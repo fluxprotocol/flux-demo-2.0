@@ -1,6 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
+// common
+import ProgressBar from '../../common/ProgressBar';
+
 const CardContainer = styled.div`
   flex: 1 0 calc(100% - 2rem);
   padding: 1rem;
@@ -19,11 +22,14 @@ const CardContainer = styled.div`
 
 const Card = styled.div`
   position: relative;
+  display: flex;
+  flex-direction: column;
   background-color: ${props => props.theme[props.category] ? props.theme[props.category] : props.theme.crypto};
-  padding: 1rem;
-  height: 250px;
+  padding: 1.5rem;
+  height: 18rem;
   border-radius: 2rem;
   overflow: hidden;
+  box-shadow: 0px 3px 20px rgba(0,0,0,0.2);
 `;
 
 const CardImage = styled.img`
@@ -37,24 +43,82 @@ const CardTitle = styled.h1`
   max-width: 60%;
   font-size: 1.2rem;
   font-weight: 'bold';
+  margin-bottom: auto;
+  color: white;
 
   @media (min-width: ${({ theme }) => theme.mediumBreakpoint}) {
     font-size: 1.5rem;
   }
 `;
 
+const TwitterIcon = styled.img`
+  width: 2rem;
+  cursor: pointer;
+`;
+
+const CategoryLabel = styled.span`
+  display: block;
+  margin: 0.8rem 0;
+  font-size: 0.8rem;
+  color: white;
+`;
+
+const DateLabel = styled.div`
+  margin: 0.8rem 0;
+  margin-top: auto;
+  font-size: 0.8rem;
+  text-align: right;
+  color: white;
+`;
+
+const MarketOpinionContainer = styled.div`
+  padding: 1rem;
+`;
+
+const OpinionPercentageContainer = styled.div`
+  display: flex;
+`;
+
+const OptionLabel = styled.div`
+  margin-right: ${props => props.position === 'left' ? 'auto' : 'initial'};
+  margin-left: ${props => props.position === 'right' ? 'auto' : 'initial'};
+  color: ${props => props.theme.text};
+`;
+
 const MarketCard = props => {
   return (
     <CardContainer>
+
+      {/* colored card block */}
       <Card category={props.market.categories[0]}>
+        <TwitterIcon
+          src={require('../../../assets/images/twitter-circle.png')}
+          alt="twitter"
+          onClick={() => {}}
+        />
+        <CategoryLabel>Space | startups</CategoryLabel>
         <CardImage 
-          src={require(`../../../assets/images/card-${props.market.category ? props.market.category : 'crypto'}.png`)}
+          src={require(`../../../assets/images/card-${props.market.categories[0] ? props.market.categories[0] : 'crypto'}.png`)}
           alt={props.market.category}
         />
         <CardTitle>
           {props.market.description}
         </CardTitle>
+        <DateLabel>
+          resolution date: <strong>3/20/2020</strong>
+        </DateLabel>
       </Card>
+
+      {/* market info */}
+      <MarketOpinionContainer>
+        <p>What does the market think?</p>
+        <ProgressBar value="32" max="100"></ProgressBar>
+        <OpinionPercentageContainer>
+          <OptionLabel position={'left'}>Yes: 75%</OptionLabel>
+          <OptionLabel position={'right'}>No: 25%</OptionLabel>
+        </OpinionPercentageContainer>
+      </MarketOpinionContainer>
+
     </CardContainer>
   );
 }
