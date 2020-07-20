@@ -11,19 +11,11 @@ const Button = styled.button`
   padding: 0.6rem;
 `;
 
-<<<<<<< HEAD
-const Toggle = ({theme,  toggleTheme }) => {
-    return (
-        <Button onClick={toggleTheme} >
-          Switch Theme
-        </Button>
-=======
 const Toggle = ({ toggleTheme }) => {
     return (
       <Button onClick={toggleTheme} >
         Switch Theme
       </Button>
->>>>>>> 3d478c3762a289313f7c18c67e273cc28ffa2245
     );
 };
 
