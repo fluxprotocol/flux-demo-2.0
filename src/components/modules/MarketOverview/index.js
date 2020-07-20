@@ -13,7 +13,7 @@ const MarketOverview = props => {
         <MarketCard
           key={market.id} 
         >
-          <Link to="/detail">{market.name}</Link>
+          <Link to="/detail">{market.description}</Link>
         </MarketCard>
       ))}
     </ContentWrapper>
