@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+=======
+import { breakPoints } from './breakpoints';
+
+>>>>>>> 3d478c3762a289313f7c18c67e273cc28ffa2245
 const categoryColors = {
   esports: '#4C6BF5',
   politics: '#0004FF',
@@ -23,6 +28,10 @@ export const darkTheme = {
   background: '#999',
   ...categoryColors,
   ...globalColors,
+<<<<<<< HEAD
+=======
+  ...breakPoints,
+>>>>>>> 3d478c3762a289313f7c18c67e273cc28ffa2245
 }
 
 export const lightTheme = {
@@ -32,4 +41,8 @@ export const lightTheme = {
   background: '#363537',
   ...categoryColors,
   ...globalColors,
+<<<<<<< HEAD
+=======
+  ...breakPoints,
+>>>>>>> 3d478c3762a289313f7c18c67e273cc28ffa2245
 }

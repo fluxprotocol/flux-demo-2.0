@@ -4,18 +4,28 @@ import { ThemeProvider } from "styled-components";
 import { GlobalStyles } from "./config/globalStyles";
 import { lightTheme, darkTheme } from "./config/Themes"
 import  { useDarkMode } from "./hooks/useDarkMode"
-import ThemeToggler from "./components/common/ThemeToggler"
+
+// context
+import { connect, FluxContext } from './context/FluxProvider';
 
 // modules
 import Dashboard from './pages/Dashboard';
 import MarketDetail from './pages/MarketDetail';
 
-// context 
-import { connect, FluxContext } from './context/FluxProvider';
+const themeContext = React.createContext(null);
+
+export const useDarkModeTheme = () => {
+  const context = React.useContext(themeContext);
+
+  return context;
+};
 
 const App = () => {
+  const [theme, toggleTheme] = useDarkMode();
   const [flux, dispatch] = useContext(FluxContext);
-
+  
+  const themeMode = theme === 'light' ? lightTheme : darkTheme;
+  
   useEffect (() => {
     if (!flux.connected) {
       connect().then(fluxInstance => {
@@ -24,21 +34,22 @@ const App = () => {
     }
   })
 
-  const [theme, toggleTheme] = useDarkMode();
-
-  const themeMode = theme === 'light' ? lightTheme : darkTheme;
-
   return (
-    <ThemeProvider theme={themeMode}>
-      <GlobalStyles/>
-      <main className="App">
-        <ThemeToggler theme={theme} toggleTheme={toggleTheme} />
-        <Switch>
-          <Route path="/" component={Dashboard} exact />
-          <Route path="/detail" component={MarketDetail} exact />
-        </Switch>
-      </main>
-    </ThemeProvider>
+    <themeContext.Provider
+      value={{
+        toggleTheme,
+      }}
+    >
+      <ThemeProvider theme={themeMode}>
+        <GlobalStyles/>
+        <main className="App">
+          <Switch>
+            <Route path="/" component={Dashboard} exact />
+            <Route path="/detail" component={MarketDetail} exact />
+          </Switch>
+        </main>
+      </ThemeProvider>
+    </themeContext.Provider>
   );
 }
 

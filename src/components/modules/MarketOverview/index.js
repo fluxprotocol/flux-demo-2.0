@@ -1,22 +1,28 @@
 import React from 'react';
 import { Link } from "react-router-dom";
+import styled from 'styled-components';
 
 // common
-import ContentWrapper from '../../common/ContentWrapper';
-import MarketCard from '../../common/MarketCard';
+import MarketCard from '../MarketCard';
+
+const MarketCardContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+`;
+
 
 const MarketOverview = props => {
   return (
-    <ContentWrapper>
-      <h1>Market overview</h1>
+    <MarketCardContainer>
       {props.markets.map((market, index) => (
         <MarketCard
-          key={market.id} 
+          key={market.id}
+          market={market}
         >
           <Link to="/detail">{market.description}</Link>
         </MarketCard>
       ))}
-    </ContentWrapper>
+    </MarketCardContainer>
   );
 }
 
