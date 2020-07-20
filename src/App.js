@@ -5,7 +5,6 @@ import { GlobalStyles } from "./config/globalStyles";
 import { lightTheme, darkTheme } from "./config/Themes"
 import  { useDarkMode } from "./hooks/useDarkMode"
 import ThemeToggler from "./components/common/ThemeToggler"
-import './App.css';
 
 // modules
 import Dashboard from './pages/Dashboard';
