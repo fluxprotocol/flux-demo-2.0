@@ -1,3 +1,5 @@
+import { breakPoints } from './breakpoints';
+
 const categoryColors = {
   esports: '#4C6BF5',
   politics: '#0004FF',
@@ -23,6 +25,7 @@ export const darkTheme = {
   background: '#999',
   ...categoryColors,
   ...globalColors,
+  ...breakPoints,
 }
 
 export const lightTheme = {
@@ -32,4 +35,5 @@ export const lightTheme = {
   background: '#363537',
   ...categoryColors,
   ...globalColors,
+  ...breakPoints,
 }
