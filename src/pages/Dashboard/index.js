@@ -23,7 +23,7 @@ const Dashboard = props => {
   }, [markets, flux]);
 
   return (
-    <ContentWrapper>
+    <ContentWrapper maxWidth>
       <MainHeader />
       <MarketOverview 
        markets={markets}

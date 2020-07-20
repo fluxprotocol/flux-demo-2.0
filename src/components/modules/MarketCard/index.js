@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 // common
 import ProgressBar from '../../common/ProgressBar';
+import ContentCard from '../../common/ContentCard';
 
 const CardContainer = styled.div`
   flex: 1 0 calc(100% - 2rem);
@@ -77,12 +78,17 @@ const MarketOpinionContainer = styled.div`
 
 const OpinionPercentageContainer = styled.div`
   display: flex;
+  margin-bottom: 1rem;
 `;
 
-const OptionLabel = styled.div`
+const PositionedLabel = styled.div`
   margin-right: ${props => props.position === 'left' ? 'auto' : 'initial'};
   margin-left: ${props => props.position === 'right' ? 'auto' : 'initial'};
   color: ${props => props.theme.text};
+`;
+
+const VolumeAmount = styled.div`
+  color: ${props => props.theme[props.category] ? props.theme[props.category] : 'white'};
 `;
 
 const MarketCard = props => {
@@ -111,12 +117,30 @@ const MarketCard = props => {
 
       {/* market info */}
       <MarketOpinionContainer>
+
         <p>What does the market think?</p>
         <ProgressBar value="32" max="100"></ProgressBar>
+        
         <OpinionPercentageContainer>
-          <OptionLabel position={'left'}>Yes: 75%</OptionLabel>
-          <OptionLabel position={'right'}>No: 25%</OptionLabel>
+          <PositionedLabel position={'left'}>
+            <strong>Yes</strong> 75%
+          </PositionedLabel>
+          <PositionedLabel position={'right'}>
+            <strong>No</strong> 25%
+          </PositionedLabel>
         </OpinionPercentageContainer>
+
+        <ContentCard>
+          <PositionedLabel position={'left'}>
+            <strong>Total Volume</strong>
+          </PositionedLabel>
+          <PositionedLabel position={'right'}>
+            <VolumeAmount category={props.market.categories[0]}>
+              1000000 DAI
+            </VolumeAmount>
+          </PositionedLabel>
+        </ContentCard>
+
       </MarketOpinionContainer>
 
     </CardContainer>
