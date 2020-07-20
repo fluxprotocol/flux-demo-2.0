@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useEffect, useContext } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { ThemeProvider } from "styled-components";
 import { GlobalStyles } from "./config/globalStyles";
 import { lightTheme, darkTheme } from "./config/Themes"
 import  { useDarkMode } from "./hooks/useDarkMode"
+
+// context
+import { connect, FluxContext } from './context/FluxProvider';
 
 // modules
 import Dashboard from './pages/Dashboard';
@@ -19,8 +22,17 @@ export const useDarkModeTheme = () => {
 
 const App = () => {
   const [theme, toggleTheme] = useDarkMode();
-
+  const [flux, dispatch] = useContext(FluxContext);
+  
   const themeMode = theme === 'light' ? lightTheme : darkTheme;
+  
+  useEffect (() => {
+    if (!flux.connected) {
+      connect().then(fluxInstance => {
+        dispatch({type: 'connected', payload: {flux: fluxInstance}});
+      })
+    }
+  })
 
   return (
     <themeContext.Provider
