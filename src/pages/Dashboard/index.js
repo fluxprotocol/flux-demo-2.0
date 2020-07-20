@@ -13,13 +13,14 @@ import { FluxContext } from '../../context/FluxProvider';
 const Dashboard = props => {
   const [markets, setMarkets] = useState([]);
   const [flux, _] = useContext(FluxContext);
+
   useEffect(() => {
-    if (markets.length == 0) {
+    if (markets.length === 0) {
       flux.getMarkets().then(res => {
         setMarkets(res);
       })
     }
-  }, []);
+  }, [markets, flux]);
 
   return (
     <ContentWrapper>

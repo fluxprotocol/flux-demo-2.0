@@ -8,16 +8,18 @@ const CardContainer = styled.div`
 
   @media (min-width: ${({ theme }) => theme.mediumBreakpoint}) {
     flex: 1 0 calc(49% - 2rem);
+    max-width: calc(49%);
   }
 
   @media (min-width: ${({ theme }) => theme.largeBreakpoint}) {
     flex: 1 0 calc(33% - 2rem);
+    max-width: calc(33%);
   }
 `;
 
 const Card = styled.div`
   position: relative;
-  background-color: ${props => props.theme[props.category]};
+  background-color: ${props => props.theme[props.category] ? props.theme[props.category] : props.theme.crypto};
   padding: 1rem;
   height: 250px;
   border-radius: 2rem;
@@ -44,13 +46,13 @@ const CardTitle = styled.h1`
 const MarketCard = props => {
   return (
     <CardContainer>
-      <Card category={props.market.category}>
+      <Card category={props.market.categories[0]}>
         <CardImage 
-          src={require(`../../../assets/images/card-${props.market.category}.png`)}
+          src={require(`../../../assets/images/card-${props.market.category ? props.market.category : 'crypto'}.png`)}
           alt={props.market.category}
         />
         <CardTitle>
-          {props.market.title}
+          {props.market.description}
         </CardTitle>
       </Card>
     </CardContainer>
