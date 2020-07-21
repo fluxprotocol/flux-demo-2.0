@@ -1,4 +1,6 @@
 import { breakPoints } from './breakpoints';
+import backgroundWaveDark from '../assets/images/background-wave-dark.svg';
+import backgroundWaveLight from '../assets/images/background-wave-light.svg';
 
 const categoryColors = {
   esports: '#4C6BF5',
@@ -24,10 +26,9 @@ const globalColors = {
 export const darkTheme = {
   body: '#2C2A43',
   text: '#ffffff',
-  toggleBorder: '#6B8096',
-  background: '#999',
-  mainBackground: '#0C0B1D',
+  background: '#0C0B1D',
   contentCardBackground: '#0F0E25',
+  backgroundWave: backgroundWaveDark, 
   ...categoryColors,
   ...globalColors,
   ...breakPoints,
@@ -36,10 +37,9 @@ export const darkTheme = {
 export const lightTheme = {
   body: '#FFF',
   text: '#000000',
-  toggleBorder: '#FFF',
-  background: '#363537',
-  mainBackground: '#ffffff',
+  background: '#ffffff',
   contentCardBackground: '#ffffff',
+  backgroundWave: backgroundWaveLight,
   ...categoryColors,
   ...globalColors,
   ...breakPoints,
