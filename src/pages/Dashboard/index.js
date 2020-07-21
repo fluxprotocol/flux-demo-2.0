@@ -6,10 +6,11 @@ import { categoryFilters } from '../../config/filters';
 
 // common
 import ContentWrapper from '../../components/common/ContentWrapper';
+import OverviewToggle from '../../components/common/OverviewToggle';
+import CategoryFilters from '../../components/modules/CategoryFilters';
 
 // modules
 import MainHeader from '../../components/modules/MainHeader';
-import CategoryFilters from '../../components/modules/CategoryFilters';
 import MarketOverview from '../../components/modules/MarketOverview';
 
 // context
@@ -26,6 +27,7 @@ const BackgroundWrapper = styled.div`
 const Dashboard = props => {
   const [markets, setMarkets] = useState([]);
   const [flux, _] = useContext(FluxContext);
+  const [overviewType, setOverviewType] = useState('trade');
 
   useEffect(() => {
     if (markets.length === 0) {
@@ -35,14 +37,27 @@ const Dashboard = props => {
     }
   }, [markets, flux]);
 
+  const handleOverviewToggle = (type) => {
+    setOverviewType(type);
+  }
+
   return (
     <BackgroundWrapper>
       <ContentWrapper maxWidth>
         <MainHeader />
+        <OverviewToggle onToggle={handleOverviewToggle}/>
         <CategoryFilters filters={categoryFilters} />
-        <MarketOverview 
+        
+        {overviewType === 'trade' &&
+         <MarketOverview 
           markets={markets}
         />
+        }
+
+        {overviewType === 'resolute' &&
+         <div>Resolute overview</div>
+        }
+
       </ContentWrapper>
     </BackgroundWrapper>
   );
