@@ -27,6 +27,7 @@ const BackgroundWrapper = styled.div`
 
 const Dashboard = props => {
   const [markets, setMarkets] = useState([]);
+  const [resoluteMarkets, setResoluteMarkets] = useState([]);
   const [flux, _] = useContext(FluxContext);
   const [overviewType, setOverviewType] = useState('trade');
 
@@ -48,16 +49,19 @@ const Dashboard = props => {
         <MainHeader />
         <OverviewToggle onToggle={handleOverviewToggle}/>
         <CategoryFilters filters={categoryFilters} />
-        
-        {overviewType === 'trade' &&
-         <MarketOverview 
-          markets={markets}
-        />
-        }
 
-        {overviewType === 'resolute' &&
-         <div>Resolute overview</div>
-        }
+        {(overviewType === 'trade' && markets.length) ? (
+          <MarketOverview 
+            markets={markets}
+          />
+        ) : (overviewType === 'resolute' && resoluteMarkets.length) ? (
+          // to do
+          <div>Resolute overview</div>
+        ) : (
+          <ContentWrapper addPadding>
+            <p>No markets found.</p>
+          </ContentWrapper>
+        )}
 
       </ContentWrapper>
     </BackgroundWrapper>
