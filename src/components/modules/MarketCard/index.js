@@ -88,6 +88,7 @@ const PositionedLabel = styled.div`
 `;
 
 const VolumeAmount = styled.div`
+  margin-left: 0.5rem;
   color: ${props => props.theme[props.category] ? props.theme[props.category] : 'white'};
 `;
 
@@ -136,7 +137,7 @@ const MarketCard = props => {
           </PositionedLabel>
           <PositionedLabel position={'right'}>
             <VolumeAmount category={props.market.categories[0]}>
-              1000000 DAI
+              {props.market.volume ? props.market.volume : '-'} DAI
             </VolumeAmount>
           </PositionedLabel>
         </ContentCard>
