@@ -18,6 +18,7 @@ import { FluxContext } from '../../context/FluxProvider';
 
 const BackgroundWrapper = styled.div`
   @media (min-width: ${({ theme }) => theme.mediumBreakpoint}) {
+    min-height: 100vh;
     background: url(${props => props.theme.backgroundWave}) no-repeat;
     background-size: 100%;
     background-color: ${props => props.theme.background };
