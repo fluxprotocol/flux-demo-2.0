@@ -18,6 +18,7 @@ const MarketOverview = props => {
         <MarketCard
           key={market.id}
           market={market}
+          cardType={props.type}
         >
           <Link to="/detail">{market.description}</Link>
         </MarketCard>

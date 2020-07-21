@@ -35,6 +35,7 @@ const Dashboard = props => {
     if (markets.length === 0) {
       flux.getMarkets().then(res => {
         setMarkets(res);
+        setResoluteMarkets(res);
       })
     }
   }, [markets, flux]);
@@ -53,10 +54,13 @@ const Dashboard = props => {
         {(overviewType === 'trade' && markets.length) ? (
           <MarketOverview 
             markets={markets}
+            type="trade"
           />
         ) : (overviewType === 'resolute' && resoluteMarkets.length) ? (
-          // to do
-          <div>Resolute overview</div>
+          <MarketOverview 
+            markets={resoluteMarkets}
+            type="resolute"
+          />
         ) : (
           <ContentWrapper addPadding>
             <p>No markets found.</p>

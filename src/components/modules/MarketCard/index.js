@@ -2,8 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 // common
-import ProgressBar from '../../common/ProgressBar';
-import ContentCard from '../../common/ContentCard';
+import MarketCardOpinion from '../../common/MarketCardOpinion';
 
 const CardContainer = styled.div`
   flex: 1 0 calc(100% - 2rem);
@@ -29,6 +28,7 @@ const Card = styled.div`
   padding: 1.5rem;
   height: 18rem;
   border-radius: 2rem;
+  border-bottom-left-radius: ${props => props.cardType === 'resolute' ? 0 : '2rem'};
   overflow: hidden;
   box-shadow: 0px 3px 20px rgba(0,0,0,0.2);
 `;
@@ -72,32 +72,15 @@ const DateLabel = styled.div`
   color: white;
 `;
 
-const MarketOpinionContainer = styled.div`
-  padding: 1rem;
-`;
-
-const OpinionPercentageContainer = styled.div`
-  display: flex;
-  margin-bottom: 1rem;
-`;
-
-const PositionedLabel = styled.div`
-  margin-right: ${props => props.position === 'left' ? 'auto' : 'initial'};
-  margin-left: ${props => props.position === 'right' ? 'auto' : 'initial'};
-  color: ${props => props.theme.text};
-`;
-
-const VolumeAmount = styled.div`
-  margin-left: 0.5rem;
-  color: ${props => props.theme[props.category] ? props.theme[props.category] : 'white'};
-`;
-
 const MarketCard = props => {
   return (
     <CardContainer>
 
       {/* colored card block */}
-      <Card category={props.market.categories[0]}>
+      <Card 
+        category={props.market.categories[0]}
+        cardType={props.cardType}
+      >
         <TwitterIcon
           src={require('../../../assets/images/twitter-circle.png')}
           alt="twitter"
@@ -117,32 +100,9 @@ const MarketCard = props => {
       </Card>
 
       {/* market info */}
-      <MarketOpinionContainer>
-
-        <p>What does the market think?</p>
-        <ProgressBar value="32" max="100"></ProgressBar>
-        
-        <OpinionPercentageContainer>
-          <PositionedLabel position={'left'}>
-            <strong>Yes</strong> 75%
-          </PositionedLabel>
-          <PositionedLabel position={'right'}>
-            <strong>No</strong> 25%
-          </PositionedLabel>
-        </OpinionPercentageContainer>
-
-        <ContentCard>
-          <PositionedLabel position={'left'}>
-            <strong>Total Volume</strong>
-          </PositionedLabel>
-          <PositionedLabel position={'right'}>
-            <VolumeAmount category={props.market.categories[0]}>
-              {props.market.volume ? props.market.volume : '-'} DAI
-            </VolumeAmount>
-          </PositionedLabel>
-        </ContentCard>
-
-      </MarketOpinionContainer>
+      {props.cardType === 'trade' &&
+        <MarketCardOpinion market={props.market}/>
+      }
 
     </CardContainer>
   );
