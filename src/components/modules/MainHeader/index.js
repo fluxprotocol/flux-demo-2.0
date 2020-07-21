@@ -10,7 +10,7 @@ const MainHeader = props => {
     toggleTheme,
   } = useDarkModeTheme();
   return (
-    <ContentWrapper addPadding={true}>
+    <ContentWrapper addPadding>
       <ThemeToggler toggleTheme={toggleTheme} />
     </ContentWrapper>
   );

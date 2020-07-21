@@ -1,11 +1,15 @@
 import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 
+// config
+import { categoryFilters } from '../../config/filters';
+
 // common
 import ContentWrapper from '../../components/common/ContentWrapper';
 
 // modules
 import MainHeader from '../../components/modules/MainHeader';
+import CategoryFilters from '../../components/modules/CategoryFilters';
 import MarketOverview from '../../components/modules/MarketOverview';
 
 // context
@@ -35,6 +39,7 @@ const Dashboard = props => {
     <BackgroundWrapper>
       <ContentWrapper maxWidth>
         <MainHeader />
+        <CategoryFilters filters={categoryFilters} />
         <MarketOverview 
           markets={markets}
         />
