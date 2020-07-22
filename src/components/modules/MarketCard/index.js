@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 // common
 import MarketCardOpinion from '../../common/MarketCardOpinion';
+import MarketCardGovernance from '../../common/MarketCardGovernance';
 import { CATEGORIES } from '../../../constants';
 
 const CardContainer = styled.div`
@@ -22,6 +23,7 @@ const CardContainer = styled.div`
 `;
 
 const Card = styled.div`
+  z-index: 1;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -103,6 +105,10 @@ const MarketCard = props => {
       {/* market info */}
       {props.cardType === 'trade' &&
         <MarketCardOpinion market={props.market}/>
+      }
+
+      {props.cardType === 'resolute' &&
+        <MarketCardGovernance market={props.market}/>
       }
 
     </CardContainer>

@@ -15,9 +15,11 @@ const categoryColors = {
 
 const globalColors = {
   purple: '#A743FF',
+  lightPurple: '#5400FF',
   pink: '#FF009C',
   red: '#FF1958',
   blue: '#4C6BF5',
+  darkBlue: '#0F0E25',
   green: '#C4FF88',
   white: '#ffffff',
   black: '#000000',
