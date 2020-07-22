@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 // common
 import MarketCardOpinion from '../../common/MarketCardOpinion';
+import { CATEGORIES } from '../../../constants';
 
 const CardContainer = styled.div`
   flex: 1 0 calc(100% - 2rem);
@@ -88,7 +89,7 @@ const MarketCard = props => {
         />
         <CategoryLabel>Space | startups</CategoryLabel>
         <CardImage 
-          src={require(`../../../assets/images/card-${props.market.categories[0] ? props.market.categories[0] : 'crypto'}.png`)}
+          src={require(`../../../assets/images/card-${CATEGORIES.indexOf(props.market.categories[0]) > -1 ? props.market.categories[0] : 'crypto'}.png`)}
           alt={props.market.category}
         />
         <CardTitle>
