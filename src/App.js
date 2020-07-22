@@ -9,6 +9,7 @@ import  { useDarkMode } from "./hooks/useDarkMode"
 import { connect, FluxContext } from './context/FluxProvider';
 
 // modules
+import TopBar from './components/modules/TopBar';
 import Dashboard from './pages/Dashboard';
 import MarketDetail from './pages/MarketDetail';
 
@@ -43,6 +44,7 @@ const App = () => {
       <ThemeProvider theme={themeMode}>
         <GlobalStyles/>
         <main className="App">
+          <TopBar />
           <Switch>
             <Route path="/" component={Dashboard} exact />
             <Route path="/detail" component={MarketDetail} exact />
