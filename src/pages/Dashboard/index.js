@@ -7,7 +7,7 @@ import { categoryFilters } from '../../config/filters';
 // common
 import ContentWrapper from '../../components/common/ContentWrapper';
 import OverviewToggle from '../../components/common/OverviewToggle';
-import CategoryFilters from '../../components/modules/CategoryFilters';
+import CategoryFilters from '../../components/common/CategoryFilters';
 
 // modules
 import MainHeader from '../../components/modules/MainHeader';
