@@ -21,6 +21,7 @@ const globalColors = {
   blue: '#4C6BF5',
   darkBlue: '#0F0E25',
   green: '#C4FF88',
+  gray: '#7E7E91',
   white: '#ffffff',
   black: '#000000',
 }

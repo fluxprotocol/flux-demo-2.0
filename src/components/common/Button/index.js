@@ -1,12 +1,13 @@
 import styled from 'styled-components';
 
 const Button = styled.button`
-  padding: 0.5rem 2rem;
+  display: inline-block;
+  padding: ${props => props.small ? '0.2rem 1rem' : '0.5rem 2rem'};
   background-color: ${props => props.theme[props.color]};
-  font-size: 1rem;
+  font-size: ${props => props.small ? '0.8rem' : '1rem'};
   color: white;
-  font-weight: bold;
-  border-radius: 0.7rem;
+  font-weight: ${props => props.small ? 'regular' : 'bold'};
+  border-radius: ${props => props.small ? '0.5rem' : '0.7rem'};
   border: none;
   outline: none;
   cursor: pointer;

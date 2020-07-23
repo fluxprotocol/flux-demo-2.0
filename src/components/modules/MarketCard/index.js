@@ -17,8 +17,8 @@ const CardContainer = styled.div`
   }
 
   @media (min-width: ${({ theme }) => theme.largeBreakpoint}) {
-    flex: 1 0 calc(33% - 2rem);
-    max-width: calc(33%);
+    flex: 1 0 calc(33.3% - 2rem);
+    max-width: calc(33.3%);
   }
 `;
 
