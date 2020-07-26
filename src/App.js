@@ -13,6 +13,9 @@ import TopBar from './components/modules/TopBar';
 import Dashboard from './pages/Dashboard';
 import MarketDetail from './pages/MarketDetail';
 
+// loaded in for static development purposes
+import OrderBookBarChart from '../src/components/common/OrderBookBarChart';
+
 const themeContext = React.createContext(null);
 
 export const useDarkModeTheme = () => {
@@ -48,6 +51,7 @@ const App = () => {
           <Switch>
             <Route path="/" component={Dashboard} exact />
             <Route path="/detail" component={MarketDetail} exact />
+            <Route path="/orderBook" component={OrderBookBarChart} exact />
           </Switch>
         </main>
       </ThemeProvider>
