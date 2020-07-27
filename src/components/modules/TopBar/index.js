@@ -1,6 +1,7 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import styled from 'styled-components';
 import { useDarkModeTheme } from '../../../App';
+import { useFluxAuth } from '../../../App';
 
 // common
 import ThemeToggler from '../../common/ThemeToggler';
@@ -17,10 +18,13 @@ const Logo = styled.img`
 `;
 
 const TopBar = props => {
-  const {
-    toggleTheme,
-  } = useDarkModeTheme();
+  const { toggleTheme } = useDarkModeTheme();
+  const { user, login, logout } = useFluxAuth();
   const [flux, ] = useContext(FluxContext);
+
+  useEffect(() => {
+    console.log('USER CHANGED', user);
+  }, [user])
   
   return (
     <ContentWrapper
@@ -46,11 +50,13 @@ const TopBar = props => {
           </FlexItem>
           <FlexItem textAlign="right">
             <Button 
-              color="gray"
+              color={user ? 'gray' : 'pink'}
               small
-              onClick={ () => flux.signInProtocol()}
+              onClick={ () => {
+                user ? logout() : login();
+              }}
             >
-              Login
+              {user ? 'Logout' : 'Login'}
             </Button>
             <ThemeToggler toggleTheme={toggleTheme} />
           </FlexItem>
