@@ -50,16 +50,24 @@ const App = () => {
         toggleTheme,
       }}
     >
-      <ThemeProvider theme={themeMode}>
-        <GlobalStyles/>
-        <main className="App">
-          <TopBar />
-          <Switch>
-            <Route path="/" component={Dashboard} exact />
-            <Route path="/detail" component={MarketDetail} exact />
-          </Switch>
-        </main>
-      </ThemeProvider>
+      <authContext.Provider
+      value={{
+        user,
+        login,
+        logout,
+      }}
+      >
+        <ThemeProvider theme={themeMode}>
+          <GlobalStyles/>
+          <main className="App">
+            <TopBar />
+            <Switch>
+              <Route path="/" component={Dashboard} exact />
+              <Route path="/detail" component={MarketDetail} exact />
+            </Switch>
+          </main>
+        </ThemeProvider>
+      </authContext.Provider>
     </themeContext.Provider>
   );
 }
