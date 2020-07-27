@@ -7,6 +7,7 @@ import ThemeToggler from '../../common/ThemeToggler';
 import { FlexWrapper, FlexItem } from '../../common/Flex';
 import ContentWrapper from '../../common/ContentWrapper';
 import Button from '../../common/Button';
+import Input from '../../common/Input';
 
 // context
 import { FluxContext } from '../../../context/FluxProvider';
@@ -34,13 +35,13 @@ const TopBar = props => {
               alt="Flux"
             />
           </FlexItem>
-          <FlexItem>
-            search
+          <FlexItem hideForSmall hideForMedium>
+            <Input placeholder="Search"/>
           </FlexItem>
-          <FlexItem>
+          <FlexItem hideForSmall hideForMedium>
             buttons
           </FlexItem>
-          <FlexItem>
+          <FlexItem hideForSmall>
             profile
           </FlexItem>
           <FlexItem textAlign="right">
