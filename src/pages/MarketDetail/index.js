@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 // common
 import ContentWrapper from '../../components/common/ContentWrapper';
+import OrderBookBarChart from '../../components/common/OrderBookBarChart';
 
 // modules
 import MainHeader from '../../components/modules/MainHeader';
@@ -12,8 +13,8 @@ const MarketOverview = props => {
   return (
     <ContentWrapper>
       <MainHeader />
-      <h1>Market detail</h1>
       <Link to="/">Market overview</Link>
+      <OrderBookBarChart />
     </ContentWrapper>
   );
 }
