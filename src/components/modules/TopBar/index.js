@@ -21,10 +21,6 @@ const TopBar = props => {
   const { toggleTheme } = useDarkModeTheme();
   const { user, login, logout } = useFluxAuth();
   const [flux, ] = useContext(FluxContext);
-
-  useEffect(() => {
-    console.log('USER CHANGED', user);
-  }, [user])
   
   return (
     <ContentWrapper

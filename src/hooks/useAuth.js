@@ -7,7 +7,7 @@ export const useAuth = () => {
     const [flux, ] = useContext(FluxContext);
     const [user, setUser] = useState(null);
 
-    const login = () => {
+    const login = async () => {
       flux.signInProtocol();
     };
 
@@ -16,16 +16,24 @@ export const useAuth = () => {
       setUser(null);
     };
 
-    const setUserFromStorage = () => {
-      // const user = localStorage.getItem('flux_fungible_token.flux-dev_wallet_auth_key');
-      if (user) setUser(user);
+    const setUserFromWallet = async () => {
+      const signedIn = flux.isSignedInProtocol();
+      if (signedIn) {
+        const id = await flux.getAccountId();
+        const balance = await flux.getBalance(id);
+        const user = {
+          id,
+          balance,
+        }
+        setUser(user);
+      }
     };
 
     useEffect(() => {
-      setTimeout(() => {
-        setUserFromStorage();
-      }, 500)
-      
-    }, []);
+      if (flux.connected) {
+        setUserFromWallet();
+      }
+    }, [flux.connected]);
+
     return [user, login, logout]
 };
