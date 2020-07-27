@@ -4,6 +4,7 @@ import styled from 'styled-components';
 // common
 import Button from '../Button';
 
+// temp data, will use market prop
 const governanceRows = [
   {
     label: 'Yes',

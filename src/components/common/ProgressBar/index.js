@@ -1,20 +1,35 @@
+import React from 'react';
 import styled from 'styled-components';
 
-const ProgressBar = styled.div`
+const ProgressBarContainer = styled.div`
+  display: flex;
   height: 0.5rem;
   width: 100%;
   margin: 1rem 0;
-  background-color: ${props => props.theme.pink};
+  background-color: ${props => props.theme.gray};
   border-radius: 0.5rem;
   overflow: hidden;
-
-  &::after {
-    content: '';
-    display: block;
-    height: 0.5rem;
-    width: 75%;
-    background-color: ${props => props.theme.green};
-  }
 `;
+
+const ProgressBarBlock = styled.div`
+  height: 100%;
+  width: ${props => props.width};
+  background-color: ${props => props.theme[props.color]};
+`;
+
+const ProgressBar = props => {
+  return (
+      <ProgressBarContainer>
+        {props.items.map((item, index) => (
+          <ProgressBarBlock 
+            key={item.label}
+            width={`${item.percentage}%`}
+            color={item.color}
+          />
+        ))}
+      </ProgressBarContainer>
+  );
+}
+
 
 export default ProgressBar;
