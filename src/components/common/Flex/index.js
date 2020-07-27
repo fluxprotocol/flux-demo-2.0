@@ -10,7 +10,8 @@ export const FlexWrapper = styled.div`
 `;
 
 export const FlexItem = styled.div`
-  flex:1;
+  display: ${props => props.hideForSmall ? 'none' : 'initial'};
+  flex: 1;
   margin: ${props => props.margin ? props.margin : 0};
   padding: ${props => props.padding ? props.padding : '0'};
   text-align: ${props => props.textAlign ? props.textAlign : 'initial'};
@@ -23,4 +24,13 @@ export const FlexItem = styled.div`
   &.active {
     border-radius: ${props => props.borderRadius ? props.borderRadius : 'initial'};
   }
+
+  @media (min-width: ${({ theme }) => theme.mediumBreakpoint}) {
+    display: ${props => props.hideForMedium ? 'none' : 'initial'};
+  }
+
+  @media (min-width: ${({ theme }) => theme.largeBreakpoint}) {
+    display: ${props => props.hideForLarge ? 'none' : 'initial'};
+  }
+
 `;
