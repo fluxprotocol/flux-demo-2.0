@@ -6,8 +6,10 @@ import ContentWrapper from '../../common/ContentWrapper';
 const MainHeader = props => {
   
   return (
-    <ContentWrapper addPadding>
-
+    <ContentWrapper backgroundColor={props.market.category}>
+      <ContentWrapper maxWidth addPadding>
+        HEADER
+      </ContentWrapper>
     </ContentWrapper>
   );
 }

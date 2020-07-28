@@ -8,12 +8,18 @@ import ContentWrapper from '../../components/common/ContentWrapper';
 import MainHeader from '../../components/modules/MainHeader';
 
 const MarketOverview = props => {
+  const market = {
+    category: 'esports',
+    description: 'This is a description for a specific market',
+  }
 
   return (
     <ContentWrapper>
-      <MainHeader />
-      <h1>Market detail</h1>
-      <Link to="/">Market overview</Link>
+      <MainHeader market={market} />
+      <ContentWrapper maxWidth addPadding>
+        <h1>Market detail</h1>
+        <Link to="/">Market overview</Link>
+      </ContentWrapper>
     </ContentWrapper>
   );
 }
