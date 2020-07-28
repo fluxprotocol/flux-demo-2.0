@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useHistory } from "react-router-dom";
 
 // common
 import MarketCardOpinion from '../../common/MarketCardOpinion';
@@ -34,6 +35,7 @@ const Card = styled.div`
   border-bottom-left-radius: ${props => props.cardType === 'resolute' ? 0 : '2rem'};
   overflow: hidden;
   box-shadow: 0px 3px 20px rgba(0,0,0,0.2);
+  cursor: pointer;
 `;
 
 const CardImage = styled.img`
@@ -76,6 +78,12 @@ const DateLabel = styled.div`
 `;
 
 const MarketCard = props => {
+  const history = useHistory();
+
+  const handleCardClick = () => {
+    history.push(`/markets/${'gu4s-tf3a-h5gs-4tf4'}`);
+  };
+
   return (
     <CardContainer>
 
@@ -83,6 +91,7 @@ const MarketCard = props => {
       <Card 
         category={props.market.categories[0]}
         cardType={props.cardType}
+        onClick={handleCardClick}
       >
         <TwitterIcon
           src={require('../../../assets/images/twitter-circle.png')}
