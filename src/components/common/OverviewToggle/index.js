@@ -51,7 +51,7 @@ const OverviewToggle = props => {
   }
 
   return (
-    <ContentWrapper addPadding>
+    <ContentWrapper padding="1rem">
 
       <FilterWrapper>
         <RadioButton 

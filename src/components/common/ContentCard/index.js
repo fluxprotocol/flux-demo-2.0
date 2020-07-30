@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const ContentCard = styled.div`
-  display: flex;
+  display: ${props => props.display ? props.display : 'flex'};
   padding: 1rem;
   background-color: ${props => props.theme.contentCardBackground};
   border-radius: 1rem;

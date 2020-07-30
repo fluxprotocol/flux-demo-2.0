@@ -66,6 +66,7 @@ const App = () => {
             <TopBar />
             <Switch>
               <Route path="/" component={Dashboard} exact />
+              <Route path="/markets" component={Dashboard} exact />
               <Route path="/markets/:id" component={MarketDetail} exact />
               <Route path="/orderBook" component={OrderBookBarChart} exact />
             </Switch>

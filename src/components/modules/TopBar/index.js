@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from 'react';
+import { Link } from "react-router-dom";
 import styled from 'styled-components';
 
 // hooks
@@ -51,15 +52,17 @@ const TopBar = props => {
   return (
     <ContentWrapper
       backgroundColor="darkBlue"
-      addPadding
+      padding="1rem"
     >
       <ContentWrapper maxWidth>
         <FlexWrapper padding="0 1rem">
           <FlexItem>
-            <Logo 
-              src={require(`../../../assets/images/flux-logo.png`)}
-              alt="Flux"
-            />
+            <Link to="/">
+              <Logo 
+                src={require(`../../../assets/images/flux-logo.png`)}
+                alt="Flux"
+              />
+            </Link>
           </FlexItem>
           <FlexItem hideForSmall hideForMedium>
             <Input placeholder="Search"/>

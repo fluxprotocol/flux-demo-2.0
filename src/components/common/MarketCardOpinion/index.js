@@ -44,6 +44,7 @@ const opinionRowsTwo = [
 ];
 
 const MarketOpinionContainer = styled.div`
+  width: 100%;
   padding: 1rem;
 `;
 

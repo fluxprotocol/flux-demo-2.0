@@ -13,7 +13,6 @@ import OverviewToggle from '../../components/common/OverviewToggle';
 import CategoryFilters from '../../components/common/CategoryFilters';
 
 // modules
-import MainHeader from '../../components/modules/MainHeader';
 import MarketOverview from '../../components/modules/MarketOverview';
 
 // context
@@ -62,12 +61,15 @@ const Dashboard = props => {
   return (
     <BackgroundWrapper>
       <ContentWrapper maxWidth>
-        <ContentWrapper addPadding>
+        <ContentWrapper padding="1rem">
           <WelcomeHeader>Welcome { (user && user.id) ? user.id : '' }</WelcomeHeader>
           <WelcomeSub>These are the latest trends.</WelcomeSub>
         </ContentWrapper>
         <OverviewToggle onToggle={handleOverviewToggle}/>
-        <CategoryFilters filters={categoryFilters} />
+        
+        <ContentWrapper padding="1rem">
+          <CategoryFilters filters={categoryFilters} />
+        </ContentWrapper>
 
         {(overviewType === 'trade' && markets.length) ? (
           <MarketOverview 
@@ -80,7 +82,7 @@ const Dashboard = props => {
             type="resolute"
           />
         ) : (
-          <ContentWrapper addPadding>
+          <ContentWrapper padding="1rem">
             <p>No markets found.</p>
           </ContentWrapper>
         )}

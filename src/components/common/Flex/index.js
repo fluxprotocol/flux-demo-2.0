@@ -7,6 +7,10 @@ export const FlexWrapper = styled.div`
   padding: ${props => props.padding ? props.padding : 0};
   width: ${props => props.width ? props.width : 'auto'};
   margin: ${props => props.margin ? props.margin : 0};
+
+  @media (min-width: ${({ theme }) => theme.largeBreakpoint}) {
+    max-width: ${props => props.maxWidth ? props.maxWidth : 'initial'};
+  }
 `;
 
 export const FlexItem = styled.div`

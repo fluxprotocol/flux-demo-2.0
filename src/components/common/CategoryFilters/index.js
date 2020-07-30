@@ -25,7 +25,7 @@ const CheckboxLabel = styled.label`
   font-size: 0.8rem;
   color: ${props => props.theme.text};  
   background-color: ${props => props.theme.contentCardBackground};
-  cursor: pointer;
+  cursor: ${props => props.notClickable ? 'initial' : 'pointer'};
   user-select: none;
   border-radius: 2rem;
   transition: all 0.1s ease;
@@ -44,12 +44,12 @@ const Icon = styled.img`
 
 const CategoryFilters = props => {
   return (
-    <ContentWrapper addPadding>
+    <ContentWrapper>
 
       {props.filters.map((filter, index) => (
         <FilterWrapper key={filter.value}>
-          <Checkbox id={filter.value}/>
-          <CheckboxLabel htmlFor={filter.value}>
+          <Checkbox disabled={props.notClickable} id={filter.value}/>
+          <CheckboxLabel notClickable={props.notClickable} htmlFor={filter.value}>
             <FilterLabel>
               {filter.label}
             </FilterLabel>
