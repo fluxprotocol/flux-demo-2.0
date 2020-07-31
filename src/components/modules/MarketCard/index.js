@@ -1,9 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useHistory } from "react-router-dom";
 
 // common
 import MarketCardOpinion from '../../common/MarketCardOpinion';
 import MarketCardGovernance from '../../common/MarketCardGovernance';
+import CategoryLabel from '../../common/CategoryLabel';
+import DateLabel from '../../common/DateLabel';
+
+// constants
 import { CATEGORIES } from '../../../constants';
 
 const CardContainer = styled.div`
@@ -34,6 +39,7 @@ const Card = styled.div`
   border-bottom-left-radius: ${props => props.cardType === 'resolute' ? 0 : '2rem'};
   overflow: hidden;
   box-shadow: 0px 3px 20px rgba(0,0,0,0.2);
+  cursor: pointer;
 `;
 
 const CardImage = styled.img`
@@ -60,22 +66,13 @@ const TwitterIcon = styled.img`
   cursor: pointer;
 `;
 
-const CategoryLabel = styled.span`
-  display: block;
-  margin: 0.8rem 0;
-  font-size: 0.8rem;
-  color: white;
-`;
-
-const DateLabel = styled.div`
-  margin: 0.8rem 0;
-  margin-top: auto;
-  font-size: 0.8rem;
-  text-align: right;
-  color: white;
-`;
-
 const MarketCard = props => {
+  const history = useHistory();
+
+  const handleCardClick = (id) => {
+    history.push(`/markets/${id}`);
+  };
+
   return (
     <CardContainer>
 
@@ -83,6 +80,7 @@ const MarketCard = props => {
       <Card 
         category={props.market.categories[0]}
         cardType={props.cardType}
+        onClick={() => handleCardClick(props.market.id)}
       >
         <TwitterIcon
           src={require('../../../assets/images/twitter-circle.png')}

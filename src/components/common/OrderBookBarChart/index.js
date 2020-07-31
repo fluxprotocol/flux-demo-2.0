@@ -46,7 +46,7 @@ const OrderBookDetails = styled.tr`
 
 const OrderBookDetail = styled.th`
   padding: .5em;
-  font-weight: ${props => props.fontWeight ? props.fontWeight : 'auto'}
+  font-weight: ${props => props.fontWeight ? props.fontWeight : 'auto'};
 `;
 
 const OrderBookData = styled.td`
@@ -69,7 +69,7 @@ const BarWrapper = styled.span`
   padding: 3px 4px 3px 0;
   color: white;
   background-color: ${props => props.backgroundColor ? props.backgroundColor : '#FF009C'};
-`
+`;
 
 const OrderBookBookBarChart = props => {
   // define default state
@@ -181,117 +181,118 @@ const OrderBookBookBarChart = props => {
 
         <FlexWrapper>
           <OrderBookWrapper>
-            <colgroup span="4"></colgroup>
-            <OrderBookDetails>
-              <OrderBookDetail
-                fontWeight="100"
-              >Contract</OrderBookDetail>
-              <OrderBookDetail
-                fontWeight="100"
-              >Amount</OrderBookDetail>
-              <OrderBookDetail
-                fontWeight="100"
-              >Price</OrderBookDetail>
-              <OrderBookDetail
-                fontWeight="100"
-              >Type</OrderBookDetail>
-            </OrderBookDetails>
-            <OrderBookDetails>
-              <OrderBookData
-                color="white"
-              >Trump</OrderBookData>
-              <OrderBookData 
-                className="range"
-                borderRadius="4px"
-                minWidth="10em"
-              >
-                <BarWrapper>
-                  1200
-                </BarWrapper>
-              </OrderBookData>
-              <OrderBookData>
-                0.40
-              </OrderBookData>
-              <OrderBookData>
-                sell
-              </OrderBookData>
-            </OrderBookDetails>
-            <OrderBookDetails>
-              <OrderBookData
-                color="white"
-              >
-                Biden
-              </OrderBookData>
-              <OrderBookData 
-                className="range"
-                borderRadius="4px"
-                minWidth="10em"
-              >
-                <BarWrapper
-                  backgroundColor="#C4FF88"
+            <tbody>
+              <OrderBookDetails>
+                <OrderBookDetail
+                  fontWeight="100"
+                >Contract</OrderBookDetail>
+                <OrderBookDetail
+                  fontWeight="100"
+                >Amount</OrderBookDetail>
+                <OrderBookDetail
+                  fontWeight="100"
+                >Price</OrderBookDetail>
+                <OrderBookDetail
+                  fontWeight="100"
+                >Type</OrderBookDetail>
+              </OrderBookDetails>
+              <OrderBookDetails>
+                <OrderBookData
+                  color="white"
+                >Trump</OrderBookData>
+                <OrderBookData 
+                  className="range"
+                  borderRadius="4px"
+                  minWidth="10em"
+                >
+                  <BarWrapper>
+                    1200
+                  </BarWrapper>
+                </OrderBookData>
+                <OrderBookData>
+                  0.40
+                </OrderBookData>
+                <OrderBookData>
+                  sell
+                </OrderBookData>
+              </OrderBookDetails>
+              <OrderBookDetails>
+                <OrderBookData
                   color="white"
                 >
-                  1200
-                </BarWrapper>
-              </OrderBookData>
-              <OrderBookData
-                color="#C4FF88"
-              >
-                0.40
-              </OrderBookData>
-              <OrderBookData
-                color="#C4FF88"
-              >
-                buy
-              </OrderBookData>
-            </OrderBookDetails>
-            <OrderBookDetails>
-              <OrderBookData
-                color="white"
-              >
-                Jon
-              </OrderBookData>
-              <OrderBookData 
-                className="range"
-                borderRadius="4px"
-                minWidth="10em"
-              >
-                <BarWrapper>
-                  1200
-                </BarWrapper>
-              </OrderBookData>
-              <OrderBookData>0.40</OrderBookData>
-              <OrderBookData>sell</OrderBookData>
-            </OrderBookDetails>
-            <OrderBookDetails>
-              <OrderBookData
-                color="white"
-              >
-                Other
-              </OrderBookData>
-              <OrderBookData 
-                className="range"
-                borderRadius="4px"
-                minWidth="10em"
-              >
-                <BarWrapper
-                  backgroundColor="#C4FF88"
+                  Biden
+                </OrderBookData>
+                <OrderBookData 
+                  className="range"
+                  borderRadius="4px"
+                  minWidth="10em"
+                >
+                  <BarWrapper
+                    backgroundColor="#C4FF88"
+                    color="white"
+                  >
+                    1200
+                  </BarWrapper>
+                </OrderBookData>
+                <OrderBookData
+                  color="#C4FF88"
+                >
+                  0.40
+                </OrderBookData>
+                <OrderBookData
+                  color="#C4FF88"
+                >
+                  buy
+                </OrderBookData>
+              </OrderBookDetails>
+              <OrderBookDetails>
+                <OrderBookData
                   color="white"
                 >
-                  1200
-                </BarWrapper>
-              </OrderBookData>
-              <OrderBookData
-                color="#C4FF88"
-              >
-                0.40
-              </OrderBookData>
-              <OrderBookData
-                color="#C4FF88"
-              >
-                buy
-              </OrderBookData>
-            </OrderBookDetails>
+                  Jon
+                </OrderBookData>
+                <OrderBookData 
+                  className="range"
+                  borderRadius="4px"
+                  minWidth="10em"
+                >
+                  <BarWrapper>
+                    1200
+                  </BarWrapper>
+                </OrderBookData>
+                <OrderBookData>0.40</OrderBookData>
+                <OrderBookData>sell</OrderBookData>
+              </OrderBookDetails>
+              <OrderBookDetails>
+                <OrderBookData
+                  color="white"
+                >
+                  Other
+                </OrderBookData>
+                <OrderBookData 
+                  className="range"
+                  borderRadius="4px"
+                  minWidth="10em"
+                >
+                  <BarWrapper
+                    backgroundColor="#C4FF88"
+                    color="white"
+                  >
+                    1200
+                  </BarWrapper>
+                </OrderBookData>
+                <OrderBookData
+                  color="#C4FF88"
+                >
+                  0.40
+                </OrderBookData>
+                <OrderBookData
+                  color="#C4FF88"
+                >
+                  buy
+                </OrderBookData>
+              </OrderBookDetails>
+            </tbody>
           </OrderBookWrapper>
         </FlexWrapper>
     </PageWrapper>

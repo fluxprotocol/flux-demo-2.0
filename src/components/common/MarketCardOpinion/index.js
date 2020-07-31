@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 // common
 import ProgressBar from '../ProgressBar';
+import PositionedLabel from '../PositionedLabel';
 import ContentCard from '../ContentCard';
 import { FlexWrapper, FlexItem } from '../Flex';
 
@@ -44,13 +45,8 @@ const opinionRowsTwo = [
 ];
 
 const MarketOpinionContainer = styled.div`
+  width: 100%;
   padding: 1rem;
-`;
-
-const PositionedLabel = styled.div`
-  margin-right: ${props => props.position === 'left' ? 'auto' : 'initial'};
-  margin-left: ${props => props.position === 'right' ? 'auto' : 'initial'};
-  color: ${props => props.theme.text};
 `;
 
 const OutcomeTag = styled.div`
