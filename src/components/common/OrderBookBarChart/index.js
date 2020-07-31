@@ -129,7 +129,7 @@ const OrderBookBookBarChart = props => {
         >
 
         {orderBookFilters.map((filter, index) => (
-          <div>
+          <div key={filter}>
             <RadioButton 
               name="filterValue" 
               id={filter}
@@ -155,6 +155,7 @@ const OrderBookBookBarChart = props => {
               {orderBookHeaders.map((orderBookHeader, index) => (
                 <OrderBookDetail
                   fontWeight="100"
+                  key={orderBookHeader}
                 >
                   {orderBookHeader}
                 </OrderBookDetail>
@@ -163,7 +164,7 @@ const OrderBookBookBarChart = props => {
               </OrderBookDetails>
 
               {orderBookItems.map((orderBookItem, index) => (
-                <OrderBookDetails>
+                <OrderBookDetails key={orderBookItem.contract}>
                   <OrderBookData
                     color="white"
                   >{orderBookItem.contract}</OrderBookData>
