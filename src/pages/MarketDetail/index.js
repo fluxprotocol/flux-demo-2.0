@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import ContentWrapper from '../../components/common/ContentWrapper';
 import { FlexWrapper, FlexItem } from '../../components/common/Flex';
 import ContentCard from '../../components/common/ContentCard';
+import PositionedLabel from '../../components/common/PositionedLabel';
 
 // modules
 import MainHeader from '../../components/modules/MainHeader';
@@ -54,9 +55,26 @@ const MarketOverview = props => {
             <FlexItem  width="100%">
               <ContentWrapper>
                 <ContentCard smallNoRadius backgroundColor="mediumBlue">
-                  <ActionTitle textAlign="center">
-                    Purchase Shares
-                  </ActionTitle>
+                  
+                  {/* buying power: mobile */}
+                  {width < 650 &&
+                    <ContentWrapper width="100%">
+                      <FlexWrapper>
+                        <PositionedLabel position="left">Buying power</PositionedLabel>
+                        <PositionedLabel position="right">$150.000</PositionedLabel>
+                      </FlexWrapper>
+                    </ContentWrapper>
+                  }
+
+                  {/* purchase shares: tablet/desktop */}
+                  {width >= 650 &&
+                    <div>
+                      <ActionTitle textAlign="center">
+                        Purchase Shares
+                      </ActionTitle>
+                    </div>
+                  }
+
                 </ContentCard>
                 {/* <ProgressiveForm /> */}
               </ContentWrapper>
