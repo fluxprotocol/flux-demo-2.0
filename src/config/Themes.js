@@ -20,6 +20,7 @@ const globalColors = {
   pink: '#FF009C',
   red: '#FF1958',
   blue: '#4C6BF5',
+  mediumBlue: '#2C2A43',
   darkBlue: '#0F0E25',
   green: '#C4FF88',
   gray: '#7E7E91',
