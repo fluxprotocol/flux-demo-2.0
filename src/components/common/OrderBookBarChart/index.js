@@ -63,12 +63,30 @@ const OrderBookData = styled.td`
 
 `;
 
+const BarWrapperContainer = styled.div`
+  width: 100%;
+  position: relative;
+
+  &:after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0rem;
+    right: 0;
+    width: ${props => props.width}%;
+    border-radius: 12px 0 0 12px;
+    height: 1.7rem;
+    background-color: ${props => props.backgroundColor ? props.theme[props.color] : 'transparent'};
+  }
+` 
+
+
+// pass width: 0 / 100 fill width dynamiccaly 
 const BarWrapper = styled.span`
   display: block;
-  border-radius: 12px 0 0 12px;
   padding: 3px 4px 3px 0;
   color: white;
-  background-color: ${props => props.backgroundColor ? props.backgroundColor : '#FF009C'};
+  width: 100%;
 `;
 
 const OrderBookBookBarChart = props => {
@@ -79,7 +97,7 @@ const OrderBookBookBarChart = props => {
       contract: 'Trump',
       amount: '1200',
       price: '0.40',
-      type: 'sell',
+      type: 'buy',
     },
     {
       contract: 'Biden',
@@ -114,6 +132,11 @@ const OrderBookBookBarChart = props => {
     'Price',
     'Type',
   ]
+
+  const colorValue = {
+    sell: 'pink',
+    buy: 'green'
+  };
   
   // handler for filter selections
   const handleRadioChange = (event) => {
@@ -172,14 +195,25 @@ const OrderBookBookBarChart = props => {
                     borderRadius="4px"
                     minWidth="10em"
                   >
-                    <BarWrapper>
+                    <BarWrapperContainer
+                      backgroundColor={colorValue[orderBookItem.type]}
+                      width={orderBookItem.price * 100}
+                    >
+                    <BarWrapper
+                      backgroundColor={colorValue[orderBookItem.type]}
+                    >
                       {orderBookItem.amount}
                     </BarWrapper>
+                    </BarWrapperContainer>
                   </OrderBookData>
-                  <OrderBookData>
+                  <OrderBookData
+                    color={colorValue[orderBookItem.type]}
+                  >
                     {orderBookItem.price}
                   </OrderBookData>
-                  <OrderBookData>
+                  <OrderBookData
+                    color={colorValue[orderBookItem.type]}
+                  >
                     {orderBookItem.type}
                   </OrderBookData>
                 </OrderBookDetails>
