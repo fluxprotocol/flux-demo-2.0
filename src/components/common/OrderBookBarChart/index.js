@@ -74,6 +74,46 @@ const BarWrapper = styled.span`
 const OrderBookBookBarChart = props => {
   // define default state
   const [checked, setChecked] = useState('all');
+  const [orderBookItems, setOrderBookItems] = useState([
+    {
+      contract: 'Trump',
+      amount: '1200',
+      price: '0.40',
+      type: 'sell',
+    },
+    {
+      contract: 'Biden',
+      amount: '1000',
+      price: '0.30',
+      type: 'sell',
+    },
+    {
+      contract: 'Kanye',
+      amount: '1200',
+      price: '0.40',
+      type: 'sell',
+    },
+    {
+      contract: 'Tom',
+      amount: '1200',
+      price: '0.40',
+      type: 'sell',
+    },
+  ]);
+  const orderBookFilters = [
+    '1D',
+    '1W',
+    '1M',
+    '3M',
+    '6W',
+    'all',
+  ];
+  const orderBookHeaders = [
+    'Contact',
+    'Amount',
+    'Price',
+    'Type',
+  ]
   
   // handler for filter selections
   const handleRadioChange = (event) => {
@@ -87,211 +127,64 @@ const OrderBookBookBarChart = props => {
         <FlexWrapper
           width="80%"
         >
-          <RadioButton 
-            name="filterValue" 
-            id="1D"
-            value="1D"
-            checked={checked === '1D'}
-            onChange={handleRadioChange}
-          />
-          <RadioLabel htmlFor="1D">
-            <FilterLabel>
-              1D
-            </FilterLabel>
-          </RadioLabel>
 
-          <RadioButton 
-            name="filterValue" 
-            id="1W"
-            value="1W"
-            checked={checked === '1W'}
-            onChange={handleRadioChange}
-          />
-          <RadioLabel htmlFor="1W">
-            <FilterLabel>
-              1W
-            </FilterLabel>
-          </RadioLabel>
+        {orderBookFilters.map((filter, index) => (
+          <div>
+            <RadioButton 
+              name="filterValue" 
+              id={filter}
+              value={filter}
+              checked={checked === filter}
+              onChange={handleRadioChange}
+            />
+            <RadioLabel htmlFor={filter}>
+              <FilterLabel>
+                {filter}
+              </FilterLabel>
+            </RadioLabel>
+          </div>
+        ))}
 
-          <RadioButton 
-            name="filterValue" 
-            id="1M"
-            value="1M"
-            checked={checked === '1M'}
-            onChange={handleRadioChange}
-          />
-          <RadioLabel htmlFor="1M">
-            <FilterLabel>
-              1M
-            </FilterLabel>
-          </RadioLabel>
-
-        <RadioButton 
-          name="filterValue" 
-          id="3M"
-          value="3M"
-          checked={checked === '3M'}
-          onChange={handleRadioChange}
-        />
-        <RadioLabel htmlFor="3M">
-          <FilterLabel>
-            3M
-          </FilterLabel>
-        </RadioLabel>
-
-        <RadioButton 
-          name="filterValue" 
-          id="6M"
-          value="6M"
-          checked={checked === '6M'}
-          onChange={handleRadioChange}
-        />
-        <RadioLabel htmlFor="6M">
-          <FilterLabel>
-            6W
-          </FilterLabel>
-        </RadioLabel>
-
-        <RadioButton 
-          name="filterValue" 
-          id="1Y"
-          value="1Y"
-          checked={checked === '1Y'}
-          onChange={handleRadioChange}
-        />
-        <RadioLabel htmlFor="1Y">
-          <FilterLabel>
-            1Y
-          </FilterLabel>
-        </RadioLabel>
-
-        <RadioButton 
-          name="filterValue" 
-          id="all"
-          value="all"
-          checked={checked === 'all'}
-          onChange={handleRadioChange}
-        />
-        <RadioLabel htmlFor="all">
-          <FilterLabel>
-            all
-          </FilterLabel>
-        </RadioLabel>
         </FlexWrapper>
 
         <FlexWrapper>
           <OrderBookWrapper>
             <tbody>
               <OrderBookDetails>
+
+              {orderBookHeaders.map((orderBookHeader, index) => (
                 <OrderBookDetail
                   fontWeight="100"
-                >Contract</OrderBookDetail>
-                <OrderBookDetail
-                  fontWeight="100"
-                >Amount</OrderBookDetail>
-                <OrderBookDetail
-                  fontWeight="100"
-                >Price</OrderBookDetail>
-                <OrderBookDetail
-                  fontWeight="100"
-                >Type</OrderBookDetail>
+                >
+                  {orderBookHeader}
+                </OrderBookDetail>
+              ))}
+
               </OrderBookDetails>
-              <OrderBookDetails>
-                <OrderBookData
-                  color="white"
-                >Trump</OrderBookData>
-                <OrderBookData 
-                  className="range"
-                  borderRadius="4px"
-                  minWidth="10em"
-                >
-                  <BarWrapper>
-                    1200
-                  </BarWrapper>
-                </OrderBookData>
-                <OrderBookData>
-                  0.40
-                </OrderBookData>
-                <OrderBookData>
-                  sell
-                </OrderBookData>
-              </OrderBookDetails>
-              <OrderBookDetails>
-                <OrderBookData
-                  color="white"
-                >
-                  Biden
-                </OrderBookData>
-                <OrderBookData 
-                  className="range"
-                  borderRadius="4px"
-                  minWidth="10em"
-                >
-                  <BarWrapper
-                    backgroundColor="#C4FF88"
+
+              {orderBookItems.map((orderBookItem, index) => (
+                <OrderBookDetails>
+                  <OrderBookData
                     color="white"
+                  >{orderBookItem.contract}</OrderBookData>
+                  <OrderBookData 
+                    className="range"
+                    borderRadius="4px"
+                    minWidth="10em"
                   >
-                    1200
-                  </BarWrapper>
-                </OrderBookData>
-                <OrderBookData
-                  color="#C4FF88"
-                >
-                  0.40
-                </OrderBookData>
-                <OrderBookData
-                  color="#C4FF88"
-                >
-                  buy
-                </OrderBookData>
-              </OrderBookDetails>
-              <OrderBookDetails>
-                <OrderBookData
-                  color="white"
-                >
-                  Jon
-                </OrderBookData>
-                <OrderBookData 
-                  className="range"
-                  borderRadius="4px"
-                  minWidth="10em"
-                >
-                  <BarWrapper>
-                    1200
-                  </BarWrapper>
-                </OrderBookData>
-                <OrderBookData>0.40</OrderBookData>
-                <OrderBookData>sell</OrderBookData>
-              </OrderBookDetails>
-              <OrderBookDetails>
-                <OrderBookData
-                  color="white"
-                >
-                  Other
-                </OrderBookData>
-                <OrderBookData 
-                  className="range"
-                  borderRadius="4px"
-                  minWidth="10em"
-                >
-                  <BarWrapper
-                    backgroundColor="#C4FF88"
-                    color="white"
-                  >
-                    1200
-                  </BarWrapper>
-                </OrderBookData>
-                <OrderBookData
-                  color="#C4FF88"
-                >
-                  0.40
-                </OrderBookData>
-                <OrderBookData
-                  color="#C4FF88"
-                >
-                  buy
-                </OrderBookData>
-              </OrderBookDetails>
+                    <BarWrapper>
+                      {orderBookItem.amount}
+                    </BarWrapper>
+                  </OrderBookData>
+                  <OrderBookData>
+                    {orderBookItem.price}
+                  </OrderBookData>
+                  <OrderBookData>
+                    {orderBookItem.type}
+                  </OrderBookData>
+                </OrderBookDetails>
+              ))}
+ 
             </tbody>
           </OrderBookWrapper>
         </FlexWrapper>
