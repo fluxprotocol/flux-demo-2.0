@@ -19,10 +19,62 @@ import { FluxContext } from '../../context/FluxProvider';
 // hooks
 import useWindowDimensions from '../../hooks/useWindowDimensions';
 
+const PurchaseWrapper = styled.div`
+  width: 100%;
+`;
+
 const ActionTitle = styled.h3`
   width: 100%;
   color: white;
   text-align: ${props => props.textAlign ? props.textAlign : 'initial'};
+`;
+
+const DetailWrapper = styled.div`
+  & > table {
+    display: flex;
+    flex-direction: column;
+  }
+
+  & > table tr {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+  }
+
+  & > table hr {
+    width: 95%;
+    margin: 0 auto;
+    margin-top: 1em;
+    height: 1px;
+    color: rgba(216, 216, 216, .4);
+  }
+`;
+
+const DetailHeading = styled.th`
+  font-weight: 100;
+  font-size: .8em;
+  margin: 2em 1em 0 1em;
+`;
+
+const DetailData = styled.td`
+  font-size: 1.5em;
+  margin: 1em 1em 0 1em;
+
+  &.bold {
+    font-weight: 900;
+    margin-left: 1.5em;
+  }
+
+  &.callToAction {
+    background: ${props => props.backgroundColor ? props.backgroundColor : '#5400FF'};
+    border-radius: 15px;
+    padding: .5em 1.2em;
+    text-transform: uppercase;
+    text-align: right;
+    width: 6.5em;
+    font-size: 1em;
+    font-weight: 900;
+  }
 `;
 
 const MarketOverview = props => {
@@ -69,11 +121,47 @@ const MarketOverview = props => {
 
                   {/* purchase shares: tablet/desktop */}
                   {width >= 650 &&
-                    <div>
+                    <PurchaseWrapper>
                       <ActionTitle textAlign="center">
                         Purchase Shares
                       </ActionTitle>
-                    </div>
+                      <DetailWrapper>
+                        <table>
+                          <tr>
+                            <DetailHeading>last forecast</DetailHeading>
+                            <DetailHeading>market price</DetailHeading>
+                          </tr>
+                          <tr>
+                            <DetailData>40%</DetailData>
+                            <DetailData 
+                              className="bold"
+                            >
+                              30c
+                            </DetailData>
+                            <DetailData
+                              className="callToAction"
+                            >
+                              buy yes
+                            </DetailData>
+                          </tr>
+                          <hr className="border" />
+                          <tr>
+                            <DetailData>45%</DetailData>
+                            <DetailData 
+                              className="bold"
+                            >
+                              55c
+                            </DetailData>
+                            <DetailData
+                              className="callToAction"
+                              backgroundColor="#FF009C"
+                            >
+                              buy no
+                            </DetailData>
+                          </tr>
+                        </table>
+                      </DetailWrapper>
+                    </PurchaseWrapper>
                   }
 
                 </ContentCard>
