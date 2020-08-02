@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 59.1 (86144) - https://sketch.com -->
+    <title>Group 5</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M11.5294118,16 L11.5294118,18 L5,18 C4.44771525,18 4,17.5522847 4,17 C4,16.4477153 4.44771525,16 5,16 L5,16 L11.5294118,16 Z M14.2941176,14 C14.8464024,14 15.2941176,14.4477153 15.2941176,15 C15.2941176,15.5522847 14.8464024,16 14.2941176,16 L11.5294118,16 L11.5294118,14 L14.2941176,14 Z M11.5294118,12 L11.5294118,14 L9.70588235,14 C9.1535976,14 8.70588235,13.5522847 8.70588235,13 C8.70588235,12.4477153 9.1535976,12 9.70588235,12 L9.70588235,12 L11.5294118,12 Z M15.2352941,10 C15.7875789,10 16.2352941,10.4477153 16.2352941,11 C16.2352941,11.5522847 15.7875789,12 15.2352941,12 L11.5294118,12 L11.5294118,10 L15.2352941,10 Z M11.5294118,8 L11.5294118,10 L6.88235294,10 C6.33006819,10 5.88235294,9.55228475 5.88235294,9 C5.88235294,8.44771525 6.33006819,8 6.88235294,8 L6.88235294,8 L11.5294118,8 Z M19,6 C19.5522847,6 20,6.44771525 20,7 C20,7.55228475 19.5522847,8 19,8 L11.5294118,8 L11.5294118,6 L19,6 Z" id="path-1"></path>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="detail-catagorical-market-graph" transform="translate(-329.000000, -341.000000)">
+            <g id="Group-5" transform="translate(329.000000, 341.000000)">
+                <g id="Group-4-Copy" fill="#3B3A64" fill-rule="nonzero">
+                    <rect id="Rectangle" x="0" y="0" width="24" height="24" rx="5"></rect>
+                </g>
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <use id="Combined-Shape" fill="#0F0E25" xlink:href="#path-1"></use>
+            </g>
+        </g>
+    </g>
+</svg>

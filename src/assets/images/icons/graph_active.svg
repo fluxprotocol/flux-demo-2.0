@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="26px" height="31px" viewBox="0 0 26 31" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 59.1 (86144) - https://sketch.com -->
+    <title>Group 6</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="detail-catagorical-market-graph" transform="translate(-292.000000, -340.000000)">
+            <g id="Group-4" transform="translate(293.000000, 341.000000)">
+                <g id="Group-6">
+                    <rect id="Rectangle" stroke="#FFFFFF" fill="#3B3A64" fill-rule="nonzero" x="0" y="0" width="24" height="24" rx="5"></rect>
+                    <rect id="Rectangle" fill="#FFFFFF" x="2" y="28" width="20" height="2" rx="1"></rect>
+                    <path d="M5.26736089,16.7071038 C4.9108797,16.3164778 4.9108797,15.6832731 5.26736089,15.2928425 L10.1370114,9.95943105 C10.4934926,9.5691957 11.0718159,9.5691957 11.4282971,9.95943105 L13.2174795,11.9192014 L17.4412197,7.29282299 C17.7978792,6.90239234 18.3760242,6.90239234 18.7325054,7.29282299 C19.0891649,7.68344894 19.0891649,8.31665359 18.7325054,8.70708424 L13.8630332,14.0404957 C13.506552,14.4309264 12.9282286,14.430731 12.5717475,14.0404957 L10.7827434,12.0809206 L6.5586466,16.7071038 C6.20216542,17.0975344 5.62402039,17.0977297 5.26736089,16.7071038 Z" id="Path" fill="#FFFFFF"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
