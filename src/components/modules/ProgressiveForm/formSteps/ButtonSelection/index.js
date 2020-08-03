@@ -64,6 +64,7 @@ const ButtonSelection = props => {
               </FlexItem>
               <FlexItem>
                 <Button
+                  small={props.layover}
                   shadow
                   width="100%"
                   color={index === 0 ? 'lightPurple' : 'pink'}
@@ -76,7 +77,7 @@ const ButtonSelection = props => {
               </FlexItem>
             </FlexWrapper>
 
-            {index === 0 &&
+            {(index === 0 && !props.layover) &&
               <RowDivider />
             }
           </div>
@@ -114,7 +115,9 @@ const ButtonSelection = props => {
               </FlexItem>
             </FlexWrapper>
 
-            <RowDivider />
+            {!props.layover &&
+              <RowDivider />
+            }
           </div>
         ))}
 

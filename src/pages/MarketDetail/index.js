@@ -9,6 +9,7 @@ import { FlexWrapper, FlexItem } from '../../components/common/Flex';
 import ContentCard from '../../components/common/ContentCard';
 import PositionedLabel from '../../components/common/PositionedLabel';
 import Button from '../../components/common/Button';
+import Layover from '../../components/common/Layover';
 
 // modules
 import MainHeader from '../../components/modules/MainHeader';
@@ -57,6 +58,7 @@ const MarketOverview = props => {
   const [flux, _] = useContext(FluxContext);
   const [market, setMarket] = useState({});
   const { width } = useWindowDimensions();
+  const [showForm, setShowForm] = useState(false);
 
   useEffect(() => {
     getMarket();
@@ -121,7 +123,8 @@ const MarketOverview = props => {
                             width="100%"
                             color="lightPurple"
                             onClick={ () => {
-                              //
+                              setShowForm(true);
+                              document.body.classList.add('layover');
                             }}
                           >Trade</Button>
                         </FlexItem>
@@ -143,6 +146,16 @@ const MarketOverview = props => {
           </FlexWrapper>
         </ContentWrapper>
       </ContentWrapper>
+
+      {/* layover for mobile */}
+      {(width < 650 && showForm) &&
+        <Layover>
+          <FlexWrapper height="100%">
+            <ProgressiveForm layover market={market} />
+          </FlexWrapper>
+        </Layover>
+      }
+
     </ContentWrapper>
   );
 }

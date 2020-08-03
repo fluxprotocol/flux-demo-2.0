@@ -5,6 +5,7 @@ export const FlexWrapper = styled.div`
   align-items: ${props => props.alignItems ? props.alignItems : 'initial'};
   flex-direction: ${props => props.flexDirection ? props.flexDirection : 'initial'};
   padding: ${props => props.padding ? props.padding : 0};
+  height: ${props => props.height ? props.height : 'auto'}; 
   width: ${props => props.width ? props.width : 'auto'};
   margin: ${props => props.margin ? props.margin : 0};
 

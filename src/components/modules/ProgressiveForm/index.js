@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 // common
@@ -34,10 +34,22 @@ const multipleSelection = [
 
 
 const ProgressiveForm = props => {
+  const [currentView, setCurrentView] = useState('buttonSelection');
+
   return (
-    <ContentWrapper>
-      <ActionTitle textAlign="center">Purchase Shares</ActionTitle>
-      <ButtonSelection options={multipleSelection} />
+    <ContentWrapper 
+      width="100%"
+      margin={(props.layover && currentView === 'buttonSelection') ? 'auto 0 0 0' : 0}
+      padding={props.layover ? '2rem' : 0}
+    >
+
+      {/* buttonSelection */}
+      {currentView === 'buttonSelection' &&
+        <ContentWrapper>
+          <ActionTitle textAlign="center">Purchase Shares</ActionTitle>
+          <ButtonSelection layover={props.layover} options={binarySelection} />
+        </ContentWrapper>
+      }
       
     </ContentWrapper>
   );
