@@ -101,11 +101,23 @@ const MarketOverview = props => {
           padding="1rem"
           paddingSmall="0"
         >
-          <FlexWrapper flexDirection="column" columnForSmall>
-            <FlexItem width="100%">
+          <FlexWrapper 
+            flexDirection="column"
+            columnForSmall
+            alignItems="flex-start"
+          >
+            <FlexItem 
+              width="100%"
+              paddingMedium="0 1rem 0 0"
+              paddingLarge="0 3rem 0 0"
+            >
               <OrderBookBarChart />
             </FlexItem>
-            <FlexItem  width="100%">
+            <FlexItem
+             width="100%"
+             paddingMedium="2rem 0 0 1rem"
+             paddingLarge="2rem 3rem 0 0"
+             >
               <ContentWrapper>
                 <ContentCard smallNoRadius backgroundColor="mediumBlue">
                   

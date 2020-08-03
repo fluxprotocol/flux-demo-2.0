@@ -1,8 +1,8 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const FlexWrapper = styled.div`
   display: flex;
-  align-items: center;
+  align-items: ${props => props.alignItems ? props.alignItems : 'initial'};
   flex-direction: ${props => props.flexDirection ? props.flexDirection : 'initial'};
   padding: ${props => props.padding ? props.padding : 0};
   width: ${props => props.width ? props.width : 'auto'};
@@ -35,10 +35,18 @@ export const FlexItem = styled.div`
 
   @media (min-width: ${({ theme }) => theme.mediumBreakpoint}) {
     display: ${props => props.hideForMedium ? 'none' : 'initial'};
+
+    ${props => props.paddingMedium && css`
+      padding: ${props => props.paddingMedium ? props.paddingMedium : '0'};
+    `}
   }
 
   @media (min-width: ${({ theme }) => theme.largeBreakpoint}) {
     display: ${props => props.hideForLarge ? 'none' : 'initial'};
+
+    ${props => props.paddingLarge && css`
+      padding: ${props => props.paddingLarge ? props.paddingLarge : '0'};
+    `}
   }
 
 `;
