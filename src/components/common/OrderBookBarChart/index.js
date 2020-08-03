@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
-import styled, { ThemeConsumer } from 'styled-components';
+import styled from 'styled-components';
 
 // common
 import { FlexWrapper, FlexItem } from '../../common/Flex';
 
 const positiveArrow = require('../../../assets/images/icons/green_arrow.svg');
-const negativeArrow = require('../../../assets/images/icons/pink_arrow.svg');
+// const negativeArrow = require('../../../assets/images/icons/pink_arrow.svg');
 
 const barsActive = require('../../../assets/images/icons/bars_active.svg');
-const barsInactive = require('../../../assets/images/icons/bars_inactive.svg');
+// const barsInactive = require('../../../assets/images/icons/bars_inactive.svg');
 
-const graphActive = require('../../../assets/images/icons/graph_active.svg');
+// const graphActive = require('../../../assets/images/icons/graph_active.svg');
 const graphInactive = require('../../../assets/images/icons/graph_inactive.svg');
 
 const OverviewWrapper = styled.div`
@@ -108,13 +108,13 @@ const OrderBookDetail = styled.th`
 
 const OrderBookData = styled.td`
   padding: .8em;
-  color: ${props => props.color ? props.color : '#FF009C'};
+  color: ${props => props.color ? props.theme[props.color] : '#FF009C'};
   text-align: right;
   &.range {
     text-align: right;
     border-radius: ${props => props.borderRadius ? props.borderRadius : 'initial'};
-    background-color: ${props => props.backgroundColor ? props.backgroundColor : 'initial'};
-    background-color: ${props => props.theme.colorValue ? props.theme.colorValue : 'transparent'};
+    background-color: ${props => props.backgroundColor ? props.theme[props.backgroundColor] : 'initial'};
+    background-color: ${props => props.color ? props.theme[props.color] : 'transparent'};
     min-width: ${props => props.minWidth ? props.minWidth : '5em'};
   }
 
@@ -135,7 +135,7 @@ const BarWrapperContainer = styled.div`
     width: ${props => props.width}%;
     border-radius: 12px 0 0 12px;
     height: 1.2rem;
-    background: ${props => props.backgroundColor ? props.backgroundColor : 'transparent'};
+    background: ${props => props.backgroundColor ? props.theme[props.backgroundColor] : 'transparent'};
     color: white;
   }
 ` 
@@ -193,10 +193,9 @@ const OrderBookBookBarChart = props => {
     'Type',
   ];
 
-  // should be based off the ThemeConsumer.js variables
   const colorValue = {
-    sell: '#FF009C',
-    buy: '#C4FF88'
+    sell: 'pink',
+    buy: 'green'
   };
   
   // handler for filter selections
@@ -218,14 +217,14 @@ const OrderBookBookBarChart = props => {
             </DetailPriceHeading>
             <DetailStatHeading>
               <DetailStatLabel>
-                <img src={positiveArrow} /> $0.03 (%)
+                <img alt="positiveArrow" src={positiveArrow} /> $0.03 (%)
               </DetailStatLabel>
               Past week
             </DetailStatHeading>
           </ShareDetails>
           <FormatContainer>
-            <img src={graphInactive} />
-            <img src={barsActive} />
+            <img alt="graphInactive" src={graphInactive} />
+            <img alt="barsActive" src={barsActive} />
           </FormatContainer>
         </OverviewWrapper>
         <FlexWrapper

@@ -126,7 +126,7 @@ const MarketOverview = props => {
                         Purchase Shares
                       </ActionTitle>
                       <DetailWrapper>
-                        <table>
+                        {/* <table>
                           <tr>
                             <DetailHeading>last forecast</DetailHeading>
                             <DetailHeading>market price</DetailHeading>
@@ -159,7 +159,7 @@ const MarketOverview = props => {
                               buy no
                             </DetailData>
                           </tr>
-                        </table>
+                        </table> */}
                       </DetailWrapper>
                     </PurchaseWrapper>
                   }
