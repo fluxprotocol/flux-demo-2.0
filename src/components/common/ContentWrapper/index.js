@@ -5,7 +5,7 @@ const ContentWrapper = styled.div`
   position: ${props => props.position ? props.position : 'initial'};
   min-height: initial;
   width: ${props => props.width ? props.width : 'initial'};
-  max-width: ${props => props.maxWidth ? '78rem' : 'none'};
+  max-width: ${props => props.maxWidth ? '68rem' : 'none'};
   margin: 0 auto;
   padding: ${props => props.paddingSmall ? props.paddingSmall : props.padding ? props.padding : 0};
   background-color: ${props => props.backgroundColor ? props.theme[props.backgroundColor] : 'transparent'};

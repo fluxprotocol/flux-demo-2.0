@@ -8,6 +8,7 @@ import OrderBookBarChart from '../../components/common/OrderBookBarChart';
 import { FlexWrapper, FlexItem } from '../../components/common/Flex';
 import ContentCard from '../../components/common/ContentCard';
 import PositionedLabel from '../../components/common/PositionedLabel';
+import Button from '../../components/common/Button';
 
 // modules
 import MainHeader from '../../components/modules/MainHeader';
@@ -21,33 +22,7 @@ import useWindowDimensions from '../../hooks/useWindowDimensions';
 
 const PurchaseWrapper = styled.div`
   width: 100%;
-`;
-
-const ActionTitle = styled.h3`
-  width: 100%;
-  color: white;
-  text-align: ${props => props.textAlign ? props.textAlign : 'initial'};
-`;
-
-const DetailWrapper = styled.div`
-  & > table {
-    display: flex;
-    flex-direction: column;
-  }
-
-  & > table tr {
-    display: flex;
-    justify-content: start;
-    align-items: center;
-  }
-
-  & > table hr {
-    width: 95%;
-    margin: 0 auto;
-    margin-top: 1em;
-    height: 1px;
-    color: rgba(216, 216, 216, .4);
-  }
+  padding: 1rem;
 `;
 
 const DetailHeading = styled.th`
@@ -109,14 +84,14 @@ const MarketOverview = props => {
             <FlexItem 
               width="100%"
               paddingMedium="0 1rem 0 0"
-              paddingLarge="0 3rem 0 0"
+              paddingLarge="0 4rem 0 0"
             >
               <OrderBookBarChart />
             </FlexItem>
             <FlexItem
              width="100%"
              paddingMedium="2rem 0 0 1rem"
-             paddingLarge="2rem 3rem 0 0"
+             paddingLarge="2rem 4rem 0 0"
              >
               <ContentWrapper>
                 <ContentCard smallNoRadius backgroundColor="mediumBlue">
@@ -126,7 +101,30 @@ const MarketOverview = props => {
                     <ContentWrapper width="100%">
                       <FlexWrapper>
                         <PositionedLabel position="left">Buying power</PositionedLabel>
-                        <PositionedLabel position="right">$150.000</PositionedLabel>
+                        <PositionedLabel position="right">
+                          <strong>$150.000</strong>
+                        </PositionedLabel>
+                      </FlexWrapper>
+                      <FlexWrapper 
+                        margin="3rem 0"
+                      >
+                        <FlexItem>
+                          <ContentWrapper>
+                            <strong>total volume</strong>
+                          </ContentWrapper>
+                          10,500
+                        </FlexItem>
+                        <FlexItem textAlign="right">
+                          <Button
+                            maxWidth="10rem"
+                            shadow
+                            width="100%"
+                            color="lightPurple"
+                            onClick={ () => {
+                              //
+                            }}
+                          >Trade</Button>
+                        </FlexItem>
                       </FlexWrapper>
                     </ContentWrapper>
                   }
@@ -134,45 +132,7 @@ const MarketOverview = props => {
                   {/* purchase shares: tablet/desktop */}
                   {width >= 650 &&
                     <PurchaseWrapper>
-                      <ActionTitle textAlign="center">
-                        Purchase Shares
-                      </ActionTitle>
-                      <DetailWrapper>
-                        {/* <table>
-                          <tr>
-                            <DetailHeading>last forecast</DetailHeading>
-                            <DetailHeading>market price</DetailHeading>
-                          </tr>
-                          <tr>
-                            <DetailData>40%</DetailData>
-                            <DetailData 
-                              className="bold"
-                            >
-                              30c
-                            </DetailData>
-                            <DetailData
-                              className="callToAction"
-                            >
-                              buy yes
-                            </DetailData>
-                          </tr>
-                          <hr className="border" />
-                          <tr>
-                            <DetailData>45%</DetailData>
-                            <DetailData 
-                              className="bold"
-                            >
-                              55c
-                            </DetailData>
-                            <DetailData
-                              className="callToAction"
-                              backgroundColor="#FF009C"
-                            >
-                              buy no
-                            </DetailData>
-                          </tr>
-                        </table> */}
-                      </DetailWrapper>
+                      <ProgressiveForm market={market} />
                     </PurchaseWrapper>
                   }
 
