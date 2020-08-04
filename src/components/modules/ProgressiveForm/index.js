@@ -4,8 +4,10 @@ import styled from 'styled-components';
 // common
 import ContentWrapper from '../../common/ContentWrapper';
 
-// sections
+// form sections
 import ButtonSelection from './formSteps/ButtonSelection';
+import SharesForm from './formSteps/SharesForm';
+import FormOverview from './formSteps/FormOverview';
 
 const ActionTitle = styled.h3`
   width: 100%;
@@ -34,20 +36,49 @@ const multipleSelection = [
 
 
 const ProgressiveForm = props => {
-  const [currentView, setCurrentView] = useState('buttonSelection');
+  const [currentView, setCurrentView] = useState('buttonSelection'); // buttonSelection, sharesForm, review, loading, orderCompleted
+  const [sharesType, setSharesType] = useState(''); // yes, no, {other}
 
   return (
     <ContentWrapper 
       width="100%"
       margin={(props.layover && currentView === 'buttonSelection') ? 'auto 0 0 0' : 0}
-      padding={props.layover ? '2rem' : 0}
     >
 
       {/* buttonSelection */}
       {currentView === 'buttonSelection' &&
-        <ContentWrapper>
+        <ContentWrapper padding="2rem">
           <ActionTitle textAlign="center">Purchase Shares</ActionTitle>
-          <ButtonSelection layover={props.layover} options={binarySelection} />
+          <ButtonSelection
+            layover={props.layover}
+            options={binarySelection} 
+            buttonEvent={(response) => {
+              setCurrentView('sharesForm');
+              setSharesType(response);
+            }}
+          />
+        </ContentWrapper>
+      }
+
+      {/* sharesForm */}
+      {currentView === 'sharesForm' &&
+        <ContentWrapper
+          height="100%"
+        >
+          <SharesForm  
+            layover={props.layover}
+            sharesType={sharesType}
+            formEvent={(response) => {
+              setCurrentView(response);
+            }}
+          />
+        </ContentWrapper>
+      }
+
+      {/* review */}
+      {currentView === 'review' &&
+        <ContentWrapper>
+          <FormOverview />
         </ContentWrapper>
       }
       
