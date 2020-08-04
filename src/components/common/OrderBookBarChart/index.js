@@ -1,17 +1,29 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-// common
-import { FlexWrapper, FlexItem } from '../../common/Flex';
-
 const positiveArrow = require('../../../assets/images/icons/green_arrow.svg');
 // const negativeArrow = require('../../../assets/images/icons/pink_arrow.svg');
 
 const barsActive = require('../../../assets/images/icons/bars_active.svg');
-// const barsInactive = require('../../../assets/images/icons/bars_inactive.svg');
-
-// const graphActive = require('../../../assets/images/icons/graph_active.svg');
+const barsInactive = require('../../../assets/images/icons/bars_inactive.svg');
+const graphActive = require('../../../assets/images/icons/graph_active.svg');
 const graphInactive = require('../../../assets/images/icons/graph_inactive.svg');
+
+const ChartWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: start;
+`;
+
+const FlexWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 0 auto;
+  margin-bottom: 1em;
+  width: 90%;
+`;
 
 const OverviewWrapper = styled.div`
   width: 90%;
@@ -54,6 +66,38 @@ const FormatContainer = styled.div`
   & > img {
     margin: 0 .25em;
   }
+`;
+
+const FilterWrapper = styled.div`
+  display: inline-block;
+  margin-bottom: 0.5rem;
+  width: 50%;
+  text-align: center;
+
+  @media (min-width: ${({ theme }) => theme.mediumBreakpoint}) {
+    width: auto;
+  }
+`;
+
+const ChartButton = styled.input.attrs({ type: 'radio' })`
+  display: none;
+
+  &:checked + label {
+    opacity: 1;
+    ${props => props.theme.text}
+  }
+`;
+
+const ChartLabel = styled.label`
+  display: inline-block;
+  width: 100%;
+  padding: 0.4rem 0 0.4rem .75rem;
+  font-size: 0.8rem;
+  color: ${props => props.theme.text};
+  opacity: 0.7;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.1s ease;
 `;
 
 const RadioButton = styled.input.attrs({ type: 'radio' })`
@@ -102,8 +146,6 @@ const OrderBookDetail = styled.th`
   padding: .5em;
   font-weight: ${props => props.fontWeight ? props.fontWeight : 'auto'};
   text-align: right;
-
-
 `;
 
 const OrderBookData = styled.td`
@@ -115,7 +157,7 @@ const OrderBookData = styled.td`
     border-radius: ${props => props.borderRadius ? props.borderRadius : 'initial'};
     background-color: ${props => props.backgroundColor ? props.theme[props.backgroundColor] : 'initial'};
     background-color: ${props => props.color ? props.theme[props.color] : 'transparent'};
-    min-width: ${props => props.minWidth ? props.minWidth : '5em'};
+    width: ${props => props.width ? props.width : '5em'};
   }
 
 `;
@@ -132,11 +174,17 @@ const BarWrapperContainer = styled.div`
     right: 0;
     margin-top: -.8em;
     padding-right: .25em;
-    width: ${props => props.width}%;
+    width: 100%;
     border-radius: 12px 0 0 12px;
     height: 1.2rem;
     background: ${props => props.backgroundColor ? props.theme[props.backgroundColor] : 'transparent'};
     color: white;
+  }
+
+  @media (min-width: ${({ theme }) => theme.smallBreakpoint}) {
+    &:after {
+      width: ${props => props.width}%;
+    }
   }
 ` 
 
@@ -197,12 +245,17 @@ const OrderBookBookBarChart = props => {
     sell: 'pink',
     buy: 'green'
   };
+
+  let barIcon = barsActive;
+  let chartIcon = graphInactive;
   
   // handler for filter selections
   const handleRadioChange = (event) => {
     setChecked(event.target.value);
     let filterValue = event.target.value;
-    console.log('make request for maket detail with filter value', filterValue)
+    console.log(filterValue);
+    barIcon = barsInactive;
+    chartIcon = graphActive;
   }
 
   return (
@@ -223,12 +276,41 @@ const OrderBookBookBarChart = props => {
             </DetailStatHeading>
           </ShareDetails>
           <FormatContainer>
-            <img alt="graphInactive" src={graphInactive} />
-            <img alt="barsActive" src={barsActive} />
+            <ChartWrapper>
+              <FilterWrapper>
+                <ChartButton 
+                  name="overviewType" 
+                  id="graph"
+                  value="graph"
+                  checked={checked === 'graph'}
+                  onChange={handleRadioChange}
+                />
+                <ChartLabel htmlFor="graph">
+                  <FilterLabel>
+                    <img alt="graphIcon" src={chartIcon} />
+                  </FilterLabel>
+                </ChartLabel>
+              </FilterWrapper>
+
+              <FilterWrapper>
+                <ChartButton 
+                  name="overviewType" 
+                  id="bars"
+                  value="bars"
+                  checked={checked === 'bars'}
+                  onChange={handleRadioChange}
+                />
+                <ChartLabel htmlFor="bars">
+                  <FilterLabel>
+                    <img alt="barIcon" src={barIcon} />
+                  </FilterLabel>
+                </ChartLabel>
+              </FilterWrapper>
+            </ChartWrapper>
           </FormatContainer>
         </OverviewWrapper>
         <FlexWrapper
-          width="80%"
+          width="100%"
         >
 
         {orderBookFilters.map((filter, index) => (
@@ -274,7 +356,7 @@ const OrderBookBookBarChart = props => {
                   <OrderBookData 
                     className="range"
                     borderRadius="4px"
-                    minWidth="10em"
+                    width="100%"
                     backgroundColor={colorValue[orderBookItem.type]}
                   >
                     <BarWrapperContainer
