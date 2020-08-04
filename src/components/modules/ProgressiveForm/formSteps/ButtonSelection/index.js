@@ -50,8 +50,8 @@ const ButtonSelection = props => {
         {props.options.map((option, index) => (
           <div key={option.name}>
               <FlexWrapper 
-              margin="1rem 0"
-            >
+                margin="1rem 0"
+              >
               <FlexItem>
                 <OptionLabel>
                   {option.forecast}
@@ -59,7 +59,7 @@ const ButtonSelection = props => {
               </FlexItem>
               <FlexItem>
                 <OptionLabel>
-                  <strong>{option.marketPrice}</strong>
+                  <strong>${option.marketPrice}</strong>
                 </OptionLabel>
               </FlexItem>
               <FlexItem>
@@ -69,7 +69,7 @@ const ButtonSelection = props => {
                   width="100%"
                   color={index === 0 ? 'lightPurple' : 'pink'}
                   onClick={ () => {
-                    //
+                    props.buttonEvent(option.name);
                   }}
                 >
                   BUY {option.name.toUpperCase()}
