@@ -77,8 +77,14 @@ const ProgressiveForm = props => {
 
       {/* review */}
       {currentView === 'review' &&
-        <ContentWrapper>
-          <FormOverview />
+        <ContentWrapper height="100%">
+          <FormOverview
+            sharesType={sharesType}
+            layover={props.layover}
+            formEvent={(response) => {
+              setCurrentView(response);
+            }}
+          />
         </ContentWrapper>
       }
       

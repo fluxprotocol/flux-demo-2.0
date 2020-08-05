@@ -26,8 +26,6 @@ const SharesForm = props => {
   };
 
   return (
-    // <ContentWrapper height="100%">
-
       <FlexWrapper
         flexDirection="column"
         height="100%"
@@ -36,7 +34,7 @@ const SharesForm = props => {
         <ContentWrapper
           backgroundColor={props.layover ? colorMap[props.sharesType] : 'transparent'}
           width="100%"
-          padding={props.layover ? '2rem' : 0}
+          padding="2rem"
           >
           <ActionTitle textAlign="center">Buy {props.sharesType} Shares</ActionTitle>
           <FlexWrapper margin="1rem 0">
@@ -71,8 +69,9 @@ const SharesForm = props => {
         </ContentWrapper>
 
         <ContentWrapper 
-          margin="auto 0 0 0"
-          padding={props.layover ? '2rem' : 0}
+          margin="auto 0 2rem 0"
+          width="100%"
+          padding={props.layover ? '2rem' : '0 2rem 0 0'}
           textAlign={props.layover ? 'center' : 'right'}
         >
         <Button
@@ -96,8 +95,6 @@ const SharesForm = props => {
         </ContentWrapper>
 
       </FlexWrapper>
-      
-    // </ContentWrapper>
   );
 }
 

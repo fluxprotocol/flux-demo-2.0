@@ -23,7 +23,6 @@ import useWindowDimensions from '../../hooks/useWindowDimensions';
 
 const PurchaseWrapper = styled.div`
   width: 100%;
-  padding: 1rem;
 `;
 
 const DetailHeading = styled.th`
@@ -96,7 +95,11 @@ const MarketOverview = props => {
              paddingLarge="2rem 4rem 0 0"
              >
               <ContentWrapper>
-                <ContentCard smallNoRadius backgroundColor="mediumBlue">
+                <ContentCard
+                  paddingMedium="0"
+                  smallNoRadius
+                  backgroundColor="mediumBlue"
+                >
                   
                   {/* buying power: mobile */}
                   {width < 650 &&
