@@ -10,7 +10,7 @@ const ContentWrapper = styled.div`
   margin: ${props => props.margin ? props.margin : '0 auto'};
   padding: ${props => props.paddingSmall ? props.paddingSmall : props.padding ? props.padding : 0};
   background-color: ${props => props.backgroundColor ? props.theme[props.backgroundColor] : 'transparent'};
-  text-align: ${props => props.textAlign ? props.textAlign : 'inital'};
+  text-align: ${props => props.textAlign ? props.textAlign : 'left'};
   overflow: ${props => props.overflow ? props.overflow : 'initial'};
 
   @media (min-width: ${({ theme }) => theme.mediumBreakpoint}) {

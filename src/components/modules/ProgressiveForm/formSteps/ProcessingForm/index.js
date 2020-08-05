@@ -5,32 +5,21 @@ import styled from 'styled-components';
 import ContentWrapper from '../../../../common/ContentWrapper';
 import { FlexWrapper, FlexItem } from '../../../../common/Flex';
 import Button from '../../../../common/Button';
+import Loader from '../../../../common/Loader';
 
-const Amount = styled.p`
-  margin: 0;
+
+const Title = styled.p`
+  font-size: 1.8rem;
   color: white;
-  font-size: 5rem;
   font-weight: bold;
 `;
 
-const Currency = styled.span`
-  display: block;
-  margin: 0;
-  color: white;
-  font-size: 1.5rem;
-  font-weight: bold;
-  line-height: 0.4rem;
-`;
-
-const Shares = styled.span`
-  display: block;
-  margin: 0;
-  color: white;
+const SubTitle = styled.p`
   font-size: 0.9rem;
-  opacity: 0.7;
+  color: white;
 `;
 
-const FormOverview = props => {
+const ProcessingForm = props => {
   const colorMap = {
     yes: 'lightPurple',
     no: 'pink',
@@ -53,11 +42,14 @@ const FormOverview = props => {
             flexDirection="column"
             height="100%"
           >
-            <ContentWrapper>
-              <Currency>$</Currency>
-              <Amount>75</Amount>
+            <ContentWrapper textAlign="center">
+              <Loader />
+              <Title>Processing...</Title>
+              <SubTitle>
+                placing buy order for
+                <strong> 133.33</strong>
+              </SubTitle>
             </ContentWrapper>
-            <Shares>133.3333333 shares</Shares>
           </FlexWrapper>
         </FlexItem>
         <FlexItem 
@@ -72,7 +64,7 @@ const FormOverview = props => {
           <ContentWrapper
            margin="auto 0 0 0"
            width="100%"
-           textAlign={props.layover ? 'center' : 'right'}
+           textAlign="center"
           >
             <Button
                 borderColor="transparent"
@@ -82,14 +74,6 @@ const FormOverview = props => {
               >
                 Cancel
               </Button>
-              <Button
-                color={colorMap[props.sharesType]}
-                onClick={ () => {
-                  props.formEvent('processing')
-                }}
-              >
-                Confirm Trade
-              </Button>
           </ContentWrapper>
         </FlexWrapper>
         </FlexItem>
@@ -97,4 +81,4 @@ const FormOverview = props => {
   );
 }
 
-export default FormOverview;
+export default ProcessingForm;

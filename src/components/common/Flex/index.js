@@ -4,6 +4,8 @@ export const FlexWrapper = styled.div`
   display: flex;
   align-items: ${props => props.alignItems ? props.alignItems : 'initial'};
   flex-direction: ${props => props.flexDirection ? props.flexDirection : 'initial'};
+  justify-content: ${props => props.justifyContent ? props.justifyContent : 'intial'};
+  align-items: ${props => props.alignItems ? props.alignItems : 'intial'};
   padding: ${props => props.padding ? props.padding : 0};
   height: ${props => props.height ? props.height : 'auto'}; 
   width: ${props => props.width ? props.width : 'auto'};
@@ -20,12 +22,12 @@ export const FlexWrapper = styled.div`
 
 export const FlexItem = styled.div`
   display: ${props => props.hideForSmall ? 'none' : 'initial'};
-  flex: 1;
+  flex: ${props => props.flex ? props.flex : '1'};
   margin: ${props => props.margin ? props.margin : 0};
   padding: ${props => props.padding ? props.padding : '0'};
   text-align: ${props => props.textAlign ? props.textAlign : 'initial'};
   color: ${props => props.color ? props.color : props.theme.text};
-  background: ${props => props.backgroundColor ? props.backgroundColor : 'none'};
+  background-color: ${props => props.backgroundColor ? props.theme[props.backgroundColor] : 'transparent'};
   width: ${props => props.width ? props.width : 'initial'};
   max-width: ${props => props.maxWidth ? props.maxWidth : 'initial'};
   text-align: ${props => props.textAlign ? props.textAlign : 'initial'};

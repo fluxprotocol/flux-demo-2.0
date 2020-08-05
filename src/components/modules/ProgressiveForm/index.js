@@ -8,6 +8,7 @@ import ContentWrapper from '../../common/ContentWrapper';
 import ButtonSelection from './formSteps/ButtonSelection';
 import SharesForm from './formSteps/SharesForm';
 import FormOverview from './formSteps/FormOverview';
+import ProcessingForm from './formSteps/ProcessingForm';
 
 const ActionTitle = styled.h3`
   width: 100%;
@@ -36,7 +37,7 @@ const multipleSelection = [
 
 
 const ProgressiveForm = props => {
-  const [currentView, setCurrentView] = useState('buttonSelection'); // buttonSelection, sharesForm, review, loading, orderCompleted
+  const [currentView, setCurrentView] = useState('processing'); // buttonSelection, sharesForm, review, processing, orderCompleted
   const [sharesType, setSharesType] = useState(''); // yes, no, {other}
 
   return (
@@ -77,10 +78,30 @@ const ProgressiveForm = props => {
 
       {/* review */}
       {currentView === 'review' &&
-        <ContentWrapper>
-          <FormOverview />
+        <ContentWrapper height="100%">
+          <FormOverview
+            sharesType={sharesType}
+            layover={props.layover}
+            formEvent={(response) => {
+              setCurrentView(response);
+            }}
+          />
         </ContentWrapper>
       }
+
+      {/* processing */}
+      {currentView === 'processing' &&
+        <ContentWrapper height="100%">
+          <ProcessingForm
+            sharesType={'yes'}
+            layover={props.layover}
+            formEvent={(response) => {
+              setCurrentView(response);
+            }}
+          />
+        </ContentWrapper>
+      }
+      
       
     </ContentWrapper>
   );
