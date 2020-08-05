@@ -79,7 +79,7 @@ const SharesForm = props => {
             margin="2rem 0 0 0"
             borderColor="transparent"
             onClick={ () => {
-              props.formEvent('review')
+              props.formEvent('buttonSelection')
             }}
           >
             Cancel
