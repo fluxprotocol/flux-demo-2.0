@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 // common
 import ContentWrapper from '../../components/common/ContentWrapper';
-import OrderBookBarChart from '../../components/common/OrderBookBarChart';
+import MarketDetailData from '../../components/modules/MarketDetailData';
 import { FlexWrapper, FlexItem } from '../../components/common/Flex';
 import ContentCard from '../../components/common/ContentCard';
 import PositionedLabel from '../../components/common/PositionedLabel';
@@ -88,7 +88,7 @@ const MarketOverview = props => {
               paddingMedium="0 1rem 0 0"
               paddingLarge="0 4rem 0 0"
             >
-              <OrderBookBarChart />
+              <MarketDetailData market={market} />
             </FlexItem>
             <FlexItem
              width="100%"
