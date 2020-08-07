@@ -13,7 +13,7 @@ const categoryColors = {
   sports: '#FF1958',
 }
 
-const globalColors = {
+export const globalColors = {
   purple: '#A743FF',
   darkPurle: '#2a293f',
   lightPurple: '#5400FF',
