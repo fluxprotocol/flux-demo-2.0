@@ -56,7 +56,7 @@ const MarketOverview = props => {
       <MainHeader market={market} />
       <ContentWrapper backgroundColor="darkBlue">
         <ContentWrapper
-          maxWidth
+          maxWidth="62rem"
           paddingSmall="0"
         >
           <FlexWrapper 
@@ -131,31 +131,37 @@ const MarketOverview = props => {
             </FlexItem>
           </FlexWrapper>
 
-          <ContentWrapper
-            margin="2rem 0 0 0"
-            padding="1rem"
-          >
-            <Paragraph
-              size="1.5rem"
-              fontWeight="bold"
-              maxWidth="55rem"
-              margin="0 auto"
-            >
-              Extra info
-            </Paragraph>
-            <Paragraph
-              size="1rem"
-              maxWidth="55rem"
-              margin="2rem auto"
-            >
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-            </Paragraph>
+        </ContentWrapper>
+      </ContentWrapper>
 
-            <SignUpBlock>
+      <ContentWrapper>
+        <ContentWrapper
+          margin="2rem auto"
+          padding="1rem"
+          maxWidth="60rem"
+        >
+          <Paragraph
+            size="1.5rem"
+            fontWeight="bold"
+            maxWidth="55rem"
+            margin="0 auto"
+          >
+            Extra info
+          </Paragraph>
+          <Paragraph
+            size="1rem"
+            maxWidth="55rem"
+            margin="2rem auto"
+          >
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+          </Paragraph>
+
+          <SignUpBlock>
             <Paragraph
               size="1.7rem"
               fontWeight="bold"
               maxWidth="17rem"
+              color="white"
             >
               Sign up to receive $5 for trading!
             </Paragraph>
@@ -170,8 +176,6 @@ const MarketOverview = props => {
               Sign up now!
             </Button>
           </SignUpBlock>
-          </ContentWrapper>
-
         </ContentWrapper>
       </ContentWrapper>
 

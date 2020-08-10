@@ -6,13 +6,15 @@ export const FlexWrapper = styled.div`
   flex-direction: ${props => props.flexDirection ? props.flexDirection : 'initial'};
   justify-content: ${props => props.justifyContent ? props.justifyContent : 'intial'};
   align-items: ${props => props.alignItems ? props.alignItems : 'intial'};
-  padding: ${props => props.padding ? props.padding : 0};
+  padding: ${props => props.paddingSmall ? props.paddingSmall : props.padding ? props.padding : 0};
   height: ${props => props.height ? props.height : 'auto'}; 
   width: ${props => props.width ? props.width : 'auto'};
   margin: ${props => props.margin ? props.margin : 0};
+  background-color: ${props => props.backgroundColor ? props.theme[props.backgroundColor] : 'transparent'};
 
   @media (min-width: ${({ theme }) => theme.mediumBreakpoint}) {
     flex-direction: ${props => props.columnForSmall ? 'row' : props.flexDirection ? props.flexDirection : 'initial'};
+    padding: ${props => props.padding ? props.padding : 0};
   }
 
   @media (min-width: ${({ theme }) => theme.largeBreakpoint}) {

@@ -60,7 +60,7 @@ const Dashboard = props => {
 
   return (
     <BackgroundWrapper>
-      <ContentWrapper maxWidth>
+      <ContentWrapper maxWidth="68rem">
         <ContentWrapper padding="1rem">
           <WelcomeHeader>Welcome { (user && user.id) ? user.id : '' }</WelcomeHeader>
           <WelcomeSub>These are the latest trends.</WelcomeSub>

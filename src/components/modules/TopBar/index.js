@@ -3,11 +3,9 @@ import { Link } from "react-router-dom";
 import styled from 'styled-components';
 
 // hooks
-import { useDarkModeTheme } from '../../../App';
 import { useFluxAuth } from '../../../App';
 
 // common
-import ThemeToggler from '../../common/ThemeToggler';
 import { FlexWrapper, FlexItem } from '../../common/Flex';
 import ContentWrapper from '../../common/ContentWrapper';
 import Button from '../../common/Button';
@@ -45,7 +43,6 @@ const UserBalance = styled.span`
 `;
 
 const TopBar = props => {
-  const { toggleTheme } = useDarkModeTheme();
   const { user, login, logout } = useFluxAuth();
   const [flux, ] = useContext(FluxContext);
   
@@ -54,7 +51,7 @@ const TopBar = props => {
       backgroundColor="darkBlue"
       padding="1rem"
     >
-      <ContentWrapper maxWidth>
+      <ContentWrapper maxWidth="68rem">
         <FlexWrapper padding="0 1rem">
           <FlexItem>
             <Link to="/">
@@ -85,7 +82,6 @@ const TopBar = props => {
             >
               {user ? 'Logout' : 'Login'}
             </Button>
-            <ThemeToggler toggleTheme={toggleTheme} />
           </FlexItem>
 
         </FlexWrapper>

@@ -107,7 +107,7 @@ const ButtonSelection = props => {
                   width="100%"
                   color="lightPurple"
                   onClick={ () => {
-                    //
+                    props.buttonEvent(option);
                   }}
                 >
                   Buy

@@ -11,8 +11,11 @@ import { connect, FluxContext } from './context/FluxProvider';
 
 // modules
 import TopBar from './components/modules/TopBar';
+
+// pages
 import Dashboard from './pages/Dashboard';
 import MarketDetail from './pages/MarketDetail';
+import Settings from './pages/Settings';
 
 const themeContext = React.createContext(null);
 const authContext = React.createContext(null);
@@ -48,6 +51,7 @@ const App = () => {
     <themeContext.Provider
       value={{
         toggleTheme,
+        theme,
       }}
     >
       <authContext.Provider
@@ -65,6 +69,7 @@ const App = () => {
               <Route path="/" component={Dashboard} exact />
               <Route path="/markets" component={Dashboard} exact />
               <Route path="/markets/:id" component={MarketDetail} exact />
+              <Route path="/settings" component={Settings} exact />
             </Switch>
           </main>
         </ThemeProvider>

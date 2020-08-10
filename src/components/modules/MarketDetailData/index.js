@@ -48,15 +48,18 @@ const ShareDetails = styled.div`
 const DetailPriceHeading = styled.div`
   display: flex;
   align-items: baseline;
+  color: white;
 `;
 
 const DetailPriceLabel = styled.div`
+  color: white;
   font-weight: 900;
   font-size: 1.5em;
   margin-right: .5em;
 `;
 const DetailStatHeading = styled.div`
   display: flex;
+  color: white;
 `;
 
 const DetailStatLabel = styled.div`

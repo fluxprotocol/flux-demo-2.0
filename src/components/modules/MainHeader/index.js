@@ -83,7 +83,7 @@ const MainHeader = props => {
       padding="0 0 1rem 0"
     >
       <ContentWrapper
-        maxWidth 
+        maxWidth="60rem"
         padding="3rem 1rem 1rem 1rem"
         position="relative"
       >
