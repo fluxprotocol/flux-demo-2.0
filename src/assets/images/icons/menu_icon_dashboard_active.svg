@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="30px" height="30px" viewBox="0 0 30 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 59.1 (86144) - https://sketch.com -->
+    <title>Group 2</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="tabbar--BEFORE-login" transform="translate(-115.000000, -86.000000)">
+            <g id="tabbar" transform="translate(77.000000, 72.000000)">
+                <g id="Group-2" transform="translate(39.000000, 15.000000)">
+                    <rect id="Rectangle" stroke="#FFFFFF" stroke-width="2" x="0" y="0" width="28" height="28" rx="6"></rect>
+                    <path d="M7.26736089,18.7071038 C6.9108797,18.3164778 6.9108797,17.6832731 7.26736089,17.2928425 L12.1370114,11.959431 C12.4934926,11.5691957 13.0718159,11.5691957 13.4282971,11.959431 L15.2174795,13.9192014 L19.4412197,9.29282299 C19.7978792,8.90239234 20.3760242,8.90239234 20.7325054,9.29282299 C21.0891649,9.68344894 21.0891649,10.3166536 20.7325054,10.7070842 L15.8630332,16.0404957 C15.506552,16.4309264 14.9282286,16.430731 14.5717475,16.0404957 L12.7827434,14.0809206 L8.5586466,18.7071038 C8.20216542,19.0975344 7.62402039,19.0977297 7.26736089,18.7071038 Z" id="Path" fill="#FFFFFF"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
