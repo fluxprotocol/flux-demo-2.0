@@ -13,6 +13,9 @@ import MarketCardOpinion from '../../common/MarketCardOpinion';
 import DateLabel from '../../common/DateLabel';
 import CategoryFilters from '../../common/CategoryFilters';
 
+// constants
+import { CATEGORIES } from '../../../constants';
+
 const HeaderImagecontainer = styled.div`
   position: absolute;
   top: 0;
@@ -21,6 +24,9 @@ const HeaderImagecontainer = styled.div`
   height: 10rem;
   width: 10rem;
   background-color: ${props => props.theme.darkBlue};
+  background-image: url(${props => props.backgroundImage});
+  background-repeat: no-repeat;
+  background-size: cover;
   border-radius: 50%;
   overflow: hidden;
 
@@ -59,11 +65,13 @@ const MainHeaderTitle = styled.h1`
 
 const MainHeader = props => {
   const [categories, setCategories] = useState([]);
-
+  const [currentCategory, setCurrentCategory] = useState();
+  
   useEffect(() => {
     if (props.market.categories) {
       const filtered = categoryFilters.filter(categoryFilter => props.market.categories.includes(categoryFilter.value));
       setCategories(filtered);
+      setCurrentCategory(props.market.categories[0]);
     }
   }, [props.market])
 
@@ -79,8 +87,9 @@ const MainHeader = props => {
         padding="3rem 1rem 1rem 1rem"
         position="relative"
       >
-        <HeaderImagecontainer>
-          img
+        <HeaderImagecontainer 
+          backgroundImage={require(`../../../assets/images/circle-${CATEGORIES.indexOf(currentCategory) > -1 ? currentCategory : 'crypto'}.png`)}
+        >
         </HeaderImagecontainer>
         <ContentWrapper hideForSmall hideForMedium>
           <CategoryFilters
