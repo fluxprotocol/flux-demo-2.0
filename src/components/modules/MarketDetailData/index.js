@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+
+// common
+import ContentWrapper from '../../common/ContentWrapper';
 import OrderBookBookBarChart from '../../common/OrderBookBarChart';
 import OrderBookLineGraph from '../../common/OrderBookLineGraph';
 
@@ -283,9 +286,9 @@ const MarketDetailData = props => {
             />
           ) 
           : 
-            <OrderBookLineGraph 
-              market={market} 
-            />
+          <OrderBookLineGraph 
+            market={market} 
+          />
         }
         
     </PageWrapper>

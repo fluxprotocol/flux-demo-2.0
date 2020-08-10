@@ -64,12 +64,9 @@ const TopBar = props => {
               />
             </Link>
           </FlexItem>
-          <FlexItem hideForSmall hideForMedium>
+          {/* <FlexItem hideForSmall hideForMedium>
             <Input placeholder="Search"/>
-          </FlexItem>
-          <FlexItem hideForSmall hideForMedium>
-            buttons
-          </FlexItem>
+          </FlexItem> */}
           <FlexItem hideForSmall>
             {user &&
               <ContentWrapper>

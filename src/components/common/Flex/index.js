@@ -28,6 +28,7 @@ export const FlexItem = styled.div`
   text-align: ${props => props.textAlign ? props.textAlign : 'initial'};
   color: ${props => props.color ? props.color : props.theme.text};
   background-color: ${props => props.backgroundColor ? props.theme[props.backgroundColor] : 'transparent'};
+  height: ${props => props.height ? props.height : 'auto'};
   width: ${props => props.width ? props.width : 'initial'};
   max-width: ${props => props.maxWidth ? props.maxWidth : 'initial'};
   text-align: ${props => props.textAlign ? props.textAlign : 'initial'};

@@ -6,7 +6,7 @@ const Button = styled.button`
   width: ${props => props.width ? props.width : 'initial'};
   max-width: ${props => props.maxWidth ? props.maxWidth : 'initial'};
   margin: ${props => props.margin ? props.margin : 0};
-  padding: ${props => props.small ? '0.2rem 1rem' : '0.5rem 2rem'};
+  padding: ${props => props.small ? '0.2rem 1rem' : props.padding ? props.padding : '0.5rem 2rem'};
   background-color: ${props => props.color ? props.theme[props.color] : 'transparent'};
   font-size: ${props => props.small ? '0.8rem' : '1rem'};
   color: white;

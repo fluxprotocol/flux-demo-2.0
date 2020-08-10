@@ -6,6 +6,7 @@ import { globalColors } from '../../../config/Themes';
 
 const ChartWrapper = styled.div`
   min-height: 15rem;
+  padding-left: 1rem;
 `;
 
 const chartConfig = {

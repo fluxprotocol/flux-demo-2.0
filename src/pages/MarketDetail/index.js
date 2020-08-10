@@ -10,6 +10,7 @@ import ContentCard from '../../components/common/ContentCard';
 import PositionedLabel from '../../components/common/PositionedLabel';
 import Button from '../../components/common/Button';
 import Layover from '../../components/common/Layover';
+import Paragraph from '../../components/common/Paragraph';
 
 // modules
 import MainHeader from '../../components/modules/MainHeader';
@@ -25,31 +26,13 @@ const PurchaseWrapper = styled.div`
   width: 100%;
 `;
 
-const DetailHeading = styled.th`
-  font-weight: 100;
-  font-size: .8em;
-  margin: 2em 1em 0 1em;
-`;
-
-const DetailData = styled.td`
-  font-size: 1.5em;
-  margin: 1em 1em 0 1em;
-
-  &.bold {
-    font-weight: 900;
-    margin-left: 1.5em;
-  }
-
-  &.callToAction {
-    background: ${props => props.backgroundColor ? props.backgroundColor : '#5400FF'};
-    border-radius: 15px;
-    padding: .5em 1.2em;
-    text-transform: uppercase;
-    text-align: right;
-    width: 6.5em;
-    font-size: 1em;
-    font-weight: 900;
-  }
+const signUpBackground = require('../../assets/images/signup-background.png');
+const SignUpBlock = styled.div`
+  background: url(${signUpBackground}) no-repeat;
+  background-size: cover;
+  padding: 2rem;
+  border-radius: 2rem;
+  overflow: hidden;
 `;
 
 const MarketOverview = props => {
@@ -74,7 +57,6 @@ const MarketOverview = props => {
       <ContentWrapper backgroundColor="darkBlue">
         <ContentWrapper
           maxWidth
-          padding="1rem"
           paddingSmall="0"
         >
           <FlexWrapper 
@@ -91,6 +73,7 @@ const MarketOverview = props => {
             </FlexItem>
             <FlexItem
              width="100%"
+             height="100%"
              paddingMedium="2rem 0 0 1rem"
              paddingLarge="2rem 4rem 0 0"
              >
@@ -147,6 +130,48 @@ const MarketOverview = props => {
               </ContentWrapper>
             </FlexItem>
           </FlexWrapper>
+
+          <ContentWrapper
+            margin="2rem 0 0 0"
+            padding="1rem"
+          >
+            <Paragraph
+              size="1.5rem"
+              fontWeight="bold"
+              maxWidth="55rem"
+              margin="0 auto"
+            >
+              Extra info
+            </Paragraph>
+            <Paragraph
+              size="1rem"
+              maxWidth="55rem"
+              margin="2rem auto"
+            >
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+            </Paragraph>
+
+            <SignUpBlock>
+            <Paragraph
+              size="1.7rem"
+              fontWeight="bold"
+              maxWidth="17rem"
+            >
+              Sign up to receive $5 for trading!
+            </Paragraph>
+            <Button 
+              color="black"
+              margin="1.5rem 0 0 0"
+              padding="1rem"
+              onClick={ () => {
+                //
+              }}
+            >
+              Sign up now!
+            </Button>
+          </SignUpBlock>
+          </ContentWrapper>
+
         </ContentWrapper>
       </ContentWrapper>
 
