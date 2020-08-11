@@ -54,7 +54,10 @@ const MarketOverview = props => {
   return (
     <ContentWrapper>
       <MainHeader market={market} />
-      <ContentWrapper backgroundColor="darkBlue">
+      <ContentWrapper 
+        backgroundColor="darkBlue"
+        padding="0 0 1rem 0"
+      >
         <ContentWrapper
           maxWidth="62rem"
           paddingSmall="0"

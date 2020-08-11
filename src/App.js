@@ -11,6 +11,7 @@ import { connect, FluxContext } from './context/FluxProvider';
 
 // modules
 import TopBar from './components/modules/TopBar';
+import TabBar from './components/modules/TabBar';
 
 // pages
 import Dashboard from './pages/Dashboard';
@@ -65,6 +66,7 @@ const App = () => {
           <GlobalStyles/>
           <main className="App">
             <TopBar />
+            <TabBar />
             <Switch>
               <Route path="/" component={Dashboard} exact />
               <Route path="/markets" component={Dashboard} exact />

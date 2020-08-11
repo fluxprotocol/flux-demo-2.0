@@ -2,12 +2,10 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 
 // common
-import ContentWrapper from '../../common/ContentWrapper';
 import OrderBookBookBarChart from '../../common/OrderBookBarChart';
 import OrderBookLineGraph from '../../common/OrderBookLineGraph';
 
 const positiveArrow = require('../../../assets/images/icons/green_arrow.svg');
-const negativeArrow = require('../../../assets/images/icons/pink_arrow.svg');
 
 const barsActive = require('../../../assets/images/icons/bars_active.svg');
 const barsInactive = require('../../../assets/images/icons/bars_inactive.svg');
@@ -184,16 +182,6 @@ const MarketDetailData = props => {
     'Price',
     'Type',
   ];
-
-  const colorValue = {
-    sell: 'pink',
-    buy: 'green'
-  };
-
-  let chartState = {
-    bar: true,
-    line: false
-  }
   
   // handler for filter selections
   const handleRadioChange = (event) => {

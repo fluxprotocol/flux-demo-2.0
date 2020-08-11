@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 // common
@@ -19,11 +19,32 @@ const ActionTitle = styled.h3`
   text-align: ${props => props.textAlign ? props.textAlign : 'initial'};
 `;
 
+const Input = styled.input.attrs({ type: 'number' })`
+  max-width: 5rem;
+  border: 1px red dashed;
+  padding: 1rem 0 1rem 1rem;
+  background-color: transparent;
+  color: white;
+  font-size: 1rem;
+  border: none;
+  outline: none;
+
+  &::placeholder {
+    color: ${props => props.theme.gray};
+  }
+`;
+
 const SharesForm = props => {
+  const [numberOfShares, setNumberOfShares] = useState(100);
+
   const colorMap = {
     yes: 'lightPurple',
     no: 'pink',
   };
+
+  const handleSharesInputChange = (event) => {
+    setNumberOfShares(event.target.value);
+  }
 
   return (
       <FlexWrapper
@@ -42,7 +63,10 @@ const SharesForm = props => {
               Number of Shares
             </FlexItem>
             <FlexItem textAlign="right">
-              100
+              <Input 
+                value={numberOfShares}
+                onChange={handleSharesInputChange}
+              />
             </FlexItem>
           </FlexWrapper>
           <RowDivider />

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { Link } from "react-router-dom";
 import styled from 'styled-components';
 
@@ -9,7 +9,6 @@ import { useFluxAuth } from '../../../App';
 import { FlexWrapper, FlexItem } from '../../common/Flex';
 import ContentWrapper from '../../common/ContentWrapper';
 import Button from '../../common/Button';
-import Input from '../../common/Input';
 
 // context
 import { FluxContext } from '../../../context/FluxProvider';
