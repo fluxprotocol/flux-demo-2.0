@@ -6,18 +6,7 @@ import ContentWrapper from '../../../../common/ContentWrapper';
 import { FlexWrapper, FlexItem } from '../../../../common/Flex';
 import Button from '../../../../common/Button';
 import Loader from '../../../../common/Loader';
-
-
-const Title = styled.p`
-  font-size: 1.8rem;
-  color: white;
-  font-weight: bold;
-`;
-
-const SubTitle = styled.p`
-  font-size: 0.9rem;
-  color: white;
-`;
+import Paragraph from '../../../../common/Paragraph';
 
 const ProcessingForm = props => {
   const colorMap = {
@@ -44,11 +33,20 @@ const ProcessingForm = props => {
           >
             <ContentWrapper textAlign="center">
               <Loader />
-              <Title>Processing...</Title>
-              <SubTitle>
+              <Paragraph
+                size="1.8rem"
+                color="white"
+                fontWeight="bold"
+              >
+                Processing...
+              </Paragraph>
+              <Paragraph
+                size="0.9rem"
+                color="white"
+              >
                 placing buy order for
                 <strong> 133.33</strong>
-              </SubTitle>
+              </Paragraph>
             </ContentWrapper>
           </FlexWrapper>
         </FlexItem>

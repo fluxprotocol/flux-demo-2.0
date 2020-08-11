@@ -5,13 +5,7 @@ import styled from 'styled-components';
 import ContentWrapper from '../../../../common/ContentWrapper';
 import { FlexWrapper, FlexItem } from '../../../../common/Flex';
 import Button from '../../../../common/Button';
-
-const Amount = styled.p`
-  margin: 0;
-  color: white;
-  font-size: 5rem;
-  font-weight: bold;
-`;
+import Paragraph from '../../../../common/Paragraph';
 
 const Currency = styled.span`
   display: block;
@@ -55,7 +49,14 @@ const FormOverview = props => {
           >
             <ContentWrapper>
               <Currency>$</Currency>
-              <Amount>75</Amount>
+              <Paragraph
+                size="5rem"
+                margin="0"
+                fontWeight="bold"
+                color="white"
+              >
+                75
+              </Paragraph>
             </ContentWrapper>
             <Shares>133.3333333 shares</Shares>
           </FlexWrapper>

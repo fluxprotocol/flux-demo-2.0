@@ -48,7 +48,12 @@ const CategoryFilters = props => {
 
       {props.filters.map((filter, index) => (
         <FilterWrapper key={filter.value}>
-          <Checkbox disabled={props.notClickable} id={filter.value}/>
+          <Checkbox 
+            disabled={props.notClickable} 
+            id={filter.value}
+            value={filter.value}
+            onChange={props.filterChange}
+          />
           <CheckboxLabel notClickable={props.notClickable} htmlFor={filter.value}>
             <FilterLabel>
               {filter.label}

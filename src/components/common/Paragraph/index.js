@@ -7,6 +7,7 @@ const Paragraph = styled.p`
   color: ${props => props.color ? props.color : props.theme.text};
   line-height: ${props => props.lineHeight ? props.lineHeight : 'initial'};
   font-weight: ${props => props.fontWeight ? props.fontWeight : 'normal' };
+  opacity: ${props => props.opacity ? props.opacity : 1 };
 `;
 
 export default Paragraph;

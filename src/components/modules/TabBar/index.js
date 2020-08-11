@@ -33,7 +33,7 @@ const MenuLabel = styled.span`
 
 const TabBar = props => {
   const location = useLocation();
-  console.log(location.pathname);
+
   return (
     <TabBarContainer>
       <FlexWrapper>

@@ -5,21 +5,9 @@ import styled from 'styled-components';
 import ContentWrapper from '../../../../common/ContentWrapper';
 import { FlexWrapper, FlexItem } from '../../../../common/Flex';
 import Button from '../../../../common/Button';
+import Paragraph from '../../../../common/Paragraph';
 
 const completedIcon = require('../../../../../assets/images/icons/icon-completed.svg');
-
-
-const Title = styled.p`
-  margin-top: 2rem;
-  font-size: 1.8rem;
-  color: white;
-  font-weight: bold;
-`;
-
-const SubTitle = styled.p`
-  font-size: 0.9rem;
-  color: white;
-`;
 
 const FormCompleted = props => {
   const colorMap = {
@@ -46,11 +34,21 @@ const FormCompleted = props => {
           >
             <ContentWrapper textAlign="center">
               <img alt="order completed" src={completedIcon} />
-              <Title>Order completed!</Title>
-              <SubTitle>
+              <Paragraph
+                margin="2rem 0 0 0"
+                size="1.8rem"
+                color="white"
+                fontWeight="bold"
+              >
+                Order completed!
+              </Paragraph>
+              <Paragraph
+                size="0.9rem"
+                color="white"
+              >
                 buy order placed for
                 <strong> 133.33</strong>
-              </SubTitle>
+              </Paragraph>
             </ContentWrapper>
           </FlexWrapper>
         </FlexItem>

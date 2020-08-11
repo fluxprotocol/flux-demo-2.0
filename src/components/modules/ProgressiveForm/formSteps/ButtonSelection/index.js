@@ -5,11 +5,7 @@ import styled from 'styled-components';
 import ContentWrapper from '../../../../common/ContentWrapper';
 import { FlexWrapper, FlexItem } from '../../../../common/Flex';
 import Button from '../../../../common/Button';
-
-const ColumnTitle = styled.p`
-  font-size: 0.8rem;
-  color: white;
-`;
+import Paragraph from '../../../../common/Paragraph';
 
 const RowDivider = styled.div`
   width: 100%;
@@ -35,14 +31,17 @@ const ButtonSelection = props => {
             margin="2rem 0"
           >
             <FlexItem>
-              <ColumnTitle>
+              <Paragraph
+                size="0.8rem"
+                color="white"
+              >
                 last forecast
-              </ColumnTitle>
+              </Paragraph>
             </FlexItem>
             <FlexItem>
-              <ColumnTitle>
+              <Paragraph>
                 market price
-              </ColumnTitle>
+              </Paragraph>
             </FlexItem>
             <FlexItem></FlexItem>
           </FlexWrapper>

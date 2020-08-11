@@ -11,6 +11,7 @@ import { categoryFilters } from '../../config/filters';
 import ContentWrapper from '../../components/common/ContentWrapper';
 import OverviewToggle from '../../components/common/OverviewToggle';
 import CategoryFilters from '../../components/common/CategoryFilters';
+import Paragraph from '../../components/common/Paragraph';
 
 // modules
 import MarketOverview from '../../components/modules/MarketOverview';
@@ -32,30 +33,52 @@ const WelcomeHeader = styled.h1`
   font-size: 1.5rem;
 `;
 
-const WelcomeSub = styled.p`
-  margin-top: 0.5rem;
-  font-size: 0.8rem;
-  opacity: 0.7;
-`;
-
 const Dashboard = props => {
   const { user } = useFluxAuth();
   const [markets, setMarkets] = useState([]);
   const [resoluteMarkets, setResoluteMarkets] = useState([]);
   const [flux, _] = useContext(FluxContext);
   const [overviewType, setOverviewType] = useState('trade');
+  const [activeFilters, setActiveFilters] = useState([]);
 
   useEffect(() => {
-    if (markets.length === 0) {
-      flux.getMarkets().then(res => {
-        setMarkets(res);
-        setResoluteMarkets(res);
-      })
-    }
-  }, [markets, flux]);
+    getMarkets();
+  }, []);
 
   const handleOverviewToggle = (type) => {
     setOverviewType(type);
+  }
+
+  const getMarkets = () => {
+    const params = {};
+
+    if (activeFilters.length) params.categories = activeFilters;
+    else if (params.categories) delete params.categories;
+
+    flux.getMarkets(params, 100, 0).then(res => {
+      setMarkets(res);
+    })
+
+    flux.getMarkets(params, 100, 0).then(res => {
+      setResoluteMarkets(res);
+    })
+
+    // flux.getLastFilledPrices(params, 100, 0).then(res => {
+    //   console.log('res', res);
+    // })
+
+  }
+
+  useEffect(() => {
+    getMarkets();
+  }, [activeFilters])
+
+  const handleFilterChange = (event) => {
+    const filter = event.target.value;
+    const filterIndex = activeFilters.indexOf(filter);
+
+    if (filterIndex === -1) setActiveFilters([ ...activeFilters, filter]); 
+    else setActiveFilters(activeFilters.filter(item => item !== filter))
   }
 
   return (
@@ -63,12 +86,21 @@ const Dashboard = props => {
       <ContentWrapper maxWidth="68rem">
         <ContentWrapper padding="1rem">
           <WelcomeHeader>Welcome { (user && user.id) ? user.id : '' }</WelcomeHeader>
-          <WelcomeSub>These are the latest trends.</WelcomeSub>
+          <Paragraph
+            margin="0.5rem 0 0 0"
+            size="0.8rem"
+            opacity="0.7"
+          >
+            These are the latest trends.
+          </Paragraph>
         </ContentWrapper>
         <OverviewToggle onToggle={handleOverviewToggle}/>
         
         <ContentWrapper padding="1rem">
-          <CategoryFilters filters={categoryFilters} />
+          <CategoryFilters 
+            filters={categoryFilters} 
+            filterChange={handleFilterChange}
+          />
         </ContentWrapper>
 
         {(overviewType === 'trade' && markets.length) ? (
