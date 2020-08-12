@@ -41,6 +41,7 @@ const MarketOverview = props => {
   const [flux, _] = useContext(FluxContext);
   const [market, setMarket] = useState({});
   const [priceHistory, setPriceHistory] = useState([]);
+  const [orderbookData, setOrderbookData] = useState([]);
   const [lastFilledPricesForMarket, setLastFilledPrice] = useState({});
   const { width } = useWindowDimensions();
   const [showForm, setShowForm] = useState(false);
@@ -66,6 +67,11 @@ const MarketOverview = props => {
     setPriceHistory(allPriceHistory);
   }
 
+  const getOrderbookData = async () => {
+    const obData = await flux.getOrderbook(id);
+    setOrderbookData(obData);
+  } 
+
   return (
     <ContentWrapper>
       <MainHeader market={market} lastFilledPrices={lastFilledPricesForMarket} />
@@ -89,6 +95,7 @@ const MarketOverview = props => {
             >
               <MarketDetailData 
                 priceHistory={priceHistory} 
+                orderbookData={orderbookData}
                 market={market} 
                 filterChange={getPriceHistory}
               />
