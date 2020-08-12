@@ -8,16 +8,16 @@ export const useAuth = () => {
     const [user, setUser] = useState(null);
 
     const login = async () => {
-      flux.signInProtocol();
+      flux.signIn();
     };
 
     const logout = () => {
-      flux.signOutProtocol();
+      flux.signOut();
       setUser(null);
     };
 
     const setUserFromWallet = async () => {
-      const signedIn = flux.isSignedInProtocol();
+      const signedIn = flux.isSignedIn();
       if (signedIn) {
         const id = await flux.getAccountId();
         const balance = await flux.getBalance(id);
