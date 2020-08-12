@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import moment from 'moment';
 
 // config
 import { categoryFilters } from '../../../config/filters';
@@ -114,7 +115,7 @@ const MainHeader = props => {
               textAlign="left"
               padding="1rem"
             >
-              resolution date: <strong>3/20/2020</strong>
+              resolution date: <strong>{moment.unix(props.market.end_timestamp).format("MM/DD/YYYY")}</strong>
             </DateLabel>
               {props.market.outcome_tags &&
                 <MarketCardOpinion market={props.market}/>
