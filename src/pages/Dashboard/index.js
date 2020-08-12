@@ -46,8 +46,9 @@ const Dashboard = props => {
     getMarkets();
   }, []);
 
-  const handleOverviewToggle = (type) => {
+  const handleOverviewToggle = async (type) => {
     setOverviewType(type);
+    const resoluteMarkets = await flux.getResolutingMarkets();
   }
 
   const getMarkets = () => {
