@@ -39,6 +39,7 @@ const MarketOverview = props => {
   const { id } = useParams();
   const [flux, _] = useContext(FluxContext);
   const [market, setMarket] = useState({});
+  const [lastFilledPricesForMarket, setLastFilledPrice] = useState({});
   const { width } = useWindowDimensions();
   const [showForm, setShowForm] = useState(false);
 
@@ -48,12 +49,16 @@ const MarketOverview = props => {
 
   const getMarket = async () => {
     const market = await flux.getMarket(id);
+    const lastFilledPricesForMarket = await flux.getLastFilledPricesForMarket(id);
+
     setMarket(market[0]);
+    setLastFilledPrice(lastFilledPricesForMarket);
+
   }
 
   return (
     <ContentWrapper>
-      <MainHeader market={market} />
+      <MainHeader market={market} lastFilledPrices={lastFilledPricesForMarket} />
       <ContentWrapper 
         backgroundColor="darkBlue"
         padding="0 0 1rem 0"

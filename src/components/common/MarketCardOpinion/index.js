@@ -63,13 +63,23 @@ const VolumeAmount = styled.div`
 `;
 
 const MarketCardOpinion = props => {
+  let lastFilledPrices = [];
+  
+  if (props.lastFilledPrices) {
+    for (const [key, value] of Object.entries(props.lastFilledPrices)) {
+      lastFilledPrices.push(value);
+    }
+  }
+
+  console.log(lastFilledPrices)
+  console.log(props.market)
   return (
       <MarketOpinionContainer>
 
         <p>What does the market think?</p>
-        <ProgressBar items={props.market.outcome_tags.length === 2 ? opinionRowsTwo : opinionRowsMultiple}></ProgressBar>
+        <ProgressBar items={opinionRowsMultiple}></ProgressBar>
 
-        {props.market.outcome_tags.length === 2 &&
+        {/* {props.market.outcome_tags.length === 2 &&
           <FlexWrapper margin="0 0 1rem 0">
             <PositionedLabel position={'left'}>
               <strong>{props.market.outcome_tags[0]}</strong> 75%
@@ -78,14 +88,15 @@ const MarketCardOpinion = props => {
               <strong>{props.market.outcome_tags[1]}</strong> 25%
             </PositionedLabel>
           </FlexWrapper>
-        }
+        } */}
 
-        {props.market.outcome_tags.length > 2 &&
+        {lastFilledPrices.length !== 0 &&
           <FlexWrapper 
             flexDirection="column"
             margin="0 0 1rem 0"
             padding="0.5rem"
           >
+
             {props.market.outcome_tags.map((outcome_tag, index) => (
               <FlexItem width="100%" key={outcome_tag}>
                 <FlexWrapper>
@@ -96,7 +107,7 @@ const MarketCardOpinion = props => {
                     {outcome_tag}
                   </FlexItem>
                   <FlexItem textAlign="right">
-                    10%
+                    {lastFilledPrices[index] || 0}
                   </FlexItem>
                 </FlexWrapper>
               </FlexItem>

@@ -59,13 +59,13 @@ const Dashboard = props => {
       setMarkets(res);
     })
 
-    flux.getMarkets(params, 100, 0).then(res => {
-      setResoluteMarkets(res);
-    })
-
-    // flux.getLastFilledPrices(params, 100, 0).then(res => {
-    //   console.log('res', res);
+    // flux.getResolutingMarkets(params, 100, 0).then(res => {
+    //   setResoluteMarkets(res);
     // })
+
+    flux.getLastFilledPrices(params, 100, 0).then(res => {
+      console.log('res', res);
+    })
 
   }
 
@@ -80,6 +80,8 @@ const Dashboard = props => {
     if (filterIndex === -1) setActiveFilters([ ...activeFilters, filter]); 
     else setActiveFilters(activeFilters.filter(item => item !== filter))
   }
+
+  console.log('@@@@@@', markets)
 
   return (
     <BackgroundWrapper>

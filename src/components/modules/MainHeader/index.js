@@ -117,7 +117,7 @@ const MainHeader = props => {
               resolution date: <strong>3/20/2020</strong>
             </DateLabel>
               {props.market.outcome_tags &&
-                <MarketCardOpinion market={props.market}/>
+                <MarketCardOpinion market={props.market} lastFilledPrices={props.lastFilledPrices} />
               }
             </ContentCard>
           </FlexItem>
