@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import styled from 'styled-components';
 
 // hooks
@@ -40,6 +40,7 @@ const Dashboard = props => {
   const [flux, _] = useContext(FluxContext);
   const [overviewType, setOverviewType] = useState('trade');
   const [activeFilters, setActiveFilters] = useState([]);
+  const isFirstRun = useRef(true);
 
   useEffect(() => {
     getMarkets();
@@ -56,24 +57,29 @@ const Dashboard = props => {
     else if (params.categories) delete params.categories;
 
     flux.getMarkets(params, 100, 0).then(res => {
-      setMarkets(res);
+      getLastFilledPrices(params, res);
     })
 
     flux.getMarkets(params, 100, 0).then(res => {
       setResoluteMarkets(res);
     })
+  }
 
-    flux.getLastFilledPrices(params, 100, 0).then(res => {
-      console.log('res', res);
-    })
-
-    // flux.getLastFilledPrices(params, 100, 0).then(res => {
-    //   console.log('res', res);
-    // })
-
+  const getLastFilledPrices = async (params, marketArr) => {
+    const prices = await flux.getLastFilledPrices(params, 10, 0);
+    const currentMarkets = marketArr;
+    currentMarkets.forEach((market, index) => {
+      if (prices[market.id]) market.prices = prices[market.id];
+      else market.prices = [];
+    });
+    setMarkets(currentMarkets);
   }
 
   useEffect(() => {
+    if (isFirstRun.current) {
+      isFirstRun.current = false;
+      return;
+    }
     getMarkets();
   }, [activeFilters])
 

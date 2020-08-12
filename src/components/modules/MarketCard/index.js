@@ -113,7 +113,7 @@ const MarketCard = props => {
 
       {/* market info */}
       {props.cardType === 'trade' &&
-        <MarketCardOpinion market={props.market}/>
+        <MarketCardOpinion market={props.market} lastFilledPrices={props.market.prices}/>
       }
 
       {props.cardType === 'resolute' &&
