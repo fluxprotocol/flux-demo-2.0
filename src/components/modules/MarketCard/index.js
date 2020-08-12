@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useHistory } from "react-router-dom";
+import moment from 'moment';
 
 // common
 import MarketCardOpinion from '../../common/MarketCardOpinion';
@@ -96,7 +97,7 @@ const MarketCard = props => {
           {props.market.description}
         </CardTitle>
         <DateLabel>
-          resolution date: <strong>3/20/2020</strong>
+          resolution date: <strong>{moment.unix(props.market.end_timestamp).format("MM/DD/YYYY")}</strong>
         </DateLabel>
       </Card>
 

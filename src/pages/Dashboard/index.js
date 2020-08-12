@@ -59,9 +59,13 @@ const Dashboard = props => {
       setMarkets(res);
     })
 
-    // flux.getResolutingMarkets(params, 100, 0).then(res => {
-    //   setResoluteMarkets(res);
-    // })
+    flux.getMarkets(params, 100, 0).then(res => {
+      setResoluteMarkets(res);
+    })
+
+    flux.getLastFilledPrices(params, 100, 0).then(res => {
+      console.log('res', res);
+    })
 
     flux.getLastFilledPrices(params, 100, 0).then(res => {
       console.log('res', res);
