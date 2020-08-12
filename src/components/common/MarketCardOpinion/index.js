@@ -71,24 +71,11 @@ const MarketCardOpinion = props => {
     }
   }
 
-  console.log(lastFilledPrices)
-  console.log(props.market)
   return (
       <MarketOpinionContainer>
 
         <p>What does the market think?</p>
         <ProgressBar items={opinionRowsMultiple}></ProgressBar>
-
-        {/* {props.market.outcome_tags.length === 2 &&
-          <FlexWrapper margin="0 0 1rem 0">
-            <PositionedLabel position={'left'}>
-              <strong>{props.market.outcome_tags[0]}</strong> 75%
-            </PositionedLabel>
-            <PositionedLabel position={'right'}>
-              <strong>{props.market.outcome_tags[1]}</strong> 25%
-            </PositionedLabel>
-          </FlexWrapper>
-        } */}
 
         {lastFilledPrices.length !== 0 &&
           <FlexWrapper 

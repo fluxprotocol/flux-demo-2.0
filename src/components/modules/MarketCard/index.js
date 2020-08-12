@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { useHistory } from "react-router-dom";
 import moment from 'moment';
+import { TwitterShareButton, TwitterIcon } from 'react-share';
 
 // common
 import MarketCardOpinion from '../../common/MarketCardOpinion';
@@ -62,16 +63,16 @@ const CardTitle = styled.h1`
   }
 `;
 
-const TwitterIcon = styled.img`
+const StyledTwitterShareButton = styled(TwitterShareButton)`
   width: 2rem;
   cursor: pointer;
-`;
+`
 
 const MarketCard = props => {
   const history = useHistory();
 
   const handleCardClick = (id) => {
-    history.push(`/markets/${id}`);
+    history.push(`/markets/${props.market.id}`);
   };
 
   return (
@@ -83,11 +84,20 @@ const MarketCard = props => {
         cardType={props.cardType}
         onClick={() => handleCardClick(props.market.id)}
       >
-        <TwitterIcon
-          src={require('../../../assets/images/twitter-circle.png')}
-          alt="twitter"
-          onClick={() => {}}
-        />
+        <StyledTwitterShareButton
+					url={`https://app.flux.market/market/${props.market.id}`}
+					title={`Checkout this @fluxprotocol market: ${props.market.description}`}
+				>
+					<TwitterIcon
+						size={40}
+						round
+						iconFillColor={"white"}
+						hashtags={["flux", "fluxProtocol", "markets"]}
+						bgStyle={
+							{fill: "#0D0C0C"}
+						}
+					/>
+				</StyledTwitterShareButton>
         <CategoryLabel>Space | startups</CategoryLabel>
         <CardImage 
           src={require(`../../../assets/images/card-${CATEGORIES.indexOf(props.market.categories[0]) > -1 ? props.market.categories[0] : 'crypto'}.png`)}
