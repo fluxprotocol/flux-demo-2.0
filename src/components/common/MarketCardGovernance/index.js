@@ -58,9 +58,9 @@ const ContainerColumn = styled.div`
 `;
 
 const MarketCardGovernance = props => {
+  console.log('props', props)
   return (
       <MarketGovernanceContainer>
-
         {governanceRows.map((governanceRow, index) => (
           <ContainerRow key={governanceRow.label}>
             <ContainerColumn position="left">
@@ -82,7 +82,7 @@ const MarketCardGovernance = props => {
               Total Volume
             </ContainerColumn>
             <ContainerColumn position="right">
-              10,500 DAI
+              {props.market.volume}
             </ContainerColumn>
           </ContainerRow>
         
