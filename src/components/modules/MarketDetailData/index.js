@@ -139,9 +139,14 @@ const PageWrapper = styled.div`
 `
 
 const MarketDetailData = props => {
+
   // define default state
   const [checked, setChecked] = useState('all');
   const [chartView, setChartView] = useState('orderBook');
+  console.log('This is orderbookData', props.orderbookData)
+  // *************************************************************
+  // Should be replaced with props.orderbookData when DB is filled
+  // *************************************************************
   const [orderBookItems, setOrderBookItems] = useState([
     {
       contract: 'Trump',
