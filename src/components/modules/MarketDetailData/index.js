@@ -186,6 +186,7 @@ const MarketDetailData = props => {
   // handler for filter selections
   const handleRadioChange = (event) => {
     setChecked(event.target.value);
+    props.filterChange(event.target.value);
   }
 
   const handleChartChange = (event) => {
@@ -279,6 +280,7 @@ const MarketDetailData = props => {
           : 
           <OrderBookLineGraph 
             market={market} 
+            priceHistory={props.priceHistory}
           />
         }
         

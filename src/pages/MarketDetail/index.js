@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
 import styled from 'styled-components';
+import moment from 'moment';
 
 // common
 import ContentWrapper from '../../components/common/ContentWrapper';
@@ -39,12 +40,14 @@ const MarketOverview = props => {
   const { id } = useParams();
   const [flux, _] = useContext(FluxContext);
   const [market, setMarket] = useState({});
+  const [priceHistory, setPriceHistory] = useState([]);
   const [lastFilledPricesForMarket, setLastFilledPrice] = useState({});
   const { width } = useWindowDimensions();
   const [showForm, setShowForm] = useState(false);
 
   useEffect(() => {
     getMarket();
+    getPriceHistory();
   }, []);
 
   const getMarket = async () => {
@@ -53,7 +56,14 @@ const MarketOverview = props => {
 
     setMarket(market[0]);
     setLastFilledPrice(lastFilledPricesForMarket);
+  }
 
+  const getPriceHistory = async (type) => {
+    // console.log('getPriceHistory', type);
+    // console.log(moment().subtract(1, 'days'));
+    // return;
+    const allPriceHistory = await flux.getPriceHistory(id, "2020-01-10", "2020-08-17", ["day", "month"]);
+    setPriceHistory(allPriceHistory);
   }
 
   return (
@@ -77,7 +87,11 @@ const MarketOverview = props => {
               paddingMedium="0 1rem 0 0"
               paddingLarge="0 4rem 0 0"
             >
-              <MarketDetailData market={market} />
+              <MarketDetailData 
+                priceHistory={priceHistory} 
+                market={market} 
+                filterChange={getPriceHistory}
+              />
             </FlexItem>
             <FlexItem
              width="100%"

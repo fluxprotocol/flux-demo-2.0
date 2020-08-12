@@ -12,18 +12,11 @@ const ChartWrapper = styled.div`
 const chartConfig = {
   type: 'line',
   data: {
-    labels: [10, 38, 40, 30, 70, 80],
+    labels: [],
     datasets: [{
-      data: [10, 38, 40, 30, 70, 80],
+      data: [],
       backgroundColor: 'transparent',
       borderColor: globalColors.pink,
-      borderWidth: 1,
-      fill: false,
-    }, 
-    {
-      data: [22, 10, 17, 55, 55, 77],
-      backgroundColor: 'transparent',
-      borderColor: globalColors.green,
       borderWidth: 1,
       fill: false,
     }]
@@ -77,12 +70,27 @@ const OrderBookLineChart = props => {
     }
   }, [chartContainer]);
 
-  const updateDataset = (datasetIndex, newData) => {
-    // console.log('c', chartInstance)
-    // chartInstance.data.datasets[datasetIndex].data = newData;
-    // chartInstance.update();
-  };
+  useEffect(() => {
+    // console.log('----', props.priceHistory)
+    const dataArray = [];
+    props.priceHistory.forEach(dataItem => {
+      dataArray.push(Math.floor(dataItem.avg_price));
+    });
+    chartConfig.data.labels = dataArray;
+    chartConfig.data.datasets[0].data = dataArray;
+    // updateDataset(0, dataArray);
+  }, [props.priceHistory]);
 
+
+  useEffect(() => {
+    if (!chartInstance) return;
+    updateDataset();
+  }, [chartInstance]);
+
+  const updateDataset = () => {
+    chartInstance.data = chartConfig.data;
+    chartInstance.update();
+  };  
 
   return (
     <ChartWrapper>
