@@ -58,7 +58,6 @@ const ContainerColumn = styled.div`
 `;
 
 const MarketCardGovernance = props => {
-  console.log('props', props)
   return (
       <MarketGovernanceContainer>
         {governanceRows.map((governanceRow, index) => (
