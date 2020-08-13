@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 // common
@@ -143,36 +143,14 @@ const MarketDetailData = props => {
   // define default state
   const [checked, setChecked] = useState('all');
   const [chartView, setChartView] = useState('orderBook');
-  // console.log('This is orderbookData', props.orderbookData)
-  // *************************************************************
-  // Should be replaced with props.orderbookData when DB is filled
-  // *************************************************************
-  const [orderBookItems, setOrderBookItems] = useState([
-    {
-      contract: 'Trump',
-      amount: '1200',
-      price: '0.40',
-      type: 'buy',
-    },
-    {
-      contract: 'Biden',
-      amount: '1000',
-      price: '0.30',
-      type: 'sell',
-    },
-    {
-      contract: 'Kanye',
-      amount: '1200',
-      price: '0.40',
-      type: 'sell',
-    },
-    {
-      contract: 'Tom',
-      amount: '1200',
-      price: '0.40',
-      type: 'sell',
-    },
-  ]);
+
+  const {orderbookData, market} = props;
+
+  useEffect(() => {
+  }, [])
+
+  console.log('the data from upper component', market);
+
   const orderBookFilters = [
     '1D',
     '1W',
@@ -182,7 +160,7 @@ const MarketDetailData = props => {
     'all',
   ];
   const orderBookHeaders = [
-    'Contact',
+    'Contract',
     'Amount',
     'Price',
     'Type',
@@ -197,8 +175,6 @@ const MarketDetailData = props => {
   const handleChartChange = (event) => {
     setChartView(event.target.value);
   }
-
-  const { market } = props;
 
   return (
     <PageWrapper>
@@ -279,7 +255,8 @@ const MarketDetailData = props => {
           (
             <OrderBookBookBarChart 
               orderBookHeaders={orderBookHeaders} 
-              orderBookItems={orderBookItems} 
+              orderBookItems={orderbookData}
+              market={market} 
             />
           ) 
           : 

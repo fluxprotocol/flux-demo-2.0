@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 const FlexWrapper = styled.div`
@@ -67,7 +67,10 @@ const BarWrapperContainer = styled.div`
 ` 
 
 const OrderBookBookBarChart = props => {
-  
+  const {orderBookHeaders, orderBookItems, market } = props;
+
+  const [state, setState] = useState('orderbookData');
+
 
   const colorValue = {
     sell: 'pink',
@@ -77,10 +80,7 @@ const OrderBookBookBarChart = props => {
   // handler for filter selections
   const handleRadioChange = (event) => {
     let filterValue = event.target.value;
-    console.log('this is the filtervalue', filterValue);
   }
-
-  const {orderBookHeaders, orderBookItems } = props;
 
   return (
     <FlexWrapper>
@@ -103,7 +103,7 @@ const OrderBookBookBarChart = props => {
             <OrderBookDetails key={orderBookItem.contract}>
               <OrderBookData
                 color="white"
-              >{orderBookItem.contract}</OrderBookData>
+              >hi</OrderBookData>
               <OrderBookData 
                 className="range"
                 borderRadius="4px"
