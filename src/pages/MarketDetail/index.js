@@ -49,6 +49,7 @@ const MarketOverview = props => {
   useEffect(() => {
     getMarket();
     getPriceHistory();
+    getOrderbookData();
   }, []);
 
   const getMarket = async () => {
