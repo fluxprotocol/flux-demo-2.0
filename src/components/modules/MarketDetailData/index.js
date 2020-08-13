@@ -144,7 +144,10 @@ const MarketDetailData = props => {
   const [checked, setChecked] = useState('all');
   const [chartView, setChartView] = useState('orderBook');
 
-  const {orderbookData, market} = props;
+  const {orderbookData, market, averagePriceData} = props;
+  // setup for average price data - has to be calculated based off selected filter day/week/month etc
+  // check the price for that date and calculate the current price - then come up with percentage
+  console.log('@@@@', averagePriceData)
 
   useEffect(() => {
   }, [])
