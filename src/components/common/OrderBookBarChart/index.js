@@ -68,6 +68,7 @@ const BarWrapperContainer = styled.div`
 
 const OrderBookBookBarChart = props => {
   const {orderBookHeaders, orderBookItems, market } = props;
+  console.log('orderbookitems', orderBookItems);
 
   const colorValue = {
     buy: 'green'
@@ -104,11 +105,15 @@ const OrderBookBookBarChart = props => {
                   width="100%"
                   backgroundColor={colorValue.buy}
                 >
+                  {/* 
+                    I need to know the data format from the real data - then we can compute the arithmetics
+                    with respect to the with. Currently set to be fixed @50%
+                  */}
                   <BarWrapperContainer
                     color={colorValue.buy}
                     backgroundColor={colorValue.buy}
-                    width={orderBookItems[index].price * 10}
-                    content={orderBookItems[index].depth}
+                    width={50}
+                    content={orderBookItems[index].depth / 100000000000}
                   >
                   </BarWrapperContainer>
                 </OrderBookData>
