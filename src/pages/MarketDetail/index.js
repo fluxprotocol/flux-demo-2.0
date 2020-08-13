@@ -43,6 +43,7 @@ const MarketOverview = props => {
   const [outcomeColorNameMap, setOutcomeColorNameMap] = useState({});
   const [priceHistory, setPriceHistory] = useState([]);
   const [orderbookData, setOrderbookData] = useState([]);
+  const [avgPriceData, setAveragePriceData] = useState([]);
   const [lastFilledPricesForMarket, setLastFilledPrice] = useState({});
   const { width } = useWindowDimensions();
   const [showForm, setShowForm] = useState(false);
@@ -51,6 +52,7 @@ const MarketOverview = props => {
     getMarket();
     getPriceHistory('all');
     getOrderbookData();
+    getAveragePrices();
   }, []);
 
   const getMarket = async () => {
@@ -63,6 +65,7 @@ const MarketOverview = props => {
 
   useEffect(() => {
     if (!market || !market.outcome_tags) return;
+
     const possibleColors = ['lightPurple', 'pink', 'purple', 'red', 'green', 'blue', 'mediumBlue', 'darkPurple'];
     let outcomeObject = {};
     market.outcome_tags.forEach((market, index) => {
@@ -120,6 +123,11 @@ const MarketOverview = props => {
     setOrderbookData(obData);
   } 
 
+  const getAveragePrices = async () => {
+    const averagePriceData  = await flux.getAvgPricesOnDate(id);
+    setAveragePriceData(averagePriceData);
+  }
+
   return (
     <ContentWrapper>
       <MainHeader market={market} lastFilledPrices={lastFilledPricesForMarket} />
@@ -147,6 +155,7 @@ const MarketOverview = props => {
                 market={market} 
                 filterChange={getPriceHistory}
                 outcomeColorNameMap={outcomeColorNameMap}
+                averagePriceData={avgPriceData}
               />
             </FlexItem>
             <FlexItem
