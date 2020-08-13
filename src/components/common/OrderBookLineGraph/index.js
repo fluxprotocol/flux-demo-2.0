@@ -13,13 +13,7 @@ const chartConfig = {
   type: 'line',
   data: {
     labels: [],
-    datasets: [{
-      data: [],
-      backgroundColor: 'transparent',
-      borderColor: globalColors.pink,
-      borderWidth: 1,
-      fill: false,
-    }]
+    datasets: [],
   },
   options: {
     legend: {
@@ -70,15 +64,34 @@ const OrderBookLineChart = props => {
     }
   }, [chartContainer]);
 
+  // trigger effect everytime priceHistory value changes
   useEffect(() => {
-    // console.log('----', props.priceHistory)
-    const dataArray = [];
+    let outComes = {};
+    chartConfig.data.datasets = [];
+
+    // loop each history item and add to seperate object prop
     props.priceHistory.forEach(dataItem => {
-      dataArray.push(Math.floor(dataItem.avg_price));
+      if (!outComes[dataItem.outcome]) {
+        outComes[dataItem.outcome] = {
+          data: [],
+        }
+      };
+      outComes[dataItem.outcome].data.push(Math.floor(dataItem.avg_price));
     });
-    chartConfig.data.labels = dataArray;
-    chartConfig.data.datasets[0].data = dataArray;
-    // updateDataset(0, dataArray);
+
+    // loop outcome object prop and create dataset item for chart array
+    for (const property in outComes) {
+      chartConfig.data.datasets.push({
+        data: outComes[property].data,
+        backgroundColor: 'transparent',
+        borderColor: globalColors[props.outcomeColorNameMap[property].color],
+        borderWidth: 1,
+        fill: false,
+      })
+    }
+
+    chartConfig.data.labels = outComes['0'].data;
+    updateDataset();
   }, [props.priceHistory]);
 
 
@@ -88,6 +101,7 @@ const OrderBookLineChart = props => {
   }, [chartInstance]);
 
   const updateDataset = () => {
+    if (!chartInstance) return;
     chartInstance.data = chartConfig.data;
     chartInstance.update();
   };  

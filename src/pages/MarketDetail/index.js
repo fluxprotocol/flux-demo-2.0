@@ -40,6 +40,7 @@ const MarketOverview = props => {
   const { id } = useParams();
   const [flux, _] = useContext(FluxContext);
   const [market, setMarket] = useState({});
+  const [outcomeColorNameMap, setOutcomeColorNameMap] = useState({});
   const [priceHistory, setPriceHistory] = useState([]);
   const [orderbookData, setOrderbookData] = useState([]);
   const [lastFilledPricesForMarket, setLastFilledPrice] = useState({});
@@ -48,7 +49,7 @@ const MarketOverview = props => {
 
   useEffect(() => {
     getMarket();
-    getPriceHistory();
+    getPriceHistory('all');
   }, []);
 
   const getMarket = async () => {
@@ -59,11 +60,57 @@ const MarketOverview = props => {
     setLastFilledPrice(lastFilledPricesForMarket);
   }
 
+  useEffect(() => {
+    if (!market || !market.outcome_tags) return;
+    const possibleColors = ['lightPurple', 'pink', 'purple', 'red', 'green', 'blue', 'mediumBlue', 'darkPurple'];
+    let outcomeObject = {};
+    market.outcome_tags.forEach((market, index) => {
+      outcomeObject[index] = {
+        color: possibleColors[index],
+        label: market,
+      };
+    });
+    setOutcomeColorNameMap(outcomeObject);
+  }, [market])
+
   const getPriceHistory = async (type) => {
-    // console.log('getPriceHistory', type);
-    // console.log(moment().subtract(1, 'days'));
-    // return;
-    const allPriceHistory = await flux.getPriceHistory(id, "2020-01-10", "2020-08-17", ["day", "month"]);
+    const daysMap = {
+      '1D': {
+        substractAmount: 1,
+        substractType: 'days',
+        dataTypes: ['hour'],
+      },
+      '1W': {
+        substractAmount: 7,
+        substractType: 'days',
+        dataTypes: ['day'],
+      },
+      '1M': {
+        substractAmount: 1,
+        substractType: 'months',
+        dataTypes: ['day'],
+      },
+      '3M': {
+        substractAmount: 3,
+        substractType: 'months',
+        dataTypes: ['day'],
+      },
+      '6W': {
+        substractAmount: 6,
+        substractType: 'weeks',
+        dataTypes: ['day'],
+      },
+      'all': {
+        substractAmount: 12,
+        substractType: 'months',
+        dataTypes: ['week'],
+      },
+    };
+
+    const fromDate = moment().subtract(daysMap[type].substractAmount, daysMap[type].substractType).format('YYYY-MM-DD');
+    const toDate = moment().format('YYYY-MM-DD');
+
+    const allPriceHistory = await flux.getPriceHistory(id, fromDate, toDate, daysMap[type].dataTypes);
     setPriceHistory(allPriceHistory);
   }
 
@@ -98,6 +145,7 @@ const MarketOverview = props => {
                 orderbookData={orderbookData}
                 market={market} 
                 filterChange={getPriceHistory}
+                outcomeColorNameMap={outcomeColorNameMap}
               />
             </FlexItem>
             <FlexItem
