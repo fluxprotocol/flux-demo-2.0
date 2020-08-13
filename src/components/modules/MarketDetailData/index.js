@@ -149,8 +149,6 @@ const MarketDetailData = props => {
   useEffect(() => {
   }, [])
 
-  console.log('the data from upper component', market);
-
   const orderBookFilters = [
     '1D',
     '1W',

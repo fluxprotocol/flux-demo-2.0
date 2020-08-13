@@ -69,18 +69,9 @@ const BarWrapperContainer = styled.div`
 const OrderBookBookBarChart = props => {
   const {orderBookHeaders, orderBookItems, market } = props;
 
-  const [state, setState] = useState('orderbookData');
-
-
   const colorValue = {
-    sell: 'pink',
     buy: 'green'
   };
-  
-  // handler for filter selections
-  const handleRadioChange = (event) => {
-    let filterValue = event.target.value;
-  }
 
   return (
     <FlexWrapper>
@@ -99,38 +90,43 @@ const OrderBookBookBarChart = props => {
 
           </OrderBookDetails>
 
-          {orderBookItems.map((orderBookItem, index) => (
-            <OrderBookDetails key={orderBookItem.contract}>
-              <OrderBookData
-                color="white"
-              >hi</OrderBookData>
-              <OrderBookData 
-                className="range"
-                borderRadius="4px"
-                width="100%"
-                backgroundColor={colorValue[orderBookItem.type]}
-              >
-                <BarWrapperContainer
-                  color={colorValue[orderBookItem.type]}
-                  backgroundColor={colorValue[orderBookItem.type]}
-                  width={orderBookItem.price * 100}
-                  content={orderBookItem.amount}
+          {
+            market.outcome_tags ? market.outcome_tags.map((contract, index) => (
+              <OrderBookDetails key={contract.index}>
+                <OrderBookData
+                  color="white"
                 >
-                </BarWrapperContainer>
-              </OrderBookData>
-              <OrderBookData
-                color={colorValue[orderBookItem.type]}
-                
-              >
-                {orderBookItem.price}
-              </OrderBookData>
-              <OrderBookData
-                color={colorValue[orderBookItem.type]}
-              >
-                {orderBookItem.type}
-              </OrderBookData>
-            </OrderBookDetails>
-          ))}
+                  {contract}
+                </OrderBookData>
+                <OrderBookData 
+                  className="range"
+                  borderRadius="4px"
+                  width="100%"
+                  backgroundColor={colorValue.buy}
+                >
+                  <BarWrapperContainer
+                    color={colorValue.buy}
+                    backgroundColor={colorValue.buy}
+                    width={orderBookItems[index].price * 10}
+                    content={orderBookItems[index].depth}
+                  >
+                  </BarWrapperContainer>
+                </OrderBookData>
+                <OrderBookData
+                  color={colorValue.buy}
+                  
+                >
+                  {orderBookItems[index].price}
+                </OrderBookData>
+                <OrderBookData
+                  color={colorValue.buy}
+                >
+                  Buy
+                </OrderBookData>
+              </OrderBookDetails>
+              
+            )) : null
+          }
 
         </tbody>
       </OrderBookWrapper>
