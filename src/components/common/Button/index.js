@@ -20,6 +20,10 @@ const Button = styled.button`
   border: 1px solid ${props => props.borderColor ? props.borderColor : props.theme[props.color]};
   box-shadow: ${props => props.shadow ? '0px 3px 10px rgba(0,0,0,0.4)' : 'none'};
 
+  @media (min-width: ${({ theme }) => theme.mediumBreakpoint}) {
+    margin: ${props => props.marginMedium ? props.marginMedium : props.margin ? props.margin : 0};
+  }
+
   &:hover {
     opacity: 0.8;
   }
