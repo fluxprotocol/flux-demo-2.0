@@ -136,7 +136,7 @@ const CreateMarketForm = props => {
         Is the resolution of the source an API?
       </FormTitle>
       <RadioButton 
-        name="overviewType" 
+        name="sourceApi" 
         id="yesApi"
         value="yesApi"
         checked={true}
@@ -150,7 +150,7 @@ const CreateMarketForm = props => {
       </RadioLabel>
 
       <RadioButton 
-        name="overviewType" 
+        name="sourceApi" 
         id="noApi"
         value="noApi"
         checked={true}
