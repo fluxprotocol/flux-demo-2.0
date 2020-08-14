@@ -68,7 +68,6 @@ const BarWrapperContainer = styled.div`
 
 const OrderBookBookBarChart = props => {
   const {orderBookHeaders, orderBookItems, market } = props;
-  console.log('orderbookitems', orderBookItems);
 
   const colorValue = {
     buy: 'green'

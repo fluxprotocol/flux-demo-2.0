@@ -143,11 +143,11 @@ const MarketDetailData = props => {
   // define default state
   const [checked, setChecked] = useState('all');
   const [chartView, setChartView] = useState('orderBook');
+  const [chartPrice, calculateChartPrice] = useState('orderBook');
 
   const {orderbookData, market, averagePriceData} = props;
   // setup for average price data - has to be calculated based off selected filter day/week/month etc
   // check the price for that date and calculate the current price - then come up with percentage
-  console.log('@@@@', averagePriceData)
 
   useEffect(() => {
   }, [])
@@ -167,15 +167,52 @@ const MarketDetailData = props => {
     'Type',
   ];
   
+  
   // handler for filter selections
-  const handleRadioChange = (event) => {
+  const handleRadioChange = async (event) => {
     setChecked(event.target.value);
     props.filterChange(event.target.value);
+    let outcome = await computePriceRange();
+
+    calculateChartPrice(outcome);
   }
 
   const handleChartChange = (event) => {
     setChartView(event.target.value);
   }
+
+  const computePriceRange = () => {
+    let historicalPrices = averagePriceData;
+    let currentPrices = orderbookData;
+
+    let dataObj = [];
+
+    currentPrices.forEach((item, index) => {
+      // sometimes the indexes do not match due to dummy data
+      if (historicalPrices[index]) {
+        // get currentprice
+        let currPrice = item.price;
+        // get the historical price from array based on inex
+        let histPrice = parseInt(historicalPrices[index].avg_price);
+        // calculate what 1 % is of the historical price
+        let onePercent = histPrice / 100;
+        // calculate the difference, can be negative or positive
+        let difference = currPrice - histPrice;
+        // calculate percentage
+        let percentage = parseInt(difference / onePercent);
+
+        let finalCalculations = {
+          difference,
+          percentage
+        }
+        dataObj.push(finalCalculations);
+      } else {
+        return null;
+      }
+    });
+
+    return dataObj;
+  } 
 
   return (
     <PageWrapper>
@@ -189,9 +226,11 @@ const MarketDetailData = props => {
             </DetailPriceHeading>
             <DetailStatHeading>
               <DetailStatLabel>
-                <img alt="positiveArrow" src={positiveArrow} /> $0.03 (%)
+                {/* for now hardcoded to be the first item from the object - should this become the average of all
+                the values in each object? */}
+                <img alt="positiveArrow" src={positiveArrow} /> ${chartPrice[0].difference} ({chartPrice[0].percentage}%)
               </DetailStatLabel>
-              Past week
+              Past {checked}
             </DetailStatHeading>
           </ShareDetails>
           <FormatContainer>
