@@ -5,8 +5,6 @@ import styled from 'styled-components';
 import OrderBookBookBarChart from '../../common/OrderBookBarChart';
 import OrderBookLineGraph from '../../common/OrderBookLineGraph';
 
-const positiveArrow = require('../../../assets/images/icons/green_arrow.svg');
-
 const barsActive = require('../../../assets/images/icons/bars_active.svg');
 const barsInactive = require('../../../assets/images/icons/bars_inactive.svg');
 const lineActive = require('../../../assets/images/icons/graph_active.svg');
@@ -35,7 +33,7 @@ const OverviewWrapper = styled.div`
   margin-bottom: 1.25em;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-end;
 `;
 
 const ShareDetails = styled.div`
@@ -143,7 +141,6 @@ const MarketDetailData = props => {
   // define default state
   const [checked, setChecked] = useState('all');
   const [chartView, setChartView] = useState('orderBook');
-  const [chartPrice, calculateChartPrice] = useState('orderBook');
 
   const {orderbookData, market, averagePriceData} = props;
   // setup for average price data - has to be calculated based off selected filter day/week/month etc
@@ -167,72 +164,19 @@ const MarketDetailData = props => {
     'Type',
   ];
   
-  
   // handler for filter selections
   const handleRadioChange = async (event) => {
     setChecked(event.target.value);
     props.filterChange(event.target.value);
-    let outcome = await computePriceRange();
-
-    calculateChartPrice(outcome);
   }
 
   const handleChartChange = (event) => {
     setChartView(event.target.value);
   }
 
-  const computePriceRange = () => {
-    let historicalPrices = averagePriceData;
-    let currentPrices = orderbookData;
-
-    let dataObj = [];
-
-    currentPrices.forEach((item, index) => {
-      // sometimes the indexes do not match due to dummy data
-      if (historicalPrices[index]) {
-        // get currentprice
-        let currPrice = item.price;
-        // get the historical price from array based on inex
-        let histPrice = parseInt(historicalPrices[index].avg_price);
-        // calculate what 1 % is of the historical price
-        let onePercent = histPrice / 100;
-        // calculate the difference, can be negative or positive
-        let difference = currPrice - histPrice;
-        // calculate percentage
-        let percentage = parseInt(difference / onePercent);
-
-        let finalCalculations = {
-          difference,
-          percentage
-        }
-        dataObj.push(finalCalculations);
-      } else {
-        return null;
-      }
-    });
-
-    return dataObj;
-  } 
-
   return (
     <PageWrapper>
         <OverviewWrapper>
-          <ShareDetails>
-            <DetailPriceHeading>
-              <DetailPriceLabel>
-                $0.75
-              </DetailPriceLabel>
-              per Yes share
-            </DetailPriceHeading>
-            <DetailStatHeading>
-              <DetailStatLabel>
-                {/* for now hardcoded to be the first item from the object - should this become the average of all
-                the values in each object? */}
-                <img alt="positiveArrow" src={positiveArrow} /> ${chartPrice[0].difference} ({chartPrice[0].percentage}%)
-              </DetailStatLabel>
-              Past {checked}
-            </DetailStatHeading>
-          </ShareDetails>
           <FormatContainer>
             <ChartWrapper>
               <FilterWrapper>
@@ -297,6 +241,7 @@ const MarketDetailData = props => {
               orderBookHeaders={orderBookHeaders} 
               orderBookItems={orderbookData}
               market={market} 
+              averagePriceData={averagePriceData}
             />
           ) 
           : 
