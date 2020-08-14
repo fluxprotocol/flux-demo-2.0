@@ -50,11 +50,11 @@ const CategoryFilters = props => {
         <FilterWrapper key={filter.value}>
           <Checkbox 
             disabled={props.notClickable} 
-            id={filter.value}
+            id={props.secondary ? filter.key : filter.value}
             value={filter.value}
             onChange={props.filterChange}
           />
-          <CheckboxLabel notClickable={props.notClickable} htmlFor={filter.value}>
+          <CheckboxLabel notClickable={props.notClickable} htmlFor={props.secondary ? filter.key : filter.value}>
             <FilterLabel>
               {filter.label}
             </FilterLabel>

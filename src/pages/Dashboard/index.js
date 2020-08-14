@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import styled from 'styled-components';
+import Modal from 'react-modal';
 
 // hooks
 import { useFluxAuth } from '../../App';
@@ -12,9 +13,12 @@ import ContentWrapper from '../../components/common/ContentWrapper';
 import OverviewToggle from '../../components/common/OverviewToggle';
 import CategoryFilters from '../../components/common/CategoryFilters';
 import Paragraph from '../../components/common/Paragraph';
+import Button from '../../components/common/Button';
+import { FlexWrapper } from '../../components/common/Flex';
 
 // modules
 import MarketOverview from '../../components/modules/MarketOverview';
+import CreateMarketForm from '../../components/modules/CreateMarketForm';
 
 // context
 import { FluxContext } from '../../context/FluxProvider';
@@ -33,6 +37,30 @@ const WelcomeHeader = styled.h1`
   font-size: 1.5rem;
 `;
 
+const customStyles = {
+  content : {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    maxWidth: '30rem',
+    maxHeight: '100vh',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
+    backgroundColor: '#2C2A43',
+  }, 
+  overlay: {
+    zIndex: 999,
+    backgroundColor: 'rgba(12,11,29, 0.6)',
+  },
+};
+
+const CloseModalButton = styled.button`
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+`;
+
 const Dashboard = props => {
   const { user } = useFluxAuth();
   const [markets, setMarkets] = useState([]);
@@ -40,10 +68,12 @@ const Dashboard = props => {
   const [flux, _] = useContext(FluxContext);
   const [overviewType, setOverviewType] = useState('trade');
   const [activeFilters, setActiveFilters] = useState([]);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
   const isFirstRun = useRef(true);
 
   useEffect(() => {
     getMarkets();
+    Modal.setAppElement('#root');
   }, []);
 
   const handleOverviewToggle = async (type) => {
@@ -95,7 +125,10 @@ const Dashboard = props => {
   return (
     <BackgroundWrapper>
       <ContentWrapper maxWidth="68rem">
-        <ContentWrapper padding="1rem">
+        <FlexWrapper 
+          flexDirection="column"
+          padding="1rem"
+        >
           <WelcomeHeader>Welcome { (user && user.id) ? user.id : '' }</WelcomeHeader>
           <Paragraph
             margin="0.5rem 0 0 0"
@@ -104,7 +137,16 @@ const Dashboard = props => {
           >
             These are the latest trends.
           </Paragraph>
-        </ContentWrapper>
+          <Button 
+            margin="2rem 0 0 0"
+            marginMedium="0 0 0 auto"
+            onClick={() => {
+              setModalIsOpen(true);
+            }}
+          >
+            Create market
+          </Button>
+        </FlexWrapper>
         <OverviewToggle onToggle={handleOverviewToggle}/>
         
         <ContentWrapper padding="1rem">
@@ -131,6 +173,17 @@ const Dashboard = props => {
         )}
 
       </ContentWrapper>
+
+      <Modal
+        isOpen={modalIsOpen}
+        style={customStyles}
+        contentLabel="Example Modal"
+      >
+        <CloseModalButton onClick={() => {
+          setModalIsOpen(false);
+        }}>close</CloseModalButton>
+        <CreateMarketForm />
+      </Modal>
     </BackgroundWrapper>
   );
 }

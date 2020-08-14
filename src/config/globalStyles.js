@@ -14,5 +14,9 @@ export const GlobalStyles = createGlobalStyle`
     &.layover {
       overflow: hidden;
     }
+
+    &.ReactModal__Body--open {
+      overflow: hidden;
+    }
   }`;
   
