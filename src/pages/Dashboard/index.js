@@ -68,7 +68,7 @@ const Dashboard = props => {
   const [flux, _] = useContext(FluxContext);
   const [overviewType, setOverviewType] = useState('trade');
   const [activeFilters, setActiveFilters] = useState([]);
-  const [modalIsOpen, setModalIsOpen] = useState(true);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
   const isFirstRun = useRef(true);
 
   useEffect(() => {
