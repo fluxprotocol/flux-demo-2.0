@@ -8,6 +8,7 @@ import { categoryFilters } from '../../../config/filters';
 // common
 import ContentWrapper from '../../common/ContentWrapper';
 import CategoryFilters from '../../common/CategoryFilters';
+import Button from '../../common/Button';
 
 const TextArea = styled.textarea`
   display: block;
@@ -54,7 +55,9 @@ const RadioLabel = styled.label`
 `;
 
 const Input = styled.input`
-  width: 100%;
+  display: ${props => props.display ? props.display : 'block'};
+  width: ${props => props.width ? props.width : '100%'};
+  margin: ${props => props.margin ? props.margin : 0};
   padding: 0.5rem;
   background-color: ${globalColors.darkBlue};
   color: white;
@@ -163,7 +166,27 @@ const CreateMarketForm = props => {
       <FormTitle>
         When does this market end?
       </FormTitle>
+      <Input
+        display="inline-block"
+        width="55%"
+        margin="0 0.5rem 0 0"
+        type="date"
+      />
+      <Input 
+        display="inline-block"
+        width="35%"
+        margin="0 0 0 0.5rem"
+        type="time"
+      />
 
+      <Button 
+        color="lightPurple"
+        margin="1rem 0"
+        padding="1rem 2rem"
+        onClick={() => {}}
+      >
+        Launch this market
+      </Button>
     </ContentWrapper>
   );
 }
