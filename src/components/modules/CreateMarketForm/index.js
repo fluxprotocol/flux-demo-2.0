@@ -123,45 +123,6 @@ const CreateMarketForm = props => {
         Categorical
       </RadioLabel>
 
-      {/* source */}
-      <FormTitle>
-        What source will this market use to resolve?
-      </FormTitle>
-      <Input 
-        type="text"
-      />
-
-      {/* api */}
-      <FormTitle>
-        Is the resolution of the source an API?
-      </FormTitle>
-      <RadioButton 
-        name="sourceApi" 
-        id="yesApi"
-        value="yesApi"
-        checked={true}
-        onChange={() => {}}
-      />
-      <RadioLabel 
-        margin="0 1rem 0 0"
-        htmlFor="yesApi"
-      >
-        Yes
-      </RadioLabel>
-
-      <RadioButton 
-        name="sourceApi" 
-        id="noApi"
-        value="noApi"
-        checked={true}
-        onChange={() => {}}
-      />
-      <RadioLabel
-        htmlFor="noApi"
-      >
-        No
-      </RadioLabel>
-
       {/* end datetime */}
       <FormTitle>
         When does this market end?
