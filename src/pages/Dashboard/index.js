@@ -23,6 +23,8 @@ import CreateMarketForm from '../../components/modules/CreateMarketForm';
 // context
 import { FluxContext } from '../../context/FluxProvider';
 
+const fluxLogo = require('../../assets/images/flux-logo.png');
+
 const BackgroundWrapper = styled.div`
   @media (min-width: ${({ theme }) => theme.mediumBreakpoint}) {
     min-height: 100vh;
@@ -48,6 +50,8 @@ const customStyles = {
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
     backgroundColor: '#2C2A43',
+    border: 'none',
+    borderRadius: '10px'
   }, 
   overlay: {
     zIndex: 999,
@@ -57,8 +61,20 @@ const customStyles = {
 
 const CloseModalButton = styled.button`
   position: absolute;
+  width: 6.5em;
   top: 1rem;
   right: 1rem;
+  background: rgba(15,14,37,100);
+  color: rgba(247, 1, 154, 1);
+  font-size: 1.2em;
+  border-radius: 10px;
+  border: none;
+  padding: .4em .1em;
+`;
+
+const FluxLogo = styled.img`
+  width: 5em;
+  margin-left: 1em;
 `;
 
 const Dashboard = props => {
@@ -179,9 +195,10 @@ const Dashboard = props => {
         style={customStyles}
         contentLabel="Example Modal"
       >
+        <FluxLogo alt="fluxLogo" src={fluxLogo} />
         <CloseModalButton onClick={() => {
           setModalIsOpen(false);
-        }}>close</CloseModalButton>
+        }}>cancel</CloseModalButton>
         <CreateMarketForm />
       </Modal>
     </BackgroundWrapper>
