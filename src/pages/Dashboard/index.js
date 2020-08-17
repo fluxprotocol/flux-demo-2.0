@@ -139,6 +139,33 @@ const Dashboard = props => {
     else setActiveFilters(activeFilters.filter(item => item !== filter))
   }
 
+  const createBinaryMarket = async (market) => {
+    try {
+      const newMarketId = await flux.createBinaryMarket(
+        market.description,
+        market.extraInfo,
+        market.categories,
+        market.endTime,
+        1
+      );
+      console.log('new', newMarketId);
+    } catch (err) {
+      console.log('err', err);
+    }
+  }
+
+  const launchMarket = (market) => {
+    if (market.marketType === 'binary') {
+      createBinaryMarket(market);
+      return;
+    }
+
+    if (market.marketType === 'categorical') {
+      return;
+    }
+
+  }
+
   return (
     <BackgroundWrapper>
       <ContentWrapper maxWidth="68rem">
@@ -201,9 +228,7 @@ const Dashboard = props => {
           setModalIsOpen(false);
         }}>cancel</CloseModalButton>
         <CreateMarketForm 
-          launchMarket={(market) => {
-            console.log('launch', market);
-          }}
+          launchMarket={launchMarket}
         />
       </Modal>
       <Footer />

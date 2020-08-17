@@ -59,7 +59,7 @@ const Input = styled.input`
   display: ${props => props.display ? props.display : 'block'};
   width: ${props => props.width ? props.width : '100%'};
   margin: ${props => props.margin ? props.margin : 0};
-  padding: 0.5rem;
+  padding: ${props => props.padding ? props.padding : '0.5rem'};
   background-color: ${globalColors.darkBlue};
   color: white;
   outline: none;
@@ -76,7 +76,9 @@ const CreateMarketForm = props => {
   const [marketDescription, setMarketDescription] = useState('');
   const [marketType, setMarketType] = useState('binary');
   const [categoricalOptions, setCategoricalOptions] = useState([''])
-  const [marketEndDate, setMarketEndDate] = useState(moment().format('YYYY-MM-DD'));
+  const [marketEndDateMonth, setMarketEndDateMonth] = useState(moment().month() + 1);
+  const [marketEndDateDay, setMarketEndDateDay] = useState(moment().add(1, 'd').date());
+  const [marketEndDateYear, setMarketEndDateYear] = useState(moment().year());
   const [marketEndTime, setMarketEndTime] = useState('12:00');
 
   const handleCategoryChange = (event) => {
@@ -92,7 +94,7 @@ const CreateMarketForm = props => {
   }
 
   const handleLaunchMarket = () => {
-    const unix = moment(`${marketEndDate} ${marketEndTime}`).format('x');
+    const unix = moment(`${marketEndDateDay}-${marketEndDateMonth}-${marketEndDateYear} ${marketEndTime}`, 'DD-MM-YYYY').format('x')
     const market = {
       marketType: marketType,
       description: marketDescription,
@@ -204,22 +206,52 @@ const CreateMarketForm = props => {
         When does this market end?
       </FormTitle>
       <Input
-        min={moment().format('YYYY-MM-DD')}
+        min="1"
+        max="12"
         display="inline-block"
-        width="55%"
+        width="15%"
         margin="0 0.5rem 0 0"
-        type="date"
+        type="number"
         color="white"
-        value={marketEndDate}
+        value={marketEndDateMonth}
         onChange={(event) => {
           let date = event.target.value;
-          setMarketEndDate(date);
+          setMarketEndDateMonth(date);
         }}
       />
+      <Input
+        min="1"
+        max="31"
+        display="inline-block"
+        width="15%"
+        margin="0 0.5rem 0 0"
+        type="number"
+        color="white"
+        value={marketEndDateDay}
+        onChange={(event) => {
+          let date = event.target.value;
+          setMarketEndDateDay(date);
+        }}
+      />
+      <Input
+        min="2020"
+        display="inline-block"
+        width="22%"
+        margin="0 0.5rem 0 0"
+        type="number"
+        color="white"
+        value={marketEndDateYear}
+        onChange={(event) => {
+          let date = event.target.value;
+          setMarketEndDateYear(date);
+        }}
+      />
+
       <Input 
         display="inline-block"
         width="35%"
         margin="0 0 0 0.5rem"
+        padding="6px"
         type="time"
         color="white"
         value={marketEndTime}
@@ -229,7 +261,7 @@ const CreateMarketForm = props => {
         }}
       />
 
-      <Button 
+      <Button   
         color="lightPurple"
         margin="1rem 0"
         padding="1rem 2rem"
