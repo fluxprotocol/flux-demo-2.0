@@ -108,7 +108,7 @@ const MarketCardOpinion = props => {
           </PositionedLabel>
           <PositionedLabel position={'right'}>
             <VolumeAmount category={props.market.categories[0]}>
-              {props.market.volume ? props.market.volume : '-'} DAI
+              {props.market.volume ? props.market.volume / 1000000000000000000 : '-'} DAI
             </VolumeAmount>
           </PositionedLabel>
         </ContentCard>
