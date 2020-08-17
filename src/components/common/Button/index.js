@@ -20,6 +20,25 @@ const Button = styled.button`
   border: 1px solid ${props => props.borderColor ? props.borderColor : props.theme[props.color]};
   box-shadow: ${props => props.shadow ? '0px 3px 10px rgba(0,0,0,0.4)' : 'none'};
 
+  &.createMarketButton {
+    display: none;
+    background: #0F0E25;
+    color: #C4FF88;
+    border: none;
+    flex-direction: row;
+    align-items: center;
+    padding: 0.5em 1.5em;
+
+    & img {
+      padding-right: 1.25em;
+    }
+    
+    @media (min-width: ${({ theme }) => theme.mediumBreakpoint}) {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+
   @media (min-width: ${({ theme }) => theme.mediumBreakpoint}) {
     margin: ${props => props.marginMedium ? props.marginMedium : props.margin ? props.margin : 0};
   }

@@ -166,6 +166,8 @@ const Dashboard = props => {
 
   }
 
+  const createMarket = require("../../assets/images/icons/create_market.png");
+
   return (
     <BackgroundWrapper>
       <ContentWrapper maxWidth="68rem">
@@ -182,13 +184,15 @@ const Dashboard = props => {
             These are the latest trends.
           </Paragraph>
           <Button 
+            className="createMarketButton"
             margin="2rem 0 0 0"
             marginMedium="0 0 0 auto"
             onClick={() => {
               setModalIsOpen(true);
             }}
           >
-            Create market
+            <img src={createMarket} alt="create market icon" />
+            create market
           </Button>
         </FlexWrapper>
         <OverviewToggle onToggle={handleOverviewToggle}/>
