@@ -51,10 +51,14 @@ const CategoryFilters = props => {
           <Checkbox 
             disabled={props.notClickable} 
             id={props.secondary ? filter.key : filter.value}
+            checked={props.activeFilters.indexOf(filter.value) > -1}
             value={filter.value}
             onChange={props.filterChange}
           />
-          <CheckboxLabel notClickable={props.notClickable} htmlFor={props.secondary ? filter.key : filter.value}>
+          <CheckboxLabel 
+            notClickable={props.notClickable} 
+            htmlFor={props.secondary ? filter.key : filter.value}
+          >
             <FilterLabel>
               {filter.label}
             </FilterLabel>

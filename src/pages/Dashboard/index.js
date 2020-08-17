@@ -89,7 +89,11 @@ const Dashboard = props => {
   const isFirstRun = useRef(true);
 
   useEffect(() => {
-    getMarkets();
+    const params = new URLSearchParams(window.location.search);
+    const currentParams = params.getAll('categories');
+    setActiveFilters(currentParams);
+
+    // getMarkets();
     Modal.setAppElement('#root');
   }, []);
 
@@ -128,6 +132,15 @@ const Dashboard = props => {
       isFirstRun.current = false;
       return;
     }
+    
+    let url = '/filter?';
+    activeFilters.forEach(filter => {
+      const prefix = url.substr(url.length - 1) === '?' ? '' : '&';
+      url = url + `${prefix}categories=${filter}`;
+    });
+
+    if (!activeFilters.length) url = '';
+    window.history.replaceState(null, 'Markets', url)
     getMarkets();
   }, [activeFilters])
 
@@ -216,6 +229,7 @@ const Dashboard = props => {
         <ContentWrapper padding="1rem">
           <CategoryFilters 
             filters={categoryFilters} 
+            activeFilters={activeFilters}
             filterChange={handleFilterChange}
           />
         </ContentWrapper>
