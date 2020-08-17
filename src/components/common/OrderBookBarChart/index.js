@@ -86,7 +86,7 @@ const BarWrapperContainer = styled.div`
 const OrderBookBookBarChart = props => {
   const {orderBookHeaders, orderBookItems, market, averagePriceData } = props;
   const [chartPrice, setChartPrice] = useState([]);
-  
+
   useEffect(() => {
 
     if (!averagePriceData) {

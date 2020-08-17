@@ -20,7 +20,7 @@ const ChartWrapper = styled.div`
 const FlexWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: ${props => props.justifyContent === 'orderBook' ? 'flex-end' : 'space-between'};
   margin: 0 auto;
   margin-bottom: 1em;
   width: 90%;
@@ -149,14 +149,22 @@ const MarketDetailData = props => {
   useEffect(() => {
   }, [])
 
-  const orderBookFilters = [
-    '1D',
-    '1W',
-    '1M',
-    '3M',
-    '6W',
-    'all',
-  ];
+  const orderBookFilters = {
+    orderBook: [
+      '1D',
+      '1W',
+      'all'
+    ],
+    orderBookChart: [    
+      '1D',
+      '1W',
+      '1M',
+      '3M',
+      '6W',
+      'all'
+    ]
+  }
+
   const orderBookHeaders = [
     'Contract',
     'Amount',
@@ -213,24 +221,27 @@ const MarketDetailData = props => {
         </OverviewWrapper>
         <FlexWrapper
           width="100%"
+          justifyContent={chartView}
         >
 
-        {orderBookFilters.map((filter, index) => (
-          <div key={filter}>
-            <RadioButton 
-              name="filterValue" 
-              id={filter}
-              value={filter}
-              checked={checked === filter}
-              onChange={handleRadioChange}
-            />
-            <RadioLabel htmlFor={filter}>
-              <FilterLabel>
-                {filter}
-              </FilterLabel>
-            </RadioLabel>
-          </div>
-        ))}
+        {
+          orderBookFilters[chartView].map((filter, index) => (
+            <div key={filter}>
+              <RadioButton 
+                name="filterValue" 
+                id={filter}
+                value={filter}
+                checked={checked === filter}
+                onChange={handleRadioChange}
+              />
+              <RadioLabel htmlFor={filter}>
+                <FilterLabel>
+                  {filter}
+                </FilterLabel>
+              </RadioLabel>
+            </div>
+          )) 
+        }
 
         </FlexWrapper>
         {
