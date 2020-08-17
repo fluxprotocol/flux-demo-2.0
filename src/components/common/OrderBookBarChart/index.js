@@ -187,17 +187,6 @@ const OrderBookBookBarChart = props => {
                   
                 >
                   {orderBookItems[index].price}
-                  {
-                    chartPrice[index] 
-                    ?
-                      <div>
-                        <img alt="positiveArrow" src={positiveArrow} />
-                        <span>${chartPrice[index].difference}</span> <span>%{chartPrice[index].percentage}</span>
-                      </div>
-                    :
-                    null
-                  }
-
                   
                 </OrderBookData>
                 <OrderBookData

@@ -132,7 +132,6 @@ const MarketOverview = props => {
 
   const getMarketPrices = async () => {
     const marketPrices = await flux.getMarketPrices(id);
-    console.log('@@@@@@@@---', marketPrices);
     setMarketPrices(marketPrices);
   }
 
@@ -164,7 +163,6 @@ const MarketOverview = props => {
                 filterChange={getPriceHistory}
                 outcomeColorNameMap={outcomeColorNameMap}
                 averagePriceData={avgPriceData}
-                marketPricesData={marketPricesData}
               />
             </FlexItem>
             <FlexItem
@@ -217,7 +215,7 @@ const MarketOverview = props => {
                   {/* purchase shares: tablet/desktop */}
                   {width >= 650 &&
                     <PurchaseWrapper>
-                      <ProgressiveForm market={market} />
+                      <ProgressiveForm market={market} marketPricesData={marketPricesData} lastFilledPrices={lastFilledPricesForMarket} />
                     </PurchaseWrapper>
                   }
 
@@ -279,7 +277,12 @@ const MarketOverview = props => {
       {(width < 650 && showForm) &&
         <Layover>
           <FlexWrapper height="100%">
-            <ProgressiveForm layover market={market} />
+            <ProgressiveForm 
+              layover 
+              market={market} 
+              marketPricesData={marketPricesData} 
+              lastFilledPrices={lastFilledPricesForMarket}
+            />
           </FlexWrapper>
         </Layover>
       }
