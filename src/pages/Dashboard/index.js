@@ -14,7 +14,7 @@ import OverviewToggle from '../../components/common/OverviewToggle';
 import CategoryFilters from '../../components/common/CategoryFilters';
 import Paragraph from '../../components/common/Paragraph';
 import Button from '../../components/common/Button';
-import { FlexWrapper } from '../../components/common/Flex';
+import { FlexWrapper, FlexItem } from '../../components/common/Flex';
 import Footer from '../../components/common/Footer';
 
 // modules
@@ -36,7 +36,7 @@ const BackgroundWrapper = styled.div`
 `;
 
 const WelcomeHeader = styled.h1`  
-  margin-top: 2rem;
+  margin: 0;
   font-size: 1.5rem;
 `;
 
@@ -172,31 +172,47 @@ const Dashboard = props => {
     <BackgroundWrapper>
       <ContentWrapper maxWidth="68rem">
         <FlexWrapper 
-          flexDirection="column"
-          padding="1rem"
+          padding="3rem 1rem 1rem 1rem"
         >
-          <WelcomeHeader>Welcome { (user && user.id) ? user.id : '' }</WelcomeHeader>
-          <Paragraph
-            margin="0.5rem 0 0 0"
-            size="0.8rem"
-            opacity="0.7"
+
+          <FlexWrapper
+            flexDirection="column"
+            justifyContent="center"
+            width="50%"
           >
-            These are the latest trends.
-          </Paragraph>
-          <Button 
-            className="createMarketButton"
-            margin="2rem 0 0 0"
-            marginMedium="0 0 0 auto"
-            onClick={() => {
-              setModalIsOpen(true);
-            }}
+            <WelcomeHeader>
+              Welcome { (user && user.id) ? user.id : '' }
+            </WelcomeHeader>
+            <Paragraph
+              margin="0.5rem 0 0 0"
+              size="0.8rem"
+              opacity="0.7"
+            >
+              These are the latest trends.
+            </Paragraph>
+          </FlexWrapper>
+
+          <FlexWrapper
+            textAlign="right"
+            alignItems="center"
+            width="50%"
           >
+            <Button 
+              className="createMarketButton"
+              margin="2rem 0 0 0"
+              marginMedium="0 0 0 auto"
+              onClick={() => {
+                setModalIsOpen(true);
+              }}
+            >
             <img src={createMarket} alt="create market icon" />
-            create market
+            <span>create market</span>
           </Button>
+          </FlexWrapper>
+          
         </FlexWrapper>
         <OverviewToggle onToggle={handleOverviewToggle}/>
-        
+
         <ContentWrapper padding="1rem">
           <CategoryFilters 
             filters={categoryFilters} 

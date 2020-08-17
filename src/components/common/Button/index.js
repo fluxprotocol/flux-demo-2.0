@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const Button = styled.button`
-  display: inline-block;
+  display: ${props => props.hideForSmall ? 'none' : 'inline-block'};
   height: ${props => props.height ? props.height : 'auto'};
   width: ${props => props.width ? props.width : 'initial'};
   max-width: ${props => props.maxWidth ? props.maxWidth : 'initial'};
@@ -11,7 +11,7 @@ const Button = styled.button`
   font-size: ${props => props.small ? '0.8rem' : '1rem'};
   color: white;
   font-size: 0.9rem;
-  font-weight: ${props => props.small ? 'regular' : 'bold'};
+  font-weight: ${props => props.small ? 'normal' : 'bold'};
   border-radius: ${props => props.small ? '0.5rem' : '0.7rem'};
   border: none;
   outline: none;
@@ -27,10 +27,14 @@ const Button = styled.button`
     border: none;
     flex-direction: row;
     align-items: center;
-    padding: 0.5em 1.5em;
+    padding: 0.5em 1em;
 
-    & img {
-      padding-right: 1.25em;
+    img {
+      padding-right: 0.7rem;
+    }
+
+    span {
+      font-weight: 100;
     }
     
     @media (min-width: ${({ theme }) => theme.mediumBreakpoint}) {
@@ -40,6 +44,7 @@ const Button = styled.button`
   }
 
   @media (min-width: ${({ theme }) => theme.mediumBreakpoint}) {
+    display: inline-block;
     margin: ${props => props.marginMedium ? props.marginMedium : props.margin ? props.margin : 0};
   }
 
