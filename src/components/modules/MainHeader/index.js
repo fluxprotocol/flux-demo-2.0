@@ -95,6 +95,7 @@ const MainHeader = props => {
         <ContentWrapper hideForSmall hideForMedium>
           <CategoryFilters
           filters={categories}
+          activeFilters={[]}
           notClickable
           />
         </ContentWrapper>

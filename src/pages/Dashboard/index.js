@@ -93,9 +93,9 @@ const Dashboard = props => {
     const currentParams = params.getAll('categories');
     setActiveFilters(currentParams);
 
-    // getMarkets();
     Modal.setAppElement('#root');
   }, []);
+
 
   const handleOverviewToggle = async (type) => {
     setOverviewType(type);
@@ -133,13 +133,13 @@ const Dashboard = props => {
       return;
     }
     
-    let url = '/filter?';
+    let url = '/';
+    if (activeFilters.length) url = '/filter?';
     activeFilters.forEach(filter => {
       const prefix = url.substr(url.length - 1) === '?' ? '' : '&';
       url = url + `${prefix}categories=${filter}`;
     });
-
-    if (!activeFilters.length) url = '';
+    
     window.history.replaceState(null, 'Markets', url)
     getMarkets();
   }, [activeFilters])
