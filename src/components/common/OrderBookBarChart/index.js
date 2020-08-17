@@ -88,8 +88,6 @@ const OrderBookBookBarChart = props => {
   const [chartPrice, setChartPrice] = useState([]);
   
   useEffect(() => {
-    
-    console.log('hej zish ;(', averagePriceData);
 
     if (!averagePriceData) {
       return;
@@ -127,7 +125,7 @@ const OrderBookBookBarChart = props => {
           difference,
           percentage
         }
-        console.log('@@@@@@@@@@@', finalCalculations);
+
         dataObj.push(finalCalculations);
       } else {
         return null;

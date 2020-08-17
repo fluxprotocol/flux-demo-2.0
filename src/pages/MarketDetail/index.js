@@ -44,6 +44,7 @@ const MarketOverview = props => {
   const [priceHistory, setPriceHistory] = useState([]);
   const [orderbookData, setOrderbookData] = useState([]);
   const [avgPriceData, setAveragePriceData] = useState([]);
+  const [marketPricesData, setMarketPrices] = useState([]);
   const [lastFilledPricesForMarket, setLastFilledPrice] = useState({});
   const { width } = useWindowDimensions();
   const [showForm, setShowForm] = useState(false);
@@ -53,6 +54,7 @@ const MarketOverview = props => {
     getPriceHistory('all');
     getOrderbookData();
     getAveragePrices();
+    getMarketPrices();
   }, []);
 
   const getMarket = async () => {
@@ -128,6 +130,12 @@ const MarketOverview = props => {
     setAveragePriceData(averagePriceData);
   }
 
+  const getMarketPrices = async () => {
+    const marketPrices = await flux.getMarketPrices(id);
+    console.log('@@@@@@@@---', marketPrices);
+    setMarketPrices(marketPrices);
+  }
+
   return (
     <ContentWrapper>
       <MainHeader market={market} lastFilledPrices={lastFilledPricesForMarket} />
@@ -156,6 +164,7 @@ const MarketOverview = props => {
                 filterChange={getPriceHistory}
                 outcomeColorNameMap={outcomeColorNameMap}
                 averagePriceData={avgPriceData}
+                marketPricesData={marketPricesData}
               />
             </FlexItem>
             <FlexItem
