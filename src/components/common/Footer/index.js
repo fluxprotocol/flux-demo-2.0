@@ -63,9 +63,19 @@ const Footer = () => {
           />
           <FooterList>
             <li>
-              <img src={twitterLogo} alt="twitter logo" />
-              <img src={redditLogo} alt="reddit logo" />
-              <img src={mediumLogo} alt="medium logo" />
+              <a href="/">
+                <img src={twitterLogo} alt="twitter logo" />
+              </a>
+            </li>
+            <li>
+              <a href="/">
+                <img src={redditLogo} alt="reddit logo" />
+              </a>
+            </li>
+            <li>
+              <a href="/">
+                <img src={mediumLogo} alt="medium logo" />
+              </a>
             </li>
           </FooterList>
         </FooterWrapper>
