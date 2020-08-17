@@ -12,6 +12,7 @@ import PositionedLabel from '../../components/common/PositionedLabel';
 import Button from '../../components/common/Button';
 import Layover from '../../components/common/Layover';
 import Paragraph from '../../components/common/Paragraph';
+import Footer from '../../components/common/Footer';
 
 // modules
 import MainHeader from '../../components/modules/MainHeader';
@@ -227,8 +228,10 @@ const MarketOverview = props => {
 
         </ContentWrapper>
       </ContentWrapper>
-
-      <ContentWrapper>
+      <ContentWrapper
+        backgroundColor="darkBlue"
+        padding="1em 0"
+      >
         <ContentWrapper
           margin="2rem auto"
           padding="1rem"
@@ -240,7 +243,7 @@ const MarketOverview = props => {
             maxWidth="55rem"
             margin="0 auto"
           >
-            Extra info
+            extra info
           </Paragraph>
           <Paragraph
             size="1rem"
@@ -250,7 +253,7 @@ const MarketOverview = props => {
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
           </Paragraph>
 
-          <SignUpBlock>
+          {/* <SignUpBlock>
             <Paragraph
               size="1.7rem"
               fontWeight="bold"
@@ -269,7 +272,7 @@ const MarketOverview = props => {
             >
               Sign up now!
             </Button>
-          </SignUpBlock>
+          </SignUpBlock> */}
         </ContentWrapper>
       </ContentWrapper>
 
@@ -286,7 +289,7 @@ const MarketOverview = props => {
           </FlexWrapper>
         </Layover>
       }
-
+    <Footer />
     </ContentWrapper>
   );
 }

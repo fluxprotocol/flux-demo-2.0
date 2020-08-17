@@ -21,11 +21,8 @@ const FooterWrapper = styled.div`
 `;
 
 const FooterIcon = styled.img`
-  width: 6em;
-  height: 2em;
-  
-  @media (min-width: ${({ theme }) => theme.mediumBreakpoint}) {
-  }
+  width: 4em;
+  height: 1.35em;
 `;
 
 const FooterList = styled.ul`
