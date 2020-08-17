@@ -9,8 +9,6 @@ const FooterContainer = styled.footer`
   height: 10em;
   vertical-align: middle;
   align-items: middle;
-  position: absolute;
-  bottom: 0;
 `;
 
 const FooterWrapper = styled.div`
