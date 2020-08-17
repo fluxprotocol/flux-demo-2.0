@@ -17,6 +17,13 @@ const CardContainer = styled.div`
   flex: 1 0 calc(100% - 2rem);
   padding: 1rem;
   overflow: hidden;
+  cursor: pointer;
+
+  &:hover {
+    .card {
+      transform: translateY(-0.3rem);
+    }
+  }
 
   @media (min-width: ${({ theme }) => theme.mediumBreakpoint}) {
     flex: 1 0 calc(49% - 2rem);
@@ -41,6 +48,7 @@ const Card = styled.div`
   border-bottom-left-radius: ${props => props.cardType === 'resolute' ? 0 : '2rem'};
   overflow: hidden;
   box-shadow: 0px 3px 20px rgba(0,0,0,0.2);
+  transition: 0.3s ease;
   cursor: pointer;
 `;
 
@@ -76,13 +84,15 @@ const MarketCard = props => {
   };
 
   return (
-    <CardContainer>
+    <CardContainer 
+      onClick={() => handleCardClick(props.market.id)}
+    >
 
       {/* colored card block */}
       <Card 
         category={props.market.categories[0]}
         cardType={props.cardType}
-        onClick={() => handleCardClick(props.market.id)}
+        className="card"
       >
         <StyledTwitterShareButton
 					url={`https://app.flux.market/market/${props.market.id}`}

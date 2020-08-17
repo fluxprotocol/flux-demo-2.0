@@ -177,7 +177,7 @@ const OrderBookBookBarChart = props => {
                     color={colorValue.buy}
                     backgroundColor={colorValue.buy}
                     width={70}
-                    content={orderBookItems[index].depth / 100000000000}
+                    content={orderBookItems[index] ? orderBookItems[index].depth / 100000000000 : ''}
                   >
                   </BarWrapperContainer>
                 </OrderBookData>
@@ -186,7 +186,7 @@ const OrderBookBookBarChart = props => {
                   className="priceValues"
                   
                 >
-                  {orderBookItems[index].price}
+                  {orderBookItems[index] ? orderBookItems[index].price : ''}
                   
                 </OrderBookData>
                 <OrderBookData
