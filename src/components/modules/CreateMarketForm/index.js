@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import moment from 'moment';
 
 // config
 import { globalColors } from '../../../config/Themes';
@@ -64,6 +65,10 @@ const Input = styled.input`
   outline: none;
   border: 1px white solid;
   border-radius: 0.3rem;
+
+  &::-webkit-calendar-picker-indicator{
+  cursor:pointer;
+}
 `
 
 const CreateMarketForm = props => {
@@ -71,8 +76,8 @@ const CreateMarketForm = props => {
   const [marketDescription, setMarketDescription] = useState('');
   const [marketType, setMarketType] = useState('binary');
   const [categoricalOptions, setCategoricalOptions] = useState([''])
-  const [marketEndDate, setMarketEndDate] = useState('');
-  const [marketEndTime, setMarketEndTime] = useState('');
+  const [marketEndDate, setMarketEndDate] = useState(moment().format('YYYY-MM-DD'));
+  const [marketEndTime, setMarketEndTime] = useState('12:00');
 
   const handleCategoryChange = (event) => {
     const filter = event.target.value;
@@ -87,7 +92,20 @@ const CreateMarketForm = props => {
   }
 
   const handleLaunchMarket = () => {
-    props.launchMarket();
+    const unix = moment(`${marketEndDate} ${marketEndTime}`).format('x');
+    const market = {
+      marketType: marketType,
+      description: marketDescription,
+      extraInfo: '',
+      categories: selectedCategories,
+      endTime: unix,
+    };
+
+    if (marketType === 'categorical') {
+      market.categoricalOptions = categoricalOptions;
+    }
+
+    props.launchMarket(market);
   }
 
   return (
@@ -186,13 +204,16 @@ const CreateMarketForm = props => {
         When does this market end?
       </FormTitle>
       <Input
+        min={moment().format('YYYY-MM-DD')}
         display="inline-block"
         width="55%"
         margin="0 0.5rem 0 0"
         type="date"
+        color="white"
         value={marketEndDate}
         onChange={(event) => {
-          setMarketEndDate(event.target.value);
+          let date = event.target.value;
+          setMarketEndDate(date);
         }}
       />
       <Input 
@@ -200,9 +221,11 @@ const CreateMarketForm = props => {
         width="35%"
         margin="0 0 0 0.5rem"
         type="time"
+        color="white"
         value={marketEndTime}
         onChange={(event) => {
-          setMarketEndTime(event.target.value);
+          const time = event.target.value;
+          setMarketEndTime(time);
         }}
       />
 

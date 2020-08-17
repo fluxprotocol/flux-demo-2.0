@@ -84,7 +84,7 @@ const Dashboard = props => {
   const [flux, _] = useContext(FluxContext);
   const [overviewType, setOverviewType] = useState('trade');
   const [activeFilters, setActiveFilters] = useState([]);
-  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [modalIsOpen, setModalIsOpen] = useState(true);
   const isFirstRun = useRef(true);
 
   useEffect(() => {
@@ -200,8 +200,8 @@ const Dashboard = props => {
           setModalIsOpen(false);
         }}>cancel</CloseModalButton>
         <CreateMarketForm 
-          launchMarket={() => {
-            console.log('launch');
+          launchMarket={(market) => {
+            console.log('launch', market);
           }}
         />
       </Modal>
