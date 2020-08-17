@@ -59,7 +59,7 @@ const OutcomeTag = styled.div`
 
 const VolumeAmount = styled.div`
   margin-left: 0.5rem;
-  color: ${props => props.theme[props.category] ? props.theme[props.category] : 'white'};
+  color: 'white';
 `;
 
 const MarketCardOpinion = props => {

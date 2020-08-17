@@ -14,6 +14,10 @@ const TabBarContainer = styled.div`
   background-color: ${props => props.theme.darkBlue};
   padding: 1rem;
   border-radius: 1rem;
+
+  @media (min-width: ${({ theme }) => theme.mediumBreakpoint}) {
+    display: none;
+  }
 `;
 
 const MenuIcon = styled.img`
