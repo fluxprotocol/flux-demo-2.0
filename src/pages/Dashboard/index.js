@@ -15,6 +15,7 @@ import CategoryFilters from '../../components/common/CategoryFilters';
 import Paragraph from '../../components/common/Paragraph';
 import Button from '../../components/common/Button';
 import { FlexWrapper } from '../../components/common/Flex';
+import Footer from '../../components/common/Footer';
 
 // modules
 import MarketOverview from '../../components/modules/MarketOverview';
@@ -205,6 +206,7 @@ const Dashboard = props => {
           }}
         />
       </Modal>
+      <Footer />
     </BackgroundWrapper>
   );
 }
