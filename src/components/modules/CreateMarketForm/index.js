@@ -67,6 +67,29 @@ const Input = styled.input`
 `
 
 const CreateMarketForm = props => {
+  const [selectedCategories, setSelectedCategories] = useState([]);
+  const [marketDescription, setMarketDescription] = useState('');
+  const [marketType, setMarketType] = useState('binary');
+  const [categoricalOptions, setCategoricalOptions] = useState([''])
+  const [marketEndDate, setMarketEndDate] = useState('');
+  const [marketEndTime, setMarketEndTime] = useState('');
+
+  const handleCategoryChange = (event) => {
+    const filter = event.target.value;
+    const filterIndex = selectedCategories.indexOf(filter);
+
+    if (filterIndex === -1) setSelectedCategories([ ...selectedCategories, filter]); 
+    else setSelectedCategories(selectedCategories.filter(item => item !== filter))
+  }
+
+  const addNewCategoricalOption = () => {
+    setCategoricalOptions(oldCategoricalOptions => [...oldCategoricalOptions, ''])
+  }
+
+  const handleLaunchMarket = () => {
+    props.launchMarket();
+  }
+
   return (
     <ContentWrapper
       padding="2rem 1rem 1rem 1rem"
@@ -79,9 +102,7 @@ const CreateMarketForm = props => {
       <CategoryFilters
         filters={categoryFilters}
         secondary
-        filterChange={() => {
-          //
-        }}
+        filterChange={handleCategoryChange}
       />
 
       {/* description */}
@@ -90,6 +111,10 @@ const CreateMarketForm = props => {
       </FormTitle>
       <TextArea 
         maxlength="200"
+        value={marketDescription}
+        onChange={(event) => {
+          setMarketDescription(event.target.value);
+        }}
       />
 
       {/* type */}
@@ -97,11 +122,13 @@ const CreateMarketForm = props => {
         Choose a market type
       </FormTitle>
       <RadioButton 
-        name="overviewType" 
+        name="marketType" 
         id="binary"
         value="binary"
-        checked={true}
-        onChange={() => {}}
+        checked={marketType === 'binary'}
+        onChange={(event) => {
+          setMarketType(event.target.value)
+        }}
       />
       <RadioLabel 
         margin="0 1rem 0 0"
@@ -111,17 +138,48 @@ const CreateMarketForm = props => {
       </RadioLabel>
 
       <RadioButton 
-        name="overviewType" 
+        name="marketType" 
         id="categorical"
         value="categorical"
-        checked={true}
-        onChange={() => {}}
+        checked={marketType === 'categorical'}
+        onChange={(event) => {
+          setMarketType(event.target.value)
+        }}
       />
       <RadioLabel
         htmlFor="categorical"
       >
         Categorical
       </RadioLabel>
+
+      {/* {categorical options} */}
+      {marketType === 'categorical' &&
+        <div>
+          {categoricalOptions.map((option, index) => 
+            <Input 
+              key={`categoricalOption_${index}`}
+              margin="1rem 0"
+              type="text"
+              value={categoricalOptions[index]}
+              onChange={(event) => {
+                const newValue = event.target.value;
+
+                setCategoricalOptions(oldArray => {
+                  const array = [...oldArray];
+                  array[index] = newValue;
+                  return array;
+                })
+              }}
+            />
+          )}
+
+          <Button 
+            onClick={addNewCategoricalOption}
+          >
+            add more
+          </Button>
+        </div>
+      }
 
       {/* end datetime */}
       <FormTitle>
@@ -132,19 +190,27 @@ const CreateMarketForm = props => {
         width="55%"
         margin="0 0.5rem 0 0"
         type="date"
+        value={marketEndDate}
+        onChange={(event) => {
+          setMarketEndDate(event.target.value);
+        }}
       />
       <Input 
         display="inline-block"
         width="35%"
         margin="0 0 0 0.5rem"
         type="time"
+        value={marketEndTime}
+        onChange={(event) => {
+          setMarketEndTime(event.target.value);
+        }}
       />
 
       <Button 
         color="lightPurple"
         margin="1rem 0"
         padding="1rem 2rem"
-        onClick={() => {}}
+        onClick={handleLaunchMarket}
       >
         Launch this market
       </Button>

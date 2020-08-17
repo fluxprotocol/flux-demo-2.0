@@ -45,7 +45,7 @@ const customStyles = {
     left: '50%',
     right: 'auto',
     bottom: 'auto',
-    maxWidth: '30rem',
+    maxWidth: '33rem',
     maxHeight: '95vh',
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
@@ -84,7 +84,7 @@ const Dashboard = props => {
   const [flux, _] = useContext(FluxContext);
   const [overviewType, setOverviewType] = useState('trade');
   const [activeFilters, setActiveFilters] = useState([]);
-  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [modalIsOpen, setModalIsOpen] = useState(true);
   const isFirstRun = useRef(true);
 
   useEffect(() => {
@@ -199,7 +199,11 @@ const Dashboard = props => {
         <CloseModalButton onClick={() => {
           setModalIsOpen(false);
         }}>cancel</CloseModalButton>
-        <CreateMarketForm />
+        <CreateMarketForm 
+          launchMarket={() => {
+            console.log('launch');
+          }}
+        />
       </Modal>
     </BackgroundWrapper>
   );
