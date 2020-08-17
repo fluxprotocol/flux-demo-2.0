@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import styled from 'styled-components';
 import Modal from 'react-modal';
+import { useHistory } from 'react-router-dom'
 
 // hooks
 import { useFluxAuth } from '../../App';
@@ -87,6 +88,7 @@ const Dashboard = props => {
   const [activeFilters, setActiveFilters] = useState([]);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const isFirstRun = useRef(true);
+  const history = useHistory()
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -96,10 +98,16 @@ const Dashboard = props => {
     Modal.setAppElement('#root');
   }, []);
 
+  useEffect(() => {
+    return history.listen((location) => {
+      setActiveFilters([]);
+      getMarkets();
+    })
+},[history])
+
 
   const handleOverviewToggle = async (type) => {
     setOverviewType(type);
-    const resoluteMarkets = await flux.getResolutingMarkets();
   }
 
   const getMarkets = () => {
@@ -112,7 +120,7 @@ const Dashboard = props => {
       getLastFilledPrices(params, res);
     })
 
-    flux.getMarkets(params, 100, 0).then(res => {
+    flux.getResolutingMarkets(params, 100, 0).then(res => {
       setResoluteMarkets(res);
     })
   }
