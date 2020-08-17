@@ -71,6 +71,12 @@ const Input = styled.input`
 }
 `
 
+const Label = styled.label`
+  display: block;
+  margin: 1rem 0 0.5rem 0;
+  font-size: 0.8rem;
+`;
+
 const CreateMarketForm = props => {
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [marketDescription, setMarketDescription] = useState('');
@@ -176,21 +182,24 @@ const CreateMarketForm = props => {
       {marketType === 'categorical' &&
         <div>
           {categoricalOptions.map((option, index) => 
-            <Input 
-              key={`categoricalOption_${index}`}
-              margin="1rem 0"
-              type="text"
-              value={categoricalOptions[index]}
-              onChange={(event) => {
-                const newValue = event.target.value;
+            <div>
+              <Label>Outcome {index + 1}</Label>
+              <Input 
+                key={`categoricalOption_${index}`}
+                margin="0 0 1rem 0"
+                type="text"
+                value={categoricalOptions[index]}
+                onChange={(event) => {
+                  const newValue = event.target.value;
 
-                setCategoricalOptions(oldArray => {
-                  const array = [...oldArray];
-                  array[index] = newValue;
-                  return array;
-                })
-              }}
-            />
+                  setCategoricalOptions(oldArray => {
+                    const array = [...oldArray];
+                    array[index] = newValue;
+                    return array;
+                  })
+                }}
+              />
+            </div>
           )}
 
           <Button 
