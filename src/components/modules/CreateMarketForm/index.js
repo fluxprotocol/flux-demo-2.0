@@ -128,6 +128,7 @@ const CreateMarketForm = props => {
       <CategoryFilters
         filters={categoryFilters}
         secondary
+        activeFilters={selectedCategories}
         filterChange={handleCategoryChange}
       />
 
