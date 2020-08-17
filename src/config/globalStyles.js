@@ -10,6 +10,7 @@ export const GlobalStyles = createGlobalStyle`
   body {
     background: ${({ theme }) => theme.body};
     color: ${({ theme }) => theme.text};
+    padding-bottom: 4rem;
 
     &.layover {
       overflow: hidden;
@@ -17,6 +18,10 @@ export const GlobalStyles = createGlobalStyle`
 
     &.ReactModal__Body--open {
       overflow: hidden;
+    }
+
+    @media (min-width: ${({ theme }) => theme.mediumBreakpoint}) {
+      padding-bottom: 0;
     }
   }`;
   
