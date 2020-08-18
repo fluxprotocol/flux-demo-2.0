@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, useContext } from 'react';
 import styled from 'styled-components';
 import Modal from 'react-modal';
 import { useHistory } from 'react-router-dom'
+import { debounce } from "debounce";
 
 // hooks
 import { useFluxAuth } from '../../App';
@@ -17,6 +18,7 @@ import Paragraph from '../../components/common/Paragraph';
 import Button from '../../components/common/Button';
 import { FlexWrapper, FlexItem } from '../../components/common/Flex';
 import Footer from '../../components/common/Footer';
+import Loader from '../../components/common/Loader';
 
 // modules
 import MarketOverview from '../../components/modules/MarketOverview';
@@ -87,42 +89,72 @@ const Dashboard = props => {
   const [overviewType, setOverviewType] = useState('trade');
   const [activeFilters, setActiveFilters] = useState([]);
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [reachedScrollBottom, setReachedScrollBottom] = useState(false);
   const isFirstRun = useRef(true);
   const history = useHistory()
+  
+  const handleScroll = () => {
+    const container = document.getElementById('marketOverviewContainer');
+    const bottom = container.getBoundingClientRect().bottom <= window.innerHeight;
+
+    if (bottom) setReachedScrollBottom(true);
+  }
+  const scrolling = debounce(handleScroll, 500);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const currentParams = params.getAll('categories');
     setActiveFilters(currentParams);
+    window.addEventListener('scroll', scrolling);
 
     Modal.setAppElement('#root');
+
+    return () => {
+      window.removeEventListener('scroll', scrolling);
+    }
   }, []);
 
   useEffect(() => {
-    return history.listen((location) => {
+    const unlisten = history.listen((location) => {
       setActiveFilters([]);
-      getMarkets();
     })
-},[history])
 
+    return () => {
+      unlisten();
+    }
+  },[history]);
+
+  useEffect(() => {
+    if (!reachedScrollBottom) return;
+    if (reachedScrollBottom) {
+      getMarkets(overviewType);
+    }
+  },[reachedScrollBottom]);
 
   const handleOverviewToggle = async (type) => {
     setOverviewType(type);
   }
 
-  const getMarkets = () => {
+  const getMarkets = (type = 'all', offset) => {
     const params = {};
 
     if (activeFilters.length) params.categories = activeFilters;
     else if (params.categories) delete params.categories;
+   
+    if (type === 'all' || type === 'trade') {
+      flux.getMarkets(params, 9, offset !== undefined ? offset : markets.length).then(res => {
+        getLastFilledPrices(params, res);
+        setReachedScrollBottom(false);
+      })
+    }
 
-    flux.getMarkets(params, 100, 0).then(res => {
-      getLastFilledPrices(params, res);
-    })
+    if (type === 'all' || type === 'resolute') {
+      flux.getResolutingMarkets(params, 9, offset !== undefined ? offset : resoluteMarkets.length).then(res => {
+        setResoluteMarkets(res);
+        setReachedScrollBottom(false);
+      })
+    }
 
-    flux.getResolutingMarkets(params, 100, 0).then(res => {
-      setResoluteMarkets(res);
-    })
   }
 
   const getLastFilledPrices = async (params, marketArr) => {
@@ -132,7 +164,9 @@ const Dashboard = props => {
       if (prices[market.id]) market.prices = prices[market.id];
       else market.prices = [];
     });
-    setMarkets(currentMarkets);
+    setMarkets(oldMarkets => {
+      return [...oldMarkets, ...currentMarkets];
+    });
   }
 
   useEffect(() => {
@@ -149,7 +183,9 @@ const Dashboard = props => {
     });
     
     window.history.replaceState(null, 'Markets', url)
-    getMarkets();
+    setMarkets([]);
+    setResoluteMarkets([]);
+    getMarkets('all', 0);
   }, [activeFilters])
 
   const handleFilterChange = (event) => {
@@ -191,7 +227,10 @@ const Dashboard = props => {
 
   return (
     <BackgroundWrapper>
-      <ContentWrapper maxWidth="68rem">
+      <ContentWrapper 
+        id="marketOverviewContainer"
+        maxWidth="68rem"
+      >
         <FlexWrapper 
           padding="3rem 1rem 1rem 1rem"
         >
@@ -257,6 +296,15 @@ const Dashboard = props => {
             <p>No markets found.</p>
           </ContentWrapper>
         )}
+
+        {reachedScrollBottom &&
+          <ContentWrapper
+            padding="1rem"
+            textAlign="center"
+          >
+            <Loader />
+          </ContentWrapper>        
+        }
 
       </ContentWrapper>
 
