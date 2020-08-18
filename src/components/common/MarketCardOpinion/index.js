@@ -31,18 +31,18 @@ const opinionRowsMultiple = [
   },
 ];
 
-const opinionRowsTwo = [
-  {
-    label: 'Yes',
-    percentage: 75,
-    color: 'green',
-  },
-  {
-    label: 'No',
-    percentage: 25,
-    color: 'red',
-  },
-];
+// const opinionRowsTwo = [
+//   {
+//     label: 'Yes',
+//     percentage: 75,
+//     color: 'green',
+//   },
+//   {
+//     label: 'No',
+//     percentage: 25,
+//     color: 'red',
+//   },
+// ];
 
 const MarketOpinionContainer = styled.div`
   width: 100%;

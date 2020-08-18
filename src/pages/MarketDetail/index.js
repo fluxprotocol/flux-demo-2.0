@@ -28,14 +28,14 @@ const PurchaseWrapper = styled.div`
   width: 100%;
 `;
 
-const signUpBackground = require('../../assets/images/signup-background.png');
-const SignUpBlock = styled.div`
-  background: url(${signUpBackground}) no-repeat;
-  background-size: cover;
-  padding: 2rem;
-  border-radius: 2rem;
-  overflow: hidden;
-`;
+// const signUpBackground = require('../../assets/images/signup-background.png');
+// const SignUpBlock = styled.div`
+//   background: url(${signUpBackground}) no-repeat;
+//   background-size: cover;
+//   padding: 2rem;
+//   border-radius: 2rem;
+//   overflow: hidden;
+// `;
 
 const MarketOverview = props => {
   const { id } = useParams();

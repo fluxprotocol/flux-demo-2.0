@@ -1,5 +1,4 @@
 import React from 'react';
-import styled from 'styled-components';
 
 // common
 import ContentWrapper from '../../../../common/ContentWrapper';

@@ -10,7 +10,6 @@ import { FluxContext } from '../../context/FluxProvider';
 // common
 import ContentWrapper from '../../components/common/ContentWrapper';
 import { FlexWrapper } from '../../components/common/Flex';
-import Paragraph from '../../components/common/Paragraph';
 import ThemeToggler from '../../components/common/ThemeToggler';
 
 const SettingsLabel = styled.span`

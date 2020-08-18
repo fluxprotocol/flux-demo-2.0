@@ -16,7 +16,7 @@ import OverviewToggle from '../../components/common/OverviewToggle';
 import CategoryFilters from '../../components/common/CategoryFilters';
 import Paragraph from '../../components/common/Paragraph';
 import Button from '../../components/common/Button';
-import { FlexWrapper, FlexItem } from '../../components/common/Flex';
+import { FlexWrapper } from '../../components/common/Flex';
 import Footer from '../../components/common/Footer';
 import Loader from '../../components/common/Loader';
 
