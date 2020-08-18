@@ -28,6 +28,8 @@ const Input = styled.input.attrs({ type: 'number' })`
   font-size: 1rem;
   border: none;
   outline: none;
+  margin-right: -1em;
+  text-align: right;
 
   &::placeholder {
     color: ${props => props.theme.gray};
@@ -53,12 +55,13 @@ const SharesForm = props => {
       >
 
         <ContentWrapper
+          className="buy_shares"
           backgroundColor={props.layover ? colorMap[props.sharesType] : 'transparent'}
           width="100%"
           padding="2rem"
           >
           <ActionTitle textAlign="center">Buy {props.sharesType} Shares</ActionTitle>
-          <FlexWrapper margin="1rem 0">
+          <FlexWrapper className="input_divider" margin="1rem 0">
             <FlexItem>
               Number of Shares
             </FlexItem>
