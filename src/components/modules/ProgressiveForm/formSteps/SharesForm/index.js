@@ -76,7 +76,7 @@ const SharesForm = props => {
               Market Price
             </FlexItem>
             <FlexItem textAlign="right">
-              $0.75
+              &#162;0.75
             </ FlexItem>
           </FlexWrapper>
           <RowDivider />
@@ -86,7 +86,7 @@ const SharesForm = props => {
               Estimated Cost
             </FlexItem>
             <FlexItem textAlign="right">
-              $75
+              &#162;75
             </FlexItem>
           </FlexWrapper>
           <RowDivider />

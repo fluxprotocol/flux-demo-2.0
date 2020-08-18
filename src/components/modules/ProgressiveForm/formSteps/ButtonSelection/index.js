@@ -58,7 +58,7 @@ const ButtonSelection = props => {
               </FlexItem>
               <FlexItem>
                 <OptionLabel>
-                  <strong>${option.marketPrice}</strong>
+                  <strong>&#162;{option.marketPrice}</strong>
                 </OptionLabel>
               </FlexItem>
               <FlexItem>
