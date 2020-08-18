@@ -10,7 +10,7 @@ export const GlobalStyles = createGlobalStyle`
   body {
     background: ${({ theme }) => theme.body};
     color: ${({ theme }) => theme.text};
-    padding-bottom: 4rem;
+    padding-bottom: 7rem;
 
     &.layover {
       overflow: hidden;
