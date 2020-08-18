@@ -37,7 +37,7 @@ const SettingsContainer = styled.div`
     & div:last-child {
       color: #2C2A43;
       font-weight: 900;
-      font-size: 1.2em;
+      font-size: 1em;
     }
   }
 
