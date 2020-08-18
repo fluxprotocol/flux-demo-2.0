@@ -95,6 +95,7 @@ const Dashboard = props => {
   
   const handleScroll = () => {
     const container = document.getElementById('marketOverviewContainer');
+    if (!container) return;
     const bottom = container.getBoundingClientRect().bottom <= window.innerHeight;
 
     if (bottom) setReachedScrollBottom(true);
