@@ -105,7 +105,6 @@ const Dashboard = props => {
     })
 },[history])
 
-
   const handleOverviewToggle = async (type) => {
     setOverviewType(type);
   }
