@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 
 // hooks
-import { useDarkModeTheme } from '../../App';
+import { useDarkModeTheme, useFluxAuth } from '../../App';
+
+// context
+import { FluxContext } from '../../context/FluxProvider';
 
 // common
 import ContentWrapper from '../../components/common/ContentWrapper';
@@ -152,7 +155,28 @@ const dataSet = [
 const dataHeaders = ["contract", "price per share", "order value"];
 
 const Settings = props => {
+  const { user } = useFluxAuth();
+  const [flux, ] = useContext(FluxContext);
   const { toggleTheme, theme } = useDarkModeTheme();
+
+  const [order, setOpenOrders] = useState([]);
+
+  useEffect(() => {
+    if (!user) {
+      return;
+    }
+
+    getOpenOrders();
+  }, [user]);
+
+
+  const getOpenOrders = async () => {
+    console.log('this is user', user);
+    let openOrders = await flux.getOpenOrders(user.id);
+    console.log('this is openOrders', openOrders);
+    
+    setOpenOrders(openOrders);
+  }
 
   return (
     <ContentWrapper 
