@@ -13,6 +13,10 @@ import DateLabel from '../../common/DateLabel';
 // constants
 import { CATEGORIES } from '../../../constants';
 
+// helpers
+
+import { mapOutcomes } from '../../../helpers/mappers';
+
 const CardContainer = styled.div`
   flex: 1 0 calc(100% - 2rem);
   padding: 1rem;
@@ -123,7 +127,11 @@ const MarketCard = props => {
 
       {/* market info */}
       {props.cardType === 'trade' &&
-        <MarketCardOpinion market={props.market} lastFilledPrices={props.market.prices}/>
+        <MarketCardOpinion 
+          market={props.market}
+          outcomes={mapOutcomes(props.market.outcome_tags)}
+          lastFilledPrices={props.market.prices}
+        />
       }
 
       {props.cardType === 'resolute' &&

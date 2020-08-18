@@ -75,7 +75,10 @@ const MarketCardOpinion = props => {
       <MarketOpinionContainer>
 
         <p>What does the market think?</p>
-        <ProgressBar items={opinionRowsMultiple}></ProgressBar>
+        <ProgressBar
+          outcomes={props.outcomes}
+          lastFilledPrices={lastFilledPrices}
+        ></ProgressBar>
 
         {lastFilledPrices.length !== 0 &&
           <FlexWrapper 
@@ -84,17 +87,19 @@ const MarketCardOpinion = props => {
             padding="0.5rem"
           >
 
-            {props.market.outcome_tags.map((outcome_tag, index) => (
-              <FlexItem width="100%" key={outcome_tag}>
+            {Object.keys(props.outcomes).map((key, i) => (
+              <FlexItem width="100%" key={props.outcomes[key].label}>
                 <FlexWrapper>
                   <FlexItem maxWidth="2.5rem">
-                    <OutcomeTag/>
+                    <OutcomeTag
+                      color={props.outcomes[key].color}
+                    />
                   </FlexItem>
                   <FlexItem>
-                    {outcome_tag}
+                    {props.outcomes[key].label}
                   </FlexItem>
                   <FlexItem textAlign="right">
-                    {lastFilledPrices[index] || 0}
+                    {lastFilledPrices[key] || 0}
                   </FlexItem>
                 </FlexWrapper>
               </FlexItem>

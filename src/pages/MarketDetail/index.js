@@ -24,6 +24,9 @@ import { FluxContext } from '../../context/FluxProvider';
 // hooks
 import useWindowDimensions from '../../hooks/useWindowDimensions';
 
+// helpers
+import { mapOutcomes } from '../../helpers/mappers';
+
 const PurchaseWrapper = styled.div`
   width: 100%;
 `;
@@ -69,14 +72,7 @@ const MarketOverview = props => {
   useEffect(() => {
     if (!market || !market.outcome_tags) return;
 
-    const possibleColors = ['lightPurple', 'pink', 'purple', 'red', 'green', 'blue', 'mediumBlue', 'darkPurple'];
-    let outcomeObject = {};
-    market.outcome_tags.forEach((market, index) => {
-      outcomeObject[index] = {
-        color: possibleColors[index],
-        label: market,
-      };
-    });
+    const outcomeObject = mapOutcomes(market.outcome_tags);
     setOutcomeColorNameMap(outcomeObject);
   }, [market])
 
@@ -138,7 +134,11 @@ const MarketOverview = props => {
 
   return (
     <ContentWrapper>
-      <MainHeader market={market} lastFilledPrices={lastFilledPricesForMarket} />
+      <MainHeader 
+        market={market}
+        outcomes={outcomeColorNameMap}
+        lastFilledPrices={lastFilledPricesForMarket}
+      />
       <ContentWrapper 
         backgroundColor="darkBlue"
         padding="0 0 1rem 0"
