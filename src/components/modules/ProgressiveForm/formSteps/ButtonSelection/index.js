@@ -35,7 +35,12 @@ const ButtonSelection = props => {
                 size="0.8rem"
                 color="white"
               >
-                last forecast
+                Contract
+              </Paragraph>
+            </FlexItem>
+            <FlexItem>
+              <Paragraph>
+                Title
               </Paragraph>
             </FlexItem>
             <FlexItem>
@@ -54,6 +59,11 @@ const ButtonSelection = props => {
               <FlexItem>
                 <OptionLabel>
                   {option.forecast}
+                </OptionLabel>
+              </FlexItem>
+              <FlexItem>
+                <OptionLabel>
+                  -
                 </OptionLabel>
               </FlexItem>
               <FlexItem>

@@ -216,7 +216,11 @@ const MarketOverview = props => {
                   {/* purchase shares: tablet/desktop */}
                   {width >= 650 &&
                     <PurchaseWrapper>
-                      <ProgressiveForm market={market} marketPricesData={marketPricesData} lastFilledPrices={lastFilledPricesForMarket} />
+                      <ProgressiveForm 
+                        market={market}
+                        marketPricesData={marketPricesData}
+                        lastFilledPrices={lastFilledPricesForMarket} 
+                      />
                     </PurchaseWrapper>
                   }
 

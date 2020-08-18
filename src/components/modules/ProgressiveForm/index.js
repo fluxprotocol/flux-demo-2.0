@@ -41,7 +41,7 @@ const ProgressiveForm = props => {
   const [currentView, setCurrentView] = useState('buttonSelection'); // buttonSelection, sharesForm, review, processing, orderCompleted
   const [sharesType, setSharesType] = useState(''); // yes, no, {other}
   const {marketPricesData, lastFilledPrices} = props;
-
+  console.log(props.market.outcome_tags)
   return (
     <ContentWrapper 
       width="100%"
