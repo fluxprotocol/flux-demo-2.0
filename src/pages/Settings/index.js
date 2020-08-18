@@ -105,6 +105,10 @@ const OrderHistoryHeadings = styled.th`
   font-weight: 400;
   color: gray;
   padding-bottom: 1em;
+
+  @media (min-width: ${({ theme }) => theme.smallBreakpoint}) {
+    width: 25%;
+  }
 `;
 
 const OrderHistoryData = styled.td`
@@ -118,6 +122,10 @@ const OrderButton = styled.td`
   width: 4em;
   font-size: .8em;
   text-align: center;
+
+  @media (min-width: ${({ theme }) => theme.smallBreakpoint}) {
+    font-size: 1em;
+  }
 `;
 
 const ProfileIcon = require("../../assets/images/icons/profile_icon.png");
