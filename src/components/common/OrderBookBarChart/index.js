@@ -11,7 +11,6 @@ const FlexWrapper = styled.div`
   margin: 0 auto;
   margin-bottom: 1em;
   width: 90%;
-  overflow-x: scroll;
 `;
 
 const OrderBookWrapper = styled.table`
