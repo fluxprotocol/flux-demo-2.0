@@ -67,7 +67,7 @@ const TopBar = props => {
             {user &&
               <ContentWrapper>
                 <UserName>{user.id ? user.id : '' }</UserName>
-                <UserBalance>{user.balance ? `$${user.balance}` : '' }</UserBalance>
+                <UserBalance>{user.balance ? `$${user.balance / 1000000000000000000}` : '' }</UserBalance>
               </ContentWrapper>
             }
           </FlexItem>
