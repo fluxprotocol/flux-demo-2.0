@@ -20,13 +20,22 @@ const ProgressBarBlock = styled.div`
 const ProgressBar = props => {
   return (
       <ProgressBarContainer>
-        {props.items.map((item, index) => (
+
+        {Object.keys(props.outcomes).map((key, i) => (
+          <ProgressBarBlock 
+            key={props.outcomes[key].label}
+            width={`${props.lastFilledPrices[key]}%`}
+            color={props.outcomes[key].color}
+          />
+        ))}
+
+        {/* {props.items.map((item, index) => (
           <ProgressBarBlock 
             key={item.label}
             width={`${item.percentage}%`}
             color={item.color}
           />
-        ))}
+        ))} */}
       </ProgressBarContainer>
   );
 }

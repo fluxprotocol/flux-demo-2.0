@@ -48,7 +48,7 @@ const FormOverview = props => {
             height="100%"
           >
             <ContentWrapper>
-              <Currency>$</Currency>
+              <Currency>&#162;</Currency>
               <Paragraph
                 size="5rem"
                 margin="0"

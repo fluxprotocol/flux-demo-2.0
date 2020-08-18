@@ -119,7 +119,11 @@ const MainHeader = props => {
               resolution date: <strong>{moment.unix(props.market.end_timestamp).format("MM/DD/YYYY")}</strong>
             </DateLabel>
               {props.market.outcome_tags &&
-                <MarketCardOpinion market={props.market} lastFilledPrices={props.lastFilledPrices} />
+                <MarketCardOpinion 
+                  market={props.market}
+                  outcomes={props.outcomes}
+                  lastFilledPrices={props.lastFilledPrices} 
+                />
               }
             </ContentCard>
           </FlexItem>
