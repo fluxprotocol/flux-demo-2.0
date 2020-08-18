@@ -20,6 +20,11 @@ export const FlexWrapper = styled.div`
   @media (min-width: ${({ theme }) => theme.largeBreakpoint}) {
     max-width: ${props => props.maxWidth ? props.maxWidth : 'initial'};
   }
+
+  &.input_divider {
+    display: flex;
+    align-items: center;
+  }
 `;
 
 export const FlexItem = styled.div`
