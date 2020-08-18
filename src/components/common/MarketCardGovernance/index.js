@@ -9,16 +9,19 @@ const governanceRows = [
   {
     label: 'Yes',
     color: 'lightPurple',
+    borderColor: 'lightPurple',
     action: '',
   },
   {
     label: 'No',
     color: 'pink',
+    borderColor: 'pink',
     action: '',
   },
   {
     label: 'Invalid',
     color: 'darkBlue',
+    borderColor: 'white',
     action: '',
   },
 ];
@@ -68,7 +71,7 @@ const MarketCardGovernance = props => {
             <ContainerColumn position="right">
               <Button
                 color={governanceRow.color}
-                borderColor="white"
+                borderColor={governanceRow.borderColor}
               >
                 Stake
               </Button>

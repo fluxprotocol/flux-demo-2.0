@@ -17,7 +17,7 @@ const Button = styled.button`
   outline: none;
   cursor: pointer;
   transition: 0.2s;
-  border: 1px solid ${props => props.borderColor ? props.borderColor : props.theme[props.color]};
+  border: 1px solid ${props => props.borderColor ? props.theme[props.borderColor] : props.theme[props.color]};
   box-shadow: ${props => props.shadow ? '0px 3px 10px rgba(0,0,0,0.4)' : 'none'};
 
   &.createMarketButton {
