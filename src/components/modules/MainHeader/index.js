@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import moment from 'moment';
+import { useHistory } from "react-router-dom";
 
 // config
 import { categoryFilters } from '../../../config/filters';
@@ -64,9 +65,21 @@ const MainHeaderTitle = styled.h1`
   }
 `;
 
+const BackButton = styled.button`
+  margin-bottom: 1rem;
+  padding: 0.3rem 0.5rem;
+  background-color: rgba(15, 14, 37, 0.5);
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  outline: none;
+  cursor: pointer;
+`;
+
 const MainHeader = props => {
   const [categories, setCategories] = useState([]);
   const [currentCategory, setCurrentCategory] = useState();
+  const history = useHistory();
   
   useEffect(() => {
     if (props.market.categories) {
@@ -84,7 +97,7 @@ const MainHeader = props => {
       padding="0 0 1rem 0"
     >
       <ContentWrapper
-        maxWidth="60rem"
+        maxWidth="68rem"
         padding="3rem 1rem 1rem 1rem"
         position="relative"
       >
@@ -92,7 +105,18 @@ const MainHeader = props => {
           backgroundImage={require(`../../../assets/images/circle-${CATEGORIES.indexOf(currentCategory) > -1 ? currentCategory : 'crypto'}.png`)}
         >
         </HeaderImagecontainer>
-        <ContentWrapper hideForSmall hideForMedium>
+        <BackButton
+            onClick={() => {
+              history.push('/');
+            }}
+          >
+          back
+        </BackButton>
+        <ContentWrapper 
+          hideForSmall 
+          hideForMedium
+          padding="0 0 0.5rem 0"
+        >
           <CategoryFilters
           filters={categories}
           activeFilters={[]}
