@@ -134,165 +134,165 @@ const MarketOverview = props => {
 
   return (
     <ContentWrapper>
-      <MainHeader 
-        market={market}
-        outcomes={outcomeColorNameMap}
-        lastFilledPrices={lastFilledPricesForMarket}
-      />
-      <ContentWrapper 
-        backgroundColor="darkBlue"
-        padding="0 0 1rem 0"
-      >
-        <ContentWrapper
-          maxWidth="62rem"
-          paddingSmall="0"
+        <MainHeader 
+          market={market}
+          outcomes={outcomeColorNameMap}
+          lastFilledPrices={lastFilledPricesForMarket}
+        />
+        <ContentWrapper 
+          backgroundColor="darkBlue"
+          padding="0 0 1rem 0"
         >
-          <FlexWrapper 
-            flexDirection="column"
-            columnForSmall
-            alignItems="flex-start"
+          <ContentWrapper
+            maxWidth="62rem"
+            paddingSmall="0"
           >
-            <FlexItem 
+            <FlexWrapper 
+              flexDirection="column"
+              columnForSmall
+              alignItems="flex-start"
+            >
+              <FlexItem 
+                width="100%"
+                paddingMedium="0 1rem 0 0"
+                paddingLarge="0 4rem 0 0"
+              >
+                <MarketDetailData 
+                  priceHistory={priceHistory} 
+                  orderbookData={orderbookData}
+                  market={market} 
+                  filterChange={getPriceHistory}
+                  outcomeColorNameMap={outcomeColorNameMap}
+                  averagePriceData={avgPriceData}
+                />
+              </FlexItem>
+              <FlexItem
               width="100%"
-              paddingMedium="0 1rem 0 0"
-              paddingLarge="0 4rem 0 0"
-            >
-              <MarketDetailData 
-                priceHistory={priceHistory} 
-                orderbookData={orderbookData}
-                market={market} 
-                filterChange={getPriceHistory}
-                outcomeColorNameMap={outcomeColorNameMap}
-                averagePriceData={avgPriceData}
-              />
-            </FlexItem>
-            <FlexItem
-             width="100%"
-             height="100%"
-             paddingMedium="2rem 0 0 1rem"
-             paddingLarge="2rem 4rem 0 0"
-             >
-              <ContentWrapper>
-                <ContentCard
-                  paddingMedium="0"
-                  smallNoRadius
-                  backgroundColor="mediumBlue"
-                >
-                  
-                  {/* buying power: mobile */}
-                  {width < 650 &&
-                    <ContentWrapper width="100%">
-                      <FlexWrapper>
-                        <PositionedLabel position="left">Buying power</PositionedLabel>
-                        <PositionedLabel position="right">
-                          <strong>$150.000</strong>
-                        </PositionedLabel>
-                      </FlexWrapper>
-                      <FlexWrapper 
-                        margin="3rem 0"
-                      >
-                        <FlexItem>
-                          <ContentWrapper>
-                            <strong>total volume</strong>
-                          </ContentWrapper>
-                          10,500
-                        </FlexItem>
-                        <FlexItem textAlign="right">
-                          <Button
-                            maxWidth="10rem"
-                            shadow
-                            width="100%"
-                            color="lightPurple"
-                            onClick={ () => {
-                              setShowForm(true);
-                              document.body.classList.add('layover');
-                            }}
-                          >Trade</Button>
-                        </FlexItem>
-                      </FlexWrapper>
-                    </ContentWrapper>
-                  }
+              height="100%"
+              paddingMedium="2rem 0 0 1rem"
+              paddingLarge="2rem 4rem 0 0"
+              >
+                <ContentWrapper>
+                  <ContentCard
+                    paddingMedium="0"
+                    smallNoRadius
+                    backgroundColor="mediumBlue"
+                  >
+                    
+                    {/* buying power: mobile */}
+                    {width < 650 &&
+                      <ContentWrapper width="100%">
+                        <FlexWrapper>
+                          <PositionedLabel position="left">Buying power</PositionedLabel>
+                          <PositionedLabel position="right">
+                            <strong>$150.000</strong>
+                          </PositionedLabel>
+                        </FlexWrapper>
+                        <FlexWrapper 
+                          margin="3rem 0"
+                        >
+                          <FlexItem>
+                            <ContentWrapper>
+                              <strong>total volume</strong>
+                            </ContentWrapper>
+                            10,500
+                          </FlexItem>
+                          <FlexItem textAlign="right">
+                            <Button
+                              maxWidth="10rem"
+                              shadow
+                              width="100%"
+                              color="lightPurple"
+                              onClick={ () => {
+                                setShowForm(true);
+                                document.body.classList.add('layover');
+                              }}
+                            >Trade</Button>
+                          </FlexItem>
+                        </FlexWrapper>
+                      </ContentWrapper>
+                    }
 
-                  {/* purchase shares: tablet/desktop */}
-                  {width >= 650 &&
-                    <PurchaseWrapper>
-                      <ProgressiveForm 
-                        market={market}
-                        marketPricesData={marketPricesData}
-                        lastFilledPrices={lastFilledPricesForMarket} 
-                      />
-                    </PurchaseWrapper>
-                  }
+                    {/* purchase shares: tablet/desktop */}
+                    {width >= 650 &&
+                      <PurchaseWrapper>
+                        <ProgressiveForm 
+                          market={market}
+                          marketPricesData={marketPricesData}
+                          lastFilledPrices={lastFilledPricesForMarket} 
+                        />
+                      </PurchaseWrapper>
+                    }
 
-                </ContentCard>
-                {/* <ProgressiveForm /> */}
-              </ContentWrapper>
-            </FlexItem>
-          </FlexWrapper>
+                  </ContentCard>
+                  {/* <ProgressiveForm /> */}
+                </ContentWrapper>
+              </FlexItem>
+            </FlexWrapper>
 
+          </ContentWrapper>
         </ContentWrapper>
-      </ContentWrapper>
-      <ContentWrapper
-        backgroundColor="darkBlue"
-        padding="1em 0"
-      >
         <ContentWrapper
-          margin="2rem auto"
-          padding="1rem"
-          maxWidth="60rem"
+          backgroundColor="darkBlue"
+          padding="1em 0"
         >
-          <Paragraph
-            size="1.5rem"
-            fontWeight="bold"
-            maxWidth="55rem"
-            margin="0 auto"
-          >
-            extra info
-          </Paragraph>
-          <Paragraph
-            size="1rem"
-            maxWidth="55rem"
+          <ContentWrapper
             margin="2rem auto"
+            padding="1rem"
+            maxWidth="60rem"
           >
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-          </Paragraph>
-
-          {/* <SignUpBlock>
             <Paragraph
-              size="1.7rem"
+              size="1.5rem"
               fontWeight="bold"
-              maxWidth="17rem"
-              color="white"
+              maxWidth="55rem"
+              margin="0 auto"
             >
-              Sign up to receive $5 for trading!
+              extra info
             </Paragraph>
-            <Button 
-              color="black"
-              margin="1.5rem 0 0 0"
-              padding="1rem"
-              onClick={ () => {
-                //
-              }}
+            <Paragraph
+              size="1rem"
+              maxWidth="55rem"
+              margin="2rem auto"
             >
-              Sign up now!
-            </Button>
-          </SignUpBlock> */}
-        </ContentWrapper>
-      </ContentWrapper>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+            </Paragraph>
 
-      {/* layover for mobile */}
-      {(width < 650 && showForm) &&
-        <Layover>
-          <FlexWrapper height="100%">
-            <ProgressiveForm 
-              layover 
-              market={market} 
-              marketPricesData={marketPricesData} 
-              lastFilledPrices={lastFilledPricesForMarket}
-            />
-          </FlexWrapper>
-        </Layover>
-      }
+            {/* <SignUpBlock>
+              <Paragraph
+                size="1.7rem"
+                fontWeight="bold"
+                maxWidth="17rem"
+                color="white"
+              >
+                Sign up to receive $5 for trading!
+              </Paragraph>
+              <Button 
+                color="black"
+                margin="1.5rem 0 0 0"
+                padding="1rem"
+                onClick={ () => {
+                  //
+                }}
+              >
+                Sign up now!
+              </Button>
+            </SignUpBlock> */}
+          </ContentWrapper>
+        </ContentWrapper>
+
+        {/* layover for mobile */}
+        {(width < 650 && showForm) &&
+          <Layover>
+            <FlexWrapper height="100%">
+              <ProgressiveForm 
+                layover 
+                market={market} 
+                marketPricesData={marketPricesData} 
+                lastFilledPrices={lastFilledPricesForMarket}
+              />
+            </FlexWrapper>
+          </Layover>
+        }
     <Footer />
     </ContentWrapper>
   );

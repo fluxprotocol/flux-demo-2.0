@@ -31,7 +31,6 @@ const fluxLogo = require('../../assets/images/flux-logo.png');
 
 const BackgroundWrapper = styled.div`
   @media (min-width: ${({ theme }) => theme.mediumBreakpoint}) {
-    min-height: 100vh;
     background: url(${props => props.theme.backgroundWave}) no-repeat;
     background-size: 100%;
     background-color: ${props => props.theme.background };
@@ -228,100 +227,100 @@ const Dashboard = props => {
 
   return (
     <BackgroundWrapper>
-      <ContentWrapper 
-        id="marketOverviewContainer"
-        maxWidth="68rem"
-      >
-        <FlexWrapper 
-          padding="3rem 1rem 1rem 1rem"
+        <ContentWrapper 
+          id="marketOverviewContainer"
+          maxWidth="68rem"
         >
-
-          <FlexWrapper
-            flexDirection="column"
-            justifyContent="center"
-            width="50%"
+          <FlexWrapper 
+            padding="3rem 1rem 1rem 1rem"
           >
-            <WelcomeHeader>
-              Welcome { (user && user.id) ? user.id : '' }
-            </WelcomeHeader>
-            <Paragraph
-              margin="0.5rem 0 0 0"
-              size="0.8rem"
-              opacity="0.7"
-            >
-              These are the latest trends.
-            </Paragraph>
-          </FlexWrapper>
 
-          <FlexWrapper
-            textAlign="right"
-            alignItems="center"
-            width="50%"
-          >
-            <Button 
-              className="createMarketButton"
-              margin="2rem 0 0 0"
-              marginMedium="0 0 0 auto"
-              onClick={() => {
-                setModalIsOpen(true);
-              }}
+            <FlexWrapper
+              flexDirection="column"
+              justifyContent="center"
+              width="50%"
             >
-            <img src={createMarket} alt="create market icon" />
-            <span>create market</span>
-          </Button>
-          </FlexWrapper>
-          
-        </FlexWrapper>
-        <OverviewToggle onToggle={handleOverviewToggle}/>
+              <WelcomeHeader>
+                Welcome { (user && user.id) ? user.id : '' }
+              </WelcomeHeader>
+              <Paragraph
+                margin="0.5rem 0 0 0"
+                size="0.8rem"
+                opacity="0.7"
+              >
+                These are the latest trends.
+              </Paragraph>
+            </FlexWrapper>
 
-        <ContentWrapper padding="1rem">
-          <CategoryFilters 
-            filters={categoryFilters} 
-            activeFilters={activeFilters}
-            filterChange={handleFilterChange}
-          />
+            <FlexWrapper
+              textAlign="right"
+              alignItems="center"
+              width="50%"
+            >
+              <Button 
+                className="createMarketButton"
+                margin="2rem 0 0 0"
+                marginMedium="0 0 0 auto"
+                onClick={() => {
+                  setModalIsOpen(true);
+                }}
+              >
+              <img src={createMarket} alt="create market icon" />
+              <span>create market</span>
+            </Button>
+            </FlexWrapper>
+            
+          </FlexWrapper>
+          <OverviewToggle onToggle={handleOverviewToggle}/>
+
+          <ContentWrapper padding="1rem">
+            <CategoryFilters 
+              filters={categoryFilters} 
+              activeFilters={activeFilters}
+              filterChange={handleFilterChange}
+            />
+          </ContentWrapper>
+
+          {(overviewType === 'trade' && markets.length) ? (
+            <MarketOverview 
+              markets={markets}
+              type="trade"
+            />
+          ) : (overviewType === 'resolute' && resoluteMarkets.length) ? (
+            <MarketOverview 
+              markets={resoluteMarkets}
+              type="resolute"
+            />
+          ) : (
+            <ContentWrapper padding="1rem">
+              <p>No markets found.</p>
+            </ContentWrapper>
+          )}
+
+          {reachedScrollBottom &&
+            <ContentWrapper
+              padding="1rem"
+              textAlign="center"
+            >
+              <Loader />
+            </ContentWrapper>        
+          }
+
         </ContentWrapper>
 
-        {(overviewType === 'trade' && markets.length) ? (
-          <MarketOverview 
-            markets={markets}
-            type="trade"
+        <Modal
+          isOpen={modalIsOpen}
+          style={customStyles}
+          contentLabel="Example Modal"
+        >
+          <FluxLogo alt="fluxLogo" src={fluxLogo} />
+          <CloseModalButton onClick={() => {
+            setModalIsOpen(false);
+          }}>cancel</CloseModalButton>
+          <CreateMarketForm 
+            launchMarket={launchMarket}
           />
-        ) : (overviewType === 'resolute' && resoluteMarkets.length) ? (
-          <MarketOverview 
-            markets={resoluteMarkets}
-            type="resolute"
-          />
-        ) : (
-          <ContentWrapper padding="1rem">
-            <p>No markets found.</p>
-          </ContentWrapper>
-        )}
-
-        {reachedScrollBottom &&
-          <ContentWrapper
-            padding="1rem"
-            textAlign="center"
-          >
-            <Loader />
-          </ContentWrapper>        
-        }
-
-      </ContentWrapper>
-
-      <Modal
-        isOpen={modalIsOpen}
-        style={customStyles}
-        contentLabel="Example Modal"
-      >
-        <FluxLogo alt="fluxLogo" src={fluxLogo} />
-        <CloseModalButton onClick={() => {
-          setModalIsOpen(false);
-        }}>cancel</CloseModalButton>
-        <CreateMarketForm 
-          launchMarket={launchMarket}
-        />
-      </Modal>
+        </Modal>
       <Footer />
     </BackgroundWrapper>
   );
