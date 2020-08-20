@@ -63,7 +63,11 @@ const TopBar = props => {
           {/* <FlexItem hideForSmall hideForMedium>
             <Input placeholder="Search"/>
           </FlexItem> */}
-          <FlexItem hideForSmall>
+          <FlexItem 
+            hideForSmall
+            flex="2"
+            textAlign="center"
+          >
             {user &&
               <ContentWrapper>
                 <UserName>{user.id ? user.id : '' }</UserName>
