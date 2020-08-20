@@ -5,7 +5,8 @@ const DateLabel = styled.div`
   margin: 0.8rem 0;
   margin-top: auto;
   padding: ${props => props.padding ? props.padding : 0};
-  font-size: 0.8rem;
+  font-size: 1rem;
+  font-weight: 100;
   text-align: ${props => props.textAlign ? props.textAlign : 'right'};
   color: ${props => props.themed ? props.theme.text : 'white'};
 `;
