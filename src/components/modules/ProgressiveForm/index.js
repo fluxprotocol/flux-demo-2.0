@@ -30,17 +30,11 @@ const binarySelection = [
   }
 ];
 
-const multipleSelection = [
-  'Trump',
-  'Biden',
-  'Kanye',
-];
-
 
 const ProgressiveForm = props => {
   const [currentView, setCurrentView] = useState('buttonSelection'); // buttonSelection, sharesForm, review, processing, orderCompleted
   const [sharesType, setSharesType] = useState(''); // yes, no, {other}
-  const {marketPricesData, lastFilledPrices} = props;
+  const {market, marketPricesData, lastFilledPrices} = props;
   console.log('these are all the props', props);
   return (
     <ContentWrapper 
@@ -54,7 +48,10 @@ const ProgressiveForm = props => {
           <ActionTitle textAlign="center">Purchase Shares</ActionTitle>
           <ButtonSelection
             layover={props.layover}
-            options={binarySelection} 
+            options={binarySelection}
+            lastFilledPrices={props.lastFilledPrices}
+            market={props.market} 
+            marketPricesData={props.marketPricesData}
             buttonEvent={(response) => {
               setCurrentView('sharesForm');
               setSharesType(response);

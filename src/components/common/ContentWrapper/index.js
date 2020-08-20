@@ -23,6 +23,10 @@ const ContentWrapper = styled.div`
   @media (min-width: ${({ theme }) => theme.largeBreakpoint}) {
     display: ${props => props.hideForLarge ? 'none' : 'block'};
   }
+
+  & div.contractRow {
+    border-bottom: 1px solid white;
+  }
 `;
 
 export default ContentWrapper;

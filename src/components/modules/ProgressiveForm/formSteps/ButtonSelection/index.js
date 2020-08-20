@@ -20,6 +20,9 @@ const OptionLabel = styled.span`
 `;
 
 const ButtonSelection = props => {
+  const { market, marketPricesData, lastFilledPrices } = props;
+
+
   return (
     <ContentWrapper>
 
@@ -51,24 +54,27 @@ const ButtonSelection = props => {
             <FlexItem></FlexItem>
           </FlexWrapper>
 
-        {props.options.map((option, index) => (
-          <div key={option.name}>
+        {props.market.outcome_tags && props.market.outcome_tags.map((contract, index) => (
+          <div 
+            key={contract + index}
+            className="contractRow"
+          >
               <FlexWrapper 
                 margin="1rem 0"
               >
               <FlexItem>
                 <OptionLabel>
-                  {option.forecast}
+                  {marketPricesData[index] || null}
                 </OptionLabel>
               </FlexItem>
               <FlexItem>
                 <OptionLabel>
-                  -
+                  {contract}
                 </OptionLabel>
               </FlexItem>
               <FlexItem>
                 <OptionLabel>
-                  <strong>&#162;{option.marketPrice}</strong>
+                  <strong>&#162;{lastFilledPrices[index] || null}</strong>
                 </OptionLabel>
               </FlexItem>
               <FlexItem>
@@ -76,12 +82,12 @@ const ButtonSelection = props => {
                   small={props.layover}
                   shadow
                   width="100%"
-                  color={index === 0 ? 'lightPurple' : 'pink'}
+                  color={'lightPurple'}
                   onClick={ () => {
-                    props.buttonEvent(option.name);
+                    props.buttonEvent('buy');
                   }}
                 >
-                  BUY {option.name.toUpperCase()}
+                  BUY
                 </Button>
               </FlexItem>
             </FlexWrapper>
