@@ -30,8 +30,6 @@ const FormOverview = props => {
     no: 'pink',
   };
 
-  console.log('this is the props @@@@@@', props.finalOrder);
-
   return (
     <FlexWrapper
         flexDirection="column"
@@ -88,7 +86,7 @@ const FormOverview = props => {
               <Button
                 color={colorMap['yes']}
                 onClick={ () => {
-                  props.formEvent('processing')
+                  props.formEvent(['processing', props.finalOrder])
                 }}
               >
                 Confirm Trade

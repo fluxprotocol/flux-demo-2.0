@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
 
 // common
@@ -10,6 +10,9 @@ import SharesForm from './formSteps/SharesForm';
 import FormOverview from './formSteps/FormOverview';
 import ProcessingForm from './formSteps/ProcessingForm';
 import FormCompleted from './formSteps/FormCompleted';
+
+// context
+import { FluxContext } from '../../../context/FluxProvider';
 
 const ActionTitle = styled.h3`
   width: 100%;
@@ -32,11 +35,31 @@ const binarySelection = [
 
 
 const ProgressiveForm = props => {
+  const [flux, _] = useContext(FluxContext);
   const [currentView, setCurrentView] = useState('buttonSelection'); // buttonSelection, sharesForm, review, processing, orderCompleted
   const [sharesType, setSharesType] = useState('');
   const [finalOrder, setFinalOrder] = useState('');
+  const [placeOrder, setPlaceOrder] = useState('');
 
   const {market, marketPricesData, lastFilledPrices} = props;
+
+  const testFunc = async (order) => {
+    console.log('incoming data', order, market);
+
+    const validateAllowance = await flux.setAllowance('turiguilano.testnet', '49999.99999999999');
+    console.log('this is validateAllowance', validateAllowance);
+    debugger;
+    // currently hardcoded to 1 - since we are only handling yes orders
+    let orderData = order[1];
+    let denominatedDai =  (orderData[1] * orderData[2]) * 100000;
+    let marketID = JSON.stringify(market.id);
+    let contractType = "1";
+    let buyingPrice = JSON.stringify(orderData[2]);
+
+    const createOrder = await flux.placeOrder(denominatedDai, marketID, contractType, buyingPrice);
+    setPlaceOrder(createOrder);
+  }
+
 
   return (
     <ContentWrapper 
@@ -71,7 +94,6 @@ const ProgressiveForm = props => {
             layover={props.layover}
             sharesType={sharesType}
             formEvent={(response) => {
-              console.log('this is the response !@@@@@@', response);
               setCurrentView(response[0]);
               setFinalOrder(response);
             }}
@@ -87,7 +109,8 @@ const ProgressiveForm = props => {
             layover={props.layover}
             finalOrder={finalOrder}
             formEvent={(response) => {
-              setCurrentView(response);
+              setCurrentView(response[0]);
+              testFunc(response);
             }}
           />
         </ContentWrapper>
@@ -111,6 +134,7 @@ const ProgressiveForm = props => {
         <ContentWrapper height="100%">
           <FormCompleted
             sharesType={'yes'}
+            orderOutcome={placeOrder}
             layover={props.layover}
             formEvent={(response) => {
               setCurrentView(response);
