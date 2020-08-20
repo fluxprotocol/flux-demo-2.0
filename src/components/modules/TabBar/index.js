@@ -1,9 +1,56 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
 import { Link, useLocation } from "react-router-dom";
 import styled from 'styled-components';
+import Modal from 'react-modal';
 
 // common
 import { FlexWrapper, FlexItem } from '../../common/Flex';
+
+// modules
+import CreateMarketForm from '../CreateMarketForm';
+
+// context
+import { FluxContext } from '../../../context/FluxProvider';
+
+const customStyles = {
+  content : {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    maxWidth: '33rem',
+    maxHeight: '95vh',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
+    backgroundColor: '#2C2A43',
+    border: 'none',
+    borderRadius: '10px'
+  }, 
+  overlay: {
+    zIndex: 999,
+    backgroundColor: 'rgba(12,11,29, 0.6)',
+  },
+};
+
+const CloseModalButton = styled.button`
+  position: absolute;
+  width: 6.5em;
+  top: 1rem;
+  right: 1rem;
+  background: rgba(15,14,37,100);
+  color: rgba(247, 1, 154, 1);
+  font-size: 1.2em;
+  border-radius: 10px;
+  border: none;
+  padding: .4em .1em;
+`;
+
+const fluxLogo = require('../../../assets/images/flux-logo.png');
+
+const FluxLogo = styled.img`
+  width: 5em;
+  margin-left: 1em;
+`;
 
 const TabBarContainer = styled.div`
   z-index: 100;
@@ -36,7 +83,36 @@ const MenuLabel = styled.span`
 `;
 
 const TabBar = props => {
+  const [flux, _] = useContext(FluxContext);
   const location = useLocation();
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  const createBinaryMarket = async (market) => {
+    try {
+      const newMarketId = await flux.createBinaryMarket(
+        market.description,
+        market.extraInfo,
+        market.categories,
+        market.endTime,
+        1
+      );
+      console.log('new', newMarketId);
+    } catch (err) {
+      console.log('err', err);
+    }
+  }
+
+  const launchMarket = (market) => {
+    if (market.marketType === 'binary') {
+      createBinaryMarket(market);
+      return;
+    }
+
+    if (market.marketType === 'categorical') {
+      return;
+    }
+
+  }
 
   return (
     <TabBarContainer>
@@ -57,13 +133,14 @@ const TabBar = props => {
           padding="0 1rem"
           textAlign="center"
         >
-          <Link to="/">
+          <div onClick={() => {
+            setModalIsOpen(true);
+          }}>
             <MenuIcon
-              active={location.pathname === '/create'}
               src={require('../../../assets/images/icons/new-menu-icon.svg')}
             />
             <MenuLabel>new</MenuLabel>
-          </Link>
+          </div>
         </FlexItem>
         <FlexItem
           padding="0 1rem"
@@ -78,6 +155,20 @@ const TabBar = props => {
           </Link>
         </FlexItem>
       </FlexWrapper>
+
+      <Modal
+        isOpen={modalIsOpen}
+        style={customStyles}
+        contentLabel="Create market"
+      >
+        <FluxLogo alt="fluxLogo" src={fluxLogo} />
+        <CloseModalButton onClick={() => {
+          setModalIsOpen(false);
+        }}>cancel</CloseModalButton>
+        <CreateMarketForm 
+          launchMarket={launchMarket}
+        />
+      </Modal>
     </TabBarContainer>
   );
 }

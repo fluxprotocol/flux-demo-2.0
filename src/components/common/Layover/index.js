@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 const Layover = styled.div`
+  z-index: 999;
   position: fixed;
   top: 0;
   right: 0;

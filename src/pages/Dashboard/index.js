@@ -324,7 +324,7 @@ const Dashboard = props => {
         <Modal
           isOpen={modalIsOpen}
           style={customStyles}
-          contentLabel="Example Modal"
+          contentLabel="Create market"
         >
           <FluxLogo alt="fluxLogo" src={fluxLogo} />
           <CloseModalButton onClick={() => {
