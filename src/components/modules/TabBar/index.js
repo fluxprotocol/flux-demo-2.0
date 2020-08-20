@@ -102,6 +102,22 @@ const TabBar = props => {
     }
   }
 
+  const createCategoricalMarket = async (market) => {
+    try {
+      const newMarketId = await flux.createCategoricalMarket(
+        market.description,
+        market.extraInfo,
+        market.outcomes,
+        market.categories,
+        market.endTime,
+        1
+      );
+      console.log('new', newMarketId);
+    } catch (err) {
+      console.log('err', err);
+    }
+  }
+
   const launchMarket = (market) => {
     if (market.marketType === 'binary') {
       createBinaryMarket(market);
@@ -109,6 +125,7 @@ const TabBar = props => {
     }
 
     if (market.marketType === 'categorical') {
+      createCategoricalMarket(market);
       return;
     }
 
