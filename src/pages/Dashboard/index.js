@@ -29,8 +29,19 @@ import { FluxContext } from '../../context/FluxProvider';
 
 const fluxLogo = require('../../assets/images/flux-logo.png');
 
-const BackgroundWrapper = styled.div`
-  @media (min-width: ${({ theme }) => theme.mediumBreakpoint}) {
+const BackgroundWave = styled.div`
+  display: none;
+
+  @media (min-width: ${({ theme }) => theme.largeBreakpoint}) {
+    z-index: -1;
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 100%;
+    width: 100vw;
     background: url(${props => props.theme.backgroundWave}) no-repeat;
     background-size: 100%;
     background-color: ${props => props.theme.background };
@@ -226,7 +237,9 @@ const Dashboard = props => {
   const createMarket = require("../../assets/images/icons/create_market.png");
 
   return (
-    <BackgroundWrapper>
+    <ContentWrapper 
+      position="relative"
+    >
         <ContentWrapper 
           id="marketOverviewContainer"
           maxWidth="68rem"
@@ -322,7 +335,8 @@ const Dashboard = props => {
           />
         </Modal>
       <Footer />
-    </BackgroundWrapper>
+      <BackgroundWave />
+    </ContentWrapper>
   );
 }
 
