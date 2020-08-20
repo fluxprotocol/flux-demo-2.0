@@ -19,7 +19,7 @@ const CheckBoxLabel = styled.label`
     border-radius: 50%;
     width: 18px;
     height: 18px;
-    margin: 3px;
+    margin: 4px;
     background: #ffffff;
     box-shadow: 1px 3px 3px 1px rgba(0, 0, 0, 0.2);
     transition: 0.2s;

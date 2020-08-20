@@ -69,7 +69,7 @@ const OrderBookLineChart = props => {
     let outComes = {};
     chartConfig.data.datasets = [];
 
-    // loop each history item and add to seperate object prop
+    // loop each history item and add to separate object prop
     props.priceHistory.forEach(dataItem => {
       if (!outComes[dataItem.outcome]) {
         outComes[dataItem.outcome] = {

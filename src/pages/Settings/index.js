@@ -214,7 +214,9 @@ const Settings = props => {
             >
               {
                 dataHeaders.map((heading) => (
-                  <OrderHistoryHeadings>
+                  <OrderHistoryHeadings
+                    key={heading}
+                  >
                     {heading}
                   </OrderHistoryHeadings>
                 ))
@@ -229,7 +231,8 @@ const Settings = props => {
             <OrderHistoryBody>
               {
                 dataSet.map((order, index) => (
-                  <OrderHistoryRow 
+                  <OrderHistoryRow
+                  key={order.contract + index} 
                     className="data_row"
                   >
                     <OrderHistoryData>
@@ -267,7 +270,8 @@ const Settings = props => {
             <OrderHistoryBody>
               {
                 dataSet.map((order, index) => (
-                  <OrderHistoryRow 
+                  <OrderHistoryRow
+                    key={order.contract + index} 
                     className="data_row"
                   >
                     <OrderHistoryData>
