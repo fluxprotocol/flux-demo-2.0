@@ -21,7 +21,7 @@ const OptionLabel = styled.span`
 
 const ButtonSelection = props => {
   const { market, marketPricesData, lastFilledPrices } = props;
-
+  console.log('all the props inside buttonselection', props);
 
   return (
     <ContentWrapper>
@@ -84,7 +84,8 @@ const ButtonSelection = props => {
                   width="100%"
                   color={'lightPurple'}
                   onClick={ () => {
-                    props.buttonEvent('buy');
+                    let userSelection = [marketPricesData[index], contract, lastFilledPrices[index]]
+                    props.buttonEvent(userSelection);
                   }}
                 >
                   BUY

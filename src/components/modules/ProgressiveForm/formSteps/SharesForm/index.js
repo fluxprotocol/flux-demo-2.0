@@ -38,6 +38,9 @@ const Input = styled.input.attrs({ type: 'number' })`
 
 const SharesForm = props => {
   const [numberOfShares, setNumberOfShares] = useState(100);
+  const {sharesType} = props;
+
+  console.log('from the next component, userSelectiondata', sharesType);
 
   const colorMap = {
     yes: 'lightPurple',
@@ -60,7 +63,7 @@ const SharesForm = props => {
           width="100%"
           padding="2rem"
           >
-          <ActionTitle textAlign="center">Buy {props.sharesType} Shares</ActionTitle>
+          <ActionTitle textAlign="center">Buy {props.sharesType[1]} Shares</ActionTitle>
           <FlexWrapper className="input_divider" margin="1rem 0">
             <FlexItem>
               Number of Shares
@@ -79,7 +82,7 @@ const SharesForm = props => {
               Market Price
             </FlexItem>
             <FlexItem textAlign="right">
-              &#162;0.75
+              &#162;{props.sharesType[2] / 100}
             </ FlexItem>
           </FlexWrapper>
           <RowDivider />
@@ -89,7 +92,7 @@ const SharesForm = props => {
               Estimated Cost
             </FlexItem>
             <FlexItem textAlign="right">
-              &#162;75
+              &#162;{(numberOfShares * props.sharesType[2]) / 100}
             </FlexItem>
           </FlexWrapper>
           <RowDivider />
@@ -114,7 +117,8 @@ const SharesForm = props => {
             margin="2rem 0 0 0"
             color={colorMap[props.sharesType]}
             onClick={ () => {
-              props.formEvent('review')
+              let orderPrice = (numberOfShares * props.sharesType[2]) / 100;
+              props.formEvent(['review', numberOfShares, orderPrice]);
             }}
           >
             Review

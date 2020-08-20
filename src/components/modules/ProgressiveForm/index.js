@@ -33,9 +33,11 @@ const binarySelection = [
 
 const ProgressiveForm = props => {
   const [currentView, setCurrentView] = useState('buttonSelection'); // buttonSelection, sharesForm, review, processing, orderCompleted
-  const [sharesType, setSharesType] = useState(''); // yes, no, {other}
+  const [sharesType, setSharesType] = useState('');
+  const [finalOrder, setFinalOrder] = useState('');
+
   const {market, marketPricesData, lastFilledPrices} = props;
-  console.log('these are all the props', props);
+
   return (
     <ContentWrapper 
       width="100%"
@@ -69,7 +71,9 @@ const ProgressiveForm = props => {
             layover={props.layover}
             sharesType={sharesType}
             formEvent={(response) => {
-              setCurrentView(response);
+              console.log('this is the response !@@@@@@', response);
+              setCurrentView(response[0]);
+              setFinalOrder(response);
             }}
           />
         </ContentWrapper>
@@ -81,6 +85,7 @@ const ProgressiveForm = props => {
           <FormOverview
             sharesType={sharesType}
             layover={props.layover}
+            finalOrder={finalOrder}
             formEvent={(response) => {
               setCurrentView(response);
             }}

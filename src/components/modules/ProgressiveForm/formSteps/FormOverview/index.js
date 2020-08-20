@@ -30,6 +30,8 @@ const FormOverview = props => {
     no: 'pink',
   };
 
+  console.log('this is the props @@@@@@', props.finalOrder);
+
   return (
     <FlexWrapper
         flexDirection="column"
@@ -55,10 +57,10 @@ const FormOverview = props => {
                 fontWeight="bold"
                 color="white"
               >
-                75
+                {props.finalOrder[2]}
               </Paragraph>
             </ContentWrapper>
-            <Shares>133.3333333 shares</Shares>
+            <Shares>{props.finalOrder[1]} shares</Shares>
           </FlexWrapper>
         </FlexItem>
         <FlexItem 
@@ -84,7 +86,7 @@ const FormOverview = props => {
                 Cancel
               </Button>
               <Button
-                color={colorMap[props.sharesType]}
+                color={colorMap['yes']}
                 onClick={ () => {
                   props.formEvent('processing')
                 }}
