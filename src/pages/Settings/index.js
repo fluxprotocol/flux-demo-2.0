@@ -132,7 +132,7 @@ const OrderButton = styled.td`
 
 const ProfileIcon = require("../../assets/images/icons/profile_icon.png");
 const ReferralIcon = require("../../assets/images/icons/referral_icon.png");
-
+// for now dummy data - the call is setup: getOpenOrders and getFilledOrders
 const dataSet = [
   {
     contract: 'Trump',
@@ -158,7 +158,8 @@ const Settings = props => {
   const [flux, ] = useContext(FluxContext);
   const { toggleTheme, theme } = useDarkModeTheme();
 
-  const [order, setOpenOrders] = useState([]);
+  const [open_orders, setOpenOrders] = useState([]);
+  const [filled_orders, setFilledOrders] = useState([]);
 
   useEffect(() => {
     if (!user) {
@@ -166,15 +167,19 @@ const Settings = props => {
     }
 
     getOpenOrders();
+    getFilledOrders();
   }, [user]);
 
 
   const getOpenOrders = async () => {
-    console.log('this is user', user);
     let openOrders = await flux.getOpenOrders(user.id);
-    console.log('this is openOrders', openOrders);
-    
     setOpenOrders(openOrders);
+  }
+
+  const getFilledOrders = async () => {
+    let filledOrders = await flux.getOrderHistory(user.id);
+    setFilledOrders(filledOrders);
+
   }
 
   return (

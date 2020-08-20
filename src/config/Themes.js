@@ -23,6 +23,7 @@ export const globalColors = {
   mediumBlue: '#2C2A43',
   darkBlue: '#0F0E25',
   green: '#C4FF88',
+  orderbookGreen: 'rgba(196, 255, 136, .60)',
   gray: '#7E7E91',
   white: '#ffffff',
   black: '#000000',

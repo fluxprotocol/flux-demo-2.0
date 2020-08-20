@@ -134,7 +134,7 @@ const OrderBookBookBarChart = props => {
   }
 
   const colorValue = {
-    buy: 'green'
+    buy: 'orderbookGreen'
   };
 
   return (
