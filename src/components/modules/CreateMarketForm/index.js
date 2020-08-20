@@ -10,6 +10,7 @@ import { categoryFilters } from '../../../config/filters';
 import ContentWrapper from '../../common/ContentWrapper';
 import CategoryFilters from '../../common/CategoryFilters';
 import Button from '../../common/Button';
+import { FlexWrapper, FlexItem } from '../../common/Flex';
 
 const TextArea = styled.textarea`
   display: block;
@@ -73,8 +74,10 @@ const Input = styled.input`
 
 const Label = styled.label`
   display: block;
-  margin: 1rem 0 0.5rem 0;
-  font-size: 0.8rem;
+  margin: ${props => props.margin ? props.margin : '1rem 0 0.5rem 0'};
+  font-size: ${props => props.fontSize ? props.fontSize : '0.8rem'};
+  color: white;
+  text-align: ${props => props.textAlign ? props.textAlign : 'left'};
 `;
 
 const CreateMarketForm = props => {
@@ -183,7 +186,9 @@ const CreateMarketForm = props => {
       {marketType === 'categorical' &&
         <div>
           {categoricalOptions.map((option, index) => 
-            <div>
+            <div
+              key={`outcome_${index}`}
+            >
               <Label>Outcome {index + 1}</Label>
               <Input 
                 key={`categoricalOption_${index}`}
@@ -215,61 +220,92 @@ const CreateMarketForm = props => {
       <FormTitle>
         When does this market end?
       </FormTitle>
-      <Input
-        min="1"
-        max="12"
-        display="inline-block"
-        width="15%"
-        margin="0 0.5rem 0 0"
-        type="number"
-        color="white"
-        value={marketEndDateMonth}
-        onChange={(event) => {
-          let date = event.target.value;
-          setMarketEndDateMonth(date);
-        }}
-      />
-      <Input
-        min="1"
-        max="31"
-        display="inline-block"
-        width="15%"
-        margin="0 0.5rem 0 0"
-        type="number"
-        color="white"
-        value={marketEndDateDay}
-        onChange={(event) => {
-          let date = event.target.value;
-          setMarketEndDateDay(date);
-        }}
-      />
-      <Input
-        min="2020"
-        display="inline-block"
-        width="22%"
-        margin="0 0.5rem 0 0"
-        type="number"
-        color="white"
-        value={marketEndDateYear}
-        onChange={(event) => {
-          let date = event.target.value;
-          setMarketEndDateYear(date);
-        }}
-      />
-
-      <Input 
-        display="inline-block"
-        width="35%"
-        margin="0 0 0 0.5rem"
-        padding="6px"
-        type="time"
-        color="white"
-        value={marketEndTime}
-        onChange={(event) => {
-          const time = event.target.value;
-          setMarketEndTime(time);
-        }}
-      />
+      <FlexWrapper>
+        <FlexItem
+          padding="0 0.5rem 0 0"
+        >
+          <Input
+            min="1"
+            max="12"
+            display="inline-block"
+            type="number"
+            color="white"
+            value={marketEndDateMonth}
+            onChange={(event) => {
+              let date = event.target.value;
+              setMarketEndDateMonth(date);
+            }}
+          />
+          <Label
+            margin="0.4rem auto 0 auto"
+            textAlign="center"
+          >
+            month
+          </Label>
+        </FlexItem>
+        <FlexItem
+          padding="0 0.5rem 0 0"
+        >
+          <Input
+            min="1"
+            max="31"
+            display="inline-block"
+            type="number"
+            color="white"
+            value={marketEndDateDay}
+            onChange={(event) => {
+              let date = event.target.value;
+              setMarketEndDateDay(date);
+            }}
+          />
+          <Label
+            margin="0.4rem auto 0 auto"
+            textAlign="center"
+          >
+            day
+          </Label>
+        </FlexItem>
+        <FlexItem
+          padding="0 0.5rem 0 0"
+        >
+          <Input
+            min="2020"
+            display="inline-block"
+            type="number"
+            color="white"
+            value={marketEndDateYear}
+            onChange={(event) => {
+              let date = event.target.value;
+              setMarketEndDateYear(date);
+            }}
+          />
+          <Label
+            margin="0.4rem auto 0 auto"
+            textAlign="center"
+          >
+            year
+          </Label>
+        </FlexItem>
+        <FlexItem>
+          <Input 
+            display="inline-block"
+            padding="6px"
+            type="time"
+            color="white"
+            value={marketEndTime}
+            onChange={(event) => {
+              const time = event.target.value;
+              setMarketEndTime(time);
+            }}
+          />
+          <Label
+            margin="0.4rem auto 0 auto"
+            textAlign="center"
+          >
+            time
+          </Label>
+        </FlexItem>
+      </FlexWrapper>
 
       <Button   
         color="lightPurple"
