@@ -40,8 +40,6 @@ const SharesForm = props => {
   const [numberOfShares, setNumberOfShares] = useState(100);
   const {sharesType} = props;
 
-  console.log('from the next component, userSelectiondata', sharesType);
-
   const colorMap = {
     yes: 'lightPurple',
     no: 'pink',
