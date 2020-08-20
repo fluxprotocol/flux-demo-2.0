@@ -25,8 +25,10 @@ const OrderBookDetails = styled.tr`
 
 const OrderBookDetail = styled.th`
   padding: .5em;
+  font-size: 0.8rem;
   font-weight: ${props => props.fontWeight ? props.fontWeight : 'auto'};
   text-align: right;
+  color: white;
 `;
 
 const OrderBookData = styled.td`
@@ -145,7 +147,7 @@ const OrderBookBookBarChart = props => {
 
           {orderBookHeaders.map((orderBookHeader, index) => (
             <OrderBookDetail
-              fontWeight="100"
+              fontWeight="400"
               key={orderBookHeader}
             >
               {orderBookHeader}

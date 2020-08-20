@@ -13,6 +13,7 @@ const ContentWrapper = styled.div`
   text-align: ${props => props.textAlign ? props.textAlign : 'left'};
   border-top: ${props => props.borderTop ? props.borderTop : 'none'};
   overflow: ${props => props.overflow ? props.overflow : 'initial'};
+  cursor: ${props => props.cursor ? props.cursor : 'initial'};
 
   @media (min-width: ${({ theme }) => theme.mediumBreakpoint}) {
     display: ${props => props.hideForMedium ? 'none' : 'block'};

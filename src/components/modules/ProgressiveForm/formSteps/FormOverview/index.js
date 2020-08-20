@@ -84,6 +84,7 @@ const FormOverview = props => {
                 Cancel
               </Button>
               <Button
+                margin="0 0 0 1rem"
                 color={colorMap['yes']}
                 onClick={ () => {
                   props.formEvent(['processing', props.finalOrder])

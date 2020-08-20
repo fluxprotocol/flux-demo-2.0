@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { Link } from "react-router-dom";
 import styled from 'styled-components';
+import { useHistory } from 'react-router-dom';
 
 // hooks
 import { useFluxAuth } from '../../../App';
@@ -44,6 +45,11 @@ const UserBalance = styled.span`
 const TopBar = props => {
   const { user, login, logout } = useFluxAuth();
   const [flux, ] = useContext(FluxContext);
+  const history = useHistory();
+
+  const handleProfileClick = (id) => {
+    history.push(`/settings`);
+  };
   
   return (
     <ContentWrapper
@@ -69,7 +75,10 @@ const TopBar = props => {
             textAlign="center"
           >
             {user &&
-              <ContentWrapper>
+              <ContentWrapper
+                cursor="pointer"
+                onClick={handleProfileClick}
+              >
                 <UserName>{user.id ? user.id : '' }</UserName>
                 <UserBalance>{user.balance ? `$${user.balance / 1000000000000000000}` : '' }</UserBalance>
               </ContentWrapper>
