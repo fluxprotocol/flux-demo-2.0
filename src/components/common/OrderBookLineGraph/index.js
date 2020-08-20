@@ -68,7 +68,7 @@ const OrderBookLineChart = props => {
   useEffect(() => {
     let outComes = {};
     chartConfig.data.datasets = [];
-
+    
     // loop each history item and add to separate object prop
     props.priceHistory.forEach(dataItem => {
       if (!outComes[dataItem.outcome]) {
@@ -90,7 +90,10 @@ const OrderBookLineChart = props => {
       })
     }
 
-    chartConfig.data.labels = outComes['0'].data;
+    if (outComes['0'] && outComes['0'].data) {
+      chartConfig.data.labels = outComes['0'].data;
+    }
+
     updateDataset();
   }, [props.priceHistory]);
 
