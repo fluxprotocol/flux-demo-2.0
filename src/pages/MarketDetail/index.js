@@ -233,7 +233,7 @@ const MarketOverview = props => {
           </ContentWrapper>
         </ContentWrapper>
         <ContentWrapper
-          backgroundColor="darkBlue"
+          backgroundColor="background"
           padding="1em 0"
         >
           <ContentWrapper

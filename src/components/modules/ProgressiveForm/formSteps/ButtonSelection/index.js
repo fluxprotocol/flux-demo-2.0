@@ -42,12 +42,18 @@ const ButtonSelection = props => {
               </Paragraph>
             </FlexItem>
             <FlexItem>
-              <Paragraph>
+              <Paragraph
+                size="0.8rem"
+                color="white"
+              >
                 Title
               </Paragraph>
             </FlexItem>
             <FlexItem>
-              <Paragraph>
+              <Paragraph
+                size="0.8rem"
+                color="white"
+              >
                 market price
               </Paragraph>
             </FlexItem>

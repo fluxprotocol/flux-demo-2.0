@@ -65,7 +65,9 @@ const SharesForm = props => {
           >
           <ActionTitle textAlign="center">Buy {props.sharesType[1]} Shares</ActionTitle>
           <FlexWrapper className="input_divider" margin="1rem 0">
-            <FlexItem>
+            <FlexItem
+              color="white"
+            >
               Number of Shares
             </FlexItem>
             <FlexItem textAlign="right">
@@ -78,20 +80,30 @@ const SharesForm = props => {
           <RowDivider />
 
           <FlexWrapper margin="1rem 0">
-            <FlexItem>
+            <FlexItem
+              color="white"
+            >
               Market Price
             </FlexItem>
-            <FlexItem textAlign="right">
+            <FlexItem 
+              color="white"
+              textAlign="right"  
+            >
               &#162;{props.sharesType[2] / 100}
             </ FlexItem>
           </FlexWrapper>
           <RowDivider />
 
           <FlexWrapper margin="1rem 0">
-            <FlexItem>
+            <FlexItem
+              color="white"
+            >
               Estimated Cost
             </FlexItem>
-            <FlexItem textAlign="right">
+            <FlexItem
+              color="white"
+              textAlign="right"
+            >
               &#162;{(numberOfShares * props.sharesType[2]) / 100}
             </FlexItem>
           </FlexWrapper>
@@ -114,7 +126,7 @@ const SharesForm = props => {
             Cancel
           </Button>
           <Button
-            margin="2rem 0 0 0"
+            margin="2rem 0 0 1rem"
             color={colorMap[props.sharesType]}
             onClick={ () => {
               let orderPrice = (numberOfShares * props.sharesType[2]) / 100;

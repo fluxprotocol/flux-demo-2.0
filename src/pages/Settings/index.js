@@ -114,6 +114,7 @@ const OrderHistoryHeadings = styled.th`
 `;
 
 const OrderHistoryData = styled.td`
+  color: white;
 `;
 
 const OrderButton = styled.td`
