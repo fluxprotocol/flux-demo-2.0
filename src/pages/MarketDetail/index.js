@@ -207,7 +207,9 @@ const MarketOverview = props => {
                                 setShowForm(true);
                                 document.body.classList.add('layover');
                               }}
-                            >Trade</Button>
+                            >
+                              Trade
+                            </Button>
                           </FlexItem>
                         </FlexWrapper>
                       </ContentWrapper>
@@ -286,7 +288,11 @@ const MarketOverview = props => {
             <FlexWrapper height="100%">
               <ProgressiveForm 
                 layover 
+                isMobile={true}
                 market={market} 
+                cancelMobile={() => {
+                  setShowForm(false);
+                }}
                 marketPricesData={marketPricesData} 
                 lastFilledPrices={lastFilledPricesForMarket}
               />

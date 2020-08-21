@@ -49,7 +49,7 @@ const ProcessingForm = props => {
             </ContentWrapper>
           </FlexWrapper>
         </FlexItem>
-        <FlexItem 
+        {/* <FlexItem 
           alignItems="center"
           justifyContent="center"
           textAlign="right"
@@ -66,14 +66,14 @@ const ProcessingForm = props => {
             <Button
                 borderColor="transparent"
                 onClick={ () => {
-                  props.formEvent('sharesForm')
+                  props.cancel()
                 }}
               >
                 Cancel
               </Button>
           </ContentWrapper>
         </FlexWrapper>
-        </FlexItem>
+        </FlexItem> */}
     </FlexWrapper>
   );
 }

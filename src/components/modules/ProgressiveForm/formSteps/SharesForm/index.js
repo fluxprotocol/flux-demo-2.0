@@ -152,7 +152,7 @@ const SharesForm = props => {
             margin="2rem 0 0 0"
             borderColor="transparent"
             onClick={ () => {
-              props.formEvent('buttonSelection')
+              props.cancel()
             }}
           >
             Cancel

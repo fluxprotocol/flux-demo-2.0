@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 // common
 import ContentWrapper from '../../common/ContentWrapper';
+import Button from '../../common/Button';
 
 // form sections
 import ButtonSelection from './formSteps/ButtonSelection';
@@ -60,18 +61,12 @@ const ProgressiveForm = props => {
     setPlaceOrder(createOrder);
   }
 
-  const handleClose = () => {
-    console.log('this event should close this modal');
-  }
-
-
   return (
     <ContentWrapper 
       className="purchase_shares"
       width="100%"
       margin={(props.layover && currentView === 'buttonSelection') ? 'auto 0 0 0' : 0}
     >
-
       {/* buttonSelection */}
       {currentView === 'buttonSelection' &&
         <ContentWrapper padding="2rem">
@@ -86,7 +81,26 @@ const ProgressiveForm = props => {
               setCurrentView('sharesForm');
               setSharesType(response);
             }}
+            cancel={() => {
+              setCurrentView('buttonSelection');
+            }}
           />
+
+          {props.isMobile &&
+            <Button
+              color="lightPurple"
+              margin="1rem 0 0 0"
+              onClick={() => {
+                props.cancelMobile();
+              }}
+              cancel={() => {
+                setCurrentView('buttonSelection');
+              }}
+            >
+              Close
+            </Button>
+          }
+
         </ContentWrapper>
       }
 
@@ -101,6 +115,9 @@ const ProgressiveForm = props => {
             formEvent={(response) => {
               setCurrentView(response[0]);
               setFinalOrder(response);
+            }}
+            cancel={() => {
+              setCurrentView('buttonSelection');
             }}
           />
         </ContentWrapper>
@@ -117,6 +134,9 @@ const ProgressiveForm = props => {
               setCurrentView(response[0]);
               testFunc(response);
             }}
+            cancel={() => {
+              setCurrentView('buttonSelection');
+            }}
           />
         </ContentWrapper>
       }
@@ -129,6 +149,9 @@ const ProgressiveForm = props => {
             layover={props.layover}
             formEvent={(response) => {
               setCurrentView(response);
+            }}
+            cancel={() => {
+              setCurrentView('buttonSelection');
             }}
           />
         </ContentWrapper>
@@ -147,12 +170,7 @@ const ProgressiveForm = props => {
           />
         </ContentWrapper>
       }
-    
-      <div
-        onClick={handleClose}
-      >
-        Cancel
-      </div>
+
     </ContentWrapper>
   );
 }
