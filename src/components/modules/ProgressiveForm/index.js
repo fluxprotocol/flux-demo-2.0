@@ -48,7 +48,6 @@ const ProgressiveForm = props => {
   const {market, marketPricesData, lastFilledPrices} = props;
 
   const testFunc = async (order) => {
-    console.log('incoming data', order, market);
     // currently hardcoded to 1 - since we are only handling yes orders
     let orderData = order[1];
     let denominatedDai =  parseInt((orderData[1] * orderData[2]) * 100000);
@@ -57,7 +56,6 @@ const ProgressiveForm = props => {
     let buyingPrice = orderData[2];
 
     const createOrder = await flux.placeOrder(denominatedDai, marketID, contractType, buyingPrice);
-    console.log('this is create order', createOrder);
     setPlaceOrder(createOrder);
   }
 

@@ -135,7 +135,6 @@ const CreateMarketForm = props => {
         market.endTime,
         1
       );
-      console.log('new', newMarketId);
     } catch (err) {
       console.log('err', err.message);
       setError(err.message);
@@ -153,7 +152,6 @@ const CreateMarketForm = props => {
         market.endTime,
         1
       );
-      console.log('new', newMarketId);
     } catch (err) {
       console.log('err', err.message);
       setError(err.message);
