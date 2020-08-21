@@ -209,51 +209,6 @@ const Dashboard = props => {
     else setActiveFilters(activeFilters.filter(item => item !== filter))
   }
 
-  const createBinaryMarket = async (market) => {
-    try {
-      const newMarketId = await flux.createBinaryMarket(
-        market.description,
-        market.extraInfo,
-        market.categories,
-        market.endTime,
-        1
-      );
-      console.log('new', newMarketId);
-    } catch (err) {
-      console.log('err', err);
-    }
-  }
-
-  const createCategoricalMarket = async (market) => {
-    console.log('categorical');
-    try {
-      const newMarketId = await flux.createCategoricalMarket(
-        market.description,
-        market.extraInfo,
-        market.outcomes,
-        market.categories,
-        market.endTime,
-        1
-      );
-      console.log('new', newMarketId);
-    } catch (err) {
-      console.log('err', err);
-    }
-  }
-
-  const launchMarket = (market) => {
-    if (market.marketType === 'binary') {
-      createBinaryMarket(market);
-      return;
-    }
-
-    if (market.marketType === 'categorical') {
-      createCategoricalMarket(market);
-      return;
-    }
-
-  }
-
   const createMarket = require("../../assets/images/icons/create_market.png");
 
   return (

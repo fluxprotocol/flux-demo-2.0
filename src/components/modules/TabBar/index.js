@@ -87,53 +87,6 @@ const TabBar = props => {
   const location = useLocation();
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
-  const createBinaryMarket = async (market) => {
-    console.log('inside create binary..', market);
-    try {
-      const newMarketId = await flux.createBinaryMarket(
-        market.description,
-        market.extraInfo,
-        market.categories,
-        market.endTime,
-        1
-      );
-      console.log('new', newMarketId);
-    } catch (err) {
-      console.log('err', err);
-    }
-  }
-
-  const createCategoricalMarket = async (market) => {
-    console.log('this is inside categorical market', market)
-    try {
-      const newMarketId = await flux.createCategoricalMarket(
-        market.description,
-        market.extraInfo,
-        market.outcomes,
-        market.categories,
-        market.endTime,
-        1
-      );
-      console.log('new', newMarketId);
-    } catch (err) {
-      console.log('err', err);
-    }
-  }
-
-  const launchMarket = (market) => {
-    if (market.marketType === 'binary') {
-      createBinaryMarket(market);
-      return;
-    }
-
-    if (market.marketType === 'categorical') {
-      console.log('hello?')
-      createCategoricalMarket(market);
-      return;
-    }
-
-  }
-
   return (
     <TabBarContainer>
       <FlexWrapper>
@@ -185,9 +138,7 @@ const TabBar = props => {
         <CloseModalButton onClick={() => {
           setModalIsOpen(false);
         }}>cancel</CloseModalButton>
-        <CreateMarketForm 
-          launchMarket={launchMarket}
-        />
+        <CreateMarketForm />
       </Modal>
     </TabBarContainer>
   );
