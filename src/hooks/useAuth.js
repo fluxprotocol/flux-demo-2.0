@@ -24,7 +24,8 @@ export const useAuth = () => {
       if (signedIn) {
         const id = await flux.getAccountId();
         const balance = await flux.getBalance(id);
-        const getAllowance = await flux.getAllowance(CONTRACT_ID);
+        const getAllowance = await flux.getAllowance(id, CONTRACT_ID);
+        console.log('this is id and getAllowance', id, getAllowance);
         const user = {
           id,
           balance,
