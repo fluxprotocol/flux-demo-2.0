@@ -109,7 +109,7 @@ const CreateMarketForm = props => {
   }
 
   const handleLaunchMarket = () => {
-    const unix = moment(`${marketEndDateDay}-${marketEndDateMonth}-${marketEndDateYear} ${marketEndTime}`, 'DD-MM-YYYY').format('x')
+    const unix = moment(`${marketEndDateDay}-${marketEndDateMonth}-${marketEndDateYear} ${marketEndTime}`, 'DD-MM-YYYY HH:MM').format('x')
     const market = {
       marketType: marketType,
       description: marketDescription,
@@ -167,6 +167,8 @@ const CreateMarketForm = props => {
     }
 
     if (market.marketType === 'categorical') {
+      console.log('market:', market.endTime);
+      debugger;
       createCategoricalMarket(market);
       return;
     }

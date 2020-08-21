@@ -56,8 +56,10 @@ const ProgressiveForm = props => {
     let contractType = 1;
     let buyingPrice = orderData[2];
 
+    console.log('Data', denominatedDai, marketID, contractType, buyingPrice);
+
     const createOrder = await flux.placeOrder(denominatedDai, marketID, contractType, buyingPrice);
-    console.log('this is create order', createOrder);
+
     setPlaceOrder(createOrder);
   }
 
