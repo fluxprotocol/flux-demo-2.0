@@ -20,9 +20,9 @@ const ActionTitle = styled.h3`
 `;
 
 const Input = styled.input.attrs({ type: 'number' })`
-  max-width: 5rem;
+  max-width: 8rem;
   border: 1px red dashed;
-  padding: 1rem 0 1rem 1rem;
+  padding: 1rem 1rem 1rem 1rem;
   background-color: transparent;
   color: white;
   font-size: 1rem;
@@ -30,6 +30,11 @@ const Input = styled.input.attrs({ type: 'number' })`
   outline: none;
   margin-right: -1em;
   text-align: right;
+
+  ::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 
   &::placeholder {
     color: ${props => props.theme.gray};

@@ -109,7 +109,7 @@ const CreateMarketForm = props => {
   }
 
   const handleLaunchMarket = () => {
-    const unix = moment(`${marketEndDateDay}-${marketEndDateMonth}-${marketEndDateYear} ${marketEndTime}`, 'DD-MM-YYYY HH:MM').format('x')
+    const unix = moment(`${marketEndDateDay}-${marketEndDateMonth}-${marketEndDateYear} ${marketEndTime}`, 'DD-MM-YYYY hh:mm').format('X')
     const market = {
       marketType: marketType,
       description: marketDescription,
@@ -135,7 +135,6 @@ const CreateMarketForm = props => {
         market.endTime,
         1
       );
-      console.log('new', newMarketId);
     } catch (err) {
       console.log('err', err.message);
       setError(err.message);
@@ -153,7 +152,6 @@ const CreateMarketForm = props => {
         market.endTime,
         1
       );
-      console.log('new', newMarketId);
     } catch (err) {
       console.log('err', err.message);
       setError(err.message);
