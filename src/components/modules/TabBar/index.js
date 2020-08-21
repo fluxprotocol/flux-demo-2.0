@@ -39,10 +39,12 @@ const CloseModalButton = styled.button`
   right: 1rem;
   background: rgba(15,14,37,100);
   color: rgba(247, 1, 154, 1);
-  font-size: 1.2em;
+  font-size: 0.8em;
   border-radius: 10px;
   border: none;
-  padding: .4em .1em;
+  outline: none;
+  padding: 0.5rem .1rem;
+  cursor: pointer;
 `;
 
 const fluxLogo = require('../../../assets/images/flux-logo.png');
