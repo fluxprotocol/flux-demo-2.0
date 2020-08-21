@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
 import moment from 'moment';
 
@@ -9,8 +9,12 @@ import { categoryFilters } from '../../../config/filters';
 // common
 import ContentWrapper from '../../common/ContentWrapper';
 import CategoryFilters from '../../common/CategoryFilters';
+import Paragraph from '../../common/Paragraph';
 import Button from '../../common/Button';
 import { FlexWrapper, FlexItem } from '../../common/Flex';
+
+// context
+import { FluxContext } from '../../../context/FluxProvider';
 
 const TextArea = styled.textarea`
   display: block;
@@ -89,6 +93,8 @@ const CreateMarketForm = props => {
   const [marketEndDateDay, setMarketEndDateDay] = useState(moment().add(1, 'd').date());
   const [marketEndDateYear, setMarketEndDateYear] = useState(moment().year());
   const [marketEndTime, setMarketEndTime] = useState('12:00');
+  const [error, setError] = useState('');
+  const [flux, _] = useContext(FluxContext);
 
   const handleCategoryChange = (event) => {
     const filter = event.target.value;
@@ -116,7 +122,55 @@ const CreateMarketForm = props => {
       market.categoricalOptions = categoricalOptions;
     }
 
-    props.launchMarket(market);
+    launchMarket(market);
+  }
+
+  const createBinaryMarket = async (market) => {
+    setError('');
+    try {
+      const newMarketId = await flux.createBinaryMarket(
+        market.description,
+        market.extraInfo,
+        market.categories,
+        market.endTime,
+        1
+      );
+      console.log('new', newMarketId);
+    } catch (err) {
+      console.log('err', err.message);
+      setError(err.message);
+    }
+  }
+
+  const createCategoricalMarket = async (market) => {
+    setError('');
+    try {
+      const newMarketId = await flux.createCategoricalMarket(
+        market.description,
+        market.extraInfo,
+        market.outcomes,
+        market.categories,
+        market.endTime,
+        1
+      );
+      console.log('new', newMarketId);
+    } catch (err) {
+      console.log('err', err.message);
+      setError(err.message);
+    }
+  }
+
+  const launchMarket = (market) => {
+    if (market.marketType === 'binary') {
+      createBinaryMarket(market);
+      return;
+    }
+
+    if (market.marketType === 'categorical') {
+      createCategoricalMarket(market);
+      return;
+    }
+
   }
 
   return (
@@ -306,6 +360,15 @@ const CreateMarketForm = props => {
           </Label>
         </FlexItem>
       </FlexWrapper>
+
+      {error.length > 0 &&
+        <Paragraph
+          margin="1.5rem 0 0 0"
+          color="red"
+        >
+          {error}
+        </Paragraph>      
+      }
 
       <Button   
         color="lightPurple"
