@@ -88,6 +88,7 @@ const TabBar = props => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const createBinaryMarket = async (market) => {
+    console.log('inside create binary..', market);
     try {
       const newMarketId = await flux.createBinaryMarket(
         market.description,
@@ -103,6 +104,7 @@ const TabBar = props => {
   }
 
   const createCategoricalMarket = async (market) => {
+    console.log('this is inside categorical market', market)
     try {
       const newMarketId = await flux.createCategoricalMarket(
         market.description,
@@ -125,6 +127,7 @@ const TabBar = props => {
     }
 
     if (market.marketType === 'categorical') {
+      console.log('hello?')
       createCategoricalMarket(market);
       return;
     }

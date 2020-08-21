@@ -38,6 +38,8 @@ const Input = styled.input.attrs({ type: 'number' })`
 
 const SharesForm = props => {
   const [numberOfShares, setNumberOfShares] = useState(100);
+  const [marketPrice, setMarketPrice] = useState({});
+
   const {sharesType} = props;
 
   const colorMap = {
@@ -47,6 +49,10 @@ const SharesForm = props => {
 
   const handleSharesInputChange = (event) => {
     setNumberOfShares(event.target.value);
+  }
+
+  const handlePriceChange = (event) => {
+    setMarketPrice(event.target.value);
   }
 
   return (
@@ -87,7 +93,17 @@ const SharesForm = props => {
               color="white"
               textAlign="right"  
             >
-              &#162;{props.sharesType[2] / 100}
+              {
+                isNaN(props.sharesType) === true && 
+                <Input onChange={handlePriceChange} />
+              }
+              
+              {
+                isNaN(props.sharesType) === false && 
+                <FlexItem>
+                  &#162;{props.sharesType[2] / 100}
+                </FlexItem>
+              }
             </ FlexItem>
           </FlexWrapper>
           <RowDivider />
@@ -102,7 +118,19 @@ const SharesForm = props => {
               color="white"
               textAlign="right"
             >
-              &#162;{(numberOfShares * props.sharesType[2]) / 100}
+              {
+                isNaN(props.sharesType) === false && 
+                <FlexItem>
+                  &#162;{(numberOfShares * props.sharesType[2]) / 100}
+                </FlexItem>
+              }
+              
+              {
+                isNaN(props.sharesType) === true && 
+                <FlexItem>
+                  {(marketPrice * numberOfShares) || 'To be calculated'}
+                </FlexItem>
+              }
             </FlexItem>
           </FlexWrapper>
           <RowDivider />
@@ -127,7 +155,14 @@ const SharesForm = props => {
             margin="2rem 0 0 1rem"
             color={colorMap[props.sharesType]}
             onClick={ () => {
-              let orderPrice = (numberOfShares * props.sharesType[2]) / 100;
+              let orderPrice = null;
+              
+              if (props.sharesType[2]) {
+                orderPrice = (numberOfShares * props.sharesType[2]) / 100;
+              } else {
+                orderPrice = ((numberOfShares * marketPrice) / 100);
+              }
+
               props.formEvent(['review', numberOfShares, orderPrice]);
             }}
           >

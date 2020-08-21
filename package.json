@@ -8,7 +8,7 @@
     "@testing-library/user-event": "^7.1.2",
     "chart.js": "^2.9.3",
     "debounce": "^1.2.0",
-    "flux-sdk": "0.0.55",
+    "flux-sdk": "0.0.90",
     "moment": "^2.27.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
