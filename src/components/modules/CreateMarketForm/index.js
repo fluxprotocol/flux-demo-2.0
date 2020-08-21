@@ -109,7 +109,7 @@ const CreateMarketForm = props => {
   }
 
   const handleLaunchMarket = () => {
-    const unix = moment(`${marketEndDateDay}-${marketEndDateMonth}-${marketEndDateYear} ${marketEndTime}`, 'DD-MM-YYYY').format('x')
+    const unix = moment(`${marketEndDateDay}-${marketEndDateMonth}-${marketEndDateYear} ${marketEndTime}`, 'DD-MM-YYYY hh:mm').format('X')
     const market = {
       marketType: marketType,
       description: marketDescription,
