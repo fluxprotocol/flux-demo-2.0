@@ -60,4 +60,8 @@ export const FlexItem = styled.div`
     `}
   }
 
+  &.inputError {
+    color: red;
+  }
+
 `;

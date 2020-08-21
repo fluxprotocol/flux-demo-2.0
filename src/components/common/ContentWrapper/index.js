@@ -28,6 +28,10 @@ const ContentWrapper = styled.div`
   & div.contractRow {
     border-bottom: 1px solid white;
   }
+
+  &.purchase_shares {
+    margin-top: 1em;
+  }
 `;
 
 export default ContentWrapper;

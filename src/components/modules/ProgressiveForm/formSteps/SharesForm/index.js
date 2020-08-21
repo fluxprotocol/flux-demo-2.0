@@ -67,7 +67,7 @@ const SharesForm = props => {
           width="100%"
           padding="2rem"
           >
-          <ActionTitle textAlign="center">Buy {props.sharesType[1]} Shares</ActionTitle>
+          <ActionTitle textAlign="center">Buy {numberOfShares} Shares</ActionTitle>
           <FlexWrapper className="input_divider" margin="1rem 0">
             <FlexItem
               color="white"
@@ -94,8 +94,14 @@ const SharesForm = props => {
               textAlign="right"  
             >
               {
-                isNaN(props.sharesType) === true && 
-                <Input onChange={handlePriceChange} />
+                isNaN(props.sharesType) === true &&
+                <FlexItem>
+                    &#162;
+                  <Input
+                    onChange={handlePriceChange}
+                    required 
+                  />
+                </FlexItem> 
               }
               
               {
@@ -128,7 +134,7 @@ const SharesForm = props => {
               {
                 isNaN(props.sharesType) === true && 
                 <FlexItem>
-                  {(marketPrice * numberOfShares) || 'To be calculated'}
+                  {((marketPrice * numberOfShares) / 100) || 'To be calculated'}
                 </FlexItem>
               }
             </FlexItem>
@@ -162,7 +168,7 @@ const SharesForm = props => {
               } else {
                 orderPrice = ((numberOfShares * marketPrice) / 100);
               }
-
+              
               props.formEvent(['review', numberOfShares, orderPrice]);
             }}
           >

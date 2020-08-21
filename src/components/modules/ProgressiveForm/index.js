@@ -11,6 +11,9 @@ import FormOverview from './formSteps/FormOverview';
 import ProcessingForm from './formSteps/ProcessingForm';
 import FormCompleted from './formSteps/FormCompleted';
 
+// constant
+import {CONTRACT_ID} from '../../../constants';
+
 // context
 import { FluxContext } from '../../../context/FluxProvider';
 
@@ -45,24 +48,26 @@ const ProgressiveForm = props => {
 
   const testFunc = async (order) => {
     console.log('incoming data', order, market);
-
-    const validateAllowance = await flux.setAllowance('turiguilano.testnet', '49999.99999999999');
-    console.log('this is validateAllowance', validateAllowance);
-    debugger;
     // currently hardcoded to 1 - since we are only handling yes orders
     let orderData = order[1];
-    let denominatedDai =  (orderData[1] * orderData[2]) * 100000;
-    let marketID = JSON.stringify(market.id);
-    let contractType = "1";
-    let buyingPrice = JSON.stringify(orderData[2]);
+    let denominatedDai =  parseInt((orderData[1] * orderData[2]) * 100000);
+    let marketID = market.id;
+    let contractType = 1;
+    let buyingPrice = orderData[2];
 
     const createOrder = await flux.placeOrder(denominatedDai, marketID, contractType, buyingPrice);
+    console.log('this is create order', createOrder);
     setPlaceOrder(createOrder);
+  }
+
+  const handleClose = () => {
+    console.log('this event should close this modal');
   }
 
 
   return (
     <ContentWrapper 
+      className="purchase_shares"
       width="100%"
       margin={(props.layover && currentView === 'buttonSelection') ? 'auto 0 0 0' : 0}
     >
@@ -142,8 +147,12 @@ const ProgressiveForm = props => {
           />
         </ContentWrapper>
       }
-      
-      
+    
+      <div
+        onClick={handleClose}
+      >
+        Cancel
+      </div>
     </ContentWrapper>
   );
 }

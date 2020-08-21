@@ -78,7 +78,7 @@ const FormOverview = props => {
             <Button
                 borderColor="transparent"
                 onClick={ () => {
-                  props.formEvent('sharesForm')
+                  props.formEvent('buttonSelection')
                 }}
               >
                 Cancel
