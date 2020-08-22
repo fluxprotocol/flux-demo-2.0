@@ -67,7 +67,7 @@ const ButtonSelection = props => {
               </FlexItem>
               <FlexItem>
                 <OptionLabel>
-                  <strong>&#162;{lastFilledPrices[index] || "-"}</strong>
+                  <strong>&#162;{marketPricesData[index] ? marketPricesData[index].marketPrice : "-"}</strong>
                 </OptionLabel>
               </FlexItem>
               <FlexItem>
