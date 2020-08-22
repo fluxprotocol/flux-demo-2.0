@@ -113,6 +113,8 @@ const CreateMarketForm = props => {
     const market = {
       marketType: marketType,
       description: marketDescription,
+      outcomes: categoricalOptions.length,
+      outcomeTags: categoricalOptions,
       extraInfo: '',
       categories: selectedCategories,
       endTime: unix * 1000,
@@ -142,12 +144,14 @@ const CreateMarketForm = props => {
   }
 
   const createCategoricalMarket = async (market) => {
-    setError('');
+
+    console.log(market)
     try {
       const newMarketId = await flux.createCategoricalMarket(
         market.description,
         market.extraInfo,
         market.outcomes,
+        market.outcomeTags,
         market.categories,
         market.endTime,
         1
@@ -166,7 +170,6 @@ const CreateMarketForm = props => {
 
     if (market.marketType === 'categorical') {
       console.log('market:', market.endTime);
-      debugger;
       createCategoricalMarket(market);
       return;
     }
