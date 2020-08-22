@@ -17,6 +17,7 @@ import {CONTRACT_ID} from '../../../constants';
 
 // context
 import { FluxContext } from '../../../context/FluxProvider';
+import { toDenom } from '../../../helpers/numberUtils';
 
 const ActionTitle = styled.h3`
   width: 100%;
@@ -46,18 +47,17 @@ const ProgressiveForm = props => {
   const [placeOrder, setPlaceOrder] = useState('');
 
   const {market, marketPricesData, lastFilledPrices} = props;
-
+  console.log(marketPricesData, lastFilledPrices)
   const testFunc = async (order) => {
     // currently hardcoded to 1 - since we are only handling yes orders
     let orderData = order[1];
     let denominatedDai =  parseInt((orderData[1] * orderData[2]) * 100000);
+
+    // let denominatedDai =  toDenom(parseInt((orderData[1] * orderData[2]));
     let marketID = market.id;
     let contractType = 1;
     let buyingPrice = orderData[2];
-
-    console.log('Data', denominatedDai, marketID, contractType, buyingPrice);
-
-    const createOrder = await flux.placeOrder(denominatedDai, marketID, contractType, buyingPrice);
+    const createOrder = await flux.placeOrder(marketID, sharesType[3], denominatedDai, buyingPrice, "");
     setPlaceOrder(createOrder);
   }
 

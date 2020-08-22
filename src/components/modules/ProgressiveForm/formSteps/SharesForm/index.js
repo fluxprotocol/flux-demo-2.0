@@ -139,7 +139,7 @@ const SharesForm = props => {
               {
                 isNaN(props.sharesType) === true && 
                 <FlexItem>
-                  {((marketPrice * numberOfShares) / 100) || 'To be calculated'}
+                  $  {((marketPrice * numberOfShares) / 100) || '-'}
                 </FlexItem>
               }
             </FlexItem>

@@ -12,44 +12,18 @@ import ContentWrapper from '../../common/ContentWrapper';
 import Button from '../../common/Button';
 
 // context
-import { FluxContext } from '../../../context/FluxProvider';
+import UserBalance from './UserBalance';
 
 const Logo = styled.img`
   width: 4rem;
 `;
 
-const UserName = styled.span`
-  position: relative;
-  margin-right: 1rem;
-  color: white;
 
-  &:after {
-    content: '';
-    display: block;
-    position: absolute;
-    top: 50%;
-    right: -1rem;
-    transform: translateY(-50%);
-    height: 2rem;
-    width: 1px;
-    background-color: white;
-    opacity: 0.5;
-  }
-`;
 
-const UserBalance = styled.span`
-  margin-left: 1rem;
-  color: ${props => props.theme.green};
-`;
 
 const TopBar = props => {
   const { user, login, logout } = useFluxAuth();
-  const [flux, ] = useContext(FluxContext);
   const history = useHistory();
-
-  const handleProfileClick = (id) => {
-    history.push(`/settings`);
-  };
   
   return (
     <ContentWrapper
@@ -74,15 +48,9 @@ const TopBar = props => {
             flex="2"
             textAlign="center"
           >
-            {user &&
-              <ContentWrapper
-                cursor="pointer"
-                onClick={handleProfileClick}
-              >
-                <UserName>{user.id ? user.id : '' }</UserName>
-                <UserBalance>{user.balance ? `$${user.balance / 1000000000000000000}` : '' }</UserBalance>
-              </ContentWrapper>
-            }
+            {user && <UserBalance user={user}/> }
+                
+
           </FlexItem>
           <FlexItem textAlign="right">
             <Button 

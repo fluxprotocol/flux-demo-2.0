@@ -115,7 +115,7 @@ const CreateMarketForm = props => {
       description: marketDescription,
       extraInfo: '',
       categories: selectedCategories,
-      endTime: unix,
+      endTime: unix * 1000,
     };
 
     if (marketType === 'categorical') {
@@ -349,7 +349,7 @@ const CreateMarketForm = props => {
             value={marketEndTime}
             onChange={(event) => {
               const time = event.target.value;
-              setMarketEndTime(time);
+              setMarketEndTime(time) ;
             }}
           />
           <Label

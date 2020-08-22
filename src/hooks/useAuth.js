@@ -24,16 +24,14 @@ export const useAuth = () => {
       if (signedIn) {
         const id = await flux.getAccountId();
         const balance = await flux.getBalance(id);
-        const getAllowance = await flux.getAllowance(id, CONTRACT_ID);
+        const allowance = await flux.getAllowance(id, CONTRACT_ID);
         const user = {
           id,
           balance,
-          getAllowance
+          allowance
         }
         setUser(user);
       }
-
-      console.log('hello', user);
     };
 
     useEffect(() => {

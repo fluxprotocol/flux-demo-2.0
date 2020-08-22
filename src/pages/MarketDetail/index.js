@@ -129,6 +129,7 @@ const MarketOverview = props => {
 
   const getMarketPrices = async () => {
     const marketPrices = await flux.getMarketPrices(id);
+    console.log(marketPrices, id)
     setMarketPrices(marketPrices);
   }
 

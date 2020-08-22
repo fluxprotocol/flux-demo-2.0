@@ -87,6 +87,8 @@ const MarketCard = props => {
     history.push(`/markets/${props.market.id}`);
   };
 
+  const categoryLabel = props.market.categories.join(" | ");
+
   return (
     <CardContainer 
       onClick={() => handleCardClick(props.market.id)}
@@ -112,7 +114,7 @@ const MarketCard = props => {
 						}
 					/>
 				</StyledTwitterShareButton>
-        <CategoryLabel>Space | startups</CategoryLabel>
+        <CategoryLabel>{categoryLabel}</CategoryLabel>
         <CardImage 
           src={require(`../../../assets/images/card-${CATEGORIES.indexOf(props.market.categories[0]) > -1 ? props.market.categories[0] : 'crypto'}.png`)}
           alt={props.market.category}

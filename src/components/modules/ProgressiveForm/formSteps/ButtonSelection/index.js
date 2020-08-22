@@ -45,14 +45,6 @@ const ButtonSelection = props => {
                 size="0.8rem"
                 color="white"
               >
-                Title
-              </Paragraph>
-            </FlexItem>
-            <FlexItem>
-              <Paragraph
-                size="0.8rem"
-                color="white"
-              >
                 market price
               </Paragraph>
             </FlexItem>
@@ -68,18 +60,14 @@ const ButtonSelection = props => {
                 margin="1rem 0"
               >
               <FlexItem>
-                <OptionLabel>
-                  {marketPricesData[index] || null}
-                </OptionLabel>
-              </FlexItem>
-              <FlexItem>
+        
                 <OptionLabel>
                   {contract}
                 </OptionLabel>
               </FlexItem>
               <FlexItem>
                 <OptionLabel>
-                  <strong>&#162;{lastFilledPrices[index] || null}</strong>
+                  <strong>&#162;{lastFilledPrices[index] || "-"}</strong>
                 </OptionLabel>
               </FlexItem>
               <FlexItem>
@@ -89,7 +77,7 @@ const ButtonSelection = props => {
                   width="100%"
                   color={'lightPurple'}
                   onClick={ () => {
-                    let userSelection = [marketPricesData[index], contract, lastFilledPrices[index]]
+                    let userSelection = [marketPricesData[index], contract, lastFilledPrices[index], index]
                     props.buttonEvent(userSelection);
                   }}
                 >
