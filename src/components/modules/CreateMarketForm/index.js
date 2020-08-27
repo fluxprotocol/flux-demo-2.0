@@ -123,6 +123,7 @@ const CreateMarketForm = props => {
     };
 
     // TODO validation: outcomeTags.length needs to equal outcomes
+    // TODO validation: description should be > 0
 
     if (marketType === 'categorical') {
       market.categoricalOptions = categoricalOptions;

@@ -46,7 +46,7 @@ const ProgressiveForm = props => {
   const [finalOrder, setFinalOrder] = useState('');
   const [placeOrder, setPlaceOrder] = useState('');
 
-  const {market, marketPricesData, lastFilledPrices} = props;
+  const {market} = props;
 
   const testFunc = async (order) => {
     // currently hardcoded to 1 - since we are only handling yes orders
@@ -55,7 +55,6 @@ const ProgressiveForm = props => {
 
     // let denominatedDai =  toDenom(parseInt((orderData[1] * orderData[2]));
     let marketID = market.id;
-    let contractType = 1;
     let buyingPrice = orderData[2];
     const createOrder = await flux.placeOrder(marketID, sharesType[3], denominatedDai, buyingPrice, "");
     setPlaceOrder(createOrder);
