@@ -91,7 +91,7 @@ const OrderBookBookBarChart = props => {
   const colorValue = {
     buy: 'orderbookGreen'
   };
-  console.log(market)
+
   const getOrderbook = () => orderBookItems.map((item, i) =>{
     return (
       <OrderBookDetails key={i}>

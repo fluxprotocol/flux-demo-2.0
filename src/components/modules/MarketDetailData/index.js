@@ -137,7 +137,6 @@ const PageWrapper = styled.div`
 `
 
 const MarketDetailData = props => {
-  console.log(props.market)
   // define default state
   const [checked, setChecked] = useState('all');
   const [chartView, setChartView] = useState('orderBook');
