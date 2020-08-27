@@ -114,7 +114,7 @@ const MarketOverview = props => {
     const toDate = moment().format('YYYY-MM-DD');
 
     const allPriceHistory = await flux.getPriceHistory(id, fromDate, toDate, daysMap[type].dataTypes);
-    console.log(id, fromDate, toDate, daysMap[type].dataTypes)
+
     setPriceHistory(allPriceHistory);
   }
 
@@ -132,7 +132,7 @@ const MarketOverview = props => {
     const marketPrices = await flux.getMarketPrices(id);
     setMarketPrices(marketPrices);
   }
-  console.log(market)
+  
   return (
     <ContentWrapper>
         <MainHeader 

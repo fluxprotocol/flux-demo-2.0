@@ -47,7 +47,7 @@ const ProgressiveForm = props => {
   const [placeOrder, setPlaceOrder] = useState('');
 
   const {market, marketPricesData, lastFilledPrices} = props;
-  console.log(marketPricesData, lastFilledPrices)
+
   const testFunc = async (order) => {
     // currently hardcoded to 1 - since we are only handling yes orders
     let orderData = order[1];
