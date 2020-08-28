@@ -25,20 +25,6 @@ const ActionTitle = styled.h3`
   text-align: ${props => props.textAlign ? props.textAlign : 'initial'};
 `;
 
-const binarySelection = [
-  {
-    forecast: '40%',
-    marketPrice: 30,
-    name: 'yes',
-  },
-  {
-    forecast: '45%',
-    marketPrice: 55,
-    name: 'no',
-  }
-];
-
-
 const ProgressiveForm = props => {
   const [flux, _] = useContext(FluxContext);
   const [currentView, setCurrentView] = useState('buttonSelection'); // buttonSelection, sharesForm, review, processing, orderCompleted
@@ -72,7 +58,6 @@ const ProgressiveForm = props => {
           <ActionTitle textAlign="center">Purchase Shares</ActionTitle>
           <ButtonSelection
             layover={props.layover}
-            options={binarySelection}
             lastFilledPrices={props.lastFilledPrices}
             market={props.market} 
             marketPricesData={props.marketPricesData}
