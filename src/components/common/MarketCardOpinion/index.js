@@ -44,13 +44,12 @@ const MarketCardOpinion = props => {
           lastFilledPrices={lastFilledPrices}
         ></ProgressBar>
 
-        {lastFilledPrices.length !== 0 &&
+        {props.outcomes.length !== 0 &&
           <FlexWrapper 
             flexDirection="column"
             margin="0 0 1rem 0"
             padding="0.5rem"
           >
-
             {Object.keys(props.outcomes).map((key, i) => (
               <FlexItem width="100%" key={props.outcomes[key].label}>
                 <FlexWrapper>

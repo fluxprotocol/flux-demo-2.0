@@ -63,6 +63,7 @@ const ProgressiveForm = props => {
             marketPricesData={props.marketPricesData}
             buttonEvent={(response) => {
               setCurrentView('sharesForm');
+              console.log('sharestype', response);
               setSharesType(response);
             }}
             cancel={() => {

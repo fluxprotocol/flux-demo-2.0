@@ -8,6 +8,7 @@ import MarketCard from '../MarketCard';
 const MarketCardContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
+  min-height: 65vh;
 `;
 
 
