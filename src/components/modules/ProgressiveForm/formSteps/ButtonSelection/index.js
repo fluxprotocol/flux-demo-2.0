@@ -21,14 +21,15 @@ const OptionLabel = styled.span`
 
 const ButtonSelection = props => {
   const { market, marketPricesData, lastFilledPrices } = props;
+  console.log(props.options)
+
+  const outcomeTags = market.outcomes > 2 ? market.outcome_tags : ["NO", "YES"];
 
   console.log('this are the props', props);
 
   return (
     <ContentWrapper>
-
-      {/* binary */}
-      {props.options.length === 2 &&
+      {market.outcomes &&
         <ContentWrapper>
 
           <FlexWrapper 
@@ -53,7 +54,7 @@ const ButtonSelection = props => {
             <FlexItem></FlexItem>
           </FlexWrapper>
 
-        {props.market.outcome_tags && props.market.outcome_tags.map((contract, index) => (
+        {props.market.outcomes && outcomeTags.map((contract, index) => (
           <div 
             key={contract + index}
             className="contractRow"
@@ -94,44 +95,6 @@ const ButtonSelection = props => {
           </div>
         ))}
           
-        </ContentWrapper>
-      }
-
-      {/* multiple */}
-      {props.options.length !== 2 &&
-        <ContentWrapper>
-          
-          {props.options.map((option, index) => (
-          <div key={option}>
-            <FlexWrapper 
-              margin="1rem 0"
-            >
-              <FlexItem>
-                <OptionLabel>
-                  <strong>{option}</strong>
-                </OptionLabel>
-              </FlexItem>
-              <FlexItem textAlign="right">
-                <Button
-                  maxWidth="6rem"
-                  shadow
-                  width="100%"
-                  color="lightPurple"
-                  onClick={ () => {
-                    props.buttonEvent(option);
-                  }}
-                >
-                  Buy
-                </Button>
-              </FlexItem>
-            </FlexWrapper>
-
-            {!props.layover &&
-              <RowDivider />
-            }
-          </div>
-        ))}
-
         </ContentWrapper>
       }
     </ContentWrapper>

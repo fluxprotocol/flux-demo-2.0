@@ -45,9 +45,9 @@ const Input = styled.input.attrs({ type: 'number' })`
 
 const SharesForm = props => {
   const [numberOfShares, setNumberOfShares] = useState(100);
-  const [marketPrice, setMarketPrice] = useState({});
-  const {sharesType} = props;
-
+  const defaultMarketPrice = props.sharesType[0] && parseInt(props.sharesType[0].marketPrice) ? parseInt(props.sharesType[0].marketPrice) : "";
+  const [marketPrice, setMarketPrice] = useState(defaultMarketPrice);
+  
   const colorMap = {
     yes: 'lightPurple',
     no: 'pink',
@@ -99,25 +99,14 @@ const SharesForm = props => {
               color="white"
               textAlign="right"  
             >
-              {
-                isNaN(props.sharesType) === true &&
-                <FlexItem>
-                    &#162;
-                  <Input
-                    required={true}
-                    onChange={handlePriceChange}
-                    placeholder={'from 1 to 99'}
-                    value={marketPrice}
-                  />
-                </FlexItem> 
-              }
-              
-              {
-                isNaN(props.sharesType) === false && 
-                <FlexItem>
-                  &#162;{props.sharesType[2] / 100}
-                </FlexItem>
-              }
+              <FlexItem>
+                  &#162;
+                <Input
+                  onChange={handlePriceChange}
+                  required
+                  value={marketPrice}
+                />
+              </FlexItem> 
             </ FlexItem>
           </FlexWrapper>
           <RowDivider />
@@ -169,16 +158,10 @@ const SharesForm = props => {
             margin="2rem 0 0 1rem"
             color={colorMap[props.sharesType]}
             onClick={ () => {
-
-              let orderPrice = null;
-              
-              if (props.sharesType[2]) {
-                orderPrice = (numberOfShares * props.sharesType[2]) / 100;
-              } else {
-                orderPrice = ((numberOfShares * marketPrice) / 100);
-              }
-              
-              props.formEvent(['review', numberOfShares, orderPrice]);
+              // TODO: validation market price < 100 && > 0
+              // TODO: validation: shares > 0
+              // TODO: default number of shares to 0
+              props.formEvent(['review', numberOfShares, marketPrice]);
             }}
           >
             Review

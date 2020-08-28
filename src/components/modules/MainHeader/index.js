@@ -82,7 +82,7 @@ const MainHeader = props => {
   const history = useHistory();
   
   useEffect(() => {
-    if (props.market.categories) {
+    if (props.market && props.market.categories) {
       const filtered = categoryFilters.filter(categoryFilter => props.market.categories.includes(categoryFilter.value));
       setCategories(filtered);
       setCurrentCategory(props.market.categories[0]);

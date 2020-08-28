@@ -84,7 +84,7 @@ const MarketCard = props => {
   const history = useHistory();
 
   const handleCardClick = (id) => {
-    history.push(`/markets/${props.market.id}`);
+    if (props.cardType !== 'resolute') history.push(`/markets/${props.market.id}`);
   };
 
   const categoryLabel = props.market.categories.join(" | ");

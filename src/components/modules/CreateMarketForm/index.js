@@ -76,6 +76,11 @@ const Input = styled.input`
 }
 `
 
+const SmallInput = styled(Input)`
+  width: 60px;
+}
+`
+
 const Label = styled.label`
   display: block;
   margin: ${props => props.margin ? props.margin : '1rem 0 0.5rem 0'};
@@ -88,6 +93,7 @@ const CreateMarketForm = props => {
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [marketDescription, setMarketDescription] = useState('');
   const [marketType, setMarketType] = useState('binary');
+  const [outcomes, setOutcomes] = useState(3);
   const [categoricalOptions, setCategoricalOptions] = useState([''])
   const [marketEndDateMonth, setMarketEndDateMonth] = useState(moment().month() + 1);
   const [marketEndDateDay, setMarketEndDateDay] = useState(moment().add(1, 'd').date());
@@ -104,10 +110,6 @@ const CreateMarketForm = props => {
     else setSelectedCategories(selectedCategories.filter(item => item !== filter))
   }
 
-  const addNewCategoricalOption = () => {
-    setCategoricalOptions(oldCategoricalOptions => [...oldCategoricalOptions, ''])
-  }
-
   const handleLaunchMarket = () => {
     const unix = moment(`${marketEndDateDay}-${marketEndDateMonth}-${marketEndDateYear} ${marketEndTime}`, 'DD-MM-YYYY hh:mm').format('X')
     const market = {
@@ -119,6 +121,9 @@ const CreateMarketForm = props => {
       categories: selectedCategories,
       endTime: unix * 1000,
     };
+
+    // TODO validation: outcomeTags.length needs to equal outcomes
+    // TODO validation: description should be > 0
 
     if (marketType === 'categorical') {
       market.categoricalOptions = categoricalOptions;
@@ -144,8 +149,6 @@ const CreateMarketForm = props => {
   }
 
   const createCategoricalMarket = async (market) => {
-
-    console.log(market)
     try {
       const newMarketId = await flux.createCategoricalMarket(
         market.description,
@@ -169,11 +172,35 @@ const CreateMarketForm = props => {
     }
 
     if (market.marketType === 'categorical') {
-      console.log('market:', market.endTime);
       createCategoricalMarket(market);
       return;
     }
 
+  }
+
+  const outcomeInput = [];
+
+  for (let i = 0; i < outcomes; i++) {
+    outcomeInput.push(<div
+      key={`outcome_${i}`}
+    >
+      <Label>Outcome {i + 1}</Label>
+      <Input 
+        key={`categoricalOption_${i}`}
+        margin="0 0 1rem 0"
+        type="text"
+        value={categoricalOptions[i]}
+        onChange={(event) => {
+          const newValue = event.target.value;
+
+          setCategoricalOptions(oldArray => {
+            const array = [...oldArray];
+            array[i] = newValue;
+            return array;
+          })
+        }}
+      />
+    </div>)
   }
 
   return (
@@ -239,39 +266,22 @@ const CreateMarketForm = props => {
         Categorical
       </RadioLabel>
 
-      {/* {categorical options} */}
-      {marketType === 'categorical' &&
-        <div>
-          {categoricalOptions.map((option, index) => 
-            <div
-              key={`outcome_${index}`}
-            >
-              <Label>Outcome {index + 1}</Label>
-              <Input 
-                key={`categoricalOption_${index}`}
-                margin="0 0 1rem 0"
-                type="text"
-                value={categoricalOptions[index]}
-                onChange={(event) => {
-                  const newValue = event.target.value;
-
-                  setCategoricalOptions(oldArray => {
-                    const array = [...oldArray];
-                    array[index] = newValue;
-                    return array;
-                  })
-                }}
-              />
-            </div>
-          )}
-
-          <Button 
-            onClick={addNewCategoricalOption}
-          >
-            add more
-          </Button>
-        </div>
+      {
+        marketType === "categorical" && <>
+          <FormTitle>
+            Outcomes
+          </FormTitle>
+          <SmallInput 
+            value={outcomes}
+            onChange={(event) => {
+              setOutcomes(event.target.value)
+            }}
+          />
+        </>
       }
+
+      {/* {categorical options} */}
+      {marketType === 'categorical' && outcomeInput}
 
       {/* end datetime */}
       <FormTitle>

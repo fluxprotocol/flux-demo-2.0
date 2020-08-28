@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { toDenom, toShares } from '../../../helpers/numberUtils';
 
 const positiveArrow = require('../../../assets/images/icons/green_arrow.svg');
 const negativeArrow = require('../../../assets/images/icons/pink_arrow.svg');
@@ -85,63 +86,52 @@ const BarWrapperContainer = styled.div`
 ` 
 
 const OrderBookBookBarChart = props => {
-  const {orderBookHeaders, orderBookItems, market, averagePriceData } = props;
-  const [chartPrice, setChartPrice] = useState([]);
-
-  console.log('this is the market', market);
-  console.log('this is the orderbookitems', orderBookItems);
-  console.log('this is the averagepricedata', averagePriceData);
-
-  useEffect(() => {
-
-    if (!averagePriceData) {
-      return;
-    }
-    getPriceData();
-  }, [averagePriceData])
-  
-
-  const getPriceData = async () => {
-    let outcome = await computePriceRange();
-    setChartPrice(outcome);
-  }
-
-  const computePriceRange = async () => {
-    let historicalPrices = averagePriceData;
-    let currentPrices = orderBookItems;
-
-    let dataObj = [];
-
-    currentPrices.forEach((item, index) => {
-      // sometimes the indexes do not match due to dummy data
-      if (historicalPrices[index]) {
-        // get currentprice
-        let currPrice = item.price;
-        // get the historical price from array based on inex
-        let histPrice = parseInt(historicalPrices[index].avg_price);
-        // calculate what 1 % is of the historical price
-        let onePercent = histPrice / 100;
-        // calculate the difference, can be negative or positive
-        let difference = currPrice - histPrice;
-        // calculate percentage
-        let percentage = parseInt(difference / onePercent);
-
-        let finalCalculations = {
-          difference,
-          percentage
-        }
-
-        dataObj.push(finalCalculations);
-      } else {
-        return null;
-      }
-    });
-    return dataObj;
-  }
+  const {orderBookHeaders, orderBookItems, market } = props;
 
   const colorValue = {
     buy: 'orderbookGreen'
   };
+
+  const getOrderbook = () => orderBookItems.map((item, i) =>{
+    return (
+      <OrderBookDetails key={i}>
+        <OrderBookData
+          color="white"
+        >
+          {market.outcome_tags[item.outcome]}
+        </OrderBookData>
+        <OrderBookData 
+          className="range"
+          borderRadius="4px"
+          width="100%"
+          backgroundColor={colorValue.buy}
+        >
+
+          <BarWrapperContainer
+            color={colorValue.buy}
+            backgroundColor={colorValue.buy}
+            width={70}
+            content={item.depth / toShares(1)}
+            />
+        
+        </OrderBookData>
+        <OrderBookData
+          color={colorValue.buy}
+          className="priceValues"
+          
+        >
+          {item.price}
+          
+        </OrderBookData>
+        <OrderBookData
+          color={colorValue.buy}
+        >
+          Buy
+        </OrderBookData>
+      </OrderBookDetails>
+    )
+
+  })
 
   return (
     <FlexWrapper>
@@ -160,49 +150,7 @@ const OrderBookBookBarChart = props => {
 
           </OrderBookDetails>
 
-          {
-            market.outcome_tags && averagePriceData ? market.outcome_tags.map((contract, index) => (
-              <OrderBookDetails key={contract}>
-                <OrderBookData
-                  color="white"
-                >
-                  {contract}
-                </OrderBookData>
-                <OrderBookData 
-                  className="range"
-                  borderRadius="4px"
-                  width="100%"
-                  backgroundColor={colorValue.buy}
-                >
-                  {/* 
-                    I need to know the data format from the real data - then we can compute the arithmetics
-                    with respect to the with. Currently set to be fixed @70%
-                  */}
-                  <BarWrapperContainer
-                    color={colorValue.buy}
-                    backgroundColor={colorValue.buy}
-                    width={70}
-                    content={orderBookItems[index] ? orderBookItems[index].depth / 100000000000 : ''}
-                  >
-                  </BarWrapperContainer>
-                </OrderBookData>
-                <OrderBookData
-                  color={colorValue.buy}
-                  className="priceValues"
-                  
-                >
-                  {orderBookItems[index] ? orderBookItems[index].price : ''}
-                  
-                </OrderBookData>
-                <OrderBookData
-                  color={colorValue.buy}
-                >
-                  Buy
-                </OrderBookData>
-              </OrderBookDetails>
-              
-            )) : null
-          }
+          {market.outcome_tags && getOrderbook()}
 
         </tbody>
       </OrderBookWrapper>
