@@ -43,7 +43,7 @@ const Input = styled.input.attrs({ type: 'number' })`
 
 const SharesForm = props => {
   const [numberOfShares, setNumberOfShares] = useState(100);
-  const defaultMarketPrice = parseInt(props.sharesType[0].marketPrice) ? parseInt(props.sharesType[0].marketPrice) : "";
+  const defaultMarketPrice = props.sharesType[0] && parseInt(props.sharesType[0].marketPrice) ? parseInt(props.sharesType[0].marketPrice) : "";
   const [marketPrice, setMarketPrice] = useState(defaultMarketPrice);
   
   const colorMap = {
