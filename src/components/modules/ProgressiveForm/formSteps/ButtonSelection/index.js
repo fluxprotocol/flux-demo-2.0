@@ -27,8 +27,6 @@ const ButtonSelection = props => {
 
   return (
     <ContentWrapper>
-
-      {/* binary */}
       {market.outcomes &&
         <ContentWrapper>
 

@@ -6,43 +6,7 @@ import ProgressBar from '../ProgressBar';
 import PositionedLabel from '../PositionedLabel';
 import ContentCard from '../ContentCard';
 import { FlexWrapper, FlexItem } from '../Flex';
-
-// temp data, will use market prop
-const opinionRowsMultiple = [
-  {
-    label: 'Option one',
-    percentage: 30,
-    color: 'red',
-  },
-  {
-    label: 'Option two',
-    percentage: 15,
-    color: 'blue',
-  },
-  {
-    label: 'Option three',
-    percentage: 20,
-    color: 'pink',
-  },
-  {
-    label: 'Option four',
-    percentage: 35,
-    color: 'green',
-  },
-];
-
-// const opinionRowsTwo = [
-//   {
-//     label: 'Yes',
-//     percentage: 75,
-//     color: 'green',
-//   },
-//   {
-//     label: 'No',
-//     percentage: 25,
-//     color: 'red',
-//   },
-// ];
+import { fromDenom } from '../../../helpers/numberUtils';
 
 const MarketOpinionContainer = styled.div`
   width: 100%;
@@ -113,7 +77,7 @@ const MarketCardOpinion = props => {
           </PositionedLabel>
           <PositionedLabel position={'right'}>
             <VolumeAmount category={props.market.categories[0]}>
-              {props.market.volume ? props.market.volume / 1000000000000000000 : '-'} DAI
+              {props.market.volume ? "$" + fromDenom(props.market.volume) : '-'} DAI
             </VolumeAmount>
           </PositionedLabel>
         </ContentCard>

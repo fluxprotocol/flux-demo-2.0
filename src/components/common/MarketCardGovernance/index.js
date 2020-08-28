@@ -3,28 +3,35 @@ import styled from 'styled-components';
 
 // common
 import Button from '../Button';
+import { fromDenom } from '../../../helpers/numberUtils';
 
-// temp data, will use market prop
-const governanceRows = [
-  {
-    label: 'Yes',
-    color: 'lightPurple',
-    borderColor: 'lightPurple',
-    action: '',
-  },
-  {
-    label: 'No',
-    color: 'pink',
-    borderColor: 'pink',
-    action: '',
-  },
-  {
-    label: 'Invalid',
-    color: 'darkBlue',
-    borderColor: 'white',
-    action: '',
-  },
-];
+
+// // temp data, will use market prop
+// const governanceRows = [
+//   {
+//     label: 'Yes',
+//     color: 'lightPurple',
+//     borderColor: 'lightPurple',
+//     action: '',
+//   },
+//   {
+//     label: 'No',
+//     color: 'pink',
+//     borderColor: 'pink',
+//     action: '',
+//   },
+//   {
+//     label: 'Invalid',
+//     color: 'darkBlue',
+//     borderColor: 'white',
+//     action: '',
+//   },
+// ];
+
+const VolumeAmount = styled.div`
+  margin-left: 0.5rem;
+  color: 'white';
+`;
 
 const MarketGovernanceContainer = styled.div`
   display: flex;
@@ -61,32 +68,55 @@ const ContainerColumn = styled.div`
 `;
 
 const MarketCardGovernance = props => {
+  console.log(props.market)
+  const color = props.market.outcomes > 2 ? 'lightPurple' : 'pink';
+  const handleStake = (outcome) => {
+    // todo
+  }
   return (
       <MarketGovernanceContainer>
-        {governanceRows.map((governanceRow, index) => (
-          <ContainerRow key={governanceRow.label}>
+        {props.market.outcome_tags.map((outcome, i) => (
+          <ContainerRow key={outcome}>
             <ContainerColumn position="left">
-              {governanceRow.label}
+              {outcome}
             </ContainerColumn>
             <ContainerColumn position="right">
               <Button
-                color={governanceRow.color}
-                borderColor={governanceRow.borderColor}
+                color={color}
+                borderColor={color}
+                onClick={() => handleStake(i)}
               >
-                Stake
+                Stake ${fromDenom(props.market.resolute_bond)}
               </Button>
             </ContainerColumn>
           </ContainerRow>
         ))}
 
-          <ContainerRow marginTop>
-            <ContainerColumn position="left">
-              Total Volume
-            </ContainerColumn>
-            <ContainerColumn position="right">
-              {props.market.volume}
-            </ContainerColumn>
-          </ContainerRow>
+        <ContainerRow>
+          <ContainerColumn position="left">
+            Invalid
+          </ContainerColumn>
+          <ContainerColumn position="right">
+            <Button
+              color="darkBlue"
+              borderColor="white"
+              onClick={() => handleStake(null)}
+            >
+              Stake ${fromDenom(props.market.resolute_bond)}
+            </Button>
+          </ContainerColumn>
+        </ContainerRow>
+
+        <ContainerRow marginTop>
+          <ContainerColumn position="left">
+            Total Volume
+          </ContainerColumn>
+          <ContainerColumn position="right">
+            <VolumeAmount category={props.market.categories[0]}>
+              {props.market.volume ? "$" + fromDenom(props.market.volume) : '-'} DAI
+            </VolumeAmount>
+          </ContainerColumn>
+        </ContainerRow>
         
       </MarketGovernanceContainer>
   );
