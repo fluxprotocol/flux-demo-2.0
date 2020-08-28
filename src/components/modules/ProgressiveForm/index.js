@@ -37,7 +37,7 @@ const ProgressiveForm = props => {
   const testFunc = async (order) => {
     // currently hardcoded to 1 - since we are only handling yes orders
     let orderData = order[1];
-    let denominatedDai =  parseInt((orderData[1] * orderData[2]) * 100000);
+    let denominatedDai =  toDenom((parseInt((orderData[1] * orderData[2]) / 100)));
 
     // let denominatedDai =  toDenom(parseInt((orderData[1] * orderData[2]));
     let marketID = market.id;
