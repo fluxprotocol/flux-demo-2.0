@@ -22,6 +22,8 @@ const OptionLabel = styled.span`
 const ButtonSelection = props => {
   const { market, marketPricesData, lastFilledPrices } = props;
 
+  console.log('this are the props', props);
+
   return (
     <ContentWrapper>
 

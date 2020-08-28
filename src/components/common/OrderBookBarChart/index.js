@@ -88,6 +88,10 @@ const OrderBookBookBarChart = props => {
   const {orderBookHeaders, orderBookItems, market, averagePriceData } = props;
   const [chartPrice, setChartPrice] = useState([]);
 
+  console.log('this is the market', market);
+  console.log('this is the orderbookitems', orderBookItems);
+  console.log('this is the averagepricedata', averagePriceData);
+
   useEffect(() => {
 
     if (!averagePriceData) {

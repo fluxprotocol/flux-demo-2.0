@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 // common
@@ -41,10 +41,11 @@ const Input = styled.input.attrs({ type: 'number' })`
   }
 `;
 
+// const Error
+
 const SharesForm = props => {
   const [numberOfShares, setNumberOfShares] = useState(100);
   const [marketPrice, setMarketPrice] = useState({});
-
   const {sharesType} = props;
 
   const colorMap = {
@@ -103,8 +104,10 @@ const SharesForm = props => {
                 <FlexItem>
                     &#162;
                   <Input
+                    required={true}
                     onChange={handlePriceChange}
-                    required 
+                    placeholder={'from 1 to 99'}
+                    value={marketPrice}
                   />
                 </FlexItem> 
               }
@@ -166,6 +169,7 @@ const SharesForm = props => {
             margin="2rem 0 0 1rem"
             color={colorMap[props.sharesType]}
             onClick={ () => {
+
               let orderPrice = null;
               
               if (props.sharesType[2]) {
