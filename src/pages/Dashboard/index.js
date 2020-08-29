@@ -156,7 +156,7 @@ const Dashboard = props => {
    
     if (type === 'all' || type === 'trade') {
       flux.getMarkets(params, 9, offset !== undefined ? offset : markets.length).then(res => {
-        getLastFilledPrices(params, res);
+        getLastFilledPrices(params, res.data);
         setReachedScrollBottom(false);
       })
     }
