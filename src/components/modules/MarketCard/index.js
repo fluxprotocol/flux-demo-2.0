@@ -88,6 +88,7 @@ const MarketCard = props => {
   };
 
   const categoryLabel = props.market.categories.join(" | ");
+  const outcomeTags = props.market.outcomes > 2 ? props.market.outcome_tags : ["NO", "YES"];
 
   return (
     <CardContainer 
@@ -131,7 +132,7 @@ const MarketCard = props => {
       {props.cardType === 'trade' &&
         <MarketCardOpinion 
           market={props.market}
-          outcomes={mapOutcomes(props.market.outcome_tags)}
+          outcomes={mapOutcomes(outcomeTags)}
           lastFilledPrices={props.market.prices}
         />
       }

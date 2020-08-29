@@ -35,7 +35,7 @@ const MarketCardOpinion = props => {
     }
   }
 
-  console.log(props.market)
+  console.log(props.outcomes)
 
   return (
       <MarketOpinionContainer>

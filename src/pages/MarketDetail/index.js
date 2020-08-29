@@ -64,15 +64,14 @@ const MarketOverview = props => {
   const getMarket = async () => {
     const market = await flux.getMarket(id);
     const lastFilledPricesForMarket = await flux.getLastFilledPricesForMarket(id);
-    console.log(market)
     setMarket(market[0]);
     setLastFilledPrice(lastFilledPricesForMarket);
   }
 
   useEffect(() => {
     if (!market || !market.outcome_tags) return;
-
-    const outcomeObject = mapOutcomes(market.outcome_tags);
+    const outcomeTags = market.outcomes > 2 ? market.outcome_tags : ["NO", "YES"];
+    const outcomeObject = mapOutcomes(outcomeTags);
     setOutcomeColorNameMap(outcomeObject);
   }, [market])
 

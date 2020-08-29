@@ -21,7 +21,6 @@ const OptionLabel = styled.span`
 
 const ButtonSelection = props => {
   const { market, marketPricesData, lastFilledPrices } = props;
-  console.log(props.options)
 
   const outcomeTags = market.outcomes > 2 ? market.outcome_tags : ["NO", "YES"];
 

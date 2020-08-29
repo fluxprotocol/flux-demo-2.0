@@ -68,7 +68,7 @@ const ContainerColumn = styled.div`
 `;
 
 const MarketCardGovernance = props => {
-  console.log(props.market)
+
   const color = props.market.outcomes > 2 ? 'lightPurple' : 'pink';
   const handleStake = (outcome) => {
     // todo
