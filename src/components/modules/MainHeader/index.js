@@ -89,6 +89,8 @@ const MainHeader = props => {
     }
   }, [props.market])
 
+  console.log(props.market)
+
   return (
     <ContentWrapper 
       backgroundColor={props.market.categories ? props.market.categories[0] : 'crypto'}

@@ -64,7 +64,7 @@ const MarketOverview = props => {
   const getMarket = async () => {
     const market = await flux.getMarket(id);
     const lastFilledPricesForMarket = await flux.getLastFilledPricesForMarket(id);
-
+    console.log(market)
     setMarket(market[0]);
     setLastFilledPrice(lastFilledPricesForMarket);
   }
