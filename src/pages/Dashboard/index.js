@@ -163,7 +163,7 @@ const Dashboard = props => {
 
     if (type === 'all' || type === 'resolute') {
       flux.getResolutingMarkets(params, 9, offset !== undefined ? offset : resoluteMarkets.length).then(res => {
-        setResoluteMarkets(res);
+        setResoluteMarkets(res.data);
         setReachedScrollBottom(false);
       })
     }

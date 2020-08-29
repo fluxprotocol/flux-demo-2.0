@@ -73,9 +73,12 @@ const MarketCardGovernance = props => {
   const handleStake = (outcome) => {
     // todo
   }
+
+  const outcomeTags = props.market.outcomes > 2 ? props.market.outcome_tags : ["NO", "YES"]
+
   return (
       <MarketGovernanceContainer>
-        {props.market.outcome_tags.map((outcome, i) => (
+        {outcomeTags.map((outcome, i) => (
           <ContainerRow key={outcome}>
             <ContainerColumn position="left">
               {outcome}
