@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { toDenom } from '../../../helpers/numberUtils';
+import { toDenom, toShares } from '../../../helpers/numberUtils';
 
 const positiveArrow = require('../../../assets/images/icons/green_arrow.svg');
 const negativeArrow = require('../../../assets/images/icons/pink_arrow.svg');
@@ -111,9 +111,9 @@ const OrderBookBookBarChart = props => {
             color={colorValue.buy}
             backgroundColor={colorValue.buy}
             width={70}
-            content={item.depth / toDenom(1)}
-            >
-          </BarWrapperContainer>
+            content={item.depth / toShares(1)}
+            />
+        
         </OrderBookData>
         <OrderBookData
           color={colorValue.buy}

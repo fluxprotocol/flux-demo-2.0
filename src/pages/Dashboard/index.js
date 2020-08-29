@@ -269,12 +269,12 @@ const Dashboard = props => {
             />
           </ContentWrapper>
 
-          {(overviewType === 'trade' && markets.length) ? (
+          {(overviewType === 'trade') ? (
             <MarketOverview 
               markets={markets}
               type="trade"
             />
-          ) : (overviewType === 'resolute' && resoluteMarkets.length) ? (
+          ) : (overviewType === 'resolute') ? (
             <MarketOverview 
               markets={resoluteMarkets}
               type="resolute"
