@@ -89,6 +89,8 @@ const MainHeader = props => {
     }
   }, [props.market])
 
+  const categoryLabel = props.market.categories ? props.market.categories.join(" | ") : "";
+
   return (
     <ContentWrapper 
       backgroundColor={props.market.categories ? props.market.categories[0] : 'crypto'}
@@ -130,7 +132,7 @@ const MainHeader = props => {
                 alt="twitter"
                 onClick={() => {}}
               />
-            <CategoryLabel hideForSmall>space | {props.market.categories ? props.market.categories[0] : ''}</CategoryLabel>
+            <CategoryLabel hideForSmall>{categoryLabel}</CategoryLabel>
             <MainHeaderTitle>{(props.market.description) ? props.market.description: 'Market detail'}</MainHeaderTitle>
           </FlexItem>
           <FlexItem hideForSmall hideForMedium>
@@ -140,7 +142,7 @@ const MainHeader = props => {
               textAlign="left"
               padding="1rem"
             >
-              resolution date: <strong>{moment.unix(props.market.end_timestamp).format("MM/DD/YYYY")}</strong>
+              resolution date: <strong>{moment.unix(props.market.end_timestamp).format("MM/DD/YYYY hh:mm:ss")}</strong>
             </DateLabel>
               {props.market.outcome_tags &&
                 <MarketCardOpinion 

@@ -24,6 +24,7 @@ const Shares = styled.span`
   opacity: 0.7;
 `;
 
+// TODO: make the top big price total dollar price instead of share price in cents
 const FormOverview = props => {
   const colorMap = {
     yes: 'lightPurple',
@@ -48,14 +49,14 @@ const FormOverview = props => {
             height="100%"
           >
             <ContentWrapper>
-              <Currency>&#162;</Currency>
+              <Currency>$</Currency>
               <Paragraph
                 size="5rem"
                 margin="0"
                 fontWeight="bold"
                 color="white"
               >
-                {props.finalOrder[2]}
+                {props.finalOrder[3]}
               </Paragraph>
             </ContentWrapper>
             <Shares>{props.finalOrder[1]} shares</Shares>

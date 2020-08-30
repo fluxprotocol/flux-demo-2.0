@@ -127,6 +127,8 @@ const Dashboard = props => {
     }
   }, []);
 
+  // TODO: update markets on market update event from server, not quite sure where we'd do this in the current setup
+  // reference marketDetail useEffect 
   useEffect(() => {
     const unlisten = history.listen((location) => {
       setActiveFilters([]);

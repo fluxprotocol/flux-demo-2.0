@@ -42,8 +42,8 @@ const Input = styled.input.attrs({ type: 'number' })`
 `;
 
 const SharesForm = props => {
-  const [numberOfShares, setNumberOfShares] = useState(100);
-  const defaultMarketPrice = props.sharesType[0] && parseInt(props.sharesType[0].marketPrice) ? parseInt(props.sharesType[0].marketPrice) : "";
+  const [numberOfShares, setNumberOfShares] = useState(0);
+  const defaultMarketPrice = props.sharesType[0] && parseInt(props.sharesType[0].marketPrice) ? parseInt(props.sharesType[0].marketPrice) : "-";
   const [marketPrice, setMarketPrice] = useState(defaultMarketPrice);
   
   const colorMap = {
@@ -158,8 +158,9 @@ const SharesForm = props => {
             onClick={ () => {
               // TODO: validation market price < 100 && > 0
               // TODO: validation: shares > 0
-              // TODO: default number of shares to 0
-              props.formEvent(['review', numberOfShares, marketPrice]);
+              // TODO: default number of shares to
+              console.log(numberOfShares, marketPrice)
+              props.formEvent(['review', numberOfShares, marketPrice, numberOfShares * marketPrice / 100]);
             }}
           >
             Review

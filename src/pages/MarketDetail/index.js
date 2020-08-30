@@ -27,6 +27,10 @@ import useWindowDimensions from '../../hooks/useWindowDimensions';
 // helpers
 import { mapOutcomes } from '../../helpers/mappers';
 
+const io = require('socket.io-client');
+const socket = io('ws://api.flux.market/marketDetails');
+
+
 const PurchaseWrapper = styled.div`
   width: 100%;
 `;
@@ -54,12 +58,27 @@ const MarketOverview = props => {
   const [showForm, setShowForm] = useState(false);
 
   useEffect(() => {
+    getSetData()
+    socket.on('UpdateOrders',  (payload) => {
+      if (payload.market_id === parseInt(id)) {
+        console.log("this is working")
+        getSetData()
+      }
+    });
+    return () => {
+      socket.off('UpdateOrders');
+    }
+  }, []);
+
+  
+  const getSetData = () => {
     getMarket();
     getPriceHistory('all');
     getOrderbookData();
     getAveragePrices();
     getMarketPrices();
-  }, []);
+  }
+
 
   const getMarket = async () => {
     const market = await flux.getMarket(id);
