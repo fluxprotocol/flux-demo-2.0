@@ -37,13 +37,11 @@ const ProgressiveForm = props => {
   const testFunc = async (order) => {
     // currently hardcoded to 1 - since we are only handling yes orders
     let orderData = order[1];
-    let denominatedDai =  toDenom((parseInt(orderData[1] * orderData[2]) / 100));
-    console.log(denominatedDai)
-    // let denominatedDai =  toDenom(parseInt((orderData[1] * orderData[2]));
+    let denominatedDai = toDenom(parseInt(orderData[1]) * parseInt(orderData[2]) / 100, 2);
     let marketID = market.id;
     let buyingPrice = orderData[2];
-    // const createOrder = await flux.placeOrder(marketID, sharesType[3], denominatedDai, buyingPrice, "");
-    // setPlaceOrder(createOrder);
+    const createOrder = await flux.placeOrder(marketID, sharesType[3], denominatedDai, buyingPrice, "");
+    setPlaceOrder(createOrder);
   }
 
   return (
