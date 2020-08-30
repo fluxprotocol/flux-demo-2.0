@@ -24,6 +24,8 @@ const ButtonSelection = props => {
 
   const outcomeTags = market.outcomes > 2 ? market.outcome_tags : ["NO", "YES"];
 
+  console.log('this are the props', props);
+
   return (
     <ContentWrapper>
       {market.outcomes &&

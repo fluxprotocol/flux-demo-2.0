@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 // common
@@ -40,6 +40,8 @@ const Input = styled.input.attrs({ type: 'number' })`
     color: ${props => props.theme.gray};
   }
 `;
+
+// const Error
 
 const SharesForm = props => {
   const [numberOfShares, setNumberOfShares] = useState(0);
