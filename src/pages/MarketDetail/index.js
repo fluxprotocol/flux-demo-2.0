@@ -61,7 +61,6 @@ const MarketOverview = props => {
     getSetData()
     socket.on('UpdateOrders',  (payload) => {
       if (payload.market_id === parseInt(id)) {
-        console.log("this is working")
         getSetData()
       }
     });

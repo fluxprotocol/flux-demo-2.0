@@ -1,7 +1,6 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Link } from "react-router-dom";
 import styled from 'styled-components';
-import { useHistory } from 'react-router-dom';
 
 // hooks
 import { useFluxAuth } from '../../../App';
@@ -22,8 +21,7 @@ const Logo = styled.img`
 
 
 const TopBar = props => {
-  const { user, login, logout } = useFluxAuth();
-  const history = useHistory();
+  const { user, logout } = useFluxAuth();
   
   return (
     <ContentWrapper
@@ -57,7 +55,7 @@ const TopBar = props => {
               color={user ? 'gray' : 'pink'}
               small
               onClick={ () => {
-                user ? logout() : login();
+                user ? logout() : props.showSignInModal();
               }}
             >
               {user ? 'Logout' : 'Login'}

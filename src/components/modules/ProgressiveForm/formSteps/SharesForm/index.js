@@ -161,7 +161,6 @@ const SharesForm = props => {
               // TODO: validation market price < 100 && > 0
               // TODO: validation: shares > 0
               // TODO: default number of shares to
-              console.log(numberOfShares, marketPrice)
               props.formEvent(['review', numberOfShares, marketPrice, numberOfShares * marketPrice / 100]);
             }}
           >

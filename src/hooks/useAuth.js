@@ -13,6 +13,10 @@ export const useAuth = () => {
     const login = async () => {
       flux.signIn();
     };
+  
+    const oneClickTxSignIn = async () => {
+      flux.oneClickTxSignIn();
+    };
 
     const logout = () => {
       flux.signOut();
@@ -40,5 +44,5 @@ export const useAuth = () => {
       }
     }, [flux.connected]);
 
-    return [user, login, logout]
+    return [user, login, logout, oneClickTxSignIn]
 };

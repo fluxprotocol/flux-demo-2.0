@@ -15,6 +15,7 @@ import { FlexWrapper, FlexItem } from '../../common/Flex';
 
 // context
 import { FluxContext } from '../../../context/FluxProvider';
+import { useFluxAuth } from '../../../App';
 
 const TextArea = styled.textarea`
   display: block;
@@ -29,6 +30,13 @@ const TextArea = styled.textarea`
   border-radius: 0.3rem;
   resize: none;
 `;
+
+const Disclaimer = styled.p`
+  margin: 1rem 0;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 0.9rem;
+  font-weight: bold;
+`
 
 const FormTitle = styled.p`
   margin: 1rem 0;
@@ -100,7 +108,10 @@ const CreateMarketForm = props => {
   const [marketEndDateYear, setMarketEndDateYear] = useState(moment().year());
   const [marketEndTime, setMarketEndTime] = useState('12:00');
   const [error, setError] = useState('');
+  const { user } = useFluxAuth(); 
   const [flux, _] = useContext(FluxContext);
+
+  const fundsUnlocked = user.allowance >= user.balance;
 
   const handleCategoryChange = (event) => {
     const filter = event.target.value;
@@ -383,14 +394,16 @@ const CreateMarketForm = props => {
         </Paragraph>      
       }
 
-      <Button   
-        color="lightPurple"
+      <Button
+        color={fundsUnlocked ? "lightPurple" : "gray"}
         margin="1rem 0"
         padding="1rem 2rem"
-        onClick={handleLaunchMarket}
+        onClick={ () => {if (fundsUnlocked) handleLaunchMarket()}}
       >
-        Launch this market
+        {fundsUnlocked ? "Launch this market (costs $0.25)" : "Unlock funds to create market"}
+        
       </Button>
+      <Disclaimer>Creating a market requires you to stake $0.25 on the validity of your market</Disclaimer>
     </ContentWrapper>
   );
 }

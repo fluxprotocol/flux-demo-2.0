@@ -6,6 +6,7 @@ import ContentWrapper from '../../../../common/ContentWrapper';
 import { FlexWrapper, FlexItem } from '../../../../common/Flex';
 import Button from '../../../../common/Button';
 import Paragraph from '../../../../common/Paragraph';
+import { useFluxAuth } from '../../../../../App';
 
 const RowDivider = styled.div`
   width: 100%;
@@ -21,13 +22,14 @@ const OptionLabel = styled.span`
 
 const ButtonSelection = props => {
   const { market, marketPricesData, lastFilledPrices } = props;
+  const { user } = useFluxAuth(); 
+  const fundsUnlocked = user.allowance >= user.balance;
 
   const outcomeTags = market.outcomes > 2 ? market.outcome_tags : ["NO", "YES"];
 
-  console.log('this are the props', props);
-
   return (
     <ContentWrapper>
+      {!fundsUnlocked && <Paragraph>Unlock your funds to place orders</Paragraph>}
       {market.outcomes &&
         <ContentWrapper>
 
@@ -77,10 +79,12 @@ const ButtonSelection = props => {
                   small={props.layover}
                   shadow
                   width="100%"
-                  color={'lightPurple'}
+                  color={fundsUnlocked ? 'lightPurple': 'gray'}
                   onClick={ () => {
-                    let userSelection = [marketPricesData[index], contract, lastFilledPrices[index], index]
-                    props.buttonEvent(userSelection);
+                    if (fundsUnlocked) {
+                      let userSelection = [marketPricesData[index], contract, lastFilledPrices[index], index]
+                      props.buttonEvent(userSelection);
+                    }
                   }}
                 >
                   BUY

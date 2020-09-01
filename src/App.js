@@ -1,10 +1,10 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { ThemeProvider } from "styled-components";
 import { GlobalStyles } from "./config/globalStyles";
 import { lightTheme, darkTheme } from "./config/Themes"
-import  { useDarkMode } from "./hooks/useDarkMode"
-import  { useAuth } from "./hooks/useAuth"
+import { useDarkMode } from "./hooks/useDarkMode"
+import { useAuth } from "./hooks/useAuth"
 
 // context
 import { connect, FluxContext } from './context/FluxProvider';
@@ -17,6 +17,7 @@ import TabBar from './components/modules/TabBar';
 import Dashboard from './pages/Dashboard';
 import MarketDetail from './pages/MarketDetail';
 import Settings from './pages/Settings';
+import LoginModal from './components/modules/LoginModal';
 
 const themeContext = React.createContext(null);
 const authContext = React.createContext(null);
@@ -37,9 +38,9 @@ const App = () => {
   const [theme, toggleTheme] = useDarkMode();
   const [user, login, logout] = useAuth();
   const [flux, dispatch] = useContext(FluxContext);
-  
   const themeMode = theme === 'light' ? lightTheme : darkTheme;
-  
+  const [showModal, setShowModal] = useState(false);
+
   useEffect (() => {
     if (!flux.connected) {
       connect().then(fluxInstance => {
@@ -47,6 +48,10 @@ const App = () => {
       })
     }
   })
+
+  const toggleSignInModal = (show) => {
+    setShowModal(show);
+  }
 
   return (
     <themeContext.Provider
@@ -65,8 +70,9 @@ const App = () => {
         <ThemeProvider theme={themeMode}>
           <GlobalStyles/>
           <main className="App">
-            <TopBar />
+            <TopBar showSignInModal={() => toggleSignInModal(true)} />
             <TabBar />
+            {showModal && <LoginModal hideSignInModal={() => toggleSignInModal(false)}/>}
             <Switch>
               <Route path="/" component={Dashboard} exact />
               <Route path="/filter" component={Dashboard} exact />

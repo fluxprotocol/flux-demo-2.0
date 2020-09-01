@@ -247,17 +247,23 @@ const Dashboard = props => {
               alignItems="center"
               width="50%"
             >
-              <Button 
-                className="createMarketButton"
-                margin="2rem 0 0 0"
-                marginMedium="0 0 0 auto"
-                onClick={() => {
-                  setModalIsOpen(true);
-                }}
-              >
-              <img src={createMarket} alt="create market icon" />
-              <span>create market</span>
-            </Button>
+
+              { flux.connected && flux.isSignedIn() && (
+                <Button 
+                    className="createMarketButton"
+                    margin="2rem 0 0 0"
+                    marginMedium="0 0 0 auto"
+                    onClick={() => {
+                      setModalIsOpen(true);
+                    }}
+                  > 
+                
+              
+              
+                  <img src={createMarket} alt="create market icon" />
+                  <span>create market</span>
+                </Button>
+              )}
             </FlexWrapper>
             
           </FlexWrapper>
