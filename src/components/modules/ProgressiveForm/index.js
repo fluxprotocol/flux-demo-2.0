@@ -17,7 +17,7 @@ import {CONTRACT_ID} from '../../../constants';
 
 // context
 import { FluxContext } from '../../../context/FluxProvider';
-import { toDenom } from '../../../helpers/numberUtils';
+import { toDenom, toShares } from '../../../helpers/numberUtils';
 
 const ActionTitle = styled.h3`
   width: 100%;
@@ -35,12 +35,12 @@ const ProgressiveForm = props => {
   const {market} = props;
 
   const testFunc = async (order) => {
-    // currently hardcoded to 1 - since we are only handling yes orders
     let orderData = order[1];
-    let denominatedDai = toDenom(parseInt(orderData[1]) * parseInt(orderData[2]) / 100, 2);
     let marketID = market.id;
     let buyingPrice = orderData[2];
-    const createOrder = await flux.placeOrder(marketID, sharesType[3], denominatedDai, buyingPrice, "");
+
+    const createOrder = await flux.placeOrder(marketID, sharesType[3], toShares(orderData[1]), buyingPrice, "");
+    setCurrentView("orderCompleted")
     setPlaceOrder(createOrder);
   }
 
@@ -127,6 +127,7 @@ const ProgressiveForm = props => {
       {currentView === 'processing' &&
         <ContentWrapper height="100%">
           <ProcessingForm
+            finalOrder={finalOrder}
             sharesType={sharesType}
             layover={props.layover}
             formEvent={(response) => {
@@ -143,7 +144,7 @@ const ProgressiveForm = props => {
       {currentView === 'orderCompleted' &&
         <ContentWrapper height="100%">
           <FormCompleted
-            sharesType={'yes'}
+            finalOrder={finalOrder}
             orderOutcome={placeOrder}
             layover={props.layover}
             formEvent={(response) => {

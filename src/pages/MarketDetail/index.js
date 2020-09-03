@@ -26,6 +26,8 @@ import useWindowDimensions from '../../hooks/useWindowDimensions';
 
 // helpers
 import { mapOutcomes } from '../../helpers/mappers';
+import { useAuth } from '../../hooks/useAuth';
+import OrderTable from '../../components/modules/OrderTable';
 
 const io = require('socket.io-client');
 const socket = io('ws://api.flux.market/marketDetails');
@@ -34,6 +36,13 @@ const socket = io('ws://api.flux.market/marketDetails');
 const PurchaseWrapper = styled.div`
   width: 100%;
 `;
+const Line = styled.div`
+  width: 90%;
+  display: block;
+  margin: auto;
+  max-width: 62rem;
+  border-top: 1px solid rgba(255,255,255, 0.2);
+`
 
 // const signUpBackground = require('../../assets/images/signup-background.png');
 // const SignUpBlock = styled.div`
@@ -46,6 +55,7 @@ const PurchaseWrapper = styled.div`
 
 const MarketOverview = props => {
   const { id } = useParams();
+  const [user] = useAuth();
   const [flux, _] = useContext(FluxContext);
   const [market, setMarket] = useState({});
   const [outcomeColorNameMap, setOutcomeColorNameMap] = useState({});
@@ -77,7 +87,6 @@ const MarketOverview = props => {
     getAveragePrices();
     getMarketPrices();
   }
-
 
   const getMarket = async () => {
     const market = await flux.getMarket(id);
@@ -158,7 +167,7 @@ const MarketOverview = props => {
           lastFilledPrices={lastFilledPricesForMarket}
         />
         <ContentWrapper 
-          backgroundColor="darkBlue"
+          backgroundColor="background"
           padding="0 0 1rem 0"
         >
           <ContentWrapper
@@ -261,6 +270,58 @@ const MarketOverview = props => {
             padding="1rem"
             maxWidth="60rem"
           >
+            {
+              market.id && user ?  <>
+                <OrderTable
+                  market={market}
+                  title="Your Open Orders"
+                  dataGetter = {() => flux.getOpenOrdersForUserForMarket(market.id, user.id)}
+                  headers = {["contract", "price per share", "shares", "% filled", ""]}
+                />
+
+                <OrderTable
+                  market={market}
+                  title="Your Positions"
+                  dataGetter = {() => flux.getShareBalanceForUserForMarket(market.id, user.id)}
+                  headers = {["contract", "price per share", "shares"]}
+                  marginTop
+                />
+              </> : null
+            }
+
+            {/* <SignUpBlock>
+              <Paragraph
+                size="1.7rem"
+                fontWeight="bold"
+                maxWidth="17rem"
+                color="white"
+              >
+                Sign up to receive $5 for trading!
+              </Paragraph>
+              <Button 
+                color="black"
+                margin="1.5rem 0 0 0"
+                padding="1rem"
+                onClick={ () => {
+                  //
+                }}
+              >
+                Sign up now!
+              </Button>
+            </SignUpBlock> */}
+          </ContentWrapper>
+        </ContentWrapper>
+
+        <ContentWrapper
+          backgroundColor="background"
+          padding="1em 0"
+        >
+          <Line />
+          <ContentWrapper
+            margin="2rem auto"
+            padding="1rem"
+            maxWidth="60rem"
+          >
             <Paragraph
               size="1.5rem"
               fontWeight="bold"
@@ -274,7 +335,7 @@ const MarketOverview = props => {
               maxWidth="55rem"
               margin="2rem auto"
             >
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+              {market.extra_info ? market.extra_info : "None"}
             </Paragraph>
 
             {/* <SignUpBlock>

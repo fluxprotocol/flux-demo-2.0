@@ -146,7 +146,7 @@ const CreateMarketForm = props => {
   const createBinaryMarket = async (market) => {
     setError('');
     try {
-      const newMarketId = await flux.createBinaryMarket(
+      return await flux.createBinaryMarket(
         market.description,
         market.extraInfo,
         market.categories,
@@ -161,7 +161,7 @@ const CreateMarketForm = props => {
 
   const createCategoricalMarket = async (market) => {
     try {
-      const newMarketId = await flux.createCategoricalMarket(
+      return await flux.createCategoricalMarket(
         market.description,
         market.extraInfo,
         market.outcomes,
@@ -176,15 +176,14 @@ const CreateMarketForm = props => {
     }
   }
 
-  const launchMarket = (market) => {
+  const launchMarket = async (market) => {
     if (market.marketType === 'binary') {
-      createBinaryMarket(market);
-      return;
+      return await createBinaryMarket(market);
     }
 
     if (market.marketType === 'categorical') {
-      createCategoricalMarket(market);
-      return;
+      return await createCategoricalMarket(market);
+      
     }
 
   }

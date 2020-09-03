@@ -20,16 +20,23 @@ const OptionLabel = styled.span`
   color: white;
 `;
 
+const StylesParagraph = styled(Paragraph)`
+  margin-top: 25px;
+  text-align: center;
+  color: pink;
+`
+
 const ButtonSelection = props => {
   const { market, marketPricesData, lastFilledPrices } = props;
   const { user } = useFluxAuth(); 
-  const fundsUnlocked = user.allowance >= user.balance;
 
+  const fundsUnlocked = user && user.allowance >= user.balance;
   const outcomeTags = market.outcomes > 2 ? market.outcome_tags : ["NO", "YES"];
-
+  
   return (
     <ContentWrapper>
-      {!fundsUnlocked && <Paragraph>Unlock your funds to place orders</Paragraph>}
+      {!user && <StylesParagraph>Please sign in to place an order</StylesParagraph>}
+      {user && !fundsUnlocked && <StylesParagraph>Unlock your funds to place orders</StylesParagraph>}
       {market.outcomes &&
         <ContentWrapper>
 

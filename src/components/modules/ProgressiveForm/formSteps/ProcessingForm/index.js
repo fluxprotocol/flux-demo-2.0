@@ -44,7 +44,7 @@ const ProcessingForm = props => {
                 color="white"
               >
                 placing buy order for
-                <strong> 133.33</strong>
+                <strong> {props.finalOrder[1]} shares</strong>
               </Paragraph>
             </ContentWrapper>
           </FlexWrapper>
