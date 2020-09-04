@@ -140,8 +140,8 @@ const MarketDetailData = props => {
   // define default state
   const [checked, setChecked] = useState('all');
   const [chartView, setChartView] = useState('orderBook');
-
   const {orderbookData, market, averagePriceData} = props;
+  console.log(averagePriceData)
   // setup for average price data - has to be calculated based off selected filter day/week/month etc
   // check the price for that date and calculate the current price - then come up with percentage
 
@@ -149,17 +149,12 @@ const MarketDetailData = props => {
   }, [])
 
   const orderBookFilters = {
-    orderBook: [
-      '1D',
-      '1W',
-      'all'
-    ],
+    orderBook: [],
     orderBookChart: [    
       '1D',
       '1W',
-      '1M',
-      '3M',
-      '6W',
+      // '1M',
+      // '3M',
       'all'
     ]
   }

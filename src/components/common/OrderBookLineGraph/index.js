@@ -70,7 +70,10 @@ const OrderBookLineChart = props => {
     chartConfig.data.datasets = [];
     
     // loop each history item and add to separate object prop
-    props.priceHistory.forEach(dataItem => {
+    console.log(props.priceHistory)
+    Object.keys(props.priceHistory).forEach(key => {
+      const dataItem = props.priceHistory[key];
+
       if (!outComes[dataItem.outcome]) {
         outComes[dataItem.outcome] = {
           data: [],
@@ -78,6 +81,7 @@ const OrderBookLineChart = props => {
       };
       outComes[dataItem.outcome].data.push(Math.floor(dataItem.avg_price));
     });
+    console.log(outComes)
 
     // loop outcome object prop and create dataset item for chart array
     for (const property in outComes) {

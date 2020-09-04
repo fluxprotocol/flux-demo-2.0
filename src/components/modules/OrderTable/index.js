@@ -83,7 +83,6 @@ const OrderTable = props => {
 	})
 
 	const getPositionBody = () => data.map((entry,i) => {
-		console.log(entry);
 		return (
 			<OrderBookDetails key={i}>
 

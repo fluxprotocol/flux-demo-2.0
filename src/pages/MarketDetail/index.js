@@ -30,7 +30,8 @@ import { useAuth } from '../../hooks/useAuth';
 import OrderTable from '../../components/modules/OrderTable';
 
 const io = require('socket.io-client');
-const socket = io('ws://api.flux.market/marketDetails');
+// const socket = io('ws://api.flux.market/marketDetails');
+const socket = io('ws://api.flux.market');
 
 
 const PurchaseWrapper = styled.div`
