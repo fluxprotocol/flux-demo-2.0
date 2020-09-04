@@ -30,14 +30,14 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
       # run tests!
       - run:
-        name: "What branch am I on now?"
-        command: echo $AWS_ACCESS_KEY_ID	
+          name: "What branch am I on now?"
+          command: echo $AWS_ACCESS_KEY_ID	
       - run:
-        name: "What was my custom environment variable?"
-        command: echo ${AWS_DEFAULT_REGION}
+          name: "What was my custom environment variable?"
+          command: echo ${AWS_DEFAULT_REGION}
       - run:
-        name: "Print an env var stored in the Project"
-        command: echo ${AWS_SECRET_ACCESS_KEY}
+          name: "Print an env var stored in the Project"
+          command: echo ${AWS_SECRET_ACCESS_KEY}
       - run: npm install
       - run: npm run build
       - aws-s3/sync:
