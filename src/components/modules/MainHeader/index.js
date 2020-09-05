@@ -90,7 +90,9 @@ const MainHeader = props => {
   }, [props.market])
 
   const categoryLabel = props.market.categories ? props.market.categories.join(" | ") : "";
-
+  const images = require.context('../../../assets/images/', true);
+  const showCardImage = CATEGORIES.indexOf(currentCategory) > -1;
+  
   return (
     <ContentWrapper 
       backgroundColor={props.market.categories ? props.market.categories[0] : 'crypto'}
@@ -104,7 +106,7 @@ const MainHeader = props => {
         position="relative"
       >
         <HeaderImagecontainer 
-          backgroundImage={require(`../../../assets/images/circle-${CATEGORIES.indexOf(currentCategory) > -1 ? currentCategory : 'crypto'}.png`)}
+          backgroundImage={showCardImage ? images(`./circle-${props.market.categories[0]}.png`) : "none"}
         >
         </HeaderImagecontainer>
         <BackButton

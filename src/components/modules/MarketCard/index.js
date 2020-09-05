@@ -89,7 +89,9 @@ const MarketCard = props => {
 
   const categoryLabel = props.market.categories.join(" | ");
   const outcomeTags = props.market.outcomes > 2 ? props.market.outcome_tags : ["NO", "YES"];
-
+  const images = require.context('../../../assets/images/', true);
+  const showCardImage = CATEGORIES.indexOf(props.market.categories[0]) > -1;
+  
   return (
     <CardContainer 
       onClick={() => handleCardClick(props.market.id)}
@@ -116,10 +118,10 @@ const MarketCard = props => {
 					/>
 				</StyledTwitterShareButton>
         <CategoryLabel>{categoryLabel}</CategoryLabel>
-        <CardImage 
-          src={require(`../../../assets/images/card-${CATEGORIES.indexOf(props.market.categories[0]) > -1 ? props.market.categories[0] : 'crypto'}.png`)}
+        {showCardImage && <CardImage 
+          src={images(`./card-${props.market.categories[0]}.png`)}
           alt={props.market.category}
-        />
+        />}
         <CardTitle>
           {props.market.description}
         </CardTitle>
