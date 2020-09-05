@@ -362,6 +362,7 @@ const MarketOverview = props => {
                 market={market} 
                 cancelMobile={() => {
                   setShowForm(false);
+                  document.body.classList.remove('layover');
                 }}
                 marketPricesData={marketPricesData} 
                 lastFilledPrices={lastFilledPricesForMarket}

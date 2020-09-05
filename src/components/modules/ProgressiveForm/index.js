@@ -12,9 +12,6 @@ import FormOverview from './formSteps/FormOverview';
 import ProcessingForm from './formSteps/ProcessingForm';
 import FormCompleted from './formSteps/FormCompleted';
 
-// constant
-import {CONTRACT_ID} from '../../../constants';
-
 // context
 import { FluxContext } from '../../../context/FluxProvider';
 import { toDenom, toShares } from '../../../helpers/numberUtils';
