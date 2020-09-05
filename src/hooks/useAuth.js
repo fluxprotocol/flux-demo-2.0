@@ -38,11 +38,17 @@ export const useAuth = () => {
       }
     };
 
+    // TODO: make sure this updates users / balance globally
+    const updateBalance = async () => {
+      const balance = await flux.getBalance(user.id);
+      setUser({...user, balance});
+    }
+
     useEffect(() => {
       if (flux.connected) {
         setUserFromWallet();
       }
     }, [flux.connected]);
 
-    return [user, login, logout, oneClickTxSignIn]
+    return [user, login, logout, oneClickTxSignIn, updateBalance]
 };

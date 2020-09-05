@@ -44,7 +44,7 @@ const Line = styled.div`
   border-top: 1px solid rgba(255,255,255, 0.2);
 `
 
-const MarketOverview = props => {
+const MarketDetail = props => {
   const { id } = useParams();
   const [user] = useAuth();
   const [flux, _] = useContext(FluxContext);
@@ -61,6 +61,7 @@ const MarketOverview = props => {
   useEffect(() => {
     getSetData()
     getPriceHistory('1D');
+    getMarket();
     socket.on('UpdateOrders',  (payload) => {
       if (payload.market_id === parseInt(id)) {
         getSetData()
@@ -73,7 +74,6 @@ const MarketOverview = props => {
 
   
   const getSetData = () => {
-    getMarket();
     getOrderbookData();
     getAveragePrices();
     getMarketPrices();
@@ -91,7 +91,7 @@ const MarketOverview = props => {
     const outcomeTags = market.outcomes > 2 ? market.outcome_tags : ["NO", "YES"];
     const outcomeObject = mapOutcomes(outcomeTags);
     setOutcomeColorNameMap(outcomeObject);
-  }, [market])
+  }, [market.outcome_tags])
 
   const getPriceHistory = async (type) => {
     const daysMap = {
@@ -131,6 +131,7 @@ const MarketOverview = props => {
     const fromDate = moment().subtract(daysMap[type].substractAmount, daysMap[type].substractType).format('YYYY-MM-DD HH:mm:ss');
     const toDate = moment().format('YYYY-MM-DD HH:mm:ss');
     const allPriceHistory = await flux.getPriceHistory(id, fromDate, toDate, daysMap[type].dataTypes);
+    console.log(allPriceHistory)
     setPriceHistory(allPriceHistory);
   }
 
@@ -374,4 +375,4 @@ const MarketOverview = props => {
   );
 }
 
-export default MarketOverview;
+export default MarketDetail;

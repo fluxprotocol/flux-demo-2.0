@@ -15,6 +15,7 @@ import FormCompleted from './formSteps/FormCompleted';
 // context
 import { FluxContext } from '../../../context/FluxProvider';
 import { toDenom, toShares } from '../../../helpers/numberUtils';
+import { useAuth } from '../../../hooks/useAuth';
 
 const ActionTitle = styled.h3`
   width: 100%;
@@ -28,7 +29,7 @@ const ProgressiveForm = props => {
   const [sharesType, setSharesType] = useState('');
   const [finalOrder, setFinalOrder] = useState('');
   const [placeOrder, setPlaceOrder] = useState('');
-
+  const [user, login, logout, oneClickTxSignIn, updateBalance] = useAuth();
   const {market} = props;
 
   const testFunc = async (order) => {
@@ -37,6 +38,7 @@ const ProgressiveForm = props => {
     let buyingPrice = orderData[2];
 
     const createOrder = await flux.placeOrder(marketID, sharesType[3], toShares(orderData[1]), buyingPrice, "");
+    updateBalance()
     setCurrentView("orderCompleted")
     setPlaceOrder(createOrder);
   }

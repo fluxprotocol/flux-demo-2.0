@@ -56,7 +56,6 @@ const chartConfig = {
 const OrderBookLineChart = props => {
   const chartContainer = useRef(null);
   const [chartInstance, setChartInstance] = useState(null);
-  console.log(props.outcomeColorNameMap)
   useEffect(() => {
     if (chartContainer && chartContainer.current) {
       const newChartInstance = new Chartjs(chartContainer.current, chartConfig);
@@ -70,9 +69,8 @@ const OrderBookLineChart = props => {
     chartConfig.data.datasets = [];
     
     // loop each history item and add to separate object prop
-    // console.log(props.priceHistory)
     props.priceHistory.forEach(dataItem => {
-
+      console.log(dataItem)
       if (!outComes[dataItem.outcome]) {
         outComes[dataItem.outcome] = {
           data: [],
@@ -83,7 +81,6 @@ const OrderBookLineChart = props => {
 
     // loop outcome object prop and create dataset item for chart array
     for (const property in outComes) {
-      console.log(property, outComes[property])
       chartConfig.data.datasets.push({
         data: outComes[property].data,
         backgroundColor: 'transparent',
@@ -91,6 +88,8 @@ const OrderBookLineChart = props => {
         borderWidth: 1,
         fill: false,
       })
+
+      console.log(chartConfig);
 
       chartConfig.data.labels[property] = props.outcomeColorNameMap[0] ? props.outcomeColorNameMap[property].label : "";
     }
@@ -107,7 +106,6 @@ const OrderBookLineChart = props => {
   const updateDataset = () => {
     if (!chartInstance) return;
     chartInstance.data = chartConfig.data;
-    console.log(chartInstance)
     chartInstance.update();
   };  
 
