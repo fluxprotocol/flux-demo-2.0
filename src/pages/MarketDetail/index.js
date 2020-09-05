@@ -60,6 +60,7 @@ const MarketOverview = props => {
 
   useEffect(() => {
     getSetData()
+    getPriceHistory('1D');
     socket.on('UpdateOrders',  (payload) => {
       if (payload.market_id === parseInt(id)) {
         getSetData()
@@ -73,7 +74,6 @@ const MarketOverview = props => {
   
   const getSetData = () => {
     getMarket();
-    getPriceHistory('1D');
     getOrderbookData();
     getAveragePrices();
     getMarketPrices();
