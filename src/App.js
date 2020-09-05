@@ -77,7 +77,7 @@ const App = () => {
               <Route path="/" component={Dashboard} exact />
               <Route path="/filter" component={Dashboard} exact />
               <Route path="/markets" component={Dashboard} exact />
-              <Route path="/markets/:id" component={MarketDetail} exact />
+              <Route path="/markets/:id" component={MarketDetail} />
               <Route path="/settings" component={Settings} exact />
             </Switch>
           </main>
