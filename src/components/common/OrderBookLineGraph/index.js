@@ -56,7 +56,7 @@ const chartConfig = {
 const OrderBookLineChart = props => {
   const chartContainer = useRef(null);
   const [chartInstance, setChartInstance] = useState(null);
-
+  console.log(props.outcomeColorNameMap)
   useEffect(() => {
     if (chartContainer && chartContainer.current) {
       const newChartInstance = new Chartjs(chartContainer.current, chartConfig);
@@ -70,9 +70,8 @@ const OrderBookLineChart = props => {
     chartConfig.data.datasets = [];
     
     // loop each history item and add to separate object prop
-    console.log(props.priceHistory)
-    Object.keys(props.priceHistory).forEach(key => {
-      const dataItem = props.priceHistory[key];
+    // console.log(props.priceHistory)
+    props.priceHistory.forEach(dataItem => {
 
       if (!outComes[dataItem.outcome]) {
         outComes[dataItem.outcome] = {
@@ -81,25 +80,23 @@ const OrderBookLineChart = props => {
       };
       outComes[dataItem.outcome].data.push(Math.floor(dataItem.avg_price));
     });
-    console.log(outComes)
 
     // loop outcome object prop and create dataset item for chart array
     for (const property in outComes) {
+      console.log(property, outComes[property])
       chartConfig.data.datasets.push({
         data: outComes[property].data,
         backgroundColor: 'transparent',
-        borderColor: globalColors[props.outcomeColorNameMap[property].color],
+        borderColor: props.outcomeColorNameMap[0] ? globalColors[props.outcomeColorNameMap[property].color] : "transparent",
         borderWidth: 1,
         fill: false,
       })
-    }
 
-    if (outComes['0'] && outComes['0'].data) {
-      chartConfig.data.labels = outComes['0'].data;
+      chartConfig.data.labels[property] = props.outcomeColorNameMap[0] ? props.outcomeColorNameMap[property].label : "";
     }
 
     updateDataset();
-  }, [props.priceHistory]);
+  }, [props.priceHistory, props.outcomeColorNameMap]);
 
 
   useEffect(() => {
@@ -110,6 +107,7 @@ const OrderBookLineChart = props => {
   const updateDataset = () => {
     if (!chartInstance) return;
     chartInstance.data = chartConfig.data;
+    console.log(chartInstance)
     chartInstance.update();
   };  
 

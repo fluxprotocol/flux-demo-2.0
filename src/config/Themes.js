@@ -14,10 +14,10 @@ const categoryColors = {
 }
 
 export const globalColors = {
+  pink: '#FF009C',
   purple: '#A743FF',
   darkPurple: '#2a293f',
   lightPurple: '#5400FF',
-  pink: '#FF009C',
   red: '#FF1958',
   blue: '#4C6BF5',
   mediumBlue: '#2C2A43',

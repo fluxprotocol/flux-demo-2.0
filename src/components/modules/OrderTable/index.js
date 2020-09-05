@@ -68,7 +68,7 @@ const OrderTable = props => {
 				<OrderBookDetail
 					fontWeight="800"
 				>
-					{fromShares(entry.shares_filled) / fromShares(entry.shares) * 100}%
+					{(fromShares(entry.shares_filled) / fromShares(entry.shares) * 100).toFixed(2)}%
 				</OrderBookDetail>
 				<OrderBookDetail
 					fontWeight="800"

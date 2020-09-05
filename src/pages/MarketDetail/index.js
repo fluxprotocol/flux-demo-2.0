@@ -73,7 +73,7 @@ const MarketOverview = props => {
   
   const getSetData = () => {
     getMarket();
-    getPriceHistory('all');
+    getPriceHistory('1D');
     getOrderbookData();
     getAveragePrices();
     getMarketPrices();
@@ -127,11 +127,10 @@ const MarketOverview = props => {
       },
     };
 
-    const fromDate = moment().subtract(daysMap[type].substractAmount, daysMap[type].substractType).format('YYYY-MM-DD');
-    const toDate = moment().format('YYYY-MM-DD');
 
+    const fromDate = moment().subtract(daysMap[type].substractAmount, daysMap[type].substractType).format('YYYY-MM-DD HH:mm:ss');
+    const toDate = moment().format('YYYY-MM-DD HH:mm:ss');
     const allPriceHistory = await flux.getPriceHistory(id, fromDate, toDate, daysMap[type].dataTypes);
-
     setPriceHistory(allPriceHistory);
   }
 
