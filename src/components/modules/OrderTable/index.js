@@ -32,9 +32,10 @@ const OrderBookDetail = styled.th`
 `;
 
 const OrderTable = props => {
-	const {title, market, headers, dataGetter} = props;
+	const {title, market, headers, dataGetter, orderbookData} = props;
 	const [data, setData] = useState([]);
-  const colorValue = {
+
+	const colorValue = {
     buy: 'orderbookGreen'
 	};
 	
@@ -42,7 +43,7 @@ const OrderTable = props => {
 		dataGetter().then(res => {
 			setData(res);
 		})
-	}, [])
+	}, [orderbookData])
 
   const outcomeTags = market.outcome > 2 ? market.outcome_tags : ["NO", "YES"]
 

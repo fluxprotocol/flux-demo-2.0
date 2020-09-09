@@ -266,6 +266,7 @@ const MarketDetail = props => {
                 <OrderTable
                   market={market}
                   title="Your Open Orders"
+                  orderbookData={orderbookData}
                   dataGetter = {() => flux.getOpenOrdersForUserForMarket(market.id, user.id)}
                   headers = {["contract", "price per share", "shares", "% filled", ""]}
                 />
@@ -273,6 +274,7 @@ const MarketDetail = props => {
                 <OrderTable
                   market={market}
                   title="Your Positions"
+                  orderbookData={orderbookData}
                   dataGetter = {() => flux.getShareBalanceForUserForMarket(market.id, user.id)}
                   headers = {["contract", "price per share", "shares"]}
                   marginTop
