@@ -44,11 +44,9 @@ const TopBar = props => {
           <FlexItem 
             hideForSmall
             flex="2"
-            textAlign="center"
+            textAlign="right"
           >
             {user && <UserBalance user={user}/> }
-                
-
           </FlexItem>
           <FlexItem textAlign="right">
             <Button 

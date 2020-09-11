@@ -60,6 +60,7 @@ const UserBalance = ({user}) => {
 
 		<ContentWrapper
 			cursor="pointer"
+			textAlign="right"
 		>
 			<InlineContentWrapper cursor="pointer" onClick={handleProfileClick}>
 				<UserName>{user.id ? user.id : '' }</UserName>
