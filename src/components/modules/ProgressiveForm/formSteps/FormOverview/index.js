@@ -24,12 +24,32 @@ const Shares = styled.span`
   opacity: 0.7;
 `;
 
+const EditIcon = styled.span`
+  position: absolute;
+  top: 1em;
+  right: 1.5em;
+  background: rgba(75, 0, 209, 100);
+  padding: .5em 1em;
+  border: none;
+  border-radius: 10px;
+  width: 5.5em;
+  display: flex;
+  justify-content: space-between;
+`;
+
+const editIcon = require('../../../../../assets/images/icons/edit_icon.png');
+
 // TODO: make the top big price total dollar price instead of share price in cents
 const FormOverview = props => {
+  console.log('all the props we got', props);
   const colorMap = {
     yes: 'lightPurple',
     no: 'pink',
   };
+
+  const handleShareChange = (event) => {
+    console.log('no design for change of shares', event);
+  }
 
   return (
     <FlexWrapper
@@ -37,7 +57,7 @@ const FormOverview = props => {
         height={props.layover ? '100%' : '350px'}
       >
       <FlexItem
-        backgroundColor={colorMap[props.sharesType]}
+        className="finalOrderOverview"
         width="100%"
         flex={props.layover ? '2' : '8'}
         >
@@ -49,6 +69,9 @@ const FormOverview = props => {
             height="100%"
           >
             <ContentWrapper>
+              <EditIcon onClick={handleShareChange}>
+                <img src={editIcon} alt="edit icon" /> edit
+              </EditIcon>
               <Currency>$</Currency>
               <Paragraph
                 size="5rem"
@@ -72,17 +95,19 @@ const FormOverview = props => {
           height="100%"
           >
           <ContentWrapper
+           className="orderSelection"
            margin="auto 0 0 0"
            width="100%"
            textAlign={props.layover ? 'center' : 'right'}
           >
             <Button
                 borderColor="transparent"
+                className="cancelButton"
                 onClick={ () => {
                   props.cancel();
                 }}
               >
-                Cancel
+                cancel
               </Button>
               <Button
                 margin="0 0 0 1rem"

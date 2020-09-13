@@ -68,4 +68,8 @@ export const FlexItem = styled.div`
     color: red;
   }
 
+  &.finalOrderOverview {
+    background: #5e00ff;
+    position: relative;
+  }
 `;

@@ -45,6 +45,10 @@ const ContentWrapper = styled.div`
   &.initialStatePurchaseShare {
     height: 12em;
   }
+
+  &.purchase_shares.finalOrderBlock {
+    margin-top: 0;
+  }
 `;
 
 export default ContentWrapper;
