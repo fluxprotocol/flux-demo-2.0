@@ -17,9 +17,6 @@ const Logo = styled.img`
   width: 4rem;
 `;
 
-
-
-
 const TopBar = props => {
   const { user, logout } = useFluxAuth();
   

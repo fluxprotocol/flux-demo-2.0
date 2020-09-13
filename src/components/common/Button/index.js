@@ -63,6 +63,10 @@ const Button = styled.button`
     background: rgba(94, 0, 255, 100);
     border: none;
   }
+
+  &.trade_button {
+    font-size: 1.1em;
+  }
 `;
 
 export default Button;

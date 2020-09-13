@@ -213,12 +213,13 @@ const MarketDetail = props => {
                         >
                           <FlexItem>
                             <ContentWrapper>
-                              <strong>total volume</strong>
+                              <strong>Total Volume</strong>
                             </ContentWrapper>
                             10,500
                           </FlexItem>
                           <FlexItem textAlign="right">
                             <Button
+                              className="trade_button"
                               maxWidth="10rem"
                               shadow
                               width="100%"
