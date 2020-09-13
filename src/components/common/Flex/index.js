@@ -40,6 +40,10 @@ export const FlexItem = styled.div`
   max-width: ${props => props.maxWidth ? props.maxWidth : 'initial'};
   text-align: ${props => props.textAlign ? props.textAlign : 'initial'};
 
+  &.marketPrice {
+    align-self: center;
+  }
+
   &.active {
     border-radius: ${props => props.borderRadius ? props.borderRadius : 'initial'};
   }

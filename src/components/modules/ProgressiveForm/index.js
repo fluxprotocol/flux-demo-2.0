@@ -88,6 +88,7 @@ const ProgressiveForm = props => {
       {/* sharesForm */}
       {currentView === 'sharesForm' &&
         <ContentWrapper
+          className="sharesFormWrapper"
           height="100%"
         >
           <SharesForm  

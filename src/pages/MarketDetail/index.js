@@ -190,7 +190,9 @@ const MarketDetail = props => {
               paddingMedium="2rem 0 0 1rem"
               paddingLarge="2rem 4rem 0 0"
               >
-                <ContentWrapper>
+                <ContentWrapper
+                  className="sharesWrapper"
+                >
                   <ContentCard
                     paddingMedium="0"
                     smallNoRadius

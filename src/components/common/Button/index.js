@@ -51,6 +51,18 @@ const Button = styled.button`
   &:hover {
     opacity: 0.8;
   }
+
+  &.cancelButton {
+    border: none;
+    color: gray;
+    font-weight: 100;
+    font-size: 1.2rem;
+  }
+
+  &.reviewButton {
+    background: rgba(94, 0, 255, 100);
+    border: none;
+  }
 `;
 
 export default Button;

@@ -41,6 +41,12 @@ const Input = styled.input.attrs({ type: 'number' })`
   }
 `;
 
+const Span = styled.span`
+  font-size: 1.2rem;
+  padding-left: .5rem;
+  color: rgba(246,1,155, 100);
+`;
+
 // const Error
 
 const SharesForm = props => {
@@ -91,16 +97,17 @@ const SharesForm = props => {
 
           <FlexWrapper margin="1rem 0">
             <FlexItem
+              className="marketPrice"
               color="white"
             >
-              Market Price
+              Market Price <Span>?</Span>
             </FlexItem>
             <FlexItem 
               color="white"
               textAlign="right"  
             >
               <FlexItem>
-                  &#162;
+                $
                 <Input
                   onChange={handlePriceChange}
                   required
@@ -140,6 +147,7 @@ const SharesForm = props => {
         </ContentWrapper>
 
         <ContentWrapper 
+          className="orderSelection"
           margin="auto 0 2rem 0"
           width="100%"
           padding={props.layover ? '2rem' : '0 2rem 0 0'}
@@ -148,15 +156,17 @@ const SharesForm = props => {
         <Button
             margin="2rem 0 0 0"
             borderColor="transparent"
+            className="cancelButton"
             onClick={ () => {
               props.cancel()
             }}
           >
-            Cancel
+            cancel
           </Button>
           <Button
             margin="2rem 0 0 1rem"
             color={colorMap[props.sharesType]}
+            className="reviewButton"
             onClick={ () => {
               // TODO: validation market price < 100 && > 0
               // TODO: validation: shares > 0
