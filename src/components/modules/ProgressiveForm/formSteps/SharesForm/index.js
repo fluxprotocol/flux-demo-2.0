@@ -45,6 +45,22 @@ const Span = styled.span`
   font-size: 1.2rem;
   padding-left: .5rem;
   color: rgba(246,1,155, 100);
+  cursor: pointer;
+`;
+
+const TradingMessage = styled.span`
+  background: #5e00ff;
+  border-radius: 14px;
+  padding: .4em .6em;
+  color: white;
+  width: 15em;
+  display: none;
+  font-size: 1.2em;
+  text-align: center;
+
+  ${Span}:hover &{
+    display: block;
+  }
 `;
 
 // const Error
@@ -60,7 +76,7 @@ const SharesForm = props => {
   };
 
   const handleSharesInputChange = (event) => {
-    setNumberOfShares(event.target.value);
+    setNumberOfShares(event.target.value)
   }
 
   const handlePriceChange = (event) => {
@@ -100,7 +116,10 @@ const SharesForm = props => {
               className="marketPrice"
               color="white"
             >
-              Market Price <Span>?</Span>
+              Market Price 
+              <Span
+              >?</Span>
+              <TradingMessage className="trading_message">The market price is the amount you will pay per share.</TradingMessage>
             </FlexItem>
             <FlexItem 
               color="white"
