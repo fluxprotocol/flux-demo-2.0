@@ -38,9 +38,9 @@ const HeaderImagecontainer = styled.div`
   }
 
   @media (min-width: ${({ theme }) => theme.largeBreakpoint}) {
-    height: 28rem;
-    width: 28rem;
-    transform: translate(50%, -50%);
+    height: 35rem;
+    width: 35rem;
+    transform: translate(60%, -40%);
   }
 `;
 
@@ -48,6 +48,7 @@ const TwitterIcon = styled.img`
   display: none;
   width: 2rem;
   cursor: pointer;
+  margin-bottom: 1rem;
 
   @media (min-width: ${({ theme }) => theme.mediumBreakpoint}) {
     display: block;
@@ -66,8 +67,9 @@ const MainHeaderTitle = styled.h1`
 `;
 
 const BackButton = styled.button`
+  font-size: 1rem;
   margin-bottom: 1rem;
-  padding: 0.3rem 0.5rem;
+  padding: 0.5rem 0.8rem;
   background-color: rgba(15, 14, 37, 0.5);
   color: white;
   border: none;
@@ -116,25 +118,24 @@ const MainHeader = props => {
           >
           back
         </BackButton>
-        <ContentWrapper 
-          hideForSmall 
-          hideForMedium
-          padding="0 0 0.5rem 0"
-        >
-          <CategoryFilters
-          filters={categories}
-          activeFilters={[]}
-          notClickable
-          />
-        </ContentWrapper>
         <FlexWrapper maxWidth="75%">
           <FlexItem>
-              <TwitterIcon
-                src={require('../../../assets/images/twitter-circle.png')}
-                alt="twitter"
-                onClick={() => {}}
+            <TwitterIcon
+              src={require('../../../assets/images/twitter-circle.png')}
+              alt="twitter"
+              onClick={() => {}}
+            />
+            <ContentWrapper 
+              hideForSmall 
+              hideForMedium
+              padding="0 0 0.5rem 0"
+            >
+              <CategoryFilters
+                filters={categories}
+                activeFilters={[]}
+                notClickable
               />
-            <CategoryLabel hideForSmall>{categoryLabel}</CategoryLabel>
+            </ContentWrapper>
             <MainHeaderTitle>{(props.market.description) ? props.market.description: 'Market detail'}</MainHeaderTitle>
           </FlexItem>
           <FlexItem hideForSmall hideForMedium>
