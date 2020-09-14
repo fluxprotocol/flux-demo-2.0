@@ -57,7 +57,7 @@ const TwitterIcon = styled.img`
 
 const MainHeaderTitle = styled.h1`
   max-width: 70%;
-  margin-top: 2rem;
+  margin-top: 1rem;
   font-size: 1.5rem;
   color: white;
 
@@ -99,12 +99,14 @@ const MainHeader = props => {
     <ContentWrapper 
       backgroundColor={props.market.categories ? props.market.categories[0] : 'crypto'}
       minHeight="22rem"
+      minHeightSmall="14rem"
       overflow="hidden"
       padding="0 0 1rem 0"
     >
       <ContentWrapper
         maxWidth="68rem"
         padding="3rem 1rem 1rem 1rem"
+        paddingSmall="1.2rem 1rem 1rem 1rem"
         position="relative"
       >
         <HeaderImagecontainer 

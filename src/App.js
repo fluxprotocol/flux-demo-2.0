@@ -1,8 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, useLocation } from 'react-router-dom';
 import { ThemeProvider } from "styled-components";
 import { GlobalStyles } from "./config/globalStyles";
 import { lightTheme, darkTheme } from "./config/Themes"
+
+// hooks
+import useWindowDimensions from './hooks/useWindowDimensions';
 import { useDarkMode } from "./hooks/useDarkMode"
 import { useAuth } from "./hooks/useAuth"
 
@@ -40,6 +43,8 @@ const App = () => {
   const [flux, dispatch] = useContext(FluxContext);
   const themeMode = theme === 'light' ? lightTheme : darkTheme;
   const [showModal, setShowModal] = useState(false);
+  const { width } = useWindowDimensions();
+  let location = useLocation();
 
   useEffect (() => {
     if (!flux.connected) {
@@ -70,7 +75,11 @@ const App = () => {
         <ThemeProvider theme={themeMode}>
           <GlobalStyles/>
           <main className="App">
-            <TopBar showSignInModal={() => toggleSignInModal(true)} />
+
+            {(!location.pathname.includes('/markets/') || width > 650 ) &&
+              <TopBar showSignInModal={() => toggleSignInModal(true)} />              
+            }
+
             <TabBar />
             {showModal && <LoginModal hideSignInModal={() => toggleSignInModal(false)}/>}
             <Switch>
