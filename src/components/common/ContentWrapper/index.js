@@ -32,6 +32,23 @@ const ContentWrapper = styled.div`
   &.purchase_shares {
     margin-top: 1em;
   }
+
+  &.sharesWrapper {
+    max-width: 22.5em;
+  }
+
+  &.orderSelection {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  &.initialStatePurchaseShare {
+    height: 12em;
+  }
+
+  &.purchase_shares.finalOrderBlock {
+    margin-top: 0;
+  }
 `;
 
 export default ContentWrapper;

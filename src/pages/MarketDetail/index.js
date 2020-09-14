@@ -190,7 +190,9 @@ const MarketDetail = props => {
               paddingMedium="2rem 0 0 1rem"
               paddingLarge="2rem 4rem 0 0"
               >
-                <ContentWrapper>
+                <ContentWrapper
+                  className="sharesWrapper"
+                >
                   <ContentCard
                     paddingMedium="0"
                     smallNoRadius
@@ -211,12 +213,13 @@ const MarketDetail = props => {
                         >
                           <FlexItem>
                             <ContentWrapper>
-                              <strong>total volume</strong>
+                              <strong>Total Volume</strong>
                             </ContentWrapper>
                             10,500
                           </FlexItem>
                           <FlexItem textAlign="right">
                             <Button
+                              className="trade_button"
                               maxWidth="10rem"
                               shadow
                               width="100%"

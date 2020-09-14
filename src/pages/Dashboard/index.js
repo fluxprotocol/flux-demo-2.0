@@ -222,7 +222,8 @@ const Dashboard = props => {
           maxWidth="68rem"
         >
           <FlexWrapper 
-            padding="3rem 1rem 1rem 1rem"
+            padding="8.6rem 1rem 1rem 1rem"
+            paddingSmall="3rem 1rem 1rem 1rem"
           >
 
             <FlexWrapper

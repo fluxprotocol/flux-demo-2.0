@@ -34,7 +34,7 @@ const ButtonSelection = props => {
   const outcomeTags = market.outcomes > 2 ? market.outcome_tags : ["NO", "YES"];
   
   return (
-    <ContentWrapper>
+    <ContentWrapper className="initialStatePurchaseShare">
       {!user && <StylesParagraph>Please sign in to place an order</StylesParagraph>}
       {user && !fundsUnlocked && <StylesParagraph>Unlock your funds to place orders</StylesParagraph>}
       {market.outcomes &&

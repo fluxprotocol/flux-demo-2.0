@@ -245,10 +245,10 @@ const Settings = props => {
                       {order.contract}
                     </OrderHistoryData>
                     <OrderHistoryData>
-                      {order.price_per_share}
+                      {order.order_value}
                     </OrderHistoryData>
                     <OrderHistoryData>
-                      {order.order_value}
+                      {order.price_per_share}
                     </OrderHistoryData>
                     <OrderButton
                       backgroundColor="#FF009C"
