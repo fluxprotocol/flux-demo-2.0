@@ -20,9 +20,9 @@ const ActionTitle = styled.h3`
 `;
 
 const Input = styled.input.attrs({ type: 'number' })`
-  max-width: 8rem;
+  max-width: 3rem;
   border: 1px red dashed;
-  padding: 1rem 1rem 1rem 1rem;
+  padding: 1rem 1rem 1rem 0;
   background-color: transparent;
   color: white;
   font-size: 1rem;
@@ -80,6 +80,16 @@ const SharesForm = props => {
   }
 
   const handlePriceChange = (event) => {
+    if (event.target.value > 100) {
+      setMarketPrice(100);
+      return;
+    }
+
+    if (event.target.value < 0) {
+      setMarketPrice(0);
+      return;
+    }
+
     setMarketPrice(event.target.value);
   }
 
