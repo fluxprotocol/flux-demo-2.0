@@ -93,6 +93,10 @@ const FluxLogo = styled.img`
   margin-left: 1em;
 `;
 
+const CreateMarketIcon = styled.img`
+  max-width: 2rem;
+`;
+
 const Dashboard = props => {
   const { user } = useFluxAuth();
   const [markets, setMarkets] = useState([]);
@@ -258,10 +262,11 @@ const Dashboard = props => {
                       setModalIsOpen(true);
                     }}
                   > 
-                
-              
-              
-                  <img src={createMarket} alt="create market icon" />
+
+                  <CreateMarketIcon 
+                    src={createMarket}
+                    alt="create market"
+                  />
                   <span>create market</span>
                 </Button>
               )}

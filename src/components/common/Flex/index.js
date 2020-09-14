@@ -41,6 +41,7 @@ export const FlexItem = styled.div`
   text-align: ${props => props.textAlign ? props.textAlign : 'initial'};
 
   &.marketPrice {
+    position: relative;
     align-self: center;
   }
 

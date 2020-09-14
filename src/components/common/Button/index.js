@@ -27,6 +27,7 @@ const Button = styled.button`
     border: none;
     flex-direction: row;
     align-items: center;
+    margin-top: 1rem;
     padding: 0.5em 1em;
 
     img {
