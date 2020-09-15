@@ -49,7 +49,7 @@ const Toggle = props => {
     return (
       <CheckBoxWrapper>
         <CheckBox 
-          onChange={props.toggle} 
+          onChange={props.toggleTheme} 
           id="checkbox" 
           type="checkbox"
           checked={props.checked}

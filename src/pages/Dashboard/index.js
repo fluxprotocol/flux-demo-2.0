@@ -93,26 +93,48 @@ const FluxLogo = styled.img`
   margin-left: 1em;
 `;
 
+const CreateMarketIcon = styled.img`
+  max-width: 2rem;
+`;
+
 const Dashboard = props => {
   const { user } = useFluxAuth();
   const [markets, setMarkets] = useState([]);
+  const [totalMarkets, setTotalMarkets] = useState();
   const [resoluteMarkets, setResoluteMarkets] = useState([]);
+  const [totalResoluteMarkets, setTotalResoluteMarkets] = useState();
   const [flux, _] = useContext(FluxContext);
   const [overviewType, setOverviewType] = useState('trade');
   const [activeFilters, setActiveFilters] = useState([]);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [reachedScrollBottom, setReachedScrollBottom] = useState(false);
+  const [currentScroll, setCurrentScroll] = useState();
   const isFirstRun = useRef(true);
   const history = useHistory()
   
   const handleScroll = () => {
     const container = document.getElementById('marketOverviewContainer');
     if (!container) return;
-    const bottom = container.getBoundingClientRect().bottom <= window.innerHeight;
 
-    if (bottom) setReachedScrollBottom(true);
+    setCurrentScroll(container.getBoundingClientRect().bottom);
   }
   const scrolling = debounce(handleScroll, 500);
+
+  useEffect(() => {
+    if (!currentScroll) return;
+    const bottom = currentScroll <= window.innerHeight;
+
+    if (overviewType === 'trade' && markets.length == totalMarkets) {
+      return;
+    };
+
+    if (overviewType === 'resolute' && resoluteMarkets.length == totalResoluteMarkets) {
+      return;
+    }
+
+    console.log('Caa')
+    if (bottom) setReachedScrollBottom(true);
+  }, [currentScroll]);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -158,13 +180,19 @@ const Dashboard = props => {
    
     if (type === 'all' || type === 'trade') {
       flux.getMarkets(params, 9, offset !== undefined ? offset : markets.length).then(res => {
+        if (res.count) {
+          setTotalMarkets(res.count);
+        }
         getLastFilledPrices(params, res.data);
         setReachedScrollBottom(false);
       })
     }
 
     if (type === 'all' || type === 'resolute') {
-      flux.getResolutingMarkets(params, 9, offset !== undefined ? offset : resoluteMarkets.length).then(res => {
+      flux.getResolutingMarkets(params, 3, offset !== undefined ? offset : resoluteMarkets.length).then(res => {
+        if (res.count) {
+          setTotalResoluteMarkets(res.count);
+        }
         setResoluteMarkets(res.data);
         setReachedScrollBottom(false);
       })
@@ -258,10 +286,11 @@ const Dashboard = props => {
                       setModalIsOpen(true);
                     }}
                   > 
-                
-              
-              
-                  <img src={createMarket} alt="create market icon" />
+
+                  <CreateMarketIcon 
+                    src={createMarket}
+                    alt="create market"
+                  />
                   <span>create market</span>
                 </Button>
               )}

@@ -4,7 +4,7 @@ const ContentWrapper = styled.div`
   display: ${props => props.hideForSmall ? 'none' : 'block'};
   position: ${props => props.position ? props.position : 'initial'};
   height: ${props => props.height ? props.height : 'auto'};
-  min-height: initial;
+  min-height: ${props => props.minHeightSmall ? props.minHeightSmall : 'initial'};
   width: ${props => props.width ? props.width : 'initial'};
   max-width: ${props => props.maxWidth ? props.maxWidth : 'none'};
   margin: ${props => props.margin ? props.margin : '0 auto'};

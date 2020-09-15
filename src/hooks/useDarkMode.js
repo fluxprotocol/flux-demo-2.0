@@ -9,6 +9,7 @@ export const useDarkMode = () => {
     };
 
     const toggleTheme = () => {
+        console.log('toggletjrm')
         theme === 'light' ? setMode('dark') : setMode('light')
     };
 

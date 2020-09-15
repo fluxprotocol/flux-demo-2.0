@@ -20,9 +20,9 @@ const ActionTitle = styled.h3`
 `;
 
 const Input = styled.input.attrs({ type: 'number' })`
-  max-width: 8rem;
+  max-width: 3rem;
   border: 1px red dashed;
-  padding: 1rem 1rem 1rem 1rem;
+  padding: 1rem 1rem 1rem 0;
   background-color: transparent;
   color: white;
   font-size: 1rem;
@@ -45,22 +45,21 @@ const Span = styled.span`
   font-size: 1.2rem;
   padding-left: .5rem;
   color: rgba(246,1,155, 100);
-  cursor: pointer;
 `;
 
 const TradingMessage = styled.span`
+  z-index: 1;
+  display: block;
+  position: absolute;
+  left: 0;
+  bottom: -200%;
   background: #5e00ff;
   border-radius: 14px;
-  padding: .4em .6em;
+  padding: .5em .7em;
   color: white;
   width: 15em;
-  display: none;
-  font-size: 1.2em;
+  font-size: 0.8em;
   text-align: center;
-
-  ${Span}:hover &{
-    display: block;
-  }
 `;
 
 // const Error
@@ -69,6 +68,7 @@ const SharesForm = props => {
   const [numberOfShares, setNumberOfShares] = useState(0);
   const defaultMarketPrice = props.sharesType[0] && parseInt(props.sharesType[0].marketPrice) ? parseInt(props.sharesType[0].marketPrice) : "-";
   const [marketPrice, setMarketPrice] = useState(defaultMarketPrice);
+  const [showMarketPriceTooltip, setShowMarketPriceTooltip] = useState(false);
   
   const colorMap = {
     yes: 'lightPurple',
@@ -80,6 +80,16 @@ const SharesForm = props => {
   }
 
   const handlePriceChange = (event) => {
+    if (event.target.value > 100) {
+      setMarketPrice(100);
+      return;
+    }
+
+    if (event.target.value < 0) {
+      setMarketPrice(0);
+      return;
+    }
+
     setMarketPrice(event.target.value);
   }
 
@@ -115,11 +125,26 @@ const SharesForm = props => {
             <FlexItem
               className="marketPrice"
               color="white"
+              onMouseEnter={() => {
+                setShowMarketPriceTooltip(true);
+              }}
+              onMouseLeave={() => {
+                setShowMarketPriceTooltip(false);
+              }}
             >
               Market Price 
-              <Span
-              >?</Span>
-              <TradingMessage className="trading_message">The market price is the amount you will pay per share.</TradingMessage>
+              <Span>
+                ?
+              </Span>
+
+              {showMarketPriceTooltip &&
+                <TradingMessage
+                  className="trading_message"
+                >
+                    The market price is the amount you will pay per share.
+                </TradingMessage>              
+              }
+
             </FlexItem>
             <FlexItem 
               color="white"
