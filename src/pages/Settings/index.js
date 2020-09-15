@@ -11,6 +11,8 @@ import { FluxContext } from '../../context/FluxProvider';
 import ContentWrapper from '../../components/common/ContentWrapper';
 import { FlexWrapper } from '../../components/common/Flex';
 import ThemeToggler from '../../components/common/ThemeToggler';
+import { fromDenom } from '../../helpers/numberUtils';
+import { useHistory } from 'react-router-dom';
 
 const SettingsLabel = styled.span`
   color: white;
@@ -73,6 +75,7 @@ const OrderHistoryWrapper = styled.table`
 `;
 
 const OrderHistoryBody = styled.tbody`
+  cursor: ${(props) => props.pointer ? "pointer" : "default"};
 `;
 
 const OrderHistoryRow = styled.tr`
@@ -109,12 +112,17 @@ const OrderHistoryHeadings = styled.th`
   padding-bottom: 1em;
 
   @media (min-width: ${({ theme }) => theme.smallBreakpoint}) {
-    width: 25%;
+    text-align: center;
+    width: 33%;
   }
 `;
 
 const OrderHistoryData = styled.td`
   color: white;
+  @media (min-width: ${({ theme }) => theme.smallBreakpoint}) {
+    text-align: center;
+    width: 33%;
+  }
 `;
 
 const OrderButton = styled.td`
@@ -122,35 +130,10 @@ const OrderButton = styled.td`
   color: white;
   border-radius: 8px;
   padding: .25em .5em;
-  width: 4em;
   font-size: .8em;
-  text-align: center;
-
-  @media (min-width: ${({ theme }) => theme.smallBreakpoint}) {
-    font-size: 1em;
-  }
 `;
 
 const ProfileIcon = require("../../assets/images/icons/profile_icon.png");
-const ReferralIcon = require("../../assets/images/icons/referral_icon.png");
-// for now dummy data - the call is setup: getOpenOrders and getFilledOrders
-const dataSet = [
-  {
-    contract: 'Trump',
-    price_per_share: '$70',
-    order_value: '$0.50',
-  },
-  {
-    contract: 'Trump',
-    price_per_share: '$70',
-    order_value: '$0.50',
-  },
-  {
-    contract: 'Trump',
-    price_per_share: '$70',
-    order_value: '$0.50',
-  }
-]
 
 const dataHeaders = ["contract", "price per share", "order value"];
 
@@ -158,9 +141,9 @@ const Settings = props => {
   const { user } = useFluxAuth();
   const [flux, ] = useContext(FluxContext);
   const { toggleTheme, theme } = useDarkModeTheme();
-
-  const [open_orders, setOpenOrders] = useState([]);
-  const [filled_orders, setFilledOrders] = useState([]);
+  const history = useHistory();
+  const [openOrders, setOpenOrders] = useState([]);
+  const [filledOrders, setFilledOrders] = useState([]);
 
   useEffect(() => {
     if (!user) {
@@ -173,13 +156,13 @@ const Settings = props => {
 
 
   const getOpenOrders = async () => {
-    let openOrders = await flux.getOpenOrders(user.id);
-    setOpenOrders(openOrders);
+    let res = await flux.getOpenOrders(user.id);
+    setOpenOrders(res);
   }
 
   const getFilledOrders = async () => {
-    let filledOrders = await flux.getOrderHistory(user.id);
-    setFilledOrders(filledOrders);
+    let res = await flux.getOrderHistory(user.id);
+    setFilledOrders(res);
 
   }
 
@@ -191,19 +174,7 @@ const Settings = props => {
     >
       <SettingsContainer>
         <img src={ProfileIcon} alt="" />
-        Peter
-      </SettingsContainer>
-
-      <SettingsContainer
-        className="account_details"
-      >
-        <div>
-          <img src={ReferralIcon} alt="" />
-          My Referral ID
-        </div>
-        <div>
-          ID: 123456
-        </div>
+        {user && user.id}
       </SettingsContainer>
 
       <SettingsContainer
@@ -234,29 +205,35 @@ const Settings = props => {
           className="table_wrapper"
         >
           <OrderHistoryWrapper>
-            <OrderHistoryBody>
+            <OrderHistoryBody pointer>
               {
-                dataSet.map((order, index) => (
-                  <OrderHistoryRow
-                  key={order.contract + index} 
-                    className="data_row"
-                  >
-                    <OrderHistoryData>
-                      {order.contract}
-                    </OrderHistoryData>
-                    <OrderHistoryData>
-                      {order.order_value}
-                    </OrderHistoryData>
-                    <OrderHistoryData>
-                      {order.price_per_share}
-                    </OrderHistoryData>
-                    <OrderButton
-                      backgroundColor="#FF009C"
+                openOrders.map((order, index) => {
+                  const outcomeTags = order.outcome_tags.length > 0 ? order.outcome_tags : ["NO", "YES"]
+                  return (
+                    <OrderHistoryRow
+                      key={index}
+                      onClick={() => {
+                        history.push("/markets/" + order.market_id)
+                      }}
+                      className="data_row"
                     >
-                      cancel
-                    </OrderButton>
-                  </OrderHistoryRow>
-                ))
+                      <OrderHistoryData>
+                        {outcomeTags[order.outcome]}
+                      </OrderHistoryData>
+                      <OrderHistoryData>
+                        {order.price}
+                      </OrderHistoryData>
+                      <OrderHistoryData>
+                        ${fromDenom(order.spend)}
+                      </OrderHistoryData>
+                      {/* <OrderButton
+                        backgroundColor="#FF009C"
+                      >
+                        cancel
+                      </OrderButton> */}
+                    </OrderHistoryRow>
+                  )
+                })
               }
             </OrderHistoryBody>
           </OrderHistoryWrapper>
@@ -275,25 +252,28 @@ const Settings = props => {
           <OrderHistoryWrapper>
             <OrderHistoryBody>
               {
-                dataSet.map((order, index) => (
-                  <OrderHistoryRow
-                    key={order.contract + index} 
-                    className="data_row"
-                  >
-                    <OrderHistoryData>
-                      {order.contract}
-                    </OrderHistoryData>
-                    <OrderHistoryData>
-                      {order.price_per_share}
-                    </OrderHistoryData>
-                    <OrderHistoryData>
-                      {order.order_value}
-                    </OrderHistoryData>
-                    <OrderButton>
-                      sell
-                    </OrderButton>
-                  </OrderHistoryRow>
-                ))
+                filledOrders.map((order, index) => {
+                  const outcomeTags = order.outcome_tags.length > 0 ? order.outcome_tags : ["NO", "YES"]
+                  return (
+                    <OrderHistoryRow
+                      key={index} 
+                      className="data_row"
+                    >
+                      <OrderHistoryData>
+                        {outcomeTags[order.outcome]}
+                      </OrderHistoryData>
+                      <OrderHistoryData>
+                        {order.price}
+                      </OrderHistoryData>
+                      <OrderHistoryData>
+                        ${fromDenom(order.spend)}
+                      </OrderHistoryData>
+                      {/* <OrderButton>
+                        sell
+                      </OrderButton> */}
+                    </OrderHistoryRow>
+                    )
+                })
               }
             </OrderHistoryBody>
           </OrderHistoryWrapper>

@@ -98,7 +98,7 @@ const UserBalance = ({user}) => {
 				
 				{showTooltip &&
 					<LockInfoText>
-						This is some explanation regarding the lock/unlocking of the account
+						Click lock to trust the Flux Protocol smart contract to be able to transfer funds for placing orders and creating markets.
 					</LockInfoText>
 				}
 
