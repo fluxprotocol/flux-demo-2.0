@@ -70,7 +70,6 @@ const OrderBookLineChart = props => {
     
     // loop each history item and add to separate object prop
     props.priceHistory.forEach(dataItem => {
-      console.log(dataItem)
       if (!outComes[dataItem.outcome]) {
         outComes[dataItem.outcome] = {
           data: [],
@@ -88,8 +87,6 @@ const OrderBookLineChart = props => {
         borderWidth: 1,
         fill: false,
       })
-
-      console.log(chartConfig);
 
       chartConfig.data.labels[property] = props.outcomeColorNameMap[0] ? props.outcomeColorNameMap[property].label : "";
     }

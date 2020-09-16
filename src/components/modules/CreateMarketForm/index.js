@@ -100,6 +100,7 @@ const Label = styled.label`
 `;
 
 const CreateMarketForm = props => {
+  const history = useHistory();
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [marketDescription, setMarketDescription] = useState('');
   const [loading, setLoading] = useState(false);
@@ -146,7 +147,9 @@ const CreateMarketForm = props => {
 
     const res = await launchMarket(market);
     setLoading(false);
-    if (typeof res === "number") props.closeModal();
+    history.push(`/markets/${res}`);
+    // if (typeof res === "number") props.closeModal();
+
   }
 
   const createBinaryMarket = async (market) => {

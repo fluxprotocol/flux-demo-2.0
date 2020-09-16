@@ -41,7 +41,6 @@ const editIcon = require('../../../../../assets/images/icons/edit_icon.png');
 
 // TODO: make the top big price total dollar price instead of share price in cents
 const FormOverview = props => {
-  console.log('all the props we got', props);
   const colorMap = {
     yes: 'lightPurple',
     no: 'pink',

@@ -81,6 +81,7 @@ const MarketDetail = props => {
 
   const getMarket = async () => {
     const market = await flux.getMarket(id);
+    if (market.length === 0) return setTimeout(getMarket, 500);
     const lastFilledPricesForMarket = await flux.getLastFilledPricesForMarket(id);
     setMarket(market[0]);
     setLastFilledPrice(lastFilledPricesForMarket);
@@ -131,7 +132,6 @@ const MarketDetail = props => {
     const fromDate = moment().subtract(daysMap[type].substractAmount, daysMap[type].substractType).format('YYYY-MM-DD HH:mm:ss');
     const toDate = moment().format('YYYY-MM-DD HH:mm:ss');
     const allPriceHistory = await flux.getPriceHistory(id, fromDate, toDate, daysMap[type].dataTypes);
-    console.log(allPriceHistory)
     setPriceHistory(allPriceHistory);
   }
 

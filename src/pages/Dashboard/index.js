@@ -132,7 +132,6 @@ const Dashboard = props => {
       return;
     }
 
-    console.log('Caa')
     if (bottom) setReachedScrollBottom(true);
   }, [currentScroll]);
 
@@ -300,11 +299,13 @@ const Dashboard = props => {
           <OverviewToggle onToggle={handleOverviewToggle}/>
 
           <ContentWrapper padding="1rem">
-            <CategoryFilters 
-              filters={categoryFilters} 
-              activeFilters={activeFilters}
-              filterChange={handleFilterChange}
-            />
+            {overviewType === "trade" && <>
+              <CategoryFilters 
+                filters={categoryFilters} 
+                activeFilters={activeFilters}
+                filterChange={handleFilterChange}
+              />
+            </>}
           </ContentWrapper>
 
           {(overviewType === 'trade') ? (
