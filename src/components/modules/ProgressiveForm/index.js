@@ -47,7 +47,6 @@ const ProgressiveForm = props => {
     <ContentWrapper 
       className="purchase_shares finalOrderBlock"
       width="100%"
-      background="red"
       margin={(props.layover && currentView === 'buttonSelection') ? 'auto 0 0 0' : 0}
     >
       {/* buttonSelection */}

@@ -66,7 +66,7 @@ const TradingMessage = styled.span`
 
 const SharesForm = props => {
   const [numberOfShares, setNumberOfShares] = useState(0);
-  const defaultMarketPrice = props.sharesType[0] && parseInt(props.sharesType[0].marketPrice) ? parseInt(props.sharesType[0].marketPrice) : "-";
+  const defaultMarketPrice = props.sharesType[0] && parseInt(props.sharesType[0].marketPrice) ? parseInt(props.sharesType[0].marketPrice) : 0;
   const [marketPrice, setMarketPrice] = useState(defaultMarketPrice);
   const [showMarketPriceTooltip, setShowMarketPriceTooltip] = useState(false);
   
@@ -80,8 +80,8 @@ const SharesForm = props => {
   }
 
   const handlePriceChange = (event) => {
-    if (event.target.value > 100) {
-      setMarketPrice(100);
+    if (event.target.value > 99) {
+      setMarketPrice(99);
       return;
     }
 
@@ -211,6 +211,7 @@ const SharesForm = props => {
             margin="2rem 0 0 1rem"
             color={colorMap[props.sharesType]}
             className="reviewButton"
+            disabled={!marketPrice || !numberOfShares}
             onClick={ () => {
               // TODO: validation market price < 100 && > 0
               // TODO: validation: shares > 0

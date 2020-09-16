@@ -27,6 +27,7 @@ const LockInfo = styled.span`
 `;
 
 const LockInfoText = styled.span`
+	z-index: 999;
 	position: absolute;
 	top: 1.5rem;
 	right: -12rem;
