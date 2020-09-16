@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
 
 // common
 import Button from '../Button';
 import { fromDenom } from '../../../helpers/numberUtils';
+import { FluxContext } from '../../../context/FluxProvider';
+import { RESOLUTION_STATE } from '../../../constants';
+import LoaderButton from '../LoaderButton';
 
 
 // // temp data, will use market prop
@@ -27,6 +30,11 @@ import { fromDenom } from '../../../helpers/numberUtils';
 //     action: '',
 //   },
 // ];
+
+const Title = styled.h3`
+  text-align: center;
+  margin-bottom: 2rem;
+`;
 
 const VolumeAmount = styled.div`
   margin-left: 0.5rem;
@@ -68,29 +76,37 @@ const ContainerColumn = styled.div`
 `;
 
 const MarketCardGovernance = props => {
-
+  const [flux] = useContext(FluxContext);
+  const [loading, setLoading] = useState(false);
   const color = props.market.outcomes > 2 ? 'lightPurple' : 'pink';
-  const handleStake = (outcome) => {
-    // todo
+
+  const handleStake = async (outcome) => {
+    setLoading(outcome);
+    if (props.market.resolution_state == "0") {
+      const res = await flux.resolute(props.market.id, outcome.toString(), props.market.resolute_bond);
+    }
   }
 
   const outcomeTags = props.market.outcomes > 2 ? props.market.outcome_tags : ["NO", "YES"]
-
   return (
       <MarketGovernanceContainer>
+        <Title>
+          {RESOLUTION_STATE[props.market.resolution_state]}
+        </Title>
         {outcomeTags.map((outcome, i) => (
           <ContainerRow key={outcome}>
             <ContainerColumn position="left">
               {outcome}
             </ContainerColumn>
             <ContainerColumn position="right">
-              <Button
+              <LoaderButton
                 color={color}
+                loading={loading === i}
                 borderColor={color}
                 onClick={() => handleStake(i)}
               >
                 Stake ${fromDenom(props.market.resolute_bond)}
-              </Button>
+              </LoaderButton>
             </ContainerColumn>
           </ContainerRow>
         ))}
@@ -100,13 +116,14 @@ const MarketCardGovernance = props => {
             Invalid
           </ContainerColumn>
           <ContainerColumn position="right">
-            <Button
+            <LoaderButton
               color="darkBlue"
+              loading={loading === null}
               borderColor="white"
               onClick={() => handleStake(null)}
             >
               Stake ${fromDenom(props.market.resolute_bond)}
-            </Button>
+            </LoaderButton>
           </ContainerColumn>
         </ContainerRow>
 

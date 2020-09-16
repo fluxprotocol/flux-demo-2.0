@@ -118,7 +118,7 @@ const Dashboard = props => {
 
     setCurrentScroll(container.getBoundingClientRect().bottom);
   }
-  const scrolling = debounce(handleScroll, 500);
+  const scrolling = debounce(handleScroll, 100);
 
   useEffect(() => {
     if (!currentScroll) return;
@@ -173,7 +173,6 @@ const Dashboard = props => {
 
   const getMarkets = (type = 'all', offset) => {
     const params = {};
-
     if (activeFilters.length) params.categories = activeFilters;
     else if (params.categories) delete params.categories;
    
@@ -324,14 +323,14 @@ const Dashboard = props => {
             </ContentWrapper>
           )}
 
-          {reachedScrollBottom &&
+          {/* {reachedScrollBottom &&
             <ContentWrapper
               padding="1rem"
               textAlign="center"
             >
               <Loader />
             </ContentWrapper>        
-          }
+          } */}
 
         </ContentWrapper>
 

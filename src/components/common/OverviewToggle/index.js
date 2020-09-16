@@ -43,7 +43,7 @@ const FilterLabel = styled.span`
 `;
 
 const OverviewToggle = props => {
-  const [checked, setChecked] = useState('trade');
+  const [checked, setChecked] = useState('resolute');
 
   const handleRadioChange = (event) => {
     setChecked(event.target.value);
