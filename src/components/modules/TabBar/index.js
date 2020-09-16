@@ -140,7 +140,7 @@ const TabBar = props => {
         <CloseModalButton onClick={() => {
           setModalIsOpen(false);
         }}>cancel</CloseModalButton>
-        <CreateMarketForm />
+        <CreateMarketForm closeModal={() => setModalIsOpen(false)}/>
       </Modal>
     </TabBarContainer>
   );

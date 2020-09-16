@@ -4,14 +4,15 @@ import styled from 'styled-components';
 const LoaderContainer = styled.div`
   color: #ffffff;
   font-size: 1rem;
-  margin: 4rem auto;
+  margin: ${(props) => props.inline ? "0.1rem 0 0 1rem" : "4rem auto"};
+  display: inline-block;
   width: 1rem;
   height: 1rem;
   border-radius: 50%;
   position: relative;
   text-indent: -9999em;
   animation: loaderKeyframes 1.3s infinite linear;
-  transform: translateZ(0);
+  transform: translateZ(0) scale(${(props) => props.scale ? props.scale : 1});
 
   @keyframes loaderKeyframes {
     0%,
@@ -44,7 +45,7 @@ const LoaderContainer = styled.div`
 
 const Loader = props => {
   return (
-    <LoaderContainer>
+    <LoaderContainer scale={props.scale} inline={props.inline}>
       
     </LoaderContainer>
   );

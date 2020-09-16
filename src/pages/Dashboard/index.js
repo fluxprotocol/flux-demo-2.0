@@ -343,7 +343,7 @@ const Dashboard = props => {
           <CloseModalButton onClick={() => {
             setModalIsOpen(false);
           }}>cancel</CloseModalButton>
-          <CreateMarketForm />
+          <CreateMarketForm closeModal={() => setModalIsOpen(false)}/>
         </Modal>
       <Footer />
       <BackgroundWave />
