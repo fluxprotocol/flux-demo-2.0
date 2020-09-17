@@ -43,7 +43,6 @@ const ContentWrapper = styled.div`
   }
 
   &.initialStatePurchaseShare {
-    height: 12em;
   }
 
   &.purchase_shares.finalOrderBlock {
