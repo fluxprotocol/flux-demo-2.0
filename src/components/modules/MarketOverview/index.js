@@ -18,6 +18,7 @@ const MarketOverview = props => {
       {props.markets.map((market, index) => (
         <MarketCard
           key={market.id}
+          getMarkets={props.getMarkets}
           market={market}
           cardType={props.type}
 

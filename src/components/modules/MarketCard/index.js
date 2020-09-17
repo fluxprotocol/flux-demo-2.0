@@ -140,7 +140,7 @@ const MarketCard = props => {
       }
 
       {props.cardType === 'resolute' &&
-        <MarketCardGovernance market={props.market}/>
+        <MarketCardGovernance getMarkets={props.getMarkets} market={props.market}/>
       }
 
     </CardContainer>

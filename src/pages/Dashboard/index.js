@@ -314,6 +314,7 @@ const Dashboard = props => {
             />
           ) : (overviewType === 'resolute') ? (
             <MarketOverview 
+              getMarkets={getMarkets}
               markets={resoluteMarkets}
               type="resolute"
             />

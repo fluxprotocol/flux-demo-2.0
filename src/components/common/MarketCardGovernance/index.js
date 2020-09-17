@@ -68,11 +68,12 @@ const MarketCardGovernance = props => {
   const handleStake = async (outcome) => {
     setLoading(outcome);
     if (props.market.resolution_state == "1") {
-      const res = await flux.resolute(props.market.id, outcome.toString(), props.market.resolute_bond);
+      const res = await flux.resolute(props.market.id, outcome !== null ? outcome.toString() : null, props.market.resolute_bond);
     } else if (props.market.resolution_state == "2" && !finalizable) {
       const res = await flux.dispute(props.market.id, outcome.toString(), toDenom(resolutionPrice.toString()));
     }
     setLoading(false)
+    props.getMarkets();
   }
 
 
@@ -80,11 +81,14 @@ const MarketCardGovernance = props => {
     setLoading(null);
     const res = await flux.finalize(props.market.id);
     setLoading(false);
+    props.getMarkets();
   }
+
+
   const now = Date.now();
   const endTime = new Date(props.market.resolution_round_end_time).getTime();
   const finalizable = (props.market.resolution_state > 1 && endTime <= now) || props.market.resolution_state == "3";
-  const outcomeTags = props.market.outcomes > 2 ? props.market.outcome_tags : ["NO", "YES"]
+  const outcomeTags = props.market.outcomes > 2 ? props.market.outcome_tags : ["NO", "YES"];
 
   return (
       <MarketGovernanceContainer>
@@ -99,7 +103,7 @@ const MarketCardGovernance = props => {
           {!finalizable ? RESOLUTION_STATE[props.market.resolution_state] : RESOLUTION_STATE[3]}
         </Title>
        {props.market.winning_outcome !== null && <Title>
-          Last winning outcome: {outcomeTags[props.market.winning_outcome]}
+          Last winning outcome: {outcomeTags[props.market.winning_outcome] || "INVALID"}
         </Title>}
         {
           !finalizable ? <> 
