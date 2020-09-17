@@ -76,7 +76,6 @@ const SharesForm = props => {
   };
 
   const handleSharesInputChange = (event) => {
-    console.log('this is event', event.target.value);
     setNumberOfShares(event.target.value)
   }
 
