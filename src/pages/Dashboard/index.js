@@ -104,7 +104,7 @@ const Dashboard = props => {
   const [resoluteMarkets, setResoluteMarkets] = useState([]);
   const [totalResoluteMarkets, setTotalResoluteMarkets] = useState();
   const [flux, _] = useContext(FluxContext);
-  const [overviewType, setOverviewType] = useState('resolute');
+  const [overviewType, setOverviewType] = useState('trade');
   const [activeFilters, setActiveFilters] = useState([]);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [reachedScrollBottom, setReachedScrollBottom] = useState(false);
