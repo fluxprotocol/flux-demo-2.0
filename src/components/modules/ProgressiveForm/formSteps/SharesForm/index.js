@@ -156,7 +156,7 @@ const SharesForm = props => {
                 <Input
                   onChange={handlePriceChange}
                   required
-                  value={marketPrice}
+                  placeholder={0}
                 />
               </FlexItem> 
             </ FlexItem>
@@ -183,7 +183,7 @@ const SharesForm = props => {
               {
                 isNaN(props.sharesType) === true && 
                 <FlexItem>
-                  $  {((marketPrice * numberOfShares) / 100) || '-'}
+                  $  {((marketPrice * numberOfShares) / 100) || '0'}
                 </FlexItem>
               }
             </FlexItem>
