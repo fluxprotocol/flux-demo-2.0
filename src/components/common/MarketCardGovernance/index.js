@@ -1,35 +1,13 @@
 import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
+import Countdown from 'react-countdown';
 
 // common
 import Button from '../Button';
-import { fromDenom } from '../../../helpers/numberUtils';
+import { fromDenom, toDenom } from '../../../helpers/numberUtils';
 import { FluxContext } from '../../../context/FluxProvider';
 import { RESOLUTION_STATE } from '../../../constants';
 import LoaderButton from '../LoaderButton';
-
-
-// // temp data, will use market prop
-// const governanceRows = [
-//   {
-//     label: 'Yes',
-//     color: 'lightPurple',
-//     borderColor: 'lightPurple',
-//     action: '',
-//   },
-//   {
-//     label: 'No',
-//     color: 'pink',
-//     borderColor: 'pink',
-//     action: '',
-//   },
-//   {
-//     label: 'Invalid',
-//     color: 'darkBlue',
-//     borderColor: 'white',
-//     action: '',
-//   },
-// ];
 
 const Title = styled.h3`
   text-align: center;
@@ -40,6 +18,12 @@ const VolumeAmount = styled.div`
   margin-left: 0.5rem;
   color: 'white';
 `;
+
+const CountdownSection = styled.p`
+  font-size: 0.9rem;
+  text-align: center;
+  padding-bottom: 2rem;
+`
 
 const MarketGovernanceContainer = styled.div`
   display: flex;
@@ -79,53 +63,99 @@ const MarketCardGovernance = props => {
   const [flux] = useContext(FluxContext);
   const [loading, setLoading] = useState(false);
   const color = props.market.outcomes > 2 ? 'lightPurple' : 'pink';
-
+  
+  const resolutionPrice = props.market.resolution_state == 1 ? fromDenom(props.market.resolute_bond) : fromDenom(props.market.resolute_bond) * 2 ** (props.market.resolution_state - 1);
   const handleStake = async (outcome) => {
     setLoading(outcome);
-    if (props.market.resolution_state == "0") {
+    if (props.market.resolution_state == "1") {
       const res = await flux.resolute(props.market.id, outcome.toString(), props.market.resolute_bond);
+    } else if (props.market.resolution_state == "2" && !finalizable) {
+      const res = await flux.dispute(props.market.id, outcome.toString(), toDenom(resolutionPrice.toString()));
     }
+    setLoading(false)
   }
 
+
+  const finalize = async () => {
+    setLoading(null);
+    const res = await flux.finalize(props.market.id);
+    setLoading(false);
+  }
+  const now = Date.now();
+  const endTime = new Date(props.market.resolution_round_end_time).getTime();
+  const finalizable = (props.market.resolution_state > 1 && endTime <= now) || props.market.resolution_state == "3";
   const outcomeTags = props.market.outcomes > 2 ? props.market.outcome_tags : ["NO", "YES"]
+
   return (
       <MarketGovernanceContainer>
+        <CountdownSection>
+          {
+            props.market.resolution_state == "2" && !finalizable && <> 
+              Time left to post dispute: <Countdown date={endTime}/>
+            </>
+          }
+        </CountdownSection>
         <Title>
-          {RESOLUTION_STATE[props.market.resolution_state]}
+          {!finalizable ? RESOLUTION_STATE[props.market.resolution_state] : RESOLUTION_STATE[3]}
         </Title>
-        {outcomeTags.map((outcome, i) => (
-          <ContainerRow key={outcome}>
-            <ContainerColumn position="left">
-              {outcome}
-            </ContainerColumn>
-            <ContainerColumn position="right">
-              <LoaderButton
-                color={color}
-                loading={loading === i}
-                borderColor={color}
-                onClick={() => handleStake(i)}
-              >
-                Stake ${fromDenom(props.market.resolute_bond)}
-              </LoaderButton>
-            </ContainerColumn>
-          </ContainerRow>
-        ))}
+       {props.market.winning_outcome !== null && <Title>
+          Last winning outcome: {outcomeTags[props.market.winning_outcome]}
+        </Title>}
+        {
+          !finalizable ? <> 
+            {outcomeTags.map((outcome, i) => (
+              <ContainerRow key={outcome}>
+                <ContainerColumn position="left">
+                  {outcome}
+                </ContainerColumn>
+                <ContainerColumn position="right">
+                  <LoaderButton
+                    color={color}
+                    loading={loading === i}
+                    borderColor={color}
+                    onClick={() => handleStake(i)}
+                  >
+                    Stake ${resolutionPrice}
+                  </LoaderButton>
+                </ContainerColumn>
+              </ContainerRow>
+            ))}
+    
+            <ContainerRow>
+              <ContainerColumn position="left">
+                Invalid
+              </ContainerColumn>
+              <ContainerColumn position="right">
+                <LoaderButton
+                  color="darkBlue"
+                  loading={loading === null}
+                  borderColor="white"
+                  onClick={() => handleStake(null)}
+                >
+                  Stake ${resolutionPrice}
+                </LoaderButton>
+              </ContainerColumn>
+            </ContainerRow>
+          
+          </>
+          :
 
-        <ContainerRow>
-          <ContainerColumn position="left">
-            Invalid
-          </ContainerColumn>
-          <ContainerColumn position="right">
-            <LoaderButton
-              color="darkBlue"
-              loading={loading === null}
-              borderColor="white"
-              onClick={() => handleStake(null)}
-            >
-              Stake ${fromDenom(props.market.resolute_bond)}
-            </LoaderButton>
-          </ContainerColumn>
-        </ContainerRow>
+          <> 
+            <ContainerRow>
+              <ContainerColumn position="left">
+                <LoaderButton
+                  color="pink"
+                  loading={loading === null}
+                  borderColor="white"
+                  onClick={() => finalize()}
+                >
+                  {props.market.resolution_state == "3" ? "Finalizable by judge" : "Finalizable"}
+                </LoaderButton>
+              </ContainerColumn>
+            </ContainerRow>
+          </>
+        }
+
 
         <ContainerRow marginTop>
           <ContainerColumn position="left">
