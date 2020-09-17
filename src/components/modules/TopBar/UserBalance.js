@@ -69,11 +69,10 @@ const UserBalance = ({user}) => {
 	const handleProfileClick = (id) => {
     history.push(`/settings`);
   };
-	
-	const handleSetAllowance = async () => {
-		const allowanceToSet = locked ? balance : 0;
-		await flux.setAllowance(CONTRACT_ID, toDenom(allowanceToSet, 2))
 
+	const handleSetAllowance = async () => {
+		const allowanceToSet = locked ? user.balance : 0;
+		await flux.setAllowance(CONTRACT_ID, allowanceToSet)
 	}
 
 	return (

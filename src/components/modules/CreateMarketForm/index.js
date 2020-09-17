@@ -405,7 +405,10 @@ const CreateMarketForm = props => {
         margin="2rem 0 0 0"
         padding="1rem 2rem"
         loading={loading}
-        onClick={ () => {if (fundsUnlocked) handleLaunchMarket()}}
+        onClick={ () => {
+          setLoading(true);
+          if (fundsUnlocked && !loading) handleLaunchMarket()}
+        }
       >
         {fundsUnlocked ? "Launch this market (costs $0.25)" : "Unlock funds to create market"}
         
