@@ -35,6 +35,7 @@ const EditIcon = styled.span`
   width: 5.5em;
   display: flex;
   justify-content: space-between;
+  cursor: pointer;
 `;
 
 const editIcon = require('../../../../../assets/images/icons/edit_icon.png');
@@ -46,10 +47,6 @@ const FormOverview = props => {
     yes: 'lightPurple',
     no: 'pink',
   };
-
-  const handleShareChange = (event) => {
-    console.log('no design for change of shares', event);
-  }
 
   return (
     <FlexWrapper
@@ -69,7 +66,10 @@ const FormOverview = props => {
             height="100%"
           >
             <ContentWrapper>
-              <EditIcon onClick={handleShareChange}>
+              <EditIcon onClick={ () => {
+                  props.cancel();
+                }}
+              >
                 <img src={editIcon} alt="edit icon" /> edit
               </EditIcon>
               <Currency>$</Currency>
