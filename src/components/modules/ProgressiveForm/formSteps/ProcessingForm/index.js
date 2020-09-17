@@ -19,6 +19,7 @@ const ProcessingForm = props => {
         height={props.layover ? '100%' : '350px'}
       >
       <FlexItem
+        className="finalOrderOverview"
         backgroundColor={colorMap[props.sharesType]}
         width="100%"
         flex={props.layover ? '2' : '8'}
