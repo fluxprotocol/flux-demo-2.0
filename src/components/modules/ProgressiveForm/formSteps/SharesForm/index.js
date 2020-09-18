@@ -65,8 +65,8 @@ const TradingMessage = styled.span`
 // const Error
 
 const SharesForm = props => {
-  const [numberOfShares, setNumberOfShares] = useState();
-  const defaultMarketPrice = props.sharesType[0] && parseInt(props.sharesType[0].marketPrice) ? parseInt(props.sharesType[0].marketPrice) : 0;
+  const [numberOfShares, setNumberOfShares] = useState(1);
+  const defaultMarketPrice = props.sharesType[0] && parseInt(props.sharesType[0].marketPrice) ? parseInt(props.sharesType[0].marketPrice) : 1;
   const [marketPrice, setMarketPrice] = useState(defaultMarketPrice);
   const [showMarketPriceTooltip, setShowMarketPriceTooltip] = useState(false);
   
@@ -76,8 +76,9 @@ const SharesForm = props => {
   };
 
   const handleSharesInputChange = (event) => {
-    console.log('this is event', event.target.value);
-    setNumberOfShares(event.target.value)
+    let numOfShares = event.target.value;
+    if (numOfShares < 1) numOfShares = 1;
+    setNumberOfShares(numOfShares)
   }
 
   const handlePriceChange = (event) => {
@@ -86,8 +87,8 @@ const SharesForm = props => {
       return;
     }
 
-    if (event.target.value < 0) {
-      setMarketPrice(0);
+    if (event.target.value < 1) {
+      setMarketPrice(1);
       return;
     }
 
@@ -116,6 +117,7 @@ const SharesForm = props => {
             <FlexItem textAlign="right">
               <Input 
                 placeholder={0}
+                value={numberOfShares}
                 onChange={handleSharesInputChange}
               />
             </FlexItem>
@@ -155,6 +157,7 @@ const SharesForm = props => {
                 $
                 <Input
                   onChange={handlePriceChange}
+                  value={marketPrice}
                   required
                   placeholder={0}
                 />

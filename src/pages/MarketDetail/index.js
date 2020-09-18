@@ -36,6 +36,7 @@ const socket = io('https://api.flux.market');
 const PurchaseWrapper = styled.div`
   width: 100%;
 `;
+
 const Line = styled.div`
   width: 90%;
   display: block;
