@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import { toDenom, toShares, fromShares } from '../../../helpers/numberUtils';
 import Paragraph from '../../common/Paragraph';
 import Button from '../../common/Button';
+import { FluxContext } from '../../../context/FluxProvider';
 
 const FlexWrapper = styled.div`
   display: flex;
@@ -34,10 +35,7 @@ const OrderBookDetail = styled.th`
 const OrderTable = props => {
 	const {title, market, headers, dataGetter, orderbookData} = props;
 	const [data, setData] = useState([]);
-
-	const colorValue = {
-    buy: 'orderbookGreen'
-	};
+	const [flux] = useContext(FluxContext);
 	
 	useEffect(() => {
 		dataGetter().then(res => {
@@ -45,7 +43,7 @@ const OrderTable = props => {
 		})
 	}, [orderbookData])
 
-  const outcomeTags = market.outcome > 2 ? market.outcome_tags : ["NO", "YES"]
+  	const outcomeTags = market.outcome > 2 ? market.outcome_tags : ["NO", "YES"]
 
 	const getOpenOrderBody = () => data.map((entry,i) => {
 		return (
@@ -76,6 +74,7 @@ const OrderTable = props => {
 				>
 				<Button
 					color='pink'
+					onClick={() => flux.cancelOrder(market.id, entry.outcome, entry.id, entry.price)}
 					small
 				>cancel</Button>
 				</OrderBookDetail>

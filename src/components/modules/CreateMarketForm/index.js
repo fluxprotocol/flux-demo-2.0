@@ -16,6 +16,8 @@ import { FlexWrapper, FlexItem } from '../../common/Flex';
 // context
 import { FluxContext } from '../../../context/FluxProvider';
 import { useFluxAuth } from '../../../App';
+import LoaderButton from '../../common/LoaderButton';
+import { useHistory } from 'react-router-dom';
 
 const TextArea = styled.textarea`
   display: block;
@@ -98,8 +100,10 @@ const Label = styled.label`
 `;
 
 const CreateMarketForm = props => {
+  const history = useHistory();
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [marketDescription, setMarketDescription] = useState('');
+  const [loading, setLoading] = useState(false);
   const [marketType, setMarketType] = useState('binary');
   const [outcomes, setOutcomes] = useState(3);
   const [categoricalOptions, setCategoricalOptions] = useState([''])
@@ -121,7 +125,8 @@ const CreateMarketForm = props => {
     else setSelectedCategories(selectedCategories.filter(item => item !== filter))
   }
 
-  const handleLaunchMarket = () => {
+  const handleLaunchMarket = async () => {
+    setLoading(true);
     const unix = moment(`${marketEndDateDay}-${marketEndDateMonth}-${marketEndDateYear} ${marketEndTime}`, 'DD-MM-YYYY hh:mm').format('X')
     const market = {
       marketType: marketType,
@@ -140,7 +145,11 @@ const CreateMarketForm = props => {
       market.categoricalOptions = categoricalOptions;
     }
 
-    launchMarket(market);
+    const res = await launchMarket(market);
+    setLoading(false);
+    history.push(`/markets/${res}`);
+    // if (typeof res === "number") props.closeModal();
+
   }
 
   const createBinaryMarket = async (market) => {
@@ -182,10 +191,8 @@ const CreateMarketForm = props => {
     }
 
     if (market.marketType === 'categorical') {
-      return await createCategoricalMarket(market);
-      
+      return await createCategoricalMarket(market); 
     }
-
   }
 
   const outcomeInput = [];
@@ -212,7 +219,7 @@ const CreateMarketForm = props => {
       />
     </div>)
   }
-
+  
   return (
     <ContentWrapper
       padding="2rem 1rem 1rem 1rem"
@@ -399,15 +406,19 @@ const CreateMarketForm = props => {
         </Paragraph>      
       }
 
-      <Button
+      <LoaderButton
         color={fundsUnlocked ? "lightPurple" : "gray"}
-        margin="1rem 0"
+        margin="2rem 0 0 0"
         padding="1rem 2rem"
-        onClick={ () => {if (fundsUnlocked) handleLaunchMarket()}}
+        loading={loading}
+        onClick={ () => {
+          setLoading(true);
+          if (fundsUnlocked && !loading) handleLaunchMarket()}
+        }
       >
         {fundsUnlocked ? "Launch this market (costs $0.25)" : "Unlock funds to create market"}
         
-      </Button>
+      </LoaderButton>
       <Disclaimer>Creating a market requires you to stake $0.25 on the validity of your market</Disclaimer>
     </ContentWrapper>
   );

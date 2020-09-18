@@ -118,7 +118,7 @@ const Dashboard = props => {
 
     setCurrentScroll(container.getBoundingClientRect().bottom);
   }
-  const scrolling = debounce(handleScroll, 500);
+  const scrolling = debounce(handleScroll, 100);
 
   useEffect(() => {
     if (!currentScroll) return;
@@ -132,7 +132,6 @@ const Dashboard = props => {
       return;
     }
 
-    console.log('Caa')
     if (bottom) setReachedScrollBottom(true);
   }, [currentScroll]);
 
@@ -174,7 +173,6 @@ const Dashboard = props => {
 
   const getMarkets = (type = 'all', offset) => {
     const params = {};
-
     if (activeFilters.length) params.categories = activeFilters;
     else if (params.categories) delete params.categories;
    
@@ -300,11 +298,13 @@ const Dashboard = props => {
           <OverviewToggle onToggle={handleOverviewToggle}/>
 
           <ContentWrapper padding="1rem">
-            <CategoryFilters 
-              filters={categoryFilters} 
-              activeFilters={activeFilters}
-              filterChange={handleFilterChange}
-            />
+            {overviewType === "trade" && <>
+              <CategoryFilters 
+                filters={categoryFilters} 
+                activeFilters={activeFilters}
+                filterChange={handleFilterChange}
+              />
+            </>}
           </ContentWrapper>
 
           {(overviewType === 'trade') ? (
@@ -314,6 +314,7 @@ const Dashboard = props => {
             />
           ) : (overviewType === 'resolute') ? (
             <MarketOverview 
+              getMarkets={getMarkets}
               markets={resoluteMarkets}
               type="resolute"
             />
@@ -323,14 +324,14 @@ const Dashboard = props => {
             </ContentWrapper>
           )}
 
-          {reachedScrollBottom &&
+          {/* {reachedScrollBottom &&
             <ContentWrapper
               padding="1rem"
               textAlign="center"
             >
               <Loader />
             </ContentWrapper>        
-          }
+          } */}
 
         </ContentWrapper>
 
@@ -343,7 +344,7 @@ const Dashboard = props => {
           <CloseModalButton onClick={() => {
             setModalIsOpen(false);
           }}>cancel</CloseModalButton>
-          <CreateMarketForm />
+          <CreateMarketForm closeModal={() => setModalIsOpen(false)}/>
         </Modal>
       <Footer />
       <BackgroundWave />
