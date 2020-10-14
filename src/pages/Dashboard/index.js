@@ -162,7 +162,7 @@ const Dashboard = props => {
 
   useEffect(() => {
     if (!reachedScrollBottom) return;
-    if (reachedScrollBottom) {
+    if (reachedScrollBottom && markets.length > 0) {
       getMarkets(overviewType);
     }
   },[reachedScrollBottom]);

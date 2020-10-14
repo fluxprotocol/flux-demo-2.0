@@ -13,6 +13,7 @@ import { FlexWrapper } from '../../components/common/Flex';
 import ThemeToggler from '../../components/common/ThemeToggler';
 import { fromDenom } from '../../helpers/numberUtils';
 import { useHistory } from 'react-router-dom';
+import Loader from '../../components/common/Loader';
 
 const SettingsLabel = styled.span`
   color: white;
@@ -60,6 +61,8 @@ const ContractContainer = styled.div`
   }
 
   & div.table_wrapper {
+    max-height: 12rem;
+    overflow-y: scroll;
     width: 100%;
     background-color: #0F0E25;
   }
@@ -124,6 +127,13 @@ const OrderHistoryData = styled.td`
     width: 33%;
   }
 `;
+const MarketHistoryData = styled.td`
+  color: white;
+  @media (min-width: ${({ theme }) => theme.smallBreakpoint}) {
+    text-align: left;
+    width: 80%;
+  }
+`;
 
 const OrderButton = styled.td`
   background: ${props => props.backgroundColor ? props.backgroundColor : '#5400FF'};
@@ -136,6 +146,7 @@ const OrderButton = styled.td`
 const ProfileIcon = require("../../assets/images/icons/profile_icon.png");
 
 const dataHeaders = ["contract", "price per share", "order value"];
+const marketHeaders = ["market", "claimable"];
 
 const Settings = props => {
   const { user } = useFluxAuth();
@@ -144,12 +155,15 @@ const Settings = props => {
   const history = useHistory();
   const [openOrders, setOpenOrders] = useState([]);
   const [filledOrders, setFilledOrders] = useState([]);
+  const [finalizedMarkets, setFinalizedMarkets] = useState([]);
+  const [claimable, setClaimable] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (!user) {
       return;
     }
-
+    getFinalizedMarkets();
     getOpenOrders();
     getFilledOrders();
   }, [user]);
@@ -163,7 +177,21 @@ const Settings = props => {
   const getFilledOrders = async () => {
     let res = await flux.getOrderHistory(user.id);
     setFilledOrders(res);
+  }
 
+  const getFinalizedMarkets = async () => {
+    let res = await flux.getFinalizedParticipatedMarkets(user.id);
+    setFinalizedMarkets(res);
+    const proms = res.map(market => flux.getClaimable(market.market_id));
+    const claimableArr = await Promise.all(proms);
+    setClaimable(claimableArr)
+  }
+
+  // TODO ux
+  const claimEarnings = async (id) => {
+    console.log(id, user.id)
+    await flux.claimEarnings(id, user.id);
+    getFinalizedMarkets()
   }
 
   return (
@@ -176,6 +204,49 @@ const Settings = props => {
         <img src={ProfileIcon} alt="" />
         {user && user.id}
       </SettingsContainer>
+
+      {finalizedMarkets.length > 0 && <>
+        <SettingsContainer
+          className="order_history"
+        >
+          Finalized markets
+        </SettingsContainer>
+        <ContractContainer>
+          <div 
+            className="table_wrapper"
+          >
+            <OrderHistoryWrapper>
+              <OrderHistoryBody pointer>
+                {
+                  finalizedMarkets.map((market, index) => {
+                    return (
+                      <OrderHistoryRow
+                        key={index}
+                        className="data_row"
+                      >
+                        <MarketHistoryData>
+                          {market.description}
+                        </MarketHistoryData>
+
+                        {
+                          claimable && claimable[index] ? <OrderButton
+                            backgroundColor="#FF009C"
+                            onClick={() => claimEarnings(market.market_id)}
+                          >
+                            CLAIM {fromDenom(claimable[index], 2)}
+                          </OrderButton>
+                          : <td><Loader/></td>
+                        }
+                      
+                      </OrderHistoryRow>
+                    )
+                  })
+                }
+              </OrderHistoryBody>
+            </OrderHistoryWrapper>
+          </div>
+        </ContractContainer> 
+      </>}
 
       <SettingsContainer
         className="order_history"
@@ -244,7 +315,7 @@ const Settings = props => {
         <span 
           className="filled_field"
         >
-          Filled
+          Closed
         </span>
         <div 
           className="table_wrapper"

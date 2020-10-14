@@ -44,11 +44,13 @@ const chartConfig = {
           maxTicksLimit: 6,
         },
       }],
-      xAxes: [{
-        ticks: {
-          display: false,
-        },
-      }],
+      // xAxes: [{
+      //   ticks: {
+      //     callback: function (value) {
+      //       return new Date(value);
+      //     },
+      //   },
+      // }],
     },
   }
 };
@@ -67,19 +69,24 @@ const OrderBookLineChart = props => {
   useEffect(() => {
     let outComes = {};
     chartConfig.data.datasets = [];
-    
+    console.log(props.priceHistory)
     // loop each history item and add to separate object prop
+
+    let prevX = null;
+    let currX = null; 
     props.priceHistory.forEach(dataItem => {
       if (!outComes[dataItem.outcome]) {
         outComes[dataItem.outcome] = {
           data: [],
         }
       };
-      outComes[dataItem.outcome].data.push(Math.floor(dataItem.avg_price));
+      outComes[dataItem.outcome].data.push({y: Math.floor(dataItem.avg_price), x: Math.floor(dataItem.date_type_0)});
     });
 
     // loop outcome object prop and create dataset item for chart array
+    let maxLen = 0;
     for (const property in outComes) {
+      if (outComes[property].data.length > maxLen) maxLen = outComes[property].data.length;
       chartConfig.data.datasets.push({
         data: outComes[property].data,
         backgroundColor: 'transparent',
@@ -87,8 +94,14 @@ const OrderBookLineChart = props => {
         borderWidth: 1,
         fill: false,
       })
+      console.log(maxLen)
+      console.log(chartConfig);
 
-      chartConfig.data.labels[property] = props.outcomeColorNameMap[0] ? props.outcomeColorNameMap[property].label : "";
+      var labels = [];
+      for (var i = 0; i <= maxLen; i++) {
+          labels.push("");
+      }
+      chartConfig.data.labels = labels;
     }
 
     updateDataset();

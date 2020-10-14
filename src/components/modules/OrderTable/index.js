@@ -4,6 +4,7 @@ import { toDenom, toShares, fromShares } from '../../../helpers/numberUtils';
 import Paragraph from '../../common/Paragraph';
 import Button from '../../common/Button';
 import { FluxContext } from '../../../context/FluxProvider';
+import LoaderButton from '../../common/LoaderButton';
 
 const FlexWrapper = styled.div`
   display: flex;
@@ -35,7 +36,14 @@ const OrderBookDetail = styled.th`
 const OrderTable = props => {
 	const {title, market, headers, dataGetter, orderbookData} = props;
 	const [data, setData] = useState([]);
+	const [loading, setLoading] = useState(false);
 	const [flux] = useContext(FluxContext);
+
+	const cancelOrder = async (entry) => {
+		setLoading({id: entry.id, outcome: entry.outcome});
+		await flux.cancelOrder(market.id, entry.outcome, entry.id, entry.price)		
+		setLoading(false);
+	}
 	
 	useEffect(() => {
 		dataGetter().then(res => {
@@ -43,7 +51,7 @@ const OrderTable = props => {
 		})
 	}, [orderbookData])
 
-  	const outcomeTags = market.outcome > 2 ? market.outcome_tags : ["NO", "YES"]
+  	const outcomeTags = market.outcomes > 2 ? market.outcome_tags : ["NO", "YES"]
 
 	const getOpenOrderBody = () => data.map((entry,i) => {
 		return (
@@ -72,11 +80,12 @@ const OrderTable = props => {
 				<OrderBookDetail
 					fontWeight="800"
 				>
-				<Button
+				<LoaderButton
 					color='pink'
-					onClick={() => flux.cancelOrder(market.id, entry.outcome, entry.id, entry.price)}
+					loading={loading.id == entry.id && loading.outcome == entry.outcome}
+					onClick={() => cancelOrder(entry)}
 					small
-				>cancel</Button>
+				>cancel</LoaderButton>
 				</OrderBookDetail>
 			</OrderBookDetails>
 		)

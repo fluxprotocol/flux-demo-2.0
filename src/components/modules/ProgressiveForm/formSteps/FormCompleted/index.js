@@ -5,6 +5,7 @@ import ContentWrapper from '../../../../common/ContentWrapper';
 import { FlexWrapper, FlexItem } from '../../../../common/Flex';
 import Button from '../../../../common/Button';
 import Paragraph from '../../../../common/Paragraph';
+import useWindowDimensions from '../../../../../hooks/useWindowDimensions';
 
 const completedIcon = require('../../../../../assets/images/icons/icon-completed.svg');
 
@@ -13,6 +14,7 @@ const FormCompleted = props => {
     yes: 'lightPurple',
     no: 'pink',
   };
+  const { width } = useWindowDimensions();
 
   return (
     <FlexWrapper
@@ -66,7 +68,11 @@ const FormCompleted = props => {
               height="fit-content"
               borderColor="white"
               onClick={ () => {
-                props.formEvent('buttonSelection')
+                if (width < 650) {
+                  props.cancelMobile();
+                } else {
+                  props.formEvent('buttonSelection')
+                }
               }}
             >
               Done

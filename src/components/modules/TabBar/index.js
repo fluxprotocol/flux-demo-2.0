@@ -11,6 +11,7 @@ import CreateMarketForm from '../CreateMarketForm';
 
 // context
 import { FluxContext } from '../../../context/FluxProvider';
+import { useAuth } from '../../../hooks/useAuth';
 
 const customStyles = {
   content : {
@@ -85,12 +86,12 @@ const MenuLabel = styled.span`
 `;
 
 const TabBar = props => {
-  const [flux, _] = useContext(FluxContext);
+  const [user] = useAuth();
   const location = useLocation();
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   return (
-    <TabBarContainer>
+    user && user.id ? <TabBarContainer>
       <FlexWrapper>
         <FlexItem
           padding="0 1rem"
@@ -143,6 +144,7 @@ const TabBar = props => {
         <CreateMarketForm closeModal={() => setModalIsOpen(false)}/>
       </Modal>
     </TabBarContainer>
+    : null
   );
 }
 

@@ -16,7 +16,7 @@ const customStyles = {
     left: '50%',
     right: 'auto',
     bottom: 'auto',
-    maxWidth: '33rem',
+    maxWidth: '90%',
     maxHeight: '95vh',
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
@@ -45,8 +45,10 @@ const CloseModalButton = styled.button`
   cursor: pointer;
 `;
 
+
 const LoginModal = props => (
   <Modal
+  
     isOpen={true}
     style={customStyles}
     contentLabel="Create market"

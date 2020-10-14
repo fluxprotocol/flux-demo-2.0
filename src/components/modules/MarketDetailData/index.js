@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 // common
 import OrderBookBookBarChart from '../../common/OrderBookBarChart';
-import OrderBookLineGraph from '../../common/OrderBookLineGraph';
+import OrderBookLineChart from '../../common/OrderBookLineChart';
 
 const barsActive = require('../../../assets/images/icons/bars_active.svg');
 const barsInactive = require('../../../assets/images/icons/bars_inactive.svg');
@@ -248,7 +248,7 @@ const MarketDetailData = props => {
             />
           ) 
           : 
-          <OrderBookLineGraph 
+          <OrderBookLineChart 
             market={market} 
             priceHistory={props.priceHistory}
             outcomeColorNameMap={props.outcomeColorNameMap}

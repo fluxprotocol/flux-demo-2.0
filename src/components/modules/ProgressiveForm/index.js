@@ -145,6 +145,7 @@ const ProgressiveForm = props => {
         <ContentWrapper height="100%">
           <FormCompleted
             finalOrder={finalOrder}
+            cancelMobile={props.cancelMobile}
             orderOutcome={placeOrder}
             layover={props.layover}
             formEvent={(response) => {

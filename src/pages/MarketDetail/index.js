@@ -28,6 +28,7 @@ import useWindowDimensions from '../../hooks/useWindowDimensions';
 import { mapOutcomes } from '../../helpers/mappers';
 import { useAuth } from '../../hooks/useAuth';
 import OrderTable from '../../components/modules/OrderTable';
+import UserBalance from '../../components/modules/TopBar/UserBalance';
 
 const io = require('socket.io-client');
 const socket = io('https://api.flux.market');
@@ -36,6 +37,15 @@ const socket = io('https://api.flux.market');
 const PurchaseWrapper = styled.div`
   width: 100%;
 `;
+
+
+
+const StylesParagraph = styled(Paragraph)`
+  margin-top: 25px;
+  text-align: center;
+  color: pink;
+`
+
 const Line = styled.div`
   width: 90%;
   display: block;
@@ -58,6 +68,7 @@ const MarketDetail = props => {
   const { width } = useWindowDimensions();
   const [showForm, setShowForm] = useState(false);
 
+  const fundsUnlocked = user && user.allowance >= user.balance;
   useEffect(() => {
     getSetData()
     getPriceHistory('1D');
@@ -96,6 +107,11 @@ const MarketDetail = props => {
 
   const getPriceHistory = async (type) => {
     const daysMap = {
+      '1H': {
+        substractAmount: 1,
+        substractType: 'hours',
+        dataTypes: ['minutes'],
+      },
       '1D': {
         substractAmount: 1,
         substractType: 'days',
@@ -202,10 +218,12 @@ const MarketDetail = props => {
                     {/* buying power: mobile */}
                     {width < 650 &&
                       <ContentWrapper width="100%">
+                        {!user && <StylesParagraph>Please sign in to place an order</StylesParagraph>}
+                        {user && !fundsUnlocked && <StylesParagraph>Unlock your funds to place orders</StylesParagraph>}
                         <FlexWrapper>
                           <PositionedLabel position="left">Buying power</PositionedLabel>
                           <PositionedLabel position="right">
-                            <strong>$150.000</strong>
+                            {user && <UserBalance user={user} hideUser/>}
                           </PositionedLabel>
                         </FlexWrapper>
                         <FlexWrapper 
@@ -223,8 +241,9 @@ const MarketDetail = props => {
                               maxWidth="10rem"
                               shadow
                               width="100%"
-                              color="lightPurple"
+                              color={fundsUnlocked ? 'lightPurple': 'gray'}
                               onClick={ () => {
+                                if (!fundsUnlocked) return;
                                 setShowForm(true);
                                 document.body.classList.add('layover');
                               }}

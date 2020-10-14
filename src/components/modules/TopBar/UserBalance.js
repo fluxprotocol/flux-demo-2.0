@@ -58,7 +58,7 @@ const UserName = styled.span`
   }
 `;
 
-const UserBalance = ({user}) => {
+const UserBalance = ({user, hideUser}) => {
 	const history = useHistory();
 	const [flux, ] = useContext(FluxContext);
 	const balance = fromDenom(user.balance, 2);
@@ -70,8 +70,10 @@ const UserBalance = ({user}) => {
     history.push(`/settings`);
   };
 
+  	console.log(balance, allowance)
 	const handleSetAllowance = async () => {
 		const allowanceToSet = locked ? user.balance : 0;
+		console.log(user.balance);
 		await flux.setAllowance(CONTRACT_ID, allowanceToSet)
 	}
 
@@ -82,7 +84,7 @@ const UserBalance = ({user}) => {
 			textAlign="right"
 		>
 			<InlineContentWrapper cursor="pointer" onClick={handleProfileClick}>
-				<UserName>{user.id ? user.id : '' }</UserName>
+				{!hideUser && <UserName>{user.id ? user.id : '' }</UserName>}
 				<UserBalanceContainer locked={locked}>{user.balance ? `$${balance}` : '' }</UserBalanceContainer>
 			</InlineContentWrapper>
 			<Lock onClick={handleSetAllowance}>{locked ? "unlock" : "lock"}</Lock>

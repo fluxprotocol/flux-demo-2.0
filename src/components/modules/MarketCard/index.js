@@ -71,7 +71,7 @@ const CardTitle = styled.h1`
   color: white;
 
   @media (min-width: ${({ theme }) => theme.mediumBreakpoint}) {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
   }
 `;
 
@@ -92,6 +92,13 @@ const MarketCard = props => {
   const images = require.context('../../../assets/images/', true);
   const showCardImage = CATEGORIES.indexOf(props.market.categories[0]) > -1;
   
+  const formatString = (source_string, max_length) => {
+    var short = source_string.substr(0, max_length);
+    if (/^\S/.test(source_string.substr(max_length)))
+        return short.replace(/\s+\S*$/, "") + '...';
+    return short;
+};
+
   return (
     <CardContainer 
       onClick={() => handleCardClick(props.market.id)}
@@ -123,7 +130,7 @@ const MarketCard = props => {
           alt={props.market.category}
         />}
         <CardTitle>
-          {props.market.description}
+          {formatString(props.market.description, 70)}
         </CardTitle>
         <DateLabel>
           resolution date: <strong>{moment.unix(props.market.end_timestamp).format("MM/DD/YYYY")}</strong>
