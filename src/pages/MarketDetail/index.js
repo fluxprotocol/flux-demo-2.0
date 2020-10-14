@@ -38,8 +38,6 @@ const PurchaseWrapper = styled.div`
   width: 100%;
 `;
 
-
-
 const StylesParagraph = styled(Paragraph)`
   margin-top: 25px;
   text-align: center;

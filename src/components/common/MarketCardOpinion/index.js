@@ -17,6 +17,7 @@ const OutcomeTag = styled.div`
   background-color: ${props => props.color ? props.theme[props.color] : props.theme.gray};
   height: 0.5rem;
   width: 1.5rem;
+  margin-top: 0.3rem;
   border-top-left-radius: 0.2rem;
   border-bottom-left-radius: 0.2rem;
 `;
@@ -61,7 +62,9 @@ const MarketCardOpinion = props => {
                   <FlexItem>
                     {props.outcomes[key].label}
                   </FlexItem>
-                  <FlexItem textAlign="right">
+                  <FlexItem
+                    textAlign="right"
+                  >
                     {lastFilledPrices[key] || 0}
                   </FlexItem>
                 </FlexWrapper>

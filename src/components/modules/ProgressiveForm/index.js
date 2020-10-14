@@ -51,7 +51,7 @@ const ProgressiveForm = props => {
     >
       {/* buttonSelection */}
       {currentView === 'buttonSelection' &&
-        <ContentWrapper padding="2rem">
+        <ContentWrapper padding="2rem 2rem 4rem 2rem">
           <ActionTitle textAlign="center">Purchase Shares</ActionTitle>
           <ButtonSelection
             layover={props.layover}

@@ -317,6 +317,8 @@ const CreateMarketForm = props => {
             value={marketEndDateMonth}
             onChange={(event) => {
               let date = event.target.value;
+              if (date < 1) date = 1;
+              else if (date > 12) date = 12;
               setMarketEndDateMonth(date);
             }}
           />
@@ -339,6 +341,8 @@ const CreateMarketForm = props => {
             value={marketEndDateDay}
             onChange={(event) => {
               let date = event.target.value;
+              if (date < 1) date = 1;
+              else if (date > 31) date = 31;
               setMarketEndDateDay(date);
             }}
           />
@@ -360,6 +364,8 @@ const CreateMarketForm = props => {
             value={marketEndDateYear}
             onChange={(event) => {
               let date = event.target.value;
+              const currentYear = new Date().getFullYear();
+              if (date < currentYear) date = currentYear;
               setMarketEndDateYear(date);
             }}
           />
