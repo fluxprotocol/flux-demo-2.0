@@ -65,7 +65,7 @@ const TradingMessage = styled.span`
 // const Error
 
 const SharesForm = props => {
-  const [numberOfShares, setNumberOfShares] = useState(1);
+  const [numberOfShares, setNumberOfShares] = useState("");
   const defaultMarketPrice = props.sharesType[0] && parseInt(props.sharesType[0].marketPrice) ? parseInt(props.sharesType[0].marketPrice) : 1;
   const [marketPrice, setMarketPrice] = useState(defaultMarketPrice);
   const [showMarketPriceTooltip, setShowMarketPriceTooltip] = useState(false);
@@ -76,8 +76,6 @@ const SharesForm = props => {
   };
 
   const handleSharesInputChange = (event) => {
-    let numOfShares = event.target.value;
-    if (numOfShares < 1) numOfShares = 1;
     setNumberOfShares(numOfShares)
   }
 
