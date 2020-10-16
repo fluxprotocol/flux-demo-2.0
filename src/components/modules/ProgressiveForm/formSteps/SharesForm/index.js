@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import ContentWrapper from '../../../../common/ContentWrapper';
 import { FlexWrapper, FlexItem } from '../../../../common/Flex';
 import Button from '../../../../common/Button';
+import Paragraph from '../../../../common/Paragraph';
 
 const RowDivider = styled.div`
   width: 100%;
@@ -18,6 +19,10 @@ const ActionTitle = styled.h3`
   color: white;
   text-align: ${props => props.textAlign ? props.textAlign : 'initial'};
 `;
+
+const Error = styled(Paragraph)`
+  color: red;
+`
 
 const Input = styled.input.attrs({ type: 'number' })`
   max-width: 3rem;
@@ -62,34 +67,24 @@ const TradingMessage = styled.span`
   text-align: center;
 `;
 
-// const Error
+const colorMap = {
+  yes: 'lightPurple',
+  no: 'pink',
+};
 
 const SharesForm = props => {
   const [numberOfShares, setNumberOfShares] = useState("");
-  const defaultMarketPrice = props.sharesType[0] && parseInt(props.sharesType[0].marketPrice) ? parseInt(props.sharesType[0].marketPrice) : 1;
+  const defaultMarketPrice = props.sharesType[0] && parseInt(props.sharesType[0].marketPrice) ? parseInt(props.sharesType[0].marketPrice) : "";
   const [marketPrice, setMarketPrice] = useState(defaultMarketPrice);
   const [showMarketPriceTooltip, setShowMarketPriceTooltip] = useState(false);
-  
-  const colorMap = {
-    yes: 'lightPurple',
-    no: 'pink',
-  };
+  const [error, setError] = useState(null);
+
 
   const handleSharesInputChange = (event) => {
-    setNumberOfShares(numOfShares)
+    setNumberOfShares(event.target.value);
   }
 
   const handlePriceChange = (event) => {
-    if (event.target.value > 99) {
-      setMarketPrice(99);
-      return;
-    }
-
-    if (event.target.value < 1) {
-      setMarketPrice(1);
-      return;
-    }
-
     setMarketPrice(event.target.value);
   }
 
@@ -106,6 +101,7 @@ const SharesForm = props => {
           padding="2rem"
           >
           <ActionTitle textAlign="center">Buy {numberOfShares} Shares</ActionTitle>
+          {error && <Error>{error}</Error>}
           <FlexWrapper className="input_divider" margin="1rem 0">
             <FlexItem
               color="white"
@@ -214,16 +210,15 @@ const SharesForm = props => {
             margin="2rem 0 0 1rem"
             color={colorMap[props.sharesType]}
             className="reviewButton"
-            disabled={!marketPrice || !numberOfShares}
             onClick={ () => {
-              // TODO: validation market price < 100 && > 0
-              // TODO: validation: shares > 0
-              // TODO: default number of shares to
+              if (marketPrice > 99 || marketPrice < 1) return setError("Invalid price - needs to be between 1 - 99");
+              if (!numberOfShares || numberOfShares < 1) return setError("Invalid number of shares, should be more than 0");
               props.formEvent(['review', numberOfShares, marketPrice, numberOfShares * marketPrice / 100]);
             }}
           >
             Review
           </Button>
+          
         </ContentWrapper>
 
       </FlexWrapper>

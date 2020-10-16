@@ -62,7 +62,7 @@ const ContractContainer = styled.div`
 
   & div.table_wrapper {
     max-height: 12rem;
-    overflow-y: scroll;
+    overflow-y: auto;
     width: 100%;
     background-color: #0F0E25;
   }
@@ -337,7 +337,7 @@ const Settings = props => {
                         {order.price}
                       </OrderHistoryData>
                       <OrderHistoryData>
-                        ${fromDenom(order.spend)}
+                        ${fromDenom(order.spend, 2)}
                       </OrderHistoryData>
                       {/* <OrderButton>
                         sell
