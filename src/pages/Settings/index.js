@@ -189,7 +189,6 @@ const Settings = props => {
 
   // TODO ux
   const claimEarnings = async (id) => {
-    console.log(id, user.id)
     await flux.claimEarnings(id, user.id);
     getFinalizedMarkets()
   }

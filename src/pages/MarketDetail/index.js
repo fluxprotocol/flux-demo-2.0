@@ -104,16 +104,17 @@ const MarketDetail = props => {
   }, [market.outcome_tags])
 
   const getPriceHistory = async (type) => {
+    type = "1H"
     const daysMap = {
       '1H': {
         substractAmount: 1,
         substractType: 'hours',
-        dataTypes: ['minutes'],
+        dataTypes: ['minute'],
       },
       '1D': {
         substractAmount: 1,
         substractType: 'days',
-        dataTypes: ['hour'],
+        dataTypes: ['hour', 'day'],
       },
       '1W': {
         substractAmount: 7,
@@ -142,10 +143,11 @@ const MarketDetail = props => {
       },
     };
 
-
-    const fromDate = moment().subtract(daysMap[type].substractAmount, daysMap[type].substractType).format('YYYY-MM-DD HH:mm:ss');
-    const toDate = moment().format('YYYY-MM-DD HH:mm:ss');
+    
+    const fromDate = moment().subtract(daysMap[type].substractAmount, daysMap[type].substractType).unix();
+    const toDate = moment().unix();
     const allPriceHistory = await flux.getPriceHistory(id, fromDate, toDate, daysMap[type].dataTypes);
+
     setPriceHistory(allPriceHistory);
   }
 

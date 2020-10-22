@@ -92,7 +92,8 @@ const OrderBookBookBarChart = props => {
     buy: 'orderbookGreen'
   };
 
-  const outcomeTags = market.outcome > 2 ? market.outcome_tags : ["NO", "YES"]
+  const outcomeTags = market.outcomes > 2 ? market.outcome_tags : ["NO", "YES"]
+
   const getOrderbook = () => orderBookItems.map((item, i) =>{
     return (
       <OrderBookDetails key={i}>

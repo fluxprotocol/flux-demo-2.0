@@ -130,7 +130,7 @@ const MarketCard = props => {
           alt={props.market.category}
         />}
         <CardTitle>
-          {formatString(props.market.description, 70)}
+          {formatString(props.market.description, 90)}
         </CardTitle>
         <DateLabel>
           resolution date: <strong>{moment.unix(props.market.end_timestamp).format("MM/DD/YYYY")}</strong>

@@ -70,10 +70,8 @@ const UserBalance = ({user, hideUser}) => {
     history.push(`/settings`);
   };
 
-  	console.log(balance, allowance)
 	const handleSetAllowance = async () => {
 		const allowanceToSet = locked ? user.balance : 0;
-		console.log(user.balance);
 		await flux.setAllowance(CONTRACT_ID, allowanceToSet)
 	}
 

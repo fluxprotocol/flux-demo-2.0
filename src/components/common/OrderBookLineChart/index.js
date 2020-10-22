@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Chartjs from 'chart.js';
+import moment from "moment";
 import styled from 'styled-components';
 
 import { globalColors } from '../../../config/Themes';
@@ -67,35 +68,56 @@ const OrderBookLineChart = props => {
 
   // trigger effect everytime priceHistory value changes
   useEffect(() => {
-    let outComes = {};
+    const outcomes = props.market.outcomes;
     chartConfig.data.datasets = [];
-    console.log(props.priceHistory)
-    // loop each history item and add to separate object prop
-
+    
+    /* Let's asume we have 1 day charts */
+    let dataByOutcome = {};
     let prevX = null;
-    let currX = null; 
-    props.priceHistory.forEach(dataItem => {
-      if (!outComes[dataItem.outcome]) {
-        outComes[dataItem.outcome] = {
-          data: [],
+    let prevTimestamp = null;
+
+    let outcomesAtPrevX = [];
+    props.priceHistory.forEach(data => {
+      if (!dataByOutcome[data.outcome]) dataByOutcome[data.outcome] = [];
+      if (prevX && prevX != data.date_type_0) {
+        const delta = data.fill_time - prevTimestamp;
+        const hours = Math.floor(moment.duration(delta * 1000).asHours());
+        if (outcomesAtPrevX.length < outcomes) {
+          for (let outcome = 0; outcome < outcomes; outcome++) {
+            if (!dataByOutcome[outcome]) dataByOutcome[outcome] = [];
+            if (typeof outcomesAtPrevX[outcome] === "undefined") dataByOutcome[outcome].push({x: data.date_type_0, y: 0});
+          }
         }
-      };
-      outComes[dataItem.outcome].data.push({y: Math.floor(dataItem.avg_price), x: Math.floor(dataItem.date_type_0)});
-    });
+        if (hours > 1) {
+          for (let i = 0; i < hours; i++) {
+            for (let outcome = 0; outcome < outcomes; outcome++) {
+              if (!dataByOutcome[outcome]) dataByOutcome[outcome] = [];
+              const lastVal = dataByOutcome[outcome][dataByOutcome[outcome].length - 1];
+              dataByOutcome[outcome].push(lastVal);
+            }
+          }
+        }
+        outcomesAtPrevX = [];
+      } else {
+        outcomesAtPrevX.push(data.outcome);
+      }
+      
+      dataByOutcome[data.outcome].push({y: Math.floor(data.avg_price), x: Math.floor(data.date_type_0)})
+      prevX = data.date_type_0;
+      prevTimestamp = data.fill_time;
+    })
 
     // loop outcome object prop and create dataset item for chart array
     let maxLen = 0;
-    for (const property in outComes) {
-      if (outComes[property].data.length > maxLen) maxLen = outComes[property].data.length;
+    for (const outcome in dataByOutcome) {
+      if (dataByOutcome[outcome].length > maxLen) maxLen = dataByOutcome[outcome].length;
       chartConfig.data.datasets.push({
-        data: outComes[property].data,
+        data: dataByOutcome[outcome],
         backgroundColor: 'transparent',
-        borderColor: props.outcomeColorNameMap[0] ? globalColors[props.outcomeColorNameMap[property].color] : "transparent",
+        borderColor: props.outcomeColorNameMap[0] ? globalColors[props.outcomeColorNameMap[outcome].color] : "transparent",
         borderWidth: 1,
         fill: false,
       })
-      console.log(maxLen)
-      console.log(chartConfig);
 
       var labels = [];
       for (var i = 0; i <= maxLen; i++) {
