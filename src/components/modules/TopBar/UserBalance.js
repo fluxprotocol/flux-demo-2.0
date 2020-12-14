@@ -72,7 +72,7 @@ const UserBalance = ({user, hideUser}) => {
 
 	const handleSetAllowance = async () => {
 		const allowanceToSet = locked ? user.balance : 0;
-		await flux.setAllowance(CONTRACT_ID, allowanceToSet)
+		await flux.incAllowance(CONTRACT_ID, allowanceToSet)
 	}
 
 	return (

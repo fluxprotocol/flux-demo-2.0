@@ -37,7 +37,7 @@ const ProgressiveForm = props => {
     let marketID = market.id;
     let buyingPrice = orderData[2];
 
-    const createOrder = await flux.placeOrder(marketID, sharesType[3], toShares(orderData[1]), buyingPrice, null);
+    const createOrder = await flux.placeOrder(marketID, sharesType[3], toShares(orderData[1]), buyingPrice);
     updateBalance()
     setCurrentView("orderCompleted")
     setPlaceOrder(createOrder);
