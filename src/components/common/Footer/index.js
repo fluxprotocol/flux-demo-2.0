@@ -46,9 +46,7 @@ const FooterList = styled.ul`
 `;
 
 const fluxLogo = require('../../../assets/images/flux-logo.png');
-const twitterLogo = require('../../../assets/images/icons/discord_logo.png');
-const redditLogo = require('../../../assets/images/icons/medium_logo.png');
-const mediumLogo = require('../../../assets/images/icons/twitter_logo.png');
+const twitterLogo = require('../../../assets/images/icons/twitter_logo.png');
 
 const Footer = () => {
   return (
@@ -60,18 +58,8 @@ const Footer = () => {
           />
           <FooterList>
             <li>
-              <a href="/">
+              <a href="https://twitter.com/fluxprotocol" rel="noopener noreferrer" target="_blank">
                 <img src={twitterLogo} alt="twitter logo" />
-              </a>
-            </li>
-            <li>
-              <a href="/">
-                <img src={redditLogo} alt="reddit logo" />
-              </a>
-            </li>
-            <li>
-              <a href="/">
-                <img src={mediumLogo} alt="medium logo" />
               </a>
             </li>
           </FooterList>
