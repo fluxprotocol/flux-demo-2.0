@@ -47,6 +47,7 @@ const FooterList = styled.ul`
 
 const fluxLogo = require('../../../assets/images/flux-logo.png');
 const twitterLogo = require('../../../assets/images/icons/twitter_logo.png');
+const telegramLogo = require('../../../assets/images/icons/telegram_logo.png');
 
 const Footer = () => {
   return (
@@ -59,7 +60,10 @@ const Footer = () => {
           <FooterList>
             <li>
               <a href="https://twitter.com/fluxprotocol" rel="noopener noreferrer" target="_blank">
-                <img src={twitterLogo} alt="twitter logo" />
+                <img src={twitterLogo} alt="Twitter page" />
+              </a>
+              <a href="https://t.me/fluxprotocol" rel="noopener noreferrer" target="_blank">
+                <img src={telegramLogo} alt="Telegram group" />
               </a>
             </li>
           </FooterList>
