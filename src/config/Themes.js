@@ -27,6 +27,7 @@ export const globalColors = {
   gray: '#7E7E91',
   white: '#ffffff',
   black: '#000000',
+  backgroundDark: '#0C0B1D',
 }
 
 export const darkTheme = {
