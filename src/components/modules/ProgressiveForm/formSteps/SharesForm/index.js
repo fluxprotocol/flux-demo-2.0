@@ -92,6 +92,7 @@ const SharesForm = props => {
       <FlexWrapper
         flexDirection="column"
         height="100%"
+        className="shares-form"
       >
 
         <ContentWrapper
@@ -147,7 +148,7 @@ const SharesForm = props => {
               color="white"
               textAlign="right"  
             >
-              <FlexItem>
+              <FlexItem color="white">
                 &#162;
                 <Input
                   onChange={handlePriceChange}
@@ -173,14 +174,14 @@ const SharesForm = props => {
             >
               {
                 isNaN(props.sharesType) === false && 
-                <FlexItem>
+                <FlexItem color="white">
                   $ {(numberOfShares * props.sharesType[2]) / 100}
                 </FlexItem>
               }
               
               {
                 isNaN(props.sharesType) === true && 
-                <FlexItem>
+                <FlexItem color="white">
                   $ {((marketPrice * numberOfShares) / 100) || '0'}
                 </FlexItem>
               }
