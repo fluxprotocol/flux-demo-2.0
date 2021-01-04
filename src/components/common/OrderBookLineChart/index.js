@@ -32,6 +32,7 @@ const chartConfig = {
         gridLines: {
           color: 'grey',
           drawBorder: false,
+          zeroLineColor: 'grey',
         },
         id: 'A',
         type: 'linear',
