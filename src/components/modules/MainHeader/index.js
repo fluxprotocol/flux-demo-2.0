@@ -102,6 +102,7 @@ const MainHeader = props => {
       minHeightSmall="14rem"
       overflow="hidden"
       padding="0 0 1rem 0"
+      className="main-header"
     >
       <ContentWrapper
         maxWidth="68rem"
@@ -110,7 +111,7 @@ const MainHeader = props => {
         position="relative"
       >
         <HeaderImagecontainer 
-          backgroundImage={showCardImage ? images(`./circle-${props.market.categories[0]}.png`) : "none"}
+          backgroundImage={showCardImage ? images(`./circle-${props.market.categories[0]}.png`) : images('./circle-stocks.png')}
         >
         </HeaderImagecontainer>
         <BackButton

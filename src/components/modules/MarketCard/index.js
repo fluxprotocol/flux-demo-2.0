@@ -97,11 +97,12 @@ const MarketCard = props => {
     if (/^\S/.test(source_string.substr(max_length)))
         return short.replace(/\s+\S*$/, "") + '...';
     return short;
-};
+  };
 
   return (
     <CardContainer 
       onClick={() => handleCardClick(props.market.id)}
+      className="market-card"
     >
 
       {/* colored card block */}
@@ -129,6 +130,9 @@ const MarketCard = props => {
           src={images(`./card-${props.market.categories[0]}.png`)}
           alt={props.market.category}
         />}
+        {!showCardImage && ( 
+          <CardImage src={images('./circle-stocks.png')} />
+        )}
         <CardTitle>
           {formatString(props.market.description, 90)}
         </CardTitle>

@@ -37,7 +37,7 @@ const MarketCardOpinion = props => {
   }
 
   return (
-      <MarketOpinionContainer>
+      <MarketOpinionContainer className="market-card-opinion">
 
         <p>What does the market think?</p>
         <ProgressBar

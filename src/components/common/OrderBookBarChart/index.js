@@ -75,7 +75,7 @@ const BarWrapperContainer = styled.div`
     border-radius: 12px 0 0 12px;
     height: 1.2rem;
     background: ${props => props.backgroundColor ? props.theme[props.backgroundColor] : 'transparent'};
-    color: white;
+    color: ${props => props.theme.text};
   }
 
   @media (min-width: ${({ theme }) => theme.smallBreakpoint}) {
