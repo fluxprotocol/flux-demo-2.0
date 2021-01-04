@@ -30,7 +30,7 @@ const OrderBookDetail = styled.th`
   font-size: 1rem;
   font-weight: ${props => props.fontWeight ? props.fontWeight : 'auto'};
   text-align: right;
-  color: white;
+  color: ${props => props.theme.text};
 `;
 
 const OrderTable = props => {
@@ -82,7 +82,7 @@ const OrderTable = props => {
 				>
 				<LoaderButton
 					color='pink'
-					loading={loading.id == entry.id && loading.outcome == entry.outcome}
+					loading={loading.id === entry.id && loading.outcome === entry.outcome}
 					onClick={() => cancelOrder(entry)}
 					small
 				>cancel</LoaderButton>
