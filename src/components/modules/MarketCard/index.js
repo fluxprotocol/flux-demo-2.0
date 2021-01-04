@@ -76,7 +76,7 @@ const CardTitle = styled.h1`
 `;
 
 const StyledTwitterShareButton = styled(TwitterShareButton)`
-  width: 2rem;
+  width: 2.5rem;
   cursor: pointer;
 `
 
@@ -116,10 +116,10 @@ const MarketCard = props => {
 					title={`Checkout this @fluxprotocol market: ${props.market.description}`}
 				>
 					<TwitterIcon
-						size={40}
 						round
 						iconFillColor={"white"}
-						hashtags={["flux", "fluxProtocol", "markets"]}
+            hashtags={["flux", "fluxProtocol", "markets"]}
+            style={{ width: '100%' }}
 						bgStyle={
 							{fill: "#0D0C0C"}
 						}
