@@ -175,7 +175,7 @@ const MarketDetailData = props => {
   }
 
   return (
-    <PageWrapper>
+    <PageWrapper className="market-detail-data">
         <OverviewWrapper>
           <FormatContainer>
             <ChartWrapper>

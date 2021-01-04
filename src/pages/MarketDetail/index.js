@@ -167,7 +167,7 @@ const MarketDetail = props => {
   }
   
   return (
-    <ContentWrapper>
+    <ContentWrapper className="market-detail">
         <MainHeader 
           market={market}
           outcomes={outcomeColorNameMap}
