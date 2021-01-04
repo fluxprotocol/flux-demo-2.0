@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
-import { fromDenom, toDenom } from '../../../helpers/numberUtils';
+import { fromDenom } from '../../../helpers/numberUtils';
 import { FluxContext } from '../../../context/FluxProvider';
 import { CONTRACT_ID } from '../../../constants';
 import { useHistory } from 'react-router-dom';
@@ -42,7 +42,7 @@ const LockInfoText = styled.span`
 const UserName = styled.span`
   position: relative;
   margin-right: 1rem;
-  color: white;
+  color: ${props => props.theme.text};
 
   &:after {
     content: '';
@@ -53,7 +53,7 @@ const UserName = styled.span`
     transform: translateY(-50%);
     height: 2rem;
     width: 1px;
-    background-color: white;
+    background-color: ${props => props.theme.text};
     opacity: 0.5;
   }
 `;
