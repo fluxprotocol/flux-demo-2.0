@@ -174,7 +174,8 @@ const MarketDetail = props => {
           lastFilledPrices={lastFilledPricesForMarket}
         />
         <ContentWrapper 
-          backgroundColor="background"
+          className="market-detail__market-status"
+          backgroundColor="backgroundDark"
           padding="0 0 1rem 0"
         >
           <ContentWrapper
@@ -185,6 +186,7 @@ const MarketDetail = props => {
               flexDirection="column"
               columnForSmall
               alignItems="flex-start"
+              padding="2rem 0"
             >
               <FlexItem 
                 width="100%"
