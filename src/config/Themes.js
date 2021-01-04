@@ -35,6 +35,7 @@ export const darkTheme = {
   text: '#ffffff',
   background: '#0C0B1D',
   contentCardBackground: '#0F0E25',
+  menuBarBackground: '#0F0E25',
   backgroundWave: backgroundWaveDark, 
   ...categoryColors,
   ...globalColors,
@@ -47,7 +48,9 @@ export const lightTheme = {
   background: '#ffffff',
   contentCardBackground: '#ffffff',
   backgroundWave: backgroundWaveLight,
+  menuBarBackground: '#fff',
   ...categoryColors,
   ...globalColors,
   ...breakPoints,
+  green: '#617f44',
 }

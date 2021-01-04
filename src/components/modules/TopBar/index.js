@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import styled from 'styled-components';
 
 // hooks
-import { useFluxAuth } from '../../../App';
+import { useDarkModeTheme, useFluxAuth } from '../../../App';
 
 // common
 import { FlexWrapper, FlexItem } from '../../common/Flex';
@@ -19,10 +19,12 @@ const Logo = styled.img`
 
 const TopBar = props => {
   const { user, logout } = useFluxAuth();
+  const { theme } = useDarkModeTheme();
   
   return (
     <ContentWrapper
-      backgroundColor="darkBlue"
+      className="top-bar"
+      backgroundColor="menuBarBackground"
       padding="1rem"
     >
       <ContentWrapper maxWidth="68rem">
@@ -30,7 +32,11 @@ const TopBar = props => {
           <FlexItem>
             <Link to="/">
               <Logo 
-                src={require(`../../../assets/images/flux-logo.png`)}
+                // src={require(`../../../assets/images/flux-logo.png`)}
+                src={theme === 'light' ? 
+                  require(`../../../assets/images/flux-logo-black.svg`) : 
+                  require(`../../../assets/images/flux-logo-white.svg`)
+                }
                 alt="Flux"
               />
             </Link>

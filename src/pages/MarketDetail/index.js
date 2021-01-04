@@ -30,6 +30,7 @@ import { useAuth } from '../../hooks/useAuth';
 import OrderTable from '../../components/modules/OrderTable';
 import UserBalance from '../../components/modules/TopBar/UserBalance';
 import { fromDenom } from '../../helpers/numberUtils';
+import trans from '../../config/translation';
 
 const io = require('socket.io-client');
 const socket = io('https://api.flux.market');
@@ -342,17 +343,15 @@ const MarketDetail = props => {
             <Paragraph
               size="1.5rem"
               fontWeight="bold"
-              maxWidth="55rem"
               margin="0 auto"
             >
-              extra info
+              {trans('market.extraInfo')}
             </Paragraph>
             <Paragraph
               size="1rem"
-              maxWidth="55rem"
               margin="2rem auto"
             >
-              {market.extra_info ? market.extra_info : "None"}
+              {market.extra_info ? market.extra_info : trans("global.none")}
             </Paragraph>
 
             {/* <SignUpBlock>
