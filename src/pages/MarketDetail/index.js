@@ -29,6 +29,7 @@ import { mapOutcomes } from '../../helpers/mappers';
 import { useAuth } from '../../hooks/useAuth';
 import OrderTable from '../../components/modules/OrderTable';
 import UserBalance from '../../components/modules/TopBar/UserBalance';
+import { fromDenom } from '../../helpers/numberUtils';
 
 const io = require('socket.io-client');
 const socket = io('https://api.flux.market');
@@ -143,7 +144,6 @@ const MarketDetail = props => {
       },
     };
 
-    
     const fromDate = moment().subtract(daysMap[type].substractAmount, daysMap[type].substractType).unix();
     const toDate = moment().unix();
     const allPriceHistory = await flux.getPriceHistory(id, fromDate, toDate, daysMap[type].dataTypes);
@@ -233,7 +233,7 @@ const MarketDetail = props => {
                             <ContentWrapper>
                               <strong>Total Volume</strong>
                             </ContentWrapper>
-                            10,500
+                            {market.volume ? "$" + fromDenom(market.volume) : '-'} DAI
                           </FlexItem>
                           <FlexItem textAlign="right">
                             <Button
