@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
-import { toDenom, toShares, fromShares } from '../../../helpers/numberUtils';
+import { fromShares } from '../../../helpers/numberUtils';
 import Paragraph from '../../common/Paragraph';
-import Button from '../../common/Button';
 import { FluxContext } from '../../../context/FluxProvider';
 import LoaderButton from '../../common/LoaderButton';
 
@@ -13,6 +12,7 @@ const FlexWrapper = styled.div`
   margin: 0 auto;
   margin-bottom: 1em;
   width: 99%;
+  overflow-y: hidden;
 `;
 
 const OrderBookWrapper = styled.table`
