@@ -59,7 +59,7 @@ const MainHeaderTitle = styled.h1`
   max-width: 70%;
   margin-top: 1rem;
   font-size: 1.5rem;
-  color: white;
+  color: ${props => props.theme.text};
 
   @media (min-width: ${({ theme }) => theme.mediumBreakpoint}) {
     margin-top: 0;
