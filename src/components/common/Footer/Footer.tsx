@@ -1,15 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const FooterContainer = styled.footer`
-  display: flex;
-  align-items: center;
-  width: 100%;
-  background: #2C2A43;
-  height: 10em;
-  vertical-align: middle;
-  align-items: middle;
-`;
+import styles from './Footer.module.scss';
 
 const FooterWrapper = styled.div`
   display: flex;
@@ -51,24 +43,24 @@ const telegramLogo = require('../../../assets/images/icons/telegram_logo.png');
 
 const Footer = () => {
   return (
-      <FooterContainer>
-        <FooterWrapper>
-          <FooterIcon 
-            alt="fluxLogo" 
-            src={fluxLogo} 
-          />
-          <FooterList>
-            <li>
-              <a href="https://twitter.com/fluxprotocol" rel="noopener noreferrer" target="_blank">
-                <img src={twitterLogo} alt="Twitter page" />
-              </a>
-              <a href="https://t.me/fluxprotocol" rel="noopener noreferrer" target="_blank">
-                <img src={telegramLogo} alt="Telegram group" />
-              </a>
-            </li>
-          </FooterList>
-        </FooterWrapper>
-      </FooterContainer>
+    <footer className={styles['footer']}>
+      <FooterWrapper>
+        <FooterIcon
+          alt="fluxLogo"
+          src={fluxLogo}
+        />
+        <FooterList>
+          <li>
+            <a href="https://twitter.com/fluxprotocol" rel="noopener noreferrer" target="_blank" >
+              <img src={twitterLogo} alt="Twitter page" />
+            </a>
+            < a href="https://t.me/fluxprotocol" rel="noopener noreferrer" target="_blank" >
+              <img src={telegramLogo} alt="Telegram group" />
+            </a>
+          </li>
+        </FooterList>
+      </FooterWrapper>
+    </footer>
   );
 }
 

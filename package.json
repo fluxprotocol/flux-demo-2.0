@@ -11,6 +11,7 @@
     "debounce": "^1.2.0",
     "flux-sdk": "^1.0.9",
     "moment": "^2.27.0",
+    "node-sass": "^4.14.1",
     "react": "^16.13.1",
     "react-countdown": "^2.2.1",
     "react-dom": "^16.13.1",
@@ -42,5 +43,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/styled-components": "^5.1.7"
   }
 }
